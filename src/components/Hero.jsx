@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Play, CheckCircle2 } from 'lucide-react';
+import dashboardImg from '../assets/dashboard.jpeg';
 
 const Hero = () => {
     return (
@@ -10,17 +11,17 @@ const Hero = () => {
             <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-[600px] h-[600px] bg-accent-pink/5 rounded-full blur-3xl opacity-60 animate-pulse-slow"></div>
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row items-center gap-16">
+                <div className="flex flex-col lg:flex-row items-center gap-10 sm:gap-12 lg:gap-16">
                     {/* Left Content */}
                     <div className="flex-1 text-center lg:text-left z-10">
                         <motion.div
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ duration: 0.6 }}
-                            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 mb-8"
+                            className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full bg-white shadow-sm border border-gray-100 mb-6 sm:mb-8"
                         >
                             <span className="flex h-2 w-2 rounded-full bg-primary animate-pulse"></span>
-                            <span className="text-sm font-bold text-gray-600">New: Role-Based Dashboards are here</span>
+                            <span className="text-xs sm:text-sm font-bold text-gray-600">New: Role-Based Dashboards are here</span>
                             <ArrowRight size={14} className="text-primary" />
                         </motion.div>
 
@@ -87,9 +88,9 @@ const Hero = () => {
                             >
                                 <div className="rounded-xl overflow-hidden shadow-inner bg-white">
                                     <img
-                                        src="/src/assets/dashboard.jpeg"
+                                        src={dashboardImg}
                                         alt="KaryaUp Dashboard"
-                                        className="w-full h-auto max-h-[250px] sm:max-h-[350px] lg:max-h-[400px] object-contain"
+                                        className="w-full h-auto max-h-[230px] sm:max-h-[350px] lg:max-h-[400px] object-contain"
                                     />
 
                                     {/* "Goggles" Scanning Animation Overlay */}

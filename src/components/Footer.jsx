@@ -1,13 +1,14 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
 const Footer = () => {
     return (
-        <footer className="bg-white text-gray-900 pt-20 pb-10 border-t border-gray-200">
+        <footer className="bg-white text-gray-900 pt-16 sm:pt-20 pb-10 border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 md:gap-12 mb-16">
                     <div className="col-span-2 lg:col-span-1">
                         <div className="flex-shrink-0 flex items-center group cursor-pointer">
-                            <img src="/src/assets/logo.png" alt="KaryaUp Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
+                            <img src={logo} alt="KaryaUp Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
                         </div>
                         <p className="text-gray-500 text-sm leading-relaxed">
                             The only platform you need for team management, tracking, and growth.
@@ -47,14 +48,14 @@ const Footer = () => {
                     <div className="col-span-2 md:col-span-1">
                         <h5 className="font-bold mb-6 text-gray-900">Newsletter</h5>
                         <p className="text-gray-500 text-sm mb-4">Stay updated with the latest in team productivity.</p>
-                        <div className="flex gap-2">
+                        <div className="flex flex-col sm:flex-row gap-2">
                             <input
                                 type="email"
                                 placeholder="Email"
                                 className="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2.5 text-sm w-full focus:ring-2 focus:ring-purple-500 focus:border-transparent focus:outline-none placeholder-gray-400 transition-all text-gray-900"
                             />
                             <button
-                                className="text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 active:scale-95 whitespace-nowrap"
+                                className="text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-purple-500/25 active:scale-95 whitespace-nowrap w-full sm:w-auto"
                                 style={{ background: 'linear-gradient(135deg, #7b68ee, #a78bfa)' }}
                             >
                                 Join
@@ -65,7 +66,7 @@ const Footer = () => {
 
                 <div className="border-t border-gray-200 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
                     <p className="text-gray-400 text-xs">© 2026 KaryaUp. All rights reserved.</p>
-                    <div className="flex gap-8 text-gray-400 text-xs">
+                    <div className="flex gap-6 sm:gap-8 text-gray-400 text-xs">
                         <a href="#" className="hover:text-purple-600 transition-colors duration-200">Privacy Policy</a>
                         <a href="#" className="hover:text-purple-600 transition-colors duration-200">Terms of Service</a>
                     </div>

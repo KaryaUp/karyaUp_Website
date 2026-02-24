@@ -12,12 +12,12 @@ const TrustedBy = () => {
     ];
 
     return (
-        <section className="py-16 bg-white overflow-hidden border-y border-gray-100">
+        <section className="py-12 sm:py-16 bg-white overflow-hidden border-y border-gray-100">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p className="text-sm font-bold text-black-400 uppercase tracking-widest mb-12">
+                <p className="text-xs sm:text-sm font-bold text-black-400 uppercase tracking-widest mb-8 sm:mb-12">
                     Trusted by the best teams
                 </p>
-                <div className="group flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                <div className="group grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 place-items-center gap-x-8 gap-y-8 md:gap-x-12">
                     {brands.map((brand, index) => (
                         <motion.div
                             key={index}
@@ -27,7 +27,7 @@ const TrustedBy = () => {
                             <img
                                 src={brand.logo}
                                 alt={brand.name}
-                                className="h-6 md:h-8 w-auto filter grayscale opacity-40 brightness-0 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500 ease-in-out"
+                                className="h-5 sm:h-6 md:h-7 w-auto filter grayscale opacity-40 brightness-0 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500 ease-in-out"
                             />
                         </motion.div>
                     ))}

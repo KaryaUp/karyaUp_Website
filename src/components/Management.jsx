@@ -10,9 +10,9 @@ const Management = () => {
     ];
 
     return (
-        <section className="py-24 bg-gray-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-gray-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-10 lg:gap-16">
                     <div className="flex-1">
                         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 mb-4 sm:mb-6">More than just tasks.</h2>
                         <p className="text-base sm:text-xl text-gray-600 mb-8 sm:mb-10 leading-relaxed">
@@ -32,11 +32,10 @@ const Management = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="flex-1 relative">
-                        {/* Dashboard mockup */}
-                        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-                            {/* Dashboard header */}
-                            <div className="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+
+                    <div className="flex-1 relative w-full">
+                        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
+                            <div className="px-4 sm:px-6 py-4 border-b border-gray-100 flex items-center justify-between gap-2">
                                 <div className="flex items-center gap-2">
                                     <div className="w-3 h-3 rounded-full bg-red-400"></div>
                                     <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
@@ -48,14 +47,12 @@ const Management = () => {
                                 </div>
                             </div>
 
-                            {/* Dashboard body */}
-                            <div className="p-5 space-y-4">
-                                {/* Top stats row */}
-                                <div className="grid grid-cols-3 gap-3">
+                            <div className="p-4 sm:p-5 space-y-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                                     <div className="bg-gradient-to-br from-purple-50 to-purple-100/50 rounded-xl p-3">
                                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Total Payroll</p>
-                                        <p className="text-lg font-black text-gray-900">₹12.4L</p>
-                                        <p className="text-[9px] font-bold text-green-500 mt-0.5">↑ 8% this month</p>
+                                        <p className="text-lg font-black text-gray-900">Rs 12.4L</p>
+                                        <p className="text-[9px] font-bold text-green-500 mt-0.5">+8% this month</p>
                                     </div>
                                     <div className="bg-gradient-to-br from-green-50 to-green-100/50 rounded-xl p-3">
                                         <p className="text-[9px] font-bold text-gray-400 uppercase tracking-wider mb-1">Present Today</p>
@@ -69,7 +66,6 @@ const Management = () => {
                                     </div>
                                 </div>
 
-                                {/* Salary chart */}
                                 <div className="bg-gray-50 rounded-xl p-4">
                                     <div className="flex justify-between items-center mb-3">
                                         <span className="text-xs font-bold text-gray-700">Monthly Payroll Overview</span>
@@ -95,8 +91,7 @@ const Management = () => {
                                     </div>
                                 </div>
 
-                                {/* Attendance row */}
-                                <div className="flex gap-3">
+                                <div className="flex flex-col sm:flex-row gap-3">
                                     <div className="flex-1 bg-gray-50 rounded-xl p-3">
                                         <span className="text-[10px] font-bold text-gray-500 mb-2 block">Team Attendance</span>
                                         <div className="flex flex-wrap gap-1.5">
@@ -110,7 +105,7 @@ const Management = () => {
                                             ))}
                                         </div>
                                     </div>
-                                    <div className="w-32 bg-gray-50 rounded-xl p-3">
+                                    <div className="w-full sm:w-32 bg-gray-50 rounded-xl p-3">
                                         <span className="text-[10px] font-bold text-gray-500 mb-1 block">Performance</span>
                                         <div className="relative w-16 h-16 mx-auto">
                                             <svg viewBox="0 0 36 36" className="w-full h-full">
@@ -136,17 +131,15 @@ const Management = () => {
                             </div>
                         </div>
 
-                        {/* Floating salary card */}
                         <div className="absolute -top-4 -right-4 p-3 bg-white rounded-xl shadow-lg border border-gray-100 w-40 animate-float z-20 hidden sm:block">
                             <div className="flex justify-between items-center mb-1">
                                 <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Salary</span>
                                 <div className="w-2 h-2 rounded-full bg-green-500"></div>
                             </div>
-                            <div className="text-base font-black text-gray-900">₹4,25,000</div>
+                            <div className="text-base font-black text-gray-900">Rs 4,25,000</div>
                             <div className="text-[9px] text-gray-400 font-medium">Processed this month</div>
                         </div>
 
-                        {/* Background blob */}
                         <div className="absolute -bottom-10 -right-10 w-64 h-64 bg-purple-100/40 rounded-full blur-3xl -z-10"></div>
                     </div>
                 </div>

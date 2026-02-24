@@ -151,7 +151,7 @@ const TeamSolutions = () => {
     const active = teams[activeIdx];
 
     return (
-        <section className="py-24 bg-[white]">
+        <section className="py-16 sm:py-20 lg:py-24 bg-[white]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <motion.div
@@ -163,7 +163,7 @@ const TeamSolutions = () => {
                     <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-tight tracking-tight mb-4">
                         KaryaUp Solution for <span className="italic font-black">every</span> team
                     </h2>
-                    <p className="text-gray-500 text-lg font-medium">
+                    <p className="text-gray-500 text-base sm:text-lg font-medium">
                         Your key workflows, powered by KaryaUp Agents.
                     </p>
                 </motion.div>
@@ -194,9 +194,9 @@ const TeamSolutions = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.35 }}
-                        className="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 shadow-sm border border-gray-100"
+                        className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 shadow-sm border border-gray-100"
                     >
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
                             {/* Left side */}
                             <div>
                                 <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-4">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown, LogIn, UserPlus } from 'lucide-react';
+import logo from '../assets/logo.png';
 
 const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
                 <div className="flex justify-between items-center">
                     <div className="flex items-center">
                         <div className="flex-shrink-0 flex items-center group cursor-pointer">
-                            <img src="/src/assets/logo.png" alt="KaryaUp Logo" className="h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
+                            <img src={logo} alt="KaryaUp Logo" className="h-9 sm:h-10 w-auto group-hover:scale-105 transition-transform duration-300" />
                         </div>
 
                         <div className="hidden md:block ml-10">
