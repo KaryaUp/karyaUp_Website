@@ -6,6 +6,7 @@ import AllInOne from "../components/AllInOne";
 import Roles from "../components/Roles";
 import TeamSolutions from "../components/TeamSolutions";
 import Management from "../components/Management";
+import Goggles from "../components/Goggles.tsx";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       
       <TrustedBy />
       <AllInOne />
+      <Goggles/>
       <Roles />
       <TeamSolutions />
       <Management />

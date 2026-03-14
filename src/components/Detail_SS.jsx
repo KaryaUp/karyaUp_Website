@@ -1,98 +1,76 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   LayoutGrid,
-  ClipboardList,
+  Notebook,
   CheckSquare,
-  FolderOpen,
-  Monitor,
-  Triangle,
+  MessageCircle,
+  Kanban,
+  Brain,
   CalendarDays,
   Clock,
   IndianRupee,
-  CalendarRange,
-  BarChart3,
-  Crosshair,
-  Settings2,
+  Bot,
   Users,
+  LineChart,
+  Target,
 } from "lucide-react";
 
-import featureProjects from "../assets/projects.jpeg";
-import featureChat from "../assets/Team.jpeg";
-import featureBrain from "../assets/work_analysis.jpeg";
-import featureAgents from "../assets/dashboard1.jpeg";
-import featureSprints from "../assets/Task.jpeg";
-import featureTime from "../assets/attendance.jpeg";
-import featureCalendar from "../assets/calender.jpeg";
-import featureDocs from "../assets/dashboard1.jpeg";
-import featureWhiteboards from "../assets/dashboard1.jpeg";
-import featureAutomations from "../assets/salary.jpeg";
-import featureDashboards from "../assets/dashboard1.jpeg";
-import featureScheduling from "../assets/calender.jpeg";
+import featureDashboard from "../assets/dashboard1.png";
+import featureDocs from "../assets/notes.png";
+import featureSprints from "../assets/Task.png";
+import featureChat from "../assets/Chat.png";
+import featureGantt from "../assets/Gantt.png";
+import featureAnalysis from "../assets/Work Analysis.png";
+import featureCalendar from "../assets/calender.png";
+import featureTime from "../assets/Attendance.png";
+import featureSalary from "../assets/salary.png";
+import featureLeads from "../assets/leads.png";
+import featureIntegration from "../assets/integration.png";
+import featureClients from "../assets/clients.png";
+import featureProfit from "../assets/profit.png";
 
 const features = [
-  {
-    id: "projects",
-    label: "Projects",
-    icon: LayoutGrid,
-    image: featureProjects,
-  },
-  { id: "docs", label: "Docs", icon: ClipboardList, image: featureDocs },
+  { id: "dashboard", label: "Dashboard", icon: LayoutGrid, image: featureDashboard },
+  { id: "docs", label: "Docs", icon: Notebook, image: featureDocs },
   { id: "sprints", label: "Sprints", icon: CheckSquare, image: featureSprints },
-  { id: "chat", label: "Chat", icon: FolderOpen, image: featureChat },
-  {
-    id: "whiteboards",
-    label: "Whiteboards",
-    icon: Monitor,
-    image: featureWhiteboards,
-  },
-  { id: "brain", label: "Brain MAX", icon: Triangle, image: featureBrain },
-  {
-    id: "calendar",
-    label: "Calendar",
-    icon: CalendarDays,
-    image: featureCalendar,
-  },
-  { id: "time", label: "Time Tracking", icon: Clock, image: featureTime },
-  { id: "billing", label: "Billing", icon: IndianRupee, image: featureAgents },
-  {
-    id: "scheduling",
-    label: "Scheduling",
-    icon: CalendarRange,
-    image: featureScheduling,
-  },
-  {
-    id: "dashboards",
-    label: "Dashboards",
-    icon: BarChart3,
-    image: featureDashboards,
-  },
-  {
-    id: "automations",
-    label: "Automations",
-    icon: Crosshair,
-    image: featureAutomations,
-  },
-  {
-    id: "settings",
-    label: "Settings",
-    icon: Settings2,
-    image: featureProjects,
-  },
-  { id: "agents", label: "AI Agents", icon: Users, image: featureAgents },
+  { id: "chat", label: "Chat", icon: MessageCircle, image: featureChat },
+  { id: "gantt", label: "Gantt", icon: Kanban, image: featureGantt },
+  { id: "analysis", label: "Work Analysis", icon: Brain, image: featureAnalysis },
+  { id: "calendar", label: "Calendar", icon: CalendarDays, image: featureCalendar },
+  { id: "attendance", label: "Attendance", icon: Clock, image: featureTime },
+  { id: "salary", label: "Salary", icon: IndianRupee, image: featureSalary },
+  { id: "leads", label: "Leads", icon: Target, image: featureLeads },
+  { id: "integration", label: "Integration", icon: Bot, image: featureIntegration },
+  { id: "clients", label: "Clients", icon: Users, image: featureClients },
+  { id: "profit", label: "Profit", icon: LineChart, image: featureProfit },
 ];
 
 const FeatureShowcase = () => {
-  const [activeFeature, setActiveFeature] = useState("projects");
+  const [activeFeature, setActiveFeature] = useState("dashboard");
+  const [opacity, setOpacity] = useState(1);
+  const [currentImage, setCurrentImage] = useState(
+    features.find((f) => f.id === "dashboard").image,
+  );
 
   const activeData = features.find((f) => f.id === activeFeature);
 
+  useEffect(() => {
+    setOpacity(0);
+    const timer = setTimeout(() => {
+      if (activeData) {
+        setCurrentImage(activeData.image);
+      }
+      setOpacity(1);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [activeFeature, activeData]);
+
   return (
-    <div className="w-full px-24 py-10">
-      {" "}
+    <div className="w-full h-screen p-4 md:p-8 max-w-[1700px] mx-auto flex items-center justify-center bg-[#F9FAFC]">
       {/* outer spacing */}
-      <div className="flex w-full h-[80vh] rounded-2xl overflow-hidden border border-border shadow-xl">
+      <div className="flex w-full h-[100%] max-h-[90vh] rounded-2xl overflow-hidden">
         {/* Sidebar */}
-        <nav className="flex flex-col items-center py-4 gap-2 bg-[#3B2A5A] w-[60px] shrink-0">
+        <nav className="flex flex-col items-center py-4 bg-[#3B2A5A] w-16 shrink-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-30">
           {features.map((feature) => {
             const isActive = activeFeature === feature.id;
             const Icon = feature.icon;
@@ -102,28 +80,39 @@ const FeatureShowcase = () => {
                 key={feature.id}
                 onClick={() => setActiveFeature(feature.id)}
                 title={feature.label}
-                className={`group relative flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 ${
-                  isActive
-                    ? "bg-feature-sidebar-active"
-                    : "hover:bg-feature-sidebar-hover"
-                }`}
+                className={`group relative flex items-center justify-center w-10 h-10 rounded-lg transition-all duration-200 shrink-0 ${isActive
+                  ? "bg-white/20"
+                  : "hover:bg-white/10"
+                  }`}
               >
-                <Icon className="h-[18px] w-[18px] text-white stroke-[1.5]" />
+                <div className="flex items-center justify-center w-8 h-8 pointer-events-none">
+                  <Icon className="h-4.5 w-4.5 text-white stroke-[1.5] group-hover:animate-stroke-draw" />
+                </div>
 
-                <span className="pointer-events-none absolute left-full ml-2 whitespace-nowrap rounded-md bg-slate-900 px-2 py-1 text-xs font-medium text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+                {/* Tooltip (Pinbar) that breaks out of the button */}
+                <div
+                  className="absolute left-[50px] px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 visibility-hidden group-hover:opacity-100 group-hover:visibility-visible transition-all duration-200 z-[9999] pointer-events-none drop-shadow-md"
+                  style={{ backgroundColor: "#000", color: "#fff" }}
+                >
                   {feature.label}
-                </span>
+                  {/* Tooltip triangle pointer */}
+                  <div
+                    className="absolute top-1/2 -translate-y-1/2 left-[-4px] w-0 h-0 border-y-[4px] border-y-transparent border-r-[4px]"
+                    style={{ borderRightColor: "#000" }}
+                  ></div>
+                </div>
               </button>
             );
           })}
         </nav>
 
         {/* Image Section */}
-        <div className="flex-1 overflow-hidden">
+        <div className="flex-1 overflow-hidden bg-slate-50 grow flex items-center justify-center p-2">
           <img
-            src={activeData.image}
+            src={currentImage}
             alt={activeData.label}
-            className="w-full h-full object-cover transition-all duration-300"
+            className="w-full h-full object-contain transition-opacity duration-300"
+            style={{ opacity }}
           />
         </div>
       </div>

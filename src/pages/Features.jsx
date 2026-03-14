@@ -1,130 +1,324 @@
 import React from "react";
 import { Link, useParams } from "react-router-dom";
-import Page from "../components/Page";
 
-const featurePages = {
-  overview: {
-    title: "Features",
-    subtitle:
-      "Explore the tools that make KaryaUp a complete platform for teams.",
+const SubPageLayout = ({ title, subtitle, badge, children }) => (
+  <div className="min-h-screen bg-white pt-28 pb-20">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      {badge && (
+        <span className="inline-block mb-4 px-3 py-1 text-xs font-bold tracking-widest uppercase rounded-full bg-emerald-100 text-emerald-700">
+          {badge}
+        </span>
+      )}
+      <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 leading-tight mb-5">
+        {title}
+      </h1>
+      <p className="text-lg text-gray-500 mb-12 max-w-2xl">{subtitle}</p>
+      {children}
+    </div>
+  </div>
+);
+
+const FeatureCard = ({ icon, title, desc }) => (
+  <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 hover:shadow-md transition-shadow">
+    <div className="text-3xl mb-3">{icon}</div>
+    <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
+    <p className="text-sm text-gray-500 leading-relaxed">{desc}</p>
+  </div>
+);
+
+const sections = {
+  tasks: {
+    badge: "Features",
+    title: "Tasks",
+    subtitle: "Break work into actionable tasks. Assign owners, set priorities, and track every step from start to done.",
     content: (
-      <div className="space-y-6">
-        <p>
-          From task management to reporting, KaryaUp includes a full suite of
-          features designed for modern teams.
-        </p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          <Link
-            to="/features/task-management"
-            className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-semibold">Task management</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Assign tasks, set deadlines, and keep work moving forward.
-            </p>
-          </Link>
-          <Link
-            to="/features/workspace-management"
-            className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-semibold">Workspace management</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Structure your team’s work with custom workspaces and templates.
-            </p>
-          </Link>
-          <Link
-            to="/features/reports-analytics"
-            className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-semibold">Reports & analytics</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Turn project data into insights with built-in dashboards.
-            </p>
-          </Link>
-          <Link
-            to="/features/automation"
-            className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-semibold">Automation</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Save time with repeatable workflows and automations (coming soon).
-            </p>
-          </Link>
-          <Link
-            to="/features/integrations"
-            className="block rounded-2xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow"
-          >
-            <h3 className="text-lg font-semibold">Integrations</h3>
-            <p className="mt-2 text-sm text-slate-600">
-              Connect your tools and keep data flowing between apps.
-            </p>
-          </Link>
-        </div>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="✅" title="Subtasks" desc="Break complex work into smaller steps. Nest subtasks under any task for fine-grained tracking." />
+        <FeatureCard icon="🏷️" title="Tags & Labels" desc="Categorize tasks by tags for quick filtering and reporting across projects." />
+        <FeatureCard icon="⚡" title="Priority Levels" desc="Mark tasks Urgent, High, Normal, or Low to help your team focus on what matters most." />
+        <FeatureCard icon="📎" title="Attachments" desc="Add files, images, and links directly to tasks. Keep all context in one place." />
+        <FeatureCard icon="🔁" title="Recurring Tasks" desc="Set daily, weekly, or monthly recurrences for tasks that repeat on a schedule." />
+        <FeatureCard icon="👁️" title="Custom Views" desc="Switch between list, board, calendar, and timeline views to see tasks the way you prefer." />
       </div>
     ),
   },
-  "task-management": {
-    title: "Task management",
-    subtitle:
-      "Track work with rich tasks, custom views, and flexible workflows.",
+  dashboards: {
+    badge: "Features",
+    title: "Dashboards",
+    subtitle: "Custom dashboards that give you real-time visibility into your work, your team, and your metrics.",
     content: (
-      <p>
-        Create, assign, and track tasks across boards, lists, and timelines with
-        power and flexibility.
-      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="📊" title="Drag & Drop Widgets" desc="Build your ideal dashboard by dragging charts, task lists, and metrics exactly where you want them." />
+        <FeatureCard icon="📈" title="Progress Charts" desc="Track team velocity, task completion rates, and sprint burndowns with live charts." />
+        <FeatureCard icon="🔢" title="Metric Tiles" desc="Display key numbers — open tasks, overdue items, team headcount — as highlighted tiles." />
+        <FeatureCard icon="🎯" title="Goal Progress" desc="Show goal completion percentage alongside project data to keep priorities aligned." />
+        <FeatureCard icon="📤" title="Share & Export" desc="Share dashboards with stakeholders or export charts as images and PDFs for reports." />
+        <FeatureCard icon="🔄" title="Auto-Refresh" desc="Dashboards update automatically so you always have the latest data without manual refreshing." />
+      </div>
     ),
   },
-  "workspace-management": {
-    title: "Workspace management",
-    subtitle:
-      "Organize teams and projects with customizable workspaces and templates.",
+  "board-view": {
+    badge: "Features",
+    title: "Board View",
+    subtitle: "A visual Kanban board to manage work in stages. Perfect for sprint planning and workflow automation.",
     content: (
-      <p>
-        Create dedicated workspaces for teams, departments, or initiatives and
-        keep things structured.
-      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="📌" title="Custom Columns" desc="Create columns for any workflow — To Do, In Progress, Review, Done — or define your own stages." />
+        <FeatureCard icon="🖱️" title="Drag & Drop" desc="Move tasks between columns instantly. Status updates automatically when a card is moved." />
+        <FeatureCard icon="🌈" title="Color-coded Cards" desc="Apply colors by priority, assignee, or tag so you can read the board state at a glance." />
+        <FeatureCard icon="⚙️" title="Automation Rules" desc="Trigger automatic actions when a card enters a column — assign it, notify someone, or set a date." />
+        <FeatureCard icon="🔢" title="WIP Limits" desc="Set work-in-progress limits per column to prevent bottlenecks and keep flow healthy." />
+        <FeatureCard icon="📋" title="Card Details" desc="Click any card to see the full task detail view — comments, attachments, history, and more." />
+      </div>
     ),
   },
-  "reports-analytics": {
-    title: "Reports & analytics",
-    subtitle:
-      "Make better decisions with dashboards, charts, and activity insights.",
+  gantt: {
+    badge: "Features",
+    title: "Gantt Charts",
+    subtitle: "Visualize project timelines, dependencies, and milestones on a powerful interactive Gantt chart.",
     content: (
-      <p>
-        Visualize progress, monitor trends, and share reports with stakeholders.
-      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="📅" title="Drag to Reschedule" desc="Drag tasks to new dates on the timeline. Dependencies update automatically to reflect the change." />
+        <FeatureCard icon="🔗" title="Task Dependencies" desc="Create start-to-finish, finish-to-start, or custom dependency links between tasks." />
+        <FeatureCard icon="🏁" title="Milestones" desc="Mark key delivery dates as milestones and track them visually across the full project timeline." />
+        <FeatureCard icon="📊" title="Baseline View" desc="Compare your original plan against actual progress to understand schedule slippage." />
+        <FeatureCard icon="👥" title="Resource Allocation" desc="See how your team's time is distributed across the timeline to avoid overloading anyone." />
+        <FeatureCard icon="📤" title="PDF Export" desc="Export your Gantt chart as a beautiful PDF for client meetings and status presentations." />
+      </div>
     ),
   },
-  automation: {
-    title: "Automation",
-    subtitle: "Automate repetitive work with rules, triggers, and actions.",
+  chat: {
+    badge: "Features",
+    title: "Chat",
+    subtitle: "Real-time messaging built into your workspace. Stay connected without leaving your work.",
     content: (
-      <p>
-        Set up workflows that run automatically so teams can focus on what
-        matters.
-      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="💬" title="Channels" desc="Create topic-based channels for teams, projects, or any discussion group." />
+        <FeatureCard icon="📌" title="Pinned Messages" desc="Pin important announcements or links to channels so they're always easy to find." />
+        <FeatureCard icon="🔍" title="Message Search" desc="Search across all channels and conversations to find any message instantly." />
+        <FeatureCard icon="📎" title="File Sharing" desc="Drop files, images, and documents directly into conversations without leaving the chat." />
+        <FeatureCard icon="🧵" title="Threaded Replies" desc="Reply in threads to keep discussions organized without cluttering the main channel." />
+        <FeatureCard icon="👀" title="Read Receipts" desc="Know when your message has been seen by the recipient for important communications." />
+      </div>
+    ),
+  },
+  notifications: {
+    badge: "Features",
+    title: "Notifications",
+    subtitle: "Smart, context-aware notifications that keep you informed without overwhelming you.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="🔔" title="Real-time Alerts" desc="Get instant notifications when tasks are assigned, updated, or commented on." />
+        <FeatureCard icon="🎛️" title="Custom Preferences" desc="Choose which events trigger notifications per workspace, project, and task type." />
+        <FeatureCard icon="⏰" title="Deadline Reminders" desc="Receive reminders before tasks are due so nothing falls through the cracks." />
+        <FeatureCard icon="📱" title="Push Notifications" desc="Get push alerts on mobile even when the app is closed, so you're always in the loop." />
+        <FeatureCard icon="📧" title="Email Digests" desc="Receive a daily or weekly digest summarizing activity rather than individual emails." />
+        <FeatureCard icon="🔕" title="Do Not Disturb" desc="Pause all notifications during focus time or outside work hours to protect your attention." />
+      </div>
+    ),
+  },
+  team: {
+    badge: "Management",
+    title: "Team Management",
+    subtitle: "Manage your entire workforce in one place — from onboarding to performance tracking.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="👤" title="Employee Profiles" desc="Maintain rich profiles for every team member including roles, skills, and contact information." />
+        <FeatureCard icon="🏢" title="Department Structure" desc="Organize staff into departments and reporting hierarchies that mirror your org chart." />
+        <FeatureCard icon="📋" title="Roles & Permissions" desc="Grant fine-grained access to tools and data based on an employee's role." />
+        <FeatureCard icon="📈" title="Performance Tracking" desc="Track KPIs, set goals, and run performance reviews from a single dashboard." />
+        <FeatureCard icon="🤝" title="Onboarding Checklists" desc="Guide new hires through a structured onboarding journey with task-based checklists." />
+        <FeatureCard icon="📊" title="Headcount Reports" desc="Generate reports on team size, growth, turnover, and departmental distribution." />
+      </div>
+    ),
+  },
+  attendance: {
+    badge: "Management",
+    title: "Attendance",
+    subtitle: "Automate attendance tracking, monitor work hours, and ensure accurate records for every employee.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="🕐" title="Clock In / Clock Out" desc="Employees clock in and out digitally from web or mobile. Timestamps are recorded automatically." />
+        <FeatureCard icon="📅" title="Attendance Calendar" desc="View attendance history on a monthly calendar with color-coded present, absent, and leave days." />
+        <FeatureCard icon="🌐" title="Remote Check-in" desc="Support remote teams with IP-based or location-based attendance verification." />
+        <FeatureCard icon="⚠️" title="Late & Absent Alerts" desc="Get automated alerts when employees arrive late or miss a day without prior approval." />
+        <FeatureCard icon="📊" title="Attendance Reports" desc="Export monthly attendance reports by department, team, or individual employee." />
+        <FeatureCard icon="🔗" title="Payroll Integration" desc="Attendance data flows directly into payroll so hours are never miscounted." />
+      </div>
+    ),
+  },
+  leave: {
+    badge: "Management",
+    title: "Leave Management",
+    subtitle: "Streamline leave requests, approvals, and balances so HR spends less time on admin.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="🏖️" title="Leave Requests" desc="Employees submit leave requests in seconds. Managers approve or decline from a single inbox." />
+        <FeatureCard icon="📊" title="Leave Balances" desc="Every employee can see their remaining leave balance by type — annual, sick, maternity, etc." />
+        <FeatureCard icon="🗓️" title="Team Calendar" desc="See all approved leaves on a shared calendar so teams plan coverage effectively." />
+        <FeatureCard icon="⚙️" title="Policy Configuration" desc="Define custom leave policies by role, department, or seniority level including carry-forward rules." />
+        <FeatureCard icon="🔔" title="Approval Workflows" desc="Route leave requests through single or multi-level approval chains based on your hierarchy." />
+        <FeatureCard icon="📤" title="Leave Reports" desc="Generate reports on leave utilization, patterns, and department-level absence rates." />
+      </div>
+    ),
+  },
+  salary: {
+    badge: "Management",
+    title: "Salary Management",
+    subtitle: "Manage payroll, salaries, and compensation with accuracy and full compliance.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="💵" title="Salary Structures" desc="Define base pay, allowances, and deductions for every role and grade in your organization." />
+        <FeatureCard icon="📊" title="Payroll Processing" desc="Generate monthly payroll in minutes with automatic deductions for taxes, PF, and insurance." />
+        <FeatureCard icon="🧾" title="Payslip Generation" desc="Send professional, itemized payslips to each employee via email or in-app download." />
+        <FeatureCard icon="📈" title="Compensation Reviews" desc="Track salary history, schedule annual reviews, and manage increments from a single dashboard." />
+        <FeatureCard icon="⚖️" title="Compliance" desc="Built-in rules for statutory deductions and compliance requirements across jurisdictions." />
+        <FeatureCard icon="🏦" title="Bank Transfers" desc="Initiate bulk salary disbursements to employee bank accounts directly from the platform." />
+      </div>
+    ),
+  },
+  calendar: {
+    badge: "Features",
+    title: "Calendar",
+    subtitle: "A unified calendar that brings together tasks, events, meetings, and deadlines in one view.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="📅" title="Task Calendar" desc="See all tasks with due dates displayed on a monthly or weekly calendar view." />
+        <FeatureCard icon="🤝" title="Shared Calendars" desc="Share project or team calendars so everyone can plan with full visibility of events and deadlines." />
+        <FeatureCard icon="🔄" title="Google Sync" desc="Two-way sync with Google Calendar so events in KaryaUp appear in your personal calendar." />
+        <FeatureCard icon="📅" title="Event Scheduling" desc="Create meetings, calls, and events with invites, locations, and agenda notes." />
+        <FeatureCard icon="🌍" title="Multi-timezone" desc="View calendars in your local time zone while scheduling across globally distributed teams." />
+        <FeatureCard icon="🔔" title="Reminders" desc="Set smart reminders for tasks and events so you're always prepared for what's next." />
+      </div>
+    ),
+  },
+  scheduling: {
+    badge: "Features",
+    title: "Scheduling",
+    subtitle: "Intelligent scheduling that respects availability, balances workloads, and avoids conflicts.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="⚖️" title="Workload Balancing" desc="Distribute tasks evenly across your team. Instantly see who is overloaded and who has capacity." />
+        <FeatureCard icon="🕐" title="Availability Settings" desc="Team members set their work hours so scheduling respects time zones and preferences." />
+        <FeatureCard icon="📆" title="Sprint Planning" desc="Define sprint cycles and auto-schedule tasks from your backlog to fill available capacity." />
+        <FeatureCard icon="🔁" title="Recurring Schedules" desc="Set up recurring meetings and work blocks that repeat automatically on defined intervals." />
+        <FeatureCard icon="📊" title="Schedule Reports" desc="Analyze planned vs actual completion to improve estimation accuracy over time." />
+        <FeatureCard icon="🔗" title="Calendar Integration" desc="Sync scheduled work directly to team and personal calendars for a unified view." />
+      </div>
+    ),
+  },
+  automations: {
+    badge: "Features",
+    title: "Automations",
+    subtitle: "Eliminate repetitive work with no-code automation rules that keep your team moving forward.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="⚡" title="Trigger-Based Rules" desc="Create rules that fire when a status changes, a date arrives, or a task is assigned." />
+        <FeatureCard icon="🤖" title="No-Code Builder" desc="Build automation workflows with a visual drag-and-drop editor — no developer needed." />
+        <FeatureCard icon="📨" title="Auto-Notifications" desc="Automatically notify the right people when key events happen in your workspace." />
+        <FeatureCard icon="🔁" title="Recurring Automations" desc="Set schedules — daily, weekly, monthly — for automations that repeat on a cadence." />
+        <FeatureCard icon="🔗" title="App Integrations" desc="Connect KaryaUp with Slack, Gmail, and other tools to automate cross-platform workflows." />
+        <FeatureCard icon="📊" title="Automation Logs" desc="See a full execution history of every automation run to debug and optimize your rules." />
+      </div>
+    ),
+  },
+  "time-tracking": {
+    badge: "Features",
+    title: "Time Tracking",
+    subtitle: "Log time directly in your tasks and get powerful insights on where hours are spent.",
+    content: (
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="⏱️" title="Task Timers" desc="Start and stop a live timer on any task. Time is automatically recorded and linked to the project." />
+        <FeatureCard icon="✏️" title="Manual Entry" desc="Add time manually for meetings, travel, or work done offline by typing hours directly." />
+        <FeatureCard icon="📊" title="Time Reports" desc="View time spent by person, team, project, or date range in flexible report formats." />
+        <FeatureCard icon="💰" title="Billable Hours" desc="Mark logged time as billable and use it to generate accurate client invoices." />
+        <FeatureCard icon="🎯" title="Estimates vs Actuals" desc="Compare estimated task duration against actual time to improve your team's accuracy." />
+        <FeatureCard icon="📤" title="Export Timesheets" desc="Download timesheets as CSV or PDF for payroll, invoicing, and client reporting." />
+      </div>
     ),
   },
   integrations: {
+    badge: "Features",
     title: "Integrations",
-    subtitle: "Connect your favorite tools to keep work in sync.",
+    subtitle: "Connect KaryaUp with the tools your team already uses to create a seamless workflow.",
     content: (
-      <p>
-        Sync data between KaryaUp and other services to reduce context
-        switching.
-      </p>
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <FeatureCard icon="📧" title="Gmail & Outlook" desc="Create tasks from emails and link conversations to projects without leaving your inbox." />
+        <FeatureCard icon="📅" title="Google Calendar" desc="Sync tasks and deadlines with Google Calendar for a unified view of your schedule." />
+        <FeatureCard icon="💬" title="Slack" desc="Receive KaryaUp notifications in Slack and create tasks directly from Slack messages." />
+        <FeatureCard icon="🔗" title="Zapier" desc="Connect KaryaUp to thousands of apps via Zapier automations without writing any code." />
+        <FeatureCard icon="🛠️" title="API Access" desc="Build custom integrations using KaryaUp's REST API for complete flexibility." />
+        <FeatureCard icon="📦" title="App Marketplace" desc="Browse and install verified integrations from the KaryaUp marketplace in one click." />
+      </div>
+    ),
+  },
+  demo: {
+    badge: "Features",
+    title: "Watch the Demo",
+    subtitle: "See KaryaUp in action. A guided walkthrough of the platform's most powerful features.",
+    content: (
+      <div className="text-center py-16 bg-gray-50 rounded-2xl">
+        <div className="text-6xl mb-6">▶️</div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-3">Product Demo</h3>
+        <p className="text-gray-500 mb-8 max-w-md mx-auto">Watch a comprehensive walkthrough of how KaryaUp helps teams work smarter, not harder.</p>
+        <Link to="/start" className="inline-block bg-indigo-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-indigo-700 transition-colors">
+          Start Free Trial Instead →
+        </Link>
+      </div>
     ),
   },
 };
 
+const allFeatures = [
+  { label: "Tasks", to: "/features/tasks", icon: "✅" },
+  { label: "Dashboards", to: "/features/dashboards", icon: "📊" },
+  { label: "Board View", to: "/features/board-view", icon: "📌" },
+  { label: "Gantt", to: "/features/gantt", icon: "📅" },
+  { label: "Chat", to: "/features/chat", icon: "💬" },
+  { label: "Notifications", to: "/features/notifications", icon: "🔔" },
+  { label: "Team", to: "/features/team", icon: "👥" },
+  { label: "Attendance", to: "/features/attendance", icon: "🕐" },
+  { label: "Leave", to: "/features/leave", icon: "🏖️" },
+  { label: "Salary", to: "/features/salary", icon: "💵" },
+  { label: "Calendar", to: "/features/calendar", icon: "📆" },
+  { label: "Scheduling", to: "/features/scheduling", icon: "⚖️" },
+  { label: "Automations", to: "/features/automations", icon: "⚡" },
+  { label: "Time Tracking", to: "/features/time-tracking", icon: "⏱️" },
+  { label: "Integrations", to: "/features/integrations", icon: "🔗" },
+];
+
 export default function Features() {
   const { page } = useParams();
-  const key = page || "overview";
-  const section = featurePages[key] || featurePages.overview;
+  const section = page ? sections[page] : null;
+
+  if (section) {
+    return (
+      <SubPageLayout badge={section.badge} title={section.title} subtitle={section.subtitle}>
+        {section.content}
+        <div className="mt-12 pt-10 border-t border-gray-100">
+          <h3 className="text-sm font-bold text-gray-400 uppercase tracking-wider mb-6">Explore more features</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+            {allFeatures.filter(f => !f.to.endsWith(`/${page}`)).map((f) => (
+              <Link key={f.to} to={f.to} className="flex items-center gap-2 text-sm text-slate-700 hover:text-primary font-medium bg-gray-50 px-3 py-2 rounded-lg hover:bg-gray-100">
+                <span>{f.icon}</span> {f.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </SubPageLayout>
+    );
+  }
 
   return (
-    <Page title={section.title} subtitle={section.subtitle}>
-      {section.content}
-    </Page>
+    <SubPageLayout badge="Features" title="All Features" subtitle="Everything you need to plan, manage, and optimize work in one unified platform.">
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {allFeatures.map((f) => (
+          <Link key={f.to} to={f.to} className="group flex items-center gap-4 bg-gray-50 rounded-2xl p-5 border border-gray-100 hover:shadow-md hover:border-emerald-200 transition-all">
+            <span className="text-2xl">{f.icon}</span>
+            <span className="font-semibold text-gray-900 group-hover:text-emerald-700">{f.label}</span>
+          </Link>
+        ))}
+      </div>
+    </SubPageLayout>
   );
 }
