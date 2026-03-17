@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 html {
   scroll-behavior: smooth;
@@ -12,9 +13,22 @@ html {
   --color-accent-pink: #ff00bb;
   --color-accent-blue: #00ccff;
 
-  --color-karyaup-purple: #7b68ee;
+  --color-karyaup-purple: #7e22ce;
   --color-karyaup-violet: #8a2be2;
   --color-karyaup-gray: #2a2e34;
+
+  --color-background: #ffffff;
+  --color-foreground: #0f172a;
+  --color-card: #ffffff;
+  --color-secondary: #f1f5f9;
+  --color-accent: #f5f3ff;
+  --color-border: #e2e8f0;
+  --color-muted-foreground: #64748b;
+  --color-primary-foreground: #ffffff;
+
+  --shadow-card: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-card-hover: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-button: 0 4px 6px -1px rgba(126, 34, 206, 0.3), 0 2px 4px -1px rgba(126, 34, 206, 0.1);
 
   --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
   --font-display: "Plus Jakarta Sans", sans-serif;
@@ -94,7 +108,7 @@ html {
 }
 
 .karyaup-gradient {
-  background: linear-gradient(135deg, #7b68ee 0%, #ff00bb 100%);
+  background: linear-gradient(135deg, #7e22ce 0%, #ff00bb 100%);
 }
 
 .text-gradient {

@@ -1,24 +1,33 @@
 import React from "react";
 import Hero from "../components/Hero";
+import ScatteredWork from "../components/ScatteredWork";
 import FeatureShowcase from "../components/Detail_SS.jsx";
 import TrustedBy from "../components/TrustedBy";
 import AllInOne from "../components/AllInOne";
 import Roles from "../components/Roles";
 import TeamSolutions from "../components/TeamSolutions";
+import WorkIntelligence from "../components/WorkIntelligence";
+import FeatureOverview from "../components/FeatureOverview";
+import TeamsSection from "../components/TeamsSection";
+import Integrations from "../components/Integrations";
 import Management from "../components/Management";
-import Goggles from "../components/Goggles.tsx";
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <FeatureShowcase />
+      <ScatteredWork />
+      {/* <FeatureShowcase /> */}
       
-      <TrustedBy />
-      <AllInOne />
-      <Goggles/>
-      <Roles />
+      {/* <TrustedBy /> */}
+      {/* <AllInOne /> */}
+      
+      {/* <Roles /> */}
       <TeamSolutions />
+      <WorkIntelligence />
+      <FeatureOverview />
+      <TeamsSection />
+      <Integrations />
       <Management />
       <section className="py-16 sm:py-20 text-black">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">

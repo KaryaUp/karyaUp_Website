@@ -1,137 +1,117 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-    ArrowRight, CheckCircle2,
-    FolderKanban, Megaphone, Cpu, Monitor, Users, Crown,
-    Bot,
+    ArrowRight, CheckCircle2, FolderKanban, Clock, MessageSquare, Briefcase, Users, Zap, Bot
 } from 'lucide-react';
 
 /* ── Team data ── */
 const teams = [
     {
         id: 'projects',
-        tab: 'Projects',
+        tab: 'Project & Task',
         icon: FolderKanban,
-        title: 'Deliver projects on time,',
-        titleHighlight: 'every time',
+        title: 'Project & Task Management',
+        titleHighlight: '',
         description:
-            'Plan, track, and manage any project with powerful task management, timelines, and real-time collaboration — all in one workspace.',
-
+            'Break work into clear, structured tasks with ownership and priorities.',
         bullets: [
-            'Automate task assignments + deadlines',
-            'Track progress with real-time dashboards',
-            'Collaborate across departments seamlessly',
+            'Outcome: Teams know exactly what to do next — every time.',
         ],
         agents: [
-            { name: 'Sprint Agent plans iterations', color: '#7b68ee' },
+            { name: 'Sprint Agent plans iterations', color: '#7e22ce' },
             { name: 'Task Agent auto-assigns work', color: '#f59e0b' },
             { name: 'Timeline Agent flags delays', color: '#10b981' },
             { name: 'Reports Agent generates summaries', color: '#ef4444' },
         ],
     },
     {
-        id: 'marketing',
-        tab: 'Marketing',
-        icon: Megaphone,
-        title: "Maximize marketing's impact",
-        titleHighlight: 'and results',
+        id: 'time',
+        tab: 'Time Tracking',
+        icon: Clock,
+        title: 'Time Tracking',
+        titleHighlight: '',
         description:
-            'Run campaigns, track performance, and align your marketing team around measurable outcomes — from ideation to execution.',
-
+            'Track time where work happens.',
         bullets: [
-            'Plan campaigns with content calendars',
-            'Track ROI with real-time analytics',
-            'Streamline creative approvals + reviews',
+            'Insight: Understand where every hour goes — and improve planning accuracy by up to 40%.',
         ],
         agents: [
-            { name: 'Campaign Agent schedules launches', color: '#e879f9' },
-            { name: 'Content Agent drafts copy', color: '#7b68ee' },
-            { name: 'Analytics Agent tracks metrics', color: '#f59e0b' },
-            { name: 'Social Agent manages channels', color: '#10b981' },
+            { name: 'Time Agent logs hours automatically', color: '#e879f9' },
+            { name: 'Capacity Agent balances workload', color: '#7e22ce' },
+            { name: 'Report Agent highlights bottlenecks', color: '#f59e0b' },
+            { name: 'Billing Agent calculates costs', color: '#10b981' },
         ],
     },
     {
-        id: 'product',
-        tab: 'Product & Eng',
-        icon: Cpu,
-        title: 'Ship faster,',
-        titleHighlight: 'more reliable software',
+        id: 'collaboration',
+        tab: 'Collaboration',
+        icon: MessageSquare,
+        title: 'Team Collaboration',
+        titleHighlight: '',
         description:
-            'Align product roadmaps with engineering sprints — manage backlogs, track bugs, and deploy with confidence.',
-
+            'Communication stays connected to work.',
         bullets: [
-            'Manage backlogs + sprint planning',
-            'Track bugs with automated triage',
-            'Connect roadmaps to daily work',
+            'Impact: Reduce internal follow-ups by 50%+',
         ],
         agents: [
-            { name: 'Backlog Agent prioritizes features', color: '#6366f1' },
-            { name: 'QA Agent triages bug reports', color: '#ef4444' },
-            { name: 'Deploy Agent tracks releases', color: '#10b981' },
-            { name: 'Docs Agent updates changelogs', color: '#f59e0b' },
+            { name: 'Summary Agent catches you up', color: '#6366f1' },
+            { name: 'Sync Agent coordinates meetings', color: '#ef4444' },
+            { name: 'Draft Agent composes replies', color: '#10b981' },
+            { name: 'Ping Agent alerts dependencies', color: '#f59e0b' },
         ],
     },
     {
-        id: 'it',
-        tab: 'IT',
-        icon: Monitor,
-        title: 'Create the systems,',
-        titleHighlight: 'for scale',
+        id: 'crm',
+        tab: 'CRM & Sales',
+        icon: Briefcase,
+        title: 'CRM & Sales',
+        titleHighlight: '',
         description:
-            'Streamline internal support processes and external vendor relationship protocols in a single, unified workspace.',
-
+            'Manage leads, deals, and delivery in one flow.',
         bullets: [
-            'Manage vendors + budgeting',
-            'Run tight asset management',
-            'Streamline contracts + procurement',
+            'Result: No disconnect between sales and execution.',
         ],
         agents: [
-            { name: 'Assets Agent tracks inventory', color: '#7b68ee' },
-            { name: 'RFP Agent manages reqs docs', color: '#f59e0b' },
-            { name: 'Contracts Agent standardizes terms', color: '#e879f9' },
-            { name: 'Live Intel Agent identifies redundancies', color: '#ef4444' },
+            { name: 'Lead Agent scores prospects', color: '#7e22ce' },
+            { name: 'Nurture Agent sends follow-ups', color: '#f59e0b' },
+            { name: 'Deal Agent forecasts revenue', color: '#e879f9' },
+            { name: 'Handoff Agent briefs the team', color: '#ef4444' },
         ],
     },
     {
         id: 'hr',
-        tab: 'HR',
+        tab: 'HR & Team',
         icon: Users,
-        title: 'Build the processes',
-        titleHighlight: 'that power your people',
+        title: 'HR & Team Management',
+        titleHighlight: '',
         description:
-            'Manage hiring pipelines, onboarding workflows, and employee engagement — all with AI-powered automation.',
-
+            'Control roles, access, attendance, and team structure.',
         bullets: [
-            'Automate onboarding checklists',
-            'Track employee leave + attendance',
-            'Manage salary reviews + appraisals',
+            'Clarity: One system to manage people and performance.',
         ],
         agents: [
             { name: 'Hiring Agent screens applicants', color: '#10b981' },
-            { name: 'Onboard Agent sets up new hires', color: '#7b68ee' },
+            { name: 'Onboard Agent sets up new hires', color: '#7e22ce' },
             { name: 'Leave Agent manages time-off', color: '#f59e0b' },
             { name: 'Payroll Agent processes salaries', color: '#ef4444' },
         ],
     },
     {
-        id: 'leadership',
-        tab: 'Leadership',
-        icon: Crown,
-        title: 'Close the strategy-',
-        titleHighlight: 'execution gap',
+        id: 'automation',
+        tab: 'Automation',
+        icon: Zap,
+        title: 'Automation',
+        titleHighlight: '',
         description:
-            'Get real-time visibility across every team, project, and KPI — make data-driven decisions at the speed of business.',
-
+            'Automate repetitive workflows.',
         bullets: [
-            'Track company-wide OKRs + KPIs',
-            'Get executive dashboards at a glance',
-            'Align team goals to business outcomes',
+            'Efficiency: Save 10+ hours per team every week',
         ],
         agents: [
-            { name: 'Strategy Agent aligns OKRs', color: '#6366f1' },
-            { name: 'Insights Agent surfaces trends', color: '#f59e0b' },
-            { name: 'Forecast Agent predicts outcomes', color: '#10b981' },
-            { name: 'Board Agent prepares reports', color: '#e879f9' },
+            { name: 'Workflow Agent connects tools', color: '#6366f1' },
+            { name: 'Trigger Agent watches for events', color: '#f59e0b' },
+            { name: 'Action Agent executes routines', color: '#10b981' },
+            { name: 'Audit Agent logs activities', color: '#e879f9' },
         ],
     },
 ];
@@ -161,7 +141,7 @@ const TeamSolutions = () => {
                     className="text-center mb-12"
                 >
                     <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-tight tracking-tight mb-4">
-                        KaryaUp Solution for <span className="italic font-black">every</span> team
+                        Built for how modern <span className="italic font-black">teams</span> actually work
                     </h2>
                     <p className="text-gray-500 text-base sm:text-lg font-medium">
                         Your key workflows, powered by KaryaUp Agents.
@@ -176,9 +156,9 @@ const TeamSolutions = () => {
                             onClick={() => setActiveIdx(idx)}
                             className="relative px-3 py-2 sm:px-5 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300"
                             style={{
-                                background: activeIdx === idx ? '#1a1a2e' : 'transparent',
+                                background: activeIdx === idx ? '#7e22ce' : 'transparent',
                                 color: activeIdx === idx ? '#fff' : '#555',
-                                border: activeIdx === idx ? '1px solid #1a1a2e' : '1px solid #ddd',
+                                border: activeIdx === idx ? '1px solid #7e22ce' : '1px solid #ddd',
                             }}
                         >
                             {team.tab}
@@ -237,17 +217,6 @@ const TeamSolutions = () => {
                                     </motion.div>
                                 ))}
 
-                                {/* CTA button */}
-                                <motion.button
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    transition={{ delay: 0.5 }}
-                                    whileHover={{ scale: 1.03 }}
-                                    whileTap={{ scale: 0.97 }}
-                                    className="mt-2 self-start inline-flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-bold text-sm px-6 py-3 rounded-full transition-colors"
-                                >
-                                    Explore solution <ArrowRight size={14} />
-                                </motion.button>
                             </div>
                         </div>
                     </motion.div>

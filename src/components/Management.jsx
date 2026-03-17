@@ -79,7 +79,7 @@ const Management = () => {
                                                     style={{
                                                         height: `${h}%`,
                                                         background: i === 5
-                                                            ? 'linear-gradient(180deg, #7b68ee, #a78bfa)'
+                                                            ? 'linear-gradient(180deg, #7e22ce, #a78bfa)'
                                                             : '#e5e7eb',
                                                     }}
                                                 ></div>
@@ -118,7 +118,7 @@ const Management = () => {
                                                 <path
                                                     d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
                                                     fill="none"
-                                                    stroke="#7b68ee"
+                                                    stroke="#7e22ce"
                                                     strokeWidth="3"
                                                     strokeDasharray="87, 100"
                                                     strokeLinecap="round"

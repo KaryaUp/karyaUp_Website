@@ -5,7 +5,7 @@ import {
   CheckSquare, Kanban, Users, Clock, BarChart2, LayoutDashboard, CircleDollarSign,
   Megaphone, Contact,
   AlignLeft, MessageSquare, Video, UserCheck, CalendarOff, Banknote, Calendar, Zap, Timer, Blocks, PlayCircle, Bell,
-  FileText, BookOpen, Sparkles, FileCode, MonitorPlay
+  FileText, BookOpen, Sparkles, FileCode, MonitorPlay, LogIn
 } from "lucide-react";
 import logo from "../assets/logo.png";
 
@@ -129,6 +129,8 @@ const resourcesMegaSections = [
   { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconBg: "bg-purple-50 text-purple-600 border border-purple-100", description: "Step-by-step video guides and walkthroughs." },
 ];
 
+import { motion, AnimatePresence } from "framer-motion";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -136,6 +138,7 @@ const Navbar = () => {
   const [isFeaturesOpen, setIsFeaturesOpen] = useState(false);
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
   const platformTimerRef = useRef(null);
   const featuresTimerRef = useRef(null);
   const solutionsTimerRef = useRef(null);
@@ -231,7 +234,7 @@ const Navbar = () => {
   };
 
   const linkBase =
-    "text-sm font-semibold text-slate-700 hover:text-primary transition-all";
+    "text-base font-semibold text-slate-700 hover:text-primary transition-all";
   const linkActive = "text-primary";
 
   return (
@@ -244,20 +247,46 @@ const Navbar = () => {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-full mx-auto px-6 lg:px-10">
         <div className="flex items-center justify-between">
           <div className="flex items-center">
-            <Link to="/" onClick={closeAllMenus} className="flex items-center group">
-              <img
-                src={logo}
-                alt="KaryaUp Logo"
-                className="h-12 sm:h-12 w-auto group-hover:scale-105 transition-transform duration-300"
-              />
-            </Link>
+            <div 
+              className="relative"
+              onMouseEnter={() => setIsLogoHovered(true)}
+              onMouseLeave={() => setIsLogoHovered(false)}
+            >
+              <Link to="/" onClick={closeAllMenus} className="flex items-center group">
+                <img
+                  src={logo}
+                  alt="KaryaUp Logo"
+                  className="h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+                />
+              </Link>
+              
+              <AnimatePresence>
+                {isLogoHovered && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    transition={{ duration: 0.2, ease: "easeOut" }}
+                    className="absolute top-full left-0 mt-2 z-50 pointer-events-none"
+                  >
+                    <div className="bg-slate-900 border border-slate-800 shadow-2xl rounded-xl px-3 py-2 w-auto min-w-[180px] max-w-[280px] backdrop-blur-md">
+                      <div className="absolute -top-1 w-2 h-2 bg-slate-900 border-t border-l border-slate-800 rotate-45 left-6" />
+                      <p className="text-[13px] font-medium text-white leading-snug">
+                        <span className="text-purple-400 font-bold tracking-tight block mb-0.5">KaryaUp</span> 
+                        From Sanskrit <span className="italic opacity-90">“Karya”</span> <br /> meaning action or work.
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
 
           <div className="hidden md:flex md:flex-1 md:justify-center">
-            <div className="flex items-center space-x-10">
+            <div className="flex items-center space-x-12">
               <div
                 className="flex items-center h-full py-2"
                 onMouseEnter={handlePlatformMouseEnter}
@@ -292,8 +321,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[15px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[13px] text-gray-500 font-normal leading-snug">
+                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
+                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
                                   {item.description}
                                 </span>
                               </div>
@@ -315,8 +344,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[15px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[13px] text-gray-500 font-normal leading-snug">
+                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
+                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
                                   {item.description}
                                 </span>
                               </div>
@@ -350,7 +379,7 @@ const Navbar = () => {
                       <div className="grid gap-x-8 gap-y-12 grid-cols-2 md:grid-cols-5 lg:grid-cols-5">
                         {featuresMegaSections.map((section) => (
                           <div key={section.heading}>
-                            <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-5">
+                            <h3 className="text-sm font-bold text-slate-400 tracking-wider mb-5">
                               {section.heading}
                             </h3>
                             <ul className="space-y-4">
@@ -359,11 +388,11 @@ const Navbar = () => {
                                   <Link
                                     to={item.to}
                                     onClick={closeAllMenus}
-                                    className="flex items-center gap-3 text-sm font-medium text-slate-800 hover:text-primary transition-colors group"
+                                    className="flex items-center gap-3 text-[15px] font-medium text-slate-800 hover:text-primary transition-colors group"
                                   >
                                     {item.icon && (
-                                      <div className={`flex items-center justify-center w-[26px] h-[26px] rounded-[6px] ${item.iconBg || 'bg-gray-200'} text-white group-hover:scale-105 transition-transform`}>
-                                        <item.icon size={14} strokeWidth={2.5} />
+                                      <div className={`flex items-center justify-center w-[30px] h-[30px] rounded-[6px] ${item.iconBg || 'bg-gray-200'} text-white group-hover:scale-105 transition-transform`}>
+                                        <item.icon size={16} strokeWidth={2.5} />
                                       </div>
                                     )}
                                     {item.label}
@@ -400,7 +429,7 @@ const Navbar = () => {
                       <div className="grid gap-x-12 gap-y-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
                         {solutionsMegaSections.map((section) => (
                           <div key={section.heading} className={section.className || ""}>
-                            <h3 className="text-xs font-bold text-slate-400 tracking-wider mb-5">
+                            <h3 className="text-sm font-bold text-slate-400 tracking-wider mb-5">
                               {section.heading}
                             </h3>
                             <ul className="space-y-4">
@@ -417,9 +446,9 @@ const Navbar = () => {
                                       </div>
                                     )}
                                     <div className="flex flex-col">
-                                      <span className={item.description ? "font-bold text-[15px] mb-1 text-black" : "font-medium"}>{item.label}</span>
+                                      <span className={item.description ? "font-bold text-[17px] mb-1 text-black" : "font-medium text-base"}>{item.label}</span>
                                       {item.description && (
-                                        <span className="text-[13px] text-gray-500 font-normal leading-snug">
+                                        <span className="text-[15px] text-gray-500 font-normal leading-snug">
                                           {item.description}
                                         </span>
                                       )}
@@ -479,8 +508,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[15px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[13px] text-gray-500 font-normal leading-snug">
+                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
+                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
                                   {item.description}
                                 </span>
                               </div>
@@ -502,8 +531,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[15px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[13px] text-gray-500 font-normal leading-snug">
+                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
+                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
                                   {item.description}
                                 </span>
                               </div>
@@ -522,13 +551,13 @@ const Navbar = () => {
             <Link
               to="/login"
               onClick={closeAllMenus}
-              className="text-sm font-semibold text-slate-700 hover:text-primary transition-all"
+              className="text-base font-semibold text-slate-700 hover:text-primary transition-all"
             >
               Log in
             </Link>
-            <Link to="/start" onClick={closeAllMenus} className="btn-primary px-4 py-2 text-sm">
+            <Link to="/start" onClick={closeAllMenus} className="btn-primary px-6 py-2.5 text-base">
               Start Workspace
-              <ArrowRight size={16} />
+              <ArrowRight size={18} />
             </Link>
           </div>
 

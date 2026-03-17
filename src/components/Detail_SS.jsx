@@ -15,19 +15,19 @@ import {
   Target,
 } from "lucide-react";
 
-import featureDashboard from "../assets/dashboard1.png";
-import featureDocs from "../assets/notes.png";
-import featureSprints from "../assets/Task.png";
-import featureChat from "../assets/Chat.png";
-import featureGantt from "../assets/Gantt.png";
-import featureAnalysis from "../assets/Work Analysis.png";
-import featureCalendar from "../assets/calender.png";
-import featureTime from "../assets/Attendance.png";
-import featureSalary from "../assets/salary.png";
-import featureLeads from "../assets/leads.png";
-import featureIntegration from "../assets/integration.png";
-import featureClients from "../assets/clients.png";
-import featureProfit from "../assets/profit.png";
+import featureDashboard from "../assets/dashboard1.jpeg";
+import featureDocs from "../assets/work_analysis.jpeg";
+import featureSprints from "../assets/Task.jpeg";
+import featureChat from "../assets/Team.jpeg";
+import featureGantt from "../assets/projects.jpeg";
+import featureAnalysis from "../assets/work_analysis.jpeg";
+import featureCalendar from "../assets/calender.jpeg";
+import featureTime from "../assets/attendance.jpeg";
+import featureSalary from "../assets/salary.jpeg";
+import featureLeads from "../assets/Task.jpeg";
+import featureIntegration from "../assets/agent.png";
+import featureClients from "../assets/Team.jpeg";
+import featureProfit from "../assets/salary.jpeg";
 
 const features = [
   { id: "dashboard", label: "Dashboard", icon: LayoutGrid, image: featureDashboard },
@@ -70,7 +70,7 @@ const FeatureShowcase = () => {
       {/* outer spacing */}
       <div className="flex w-full h-[100%] max-h-[90vh] rounded-2xl overflow-hidden">
         {/* Sidebar */}
-        <nav className="flex flex-col items-center py-4 bg-[#3B2A5A] w-16 shrink-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-30">
+        <nav className="flex flex-col items-center py-4 bg-[#7e22ce] w-16 shrink-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-30">
           {features.map((feature) => {
             const isActive = activeFeature === feature.id;
             const Icon = feature.icon;
