@@ -27,7 +27,7 @@ const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
 );
 
 const FeatureCard = ({ title, icon: Icon, image, color }) => (
-    <div className="w-80 h-[192px] bg-white border border-gray-100 flex flex-col relative overflow-hidden group/card shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="w-80   h-[192px] bg-white border border-gray-100 flex flex-col relative overflow-hidden group/card shadow-sm hover:shadow-md transition-shadow duration-300">
         <div className="absolute top-2 left-2 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 border border-gray-100 rounded-sm">
             <div className="p-1 bg-gray-50 rounded-sm">
                 <Icon className="w-3 h-3" style={{ color }} strokeWidth={2} />
