@@ -10,10 +10,11 @@ const teams = [
         id: 'projects',
         tab: 'Project & Task',
         icon: FolderKanban,
-        title: 'Project & Task Management',
-        titleHighlight: '',
+        title: 'Project & Task',
+        titleHighlight: 'Management',
         description:
             'Break work into clear, structured tasks with ownership and priorities.',
+        replaces: ['Jira', 'Asana', 'Trello'],
         bullets: [
             'Outcome: Teams know exactly what to do next — every time.',
         ],
@@ -28,10 +29,11 @@ const teams = [
         id: 'time',
         tab: 'Time Tracking',
         icon: Clock,
-        title: 'Time Tracking',
-        titleHighlight: '',
+        title: 'Time',
+        titleHighlight: 'Tracking',
         description:
             'Track time where work happens.',
+        replaces: ['Harvest', 'Toggl', 'Clockify'],
         bullets: [
             'Insight: Understand where every hour goes — and improve planning accuracy by up to 40%.',
         ],
@@ -46,10 +48,11 @@ const teams = [
         id: 'collaboration',
         tab: 'Collaboration',
         icon: MessageSquare,
-        title: 'Team Collaboration',
-        titleHighlight: '',
+        title: 'Team',
+        titleHighlight: 'Collaboration',
         description:
             'Communication stays connected to work.',
+        replaces: ['Slack', 'Loom', 'Notion'],
         bullets: [
             'Impact: Reduce internal follow-ups by 50%+',
         ],
@@ -64,10 +67,11 @@ const teams = [
         id: 'crm',
         tab: 'CRM & Sales',
         icon: Briefcase,
-        title: 'CRM & Sales',
-        titleHighlight: '',
+        title: 'CRM &',
+        titleHighlight: 'Sales',
         description:
             'Manage leads, deals, and delivery in one flow.',
+        replaces: ['Salesforce', 'HubSpot', 'Pipedrive'],
         bullets: [
             'Result: No disconnect between sales and execution.',
         ],
@@ -82,10 +86,11 @@ const teams = [
         id: 'hr',
         tab: 'HR & Team',
         icon: Users,
-        title: 'HR & Team Management',
-        titleHighlight: '',
+        title: 'HR & Team',
+        titleHighlight: 'Management',
         description:
             'Control roles, access, attendance, and team structure.',
+        replaces: ['Gusto', 'BambooHR', 'HiBob'],
         bullets: [
             'Clarity: One system to manage people and performance.',
         ],
@@ -100,10 +105,11 @@ const teams = [
         id: 'automation',
         tab: 'Automation',
         icon: Zap,
-        title: 'Automation',
-        titleHighlight: '',
+        title: 'Workflow',
+        titleHighlight: 'Automation',
         description:
             'Automate repetitive workflows.',
+        replaces: ['Zapier', 'Make', 'Workato'],
         bullets: [
             'Efficiency: Save 10+ hours per team every week',
         ],
@@ -131,17 +137,24 @@ const TeamSolutions = () => {
     const active = teams[activeIdx];
 
     return (
-        <section className="py-16 sm:py-20 lg:py-24 bg-[white]">
+        <section className="pt-8 sm:pt-12 lg:pt-16 pb-6 sm:pb-8 lg:pb-10 bg-[white]">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-12"
+                    className="text-center mb-8"
                 >
                     <h2 className="text-2xl sm:text-4xl md:text-6xl font-black text-gray-900 leading-tight tracking-tight mb-4">
-                        Built for how modern <span className="italic font-black">teams</span> actually work
+                        Built for teams that<br/> 
+                        <motion.span
+                            className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                            animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                        >
+                            move fast
+                        </motion.span>
                     </h2>
                     <p className="text-gray-500 text-base sm:text-lg font-medium">
                         Your key workflows, powered by KaryaUp Agents.
@@ -149,7 +162,7 @@ const TeamSolutions = () => {
                 </motion.div>
 
                 {/* Tab bar */}
-                <div className="flex flex-wrap justify-center gap-2 mb-8 sm:mb-14">
+                <div className="flex flex-wrap justify-center gap-2 mb-6 sm:mb-10">
                     {teams.map((team, idx) => (
                         <button
                             key={team.id}
@@ -174,32 +187,57 @@ const TeamSolutions = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.35 }}
-                        className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-8 md:p-12 shadow-sm border border-gray-100"
+                        className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-10 shadow-sm border border-gray-100"
                     >
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
                             {/* Left side */}
-                            <div>
-                                <h3 className="text-2xl sm:text-3xl md:text-4xl font-black text-gray-900 leading-tight mb-4">
-                                    {active.title}
-                                    <br />
-                                    <span className="text-gray-400 italic">{active.titleHighlight}</span>
-                                </h3>
-                                <p className="text-gray-500 text-base leading-relaxed mb-8 max-w-md">
-                                    {active.description}
-                                </p>
+                            <div className="relative overflow-hidden lg:pr-10">
+                                {/* Decorative background icon to fill space */}
+                                <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 opacity-[0.03] pointer-events-none">
+                                    <active.icon size={300} strokeWidth={1} className="text-[#7e22ce]" />
+                                </div>
 
-                                {/* Replaces */}
+                                <div className="relative z-10">
+                                    <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-6">
+                                        {active.title}
+                                        <br />
+                                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 italic">{active.titleHighlight}</span>
+                                    </h3>
+                                    
+                                    <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-md font-medium">
+                                        {active.description}
+                                    </p>
 
+                                    {/* Replaces Indicators */}
+                                    <div className="mb-10">
+                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-4 px-1">
+                                            Replaces
+                                        </p>
+                                        <div className="flex flex-wrap gap-3">
+                                            {active.replaces?.map((tool) => (
+                                                <div 
+                                                    key={tool} 
+                                                    className="px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-gray-500 text-xs font-bold hover:border-[#7e22ce]/30 hover:text-[#7e22ce] transition-all cursor-default"
+                                                >
+                                                    {tool}
+                                                </div>
+                                            ))}
+                                            <div className="px-4 py-2 rounded-xl border border-dashed border-gray-200 text-gray-400 text-xs font-bold hover:border-[#7e22ce]/30 transition-all cursor-default">
+                                                + more
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                {/* Bullet list */}
-                                <ul className="space-y-3">
-                                    {active.bullets.map((b) => (
-                                        <li key={b} className="flex items-start gap-2.5 text-gray-600 text-sm font-medium">
-                                            <CheckCircle2 size={16} className="text-gray-400 mt-0.5 flex-shrink-0" />
-                                            {b}
-                                        </li>
-                                    ))}
-                                </ul>
+                                    {/* Bullet list */}
+                                    <ul className="space-y-4">
+                                        {active.bullets.map((b) => (
+                                            <li key={b} className="flex items-start gap-3 text-gray-600 text-base font-bold bg-purple-50/50 p-4 rounded-2xl border border-purple-100/30">
+                                                <CheckCircle2 size={20} className="text-[#7e22ce] mt-0.5 flex-shrink-0" />
+                                                {b}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
                             </div>
 
                             {/* Right side — agent cards */}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  LayoutDashboard, Kanban, Briefcase, Zap, BarChart3, TrendingUp, ArrowRight, Sparkles
+  LayoutDashboard, Kanban, Briefcase, Zap, BarChart3, TrendingUp, ArrowRight
 } from 'lucide-react';
 
 /* ── Card data ── */
@@ -132,26 +132,13 @@ const FloatCard = ({ feature, index }) => {
           <span className="text-slate-400 text-sm font-medium mb-1">{feature.statLabel}</span>
         </div>
 
-        {/* Sparkle icon corner (visible on hover) */}
-        <motion.div
-          animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.5 }}
-          transition={{ duration: 0.2 }}
-          className="absolute top-5 right-5"
-        >
-          <Sparkles size={18} style={{ color: feature.accent }} />
-        </motion.div>
       </motion.div>
     </motion.div>
   );
 };
 
 const FeatureOverview = () => (
-  <section className="py-16 sm:py-20 relative overflow-hidden"
-    style={{ background: 'linear-gradient(160deg, #f8f7ff 0%, #fdf4ff 50%, #f0f9ff 100%)' }}
-  >
-    {/* Decorative circles */}
-    <div className="absolute -top-40 -right-40 w-[500px] h-[500px] bg-purple-200/30 rounded-full blur-[100px] pointer-events-none" />
-    <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-fuchsia-200/30 rounded-full blur-[100px] pointer-events-none" />
+  <section className="pt-6 sm:pt-10 pb-12 sm:pb-16 bg-white relative overflow-hidden">
 
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
       {/* Heading */}
@@ -159,17 +146,21 @@ const FeatureOverview = () => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-14"
+        className="text-center max-w-2xl mx-auto mb-8"
       >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-6 uppercase tracking-widest">
+        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-4 uppercase tracking-widest">
           <TrendingUp size={13} /> Product Features
         </span>
 
-        <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight mb-4">
+        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight tracking-tight mb-4">
           See everything.{' '}
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-fuchsia-500">
+          <motion.span 
+            className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+            animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          >
             Instantly.
-          </span>
+          </motion.span>
         </h2>
         <p className="text-slate-500 text-lg font-medium">
           One platform. Every view — always current.

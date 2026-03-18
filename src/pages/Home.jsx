@@ -11,15 +11,17 @@ import FeatureOverview from "../components/FeatureOverview";
 import TeamsSection from "../components/TeamsSection";
 import Integrations from "../components/Integrations";
 import Management from "../components/Management";
+import FinalCTA from "../components/FinalCTA";
 
 export default function Home() {
   return (
     <>
       <Hero />
+        <TrustedBy /> 
       <ScatteredWork />
       {/* <FeatureShowcase /> */}
       
-      {/* <TrustedBy /> */}
+     
       {/* <AllInOne /> */}
       
       {/* <Roles /> */}
@@ -28,21 +30,8 @@ export default function Home() {
       <FeatureOverview />
       <TeamsSection />
       <Integrations />
-      <Management />
-      <section className="py-16 sm:py-20 text-black">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold mb-6 sm:mb-8">
-            Ready to transform your workflow?
-          </h2>
-          <p className="text-base sm:text-xl opacity-90 mb-8 sm:mb-12">
-            Join thousands of teams who use KaryaUp to stay organized and
-            efficient.
-          </p>
-          <button className="bg-white text-primary w-full sm:w-auto px-8 py-4 sm:px-10 sm:py-5 rounded-xl font-bold text-base sm:text-xl shadow-2xl hover:bg-gray-50 hover:scale-105 active:scale-95 transition-all">
-            Get Started with KaryaUp
-          </button>
-        </div>
-      </section>
+      {/* <Management /> */}
+      <FinalCTA />
     </>
   );
 }

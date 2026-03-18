@@ -66,7 +66,7 @@ const TeamsSection = () => {
   const Icon = team.icon;
 
   return (
-    <section className="py-16 sm:py-20 bg-white border-t border-slate-100 relative overflow-hidden">
+    <section className="py-10 sm:py-12 bg-white relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
@@ -74,24 +74,28 @@ const TeamsSection = () => {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="mb-12 text-center flex flex-col items-center"
         >
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-6 uppercase tracking-widest">
             <Users size={13} /> Who it's for
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight max-w-3xl mx-auto">
             Built for teams that{' '}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-fuchsia-500">
+            <motion.span 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+            >
               move fast
-            </span>
+            </motion.span>
           </h2>
         </motion.div>
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
 
           {/* LEFT: stacked selectable rows */}
-          <div className="lg:col-span-2 flex flex-col divide-y divide-slate-100">
+          <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100">
             {teams.map((t, i) => {
               const TIcon = t.icon;
               const isActive = active === i;
@@ -137,7 +141,7 @@ const TeamsSection = () => {
           </div>
 
           {/* RIGHT: 3D detail panel */}
-          <div className="lg:col-span-3" style={{ perspective: '1000px' }}>
+          <div className="lg:col-span-8" style={{ perspective: '1000px' }}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -150,11 +154,11 @@ const TeamsSection = () => {
                 {/* Decorative blob */}
                 <div className={`absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br ${team.gradient} opacity-10 blur-2xl pointer-events-none`} />
 
-                {/* Icon circle */}
-                <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${team.gradient} flex items-center justify-center mb-8 shadow-xl`}
+                {/* Icon display */}
+                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-slate-100 shadow-sm"
                   style={{ transform: 'translateZ(20px)' }}
                 >
-                  <Icon size={28} className="text-white" />
+                  <Icon size={28} style={{ color: team.accentColor || '#7e22ce' }} className={`bg-clip-text text-transparent bg-gradient-to-br ${team.gradient}`} />
                 </div>
 
                 {/* Content */}
@@ -171,12 +175,20 @@ const TeamsSection = () => {
                     "{team.result}"
                   </p>
 
-                  {/* Stat pill */}
-                  <div className="inline-flex items-center gap-4">
-                    <div className={`px-5 py-3 rounded-full bg-gradient-to-r ${team.gradient} shadow-lg`}>
-                      <span className="text-white text-xl font-black">{team.stat}</span>
+                  {/* Visual Statistic */}
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-baseline gap-2">
+                      <span className={`text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
+                        {team.stat.split(',')[0]}
+                      </span>
+                      <span className="text-slate-400 text-sm font-bold uppercase tracking-wider">
+                        {team.stat.includes(',') ? team.stat.split(',')[1] : ''}
+                      </span>
                     </div>
-                    <span className="text-slate-400 text-sm font-medium">{team.statSub}</span>
+                    <div className="h-1 w-12 rounded-full bg-gradient-to-r from-slate-200 to-transparent" />
+                    <p className="text-slate-400 text-sm font-medium mt-2 max-w-[200px]">
+                      {team.statSub}
+                    </p>
                   </div>
                 </div>
               </motion.div>

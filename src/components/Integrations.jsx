@@ -32,9 +32,9 @@ const Integrations = () => {
     ];
 
     return (
-        <section className="pt-20 pb-12 sm:pt-32 sm:pb-20 bg-white relative overflow-hidden">
+        <section className="pt-10 pb-0 sm:pt-16 sm:pb-0 bg-white relative overflow-hidden">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div className="text-center max-w-3xl mx-auto mb-16 sm:mb-24">
+                <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
@@ -52,7 +52,13 @@ const Integrations = () => {
                         transition={{ delay: 0.1 }}
                         className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6 tracking-tight"
                     >
-                        Works with your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-fuchsia-600">existing tools</span>
+                        Works with your <br/><motion.span 
+                            className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-600 bg-[length:200%_auto]"
+                            animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                        >
+                            existing tools
+                        </motion.span>
                     </motion.h2>
 
                     <motion.p
@@ -66,7 +72,7 @@ const Integrations = () => {
                     </motion.p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
                     {integrations.map((item, index) => (
                         <motion.div
                             key={item.name}
@@ -103,9 +109,7 @@ const Integrations = () => {
                     transition={{ delay: 0.6 }}
                     className="text-center mt-12 sm:mt-16"
                 >
-                    <p className="text-slate-400 font-medium italic">
-                        *Your ecosystem stays intact. Your workflow improves.*
-                    </p>
+                   
                 </motion.div>
             </div>
         </section>

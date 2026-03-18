@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { 
+import {
   Menu, X, ArrowRight, ChevronDown,
   CheckSquare, Kanban, Users, Clock, BarChart2, LayoutDashboard, CircleDollarSign,
   Megaphone, Contact,
@@ -8,6 +8,8 @@ import {
   FileText, BookOpen, Sparkles, FileCode, MonitorPlay, LogIn
 } from "lucide-react";
 import logo from "../assets/logo.png";
+import KaryaUpBtn from "../assets/KaryaupBtn.png";
+import BorderBeam from "./BorderBeam";
 
 const navItems = [
   { label: "Platform", to: "/platform" },
@@ -95,26 +97,26 @@ const solutionsMegaSections = [
     heading: "TEMPLATES",
     className: "lg:col-span-2",
     items: [
-      { 
-        label: "Project Management", 
-        to: "/solutions/templates/project-management", 
-        icon: Kanban, 
+      {
+        label: "Project Management",
+        to: "/solutions/templates/project-management",
+        icon: Kanban,
         iconBg: "bg-blue-100 text-blue-600",
-        description: "Manage roadmaps, backlogs, bugs, agile dev, and documentation." 
+        description: "Manage roadmaps, backlogs, bugs, agile dev, and documentation."
       },
-      { 
-        label: "Sales/CRM", 
-        to: "/solutions/templates/crm", 
-        icon: Contact, 
+      {
+        label: "Sales/CRM",
+        to: "/solutions/templates/crm",
+        icon: Contact,
         iconBg: "bg-orange-100 text-orange-600",
-        description: "Manage leads, deals, and contacts." 
+        description: "Manage leads, deals, and contacts."
       },
-      { 
-        label: "Marketing", 
-        to: "/solutions/templates/marketing", 
-        icon: Megaphone, 
+      {
+        label: "Marketing",
+        to: "/solutions/templates/marketing",
+        icon: Megaphone,
         iconBg: "bg-indigo-100 text-indigo-600",
-        description: "Plan campaigns, organize assets, and create wikis." 
+        description: "Plan campaigns, organize assets, and create wikis."
       },
     ],
   },
@@ -239,18 +241,17 @@ const Navbar = () => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 py-3 ${
-        isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
+      className={`fixed w-full z-50 transition-all duration-300 py-3 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
           ? "bg-white shadow-md  border-gray-100"
           : isScrolled
-          ? "bg-white/70 backdrop-blur-md shadow-sm "
-          : "bg-transparent"
-      }`}
+            ? "bg-white/70 backdrop-blur-md shadow-sm "
+            : "bg-transparent"
+        }`}
     >
-      <div className="max-w-full mx-auto px-6 lg:px-10">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <div 
+      <div className="max-w-full mx-auto px-4 lg:px-4">
+        <div className="flex items-center">
+          <div className="flex-none flex items-center">
+            <div
               className="relative"
               onMouseEnter={() => setIsLogoHovered(true)}
               onMouseLeave={() => setIsLogoHovered(false)}
@@ -259,10 +260,10 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
-                  className="h-14 w-auto group-hover:scale-105 transition-transform duration-300"
+                  className="h-11 w-auto group-hover:scale-105 transition-transform duration-300"
                 />
               </Link>
-              
+
               <AnimatePresence>
                 {isLogoHovered && (
                   <motion.div
@@ -275,7 +276,7 @@ const Navbar = () => {
                     <div className="bg-slate-900 border border-slate-800 shadow-2xl rounded-xl px-3 py-2 w-auto min-w-[180px] max-w-[280px] backdrop-blur-md">
                       <div className="absolute -top-1 w-2 h-2 bg-slate-900 border-t border-l border-slate-800 rotate-45 left-6" />
                       <p className="text-[13px] font-medium text-white leading-snug">
-                        <span className="text-purple-400 font-bold tracking-tight block mb-0.5">KaryaUp</span> 
+                        <span className="text-purple-400 font-bold tracking-tight block mb-0.5">KaryaUp</span>
                         From Sanskrit <span className="italic opacity-90">“Karya”</span> <br /> meaning action or work.
                       </p>
                     </div>
@@ -285,8 +286,10 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex md:flex-1 md:justify-center">
-            <div className="flex items-center space-x-12">
+          <div className="hidden md:flex flex-1"></div>
+
+          <div className="hidden md:flex md:justify-center flex-none">
+            <div className="flex items-center space-x-10">
               <div
                 className="flex items-center h-full py-2"
                 onMouseEnter={handlePlatformMouseEnter}
@@ -516,7 +519,7 @@ const Navbar = () => {
                             </Link>
                           ))}
                         </div>
-                         {/* Section 2 */}
+                        {/* Section 2 */}
                         <div className="flex flex-col gap-6 flex-1">
                           {resourcesMegaSections.slice(3).map((item) => (
                             <Link
@@ -547,17 +550,22 @@ const Navbar = () => {
             </div>
           </div>
 
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden md:flex flex-1"></div>
+
+          <div className="flex-none hidden md:flex items-center space-x-4">
             <Link
               to="/login"
               onClick={closeAllMenus}
-              className="text-base font-semibold text-slate-700 hover:text-primary transition-all"
+              className="group flex items-center gap-2 font-semibold text-slate-700 hover:text-primary transition-all"
             >
-              Log in
+              <LogIn size={16} className="text-primary group-hover:-translate-x-0.5 transition-transform" />
+              <span className="text-[14px]">Log in</span>
             </Link>
-            <Link to="/start" onClick={closeAllMenus} className="btn-primary px-6 py-2.5 text-base">
-              Start Workspace
-              <ArrowRight size={18} />
+            <Link to="/start" onClick={closeAllMenus} className="relative inline-flex items-center justify-center group rounded-full hover:ring-[2.5px] hover:ring-black hover:ring-offset-2 active:scale-[0.98] transition-all duration-300">
+              <img src={KaryaUpBtn} alt="Start Workspace Button" className="h-[38px] w-auto rounded-[30px] pointer-events-none" />
+              <span className="absolute inset-0 flex items-center justify-center gap-1.5 text-white text-[13px] font-bold tracking-wide drop-shadow-md z-10 w-full pointer-events-none">
+                Start Workspace <ArrowRight size={14} strokeWidth={2.5} className="transition-transform group-hover:translate-x-1" />
+              </span>
             </Link>
           </div>
 
@@ -581,10 +589,9 @@ const Navbar = () => {
                 to={item.to}
                 onClick={closeAllMenus}
                 className={({ isActive }) =>
-                  `block rounded-xl px-4 py-3 text-base font-semibold transition ${
-                    isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-slate-700 hover:bg-primary/5"
+                  `block rounded-xl px-4 py-3 text-base font-semibold transition ${isActive
+                    ? "bg-primary/10 text-primary"
+                    : "text-slate-700 hover:bg-primary/5"
                   }`
                 }
               >
@@ -596,18 +603,22 @@ const Navbar = () => {
               <Link
                 to="/login"
                 onClick={() => setIsOpen(false)}
-                className="w-full flex justify-center items-center gap-2 rounded-xl border border-gray-200 bg-white py-3 text-sm font-semibold text-slate-700 hover:bg-gray-50 transition"
+                className="w-full flex justify-center items-center gap-2 rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-semibold text-slate-700 hover:bg-gray-50 transition"
               >
                 <LogIn size={18} /> Log in
               </Link>
-              <Link
-                to="/start"
-                onClick={() => setIsOpen(false)}
-                className="w-full btn-primary py-3 justify-center"
-              >
-                Start Workspace
-                <ArrowRight size={16} />
-              </Link>
+              <div className="flex justify-center w-full mt-2 pb-1">
+                <Link
+                  to="/start"
+                  onClick={() => setIsOpen(false)}
+                  className="relative inline-flex items-center justify-center group rounded-full hover:ring-[2.5px] hover:ring-black hover:ring-offset-2 active:scale-[0.98] transition-all duration-300"
+                >
+                  <img src={KaryaUpBtn} alt="Start Workspace Button" className="h-[44px] w-auto rounded-[40px] pointer-events-none" />
+                  <span className="absolute inset-0 flex items-center justify-center gap-2 text-white text-[14px] font-bold tracking-wide drop-shadow-md z-10 w-full pointer-events-none">
+                    Start Workspace <ArrowRight size={16} strokeWidth={2.5} className="transition-transform group-hover:translate-x-1" />
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
