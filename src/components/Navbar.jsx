@@ -133,6 +133,83 @@ const resourcesMegaSections = [
 
 import { motion, AnimatePresence } from "framer-motion";
 
+const StartWorkspaceButton = ({ to, onClick, size = "sm" }) => {
+  const [hovered, setHovered] = useState(false);
+  const angleRef = useRef(0);
+  const rafRef = useRef(null);
+  const spanRef = useRef(null);
+
+  const imgH = size === "sm" ? "h-[34px]" : "h-[42px]";
+  const textSz = size === "sm" ? "text-[13px]" : "text-[14px]";
+  const arrowSz = size === "sm" ? 13 : 16;
+
+  useEffect(() => {
+    if (hovered) {
+      const animate = () => {
+        angleRef.current = (angleRef.current + 2) % 360;
+        if (spanRef.current) {
+          spanRef.current.style.background = `conic-gradient(from ${angleRef.current}deg, transparent 82%, #111 90%, transparent 100%)`;
+        }
+        rafRef.current = requestAnimationFrame(animate);
+      };
+      rafRef.current = requestAnimationFrame(animate);
+    } else {
+      if (rafRef.current) {
+        cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    }
+    return () => {
+      if (rafRef.current) cancelAnimationFrame(rafRef.current);
+    };
+  }, [hovered]);
+
+  return (
+    <Link
+      to={to}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative inline-flex items-center justify-center group active:scale-[0.98] transition-all duration-300"
+      style={{ borderRadius: 999 }}
+    >
+      {hovered && (
+        <span
+          ref={spanRef}
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            inset: "-2px",
+            borderRadius: "999px",
+            background: "conic-gradient(from 0deg, transparent 82%, #111 90%, transparent 100%)",
+            WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+            WebkitMaskComposite: "xor",
+            maskComposite: "exclude",
+            padding: "1.5px",
+            pointerEvents: "none",
+            zIndex: 20,
+          }}
+        />
+      )}
+      <img
+        src={KaryaUpBtn}
+        alt="Start Workspace Button"
+        className={`${imgH} w-auto rounded-[999px] pointer-events-none relative z-10`}
+      />
+      <span
+        className={`absolute inset-0 flex items-center justify-center gap-1.5 text-white ${textSz} font-bold tracking-wide drop-shadow-md z-10 w-full pointer-events-none`}
+      >
+        Start Workspace{" "}
+        <ArrowRight
+          size={arrowSz}
+          strokeWidth={2.5}
+          className="transition-transform group-hover:translate-x-1"
+        />
+      </span>
+    </Link>
+  );
+};
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -561,12 +638,7 @@ const Navbar = () => {
               <LogIn size={16} className="text-primary group-hover:-translate-x-0.5 transition-transform" />
               <span className="text-[14px]">Log in</span>
             </Link>
-            <Link to="/start" onClick={closeAllMenus} className="relative inline-flex items-center justify-center group rounded-full hover:ring-[2.5px] hover:ring-black hover:ring-offset-2 active:scale-[0.98] transition-all duration-300">
-              <img src={KaryaUpBtn} alt="Start Workspace Button" className="h-[38px] w-auto rounded-[30px] pointer-events-none" />
-              <span className="absolute inset-0 flex items-center justify-center gap-1.5 text-white text-[13px] font-bold tracking-wide drop-shadow-md z-10 w-full pointer-events-none">
-                Start Workspace <ArrowRight size={14} strokeWidth={2.5} className="transition-transform group-hover:translate-x-1" />
-              </span>
-            </Link>
+            <StartWorkspaceButton to="/start" onClick={closeAllMenus} />
           </div>
 
           <div className="md:hidden">
@@ -608,16 +680,11 @@ const Navbar = () => {
                 <LogIn size={18} /> Log in
               </Link>
               <div className="flex justify-center w-full mt-2 pb-1">
-                <Link
+                <StartWorkspaceButton
                   to="/start"
                   onClick={() => setIsOpen(false)}
-                  className="relative inline-flex items-center justify-center group rounded-full hover:ring-[2.5px] hover:ring-black hover:ring-offset-2 active:scale-[0.98] transition-all duration-300"
-                >
-                  <img src={KaryaUpBtn} alt="Start Workspace Button" className="h-[44px] w-auto rounded-[40px] pointer-events-none" />
-                  <span className="absolute inset-0 flex items-center justify-center gap-2 text-white text-[14px] font-bold tracking-wide drop-shadow-md z-10 w-full pointer-events-none">
-                    Start Workspace <ArrowRight size={16} strokeWidth={2.5} className="transition-transform group-hover:translate-x-1" />
-                  </span>
-                </Link>
+                  size="lg"
+                />
               </div>
             </div>
           </div>

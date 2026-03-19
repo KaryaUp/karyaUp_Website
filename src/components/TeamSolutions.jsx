@@ -192,11 +192,6 @@ const TeamSolutions = () => {
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
                             {/* Left side */}
                             <div className="relative overflow-hidden lg:pr-10">
-                                {/* Decorative background icon to fill space */}
-                                <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 opacity-[0.03] pointer-events-none">
-                                    <active.icon size={300} strokeWidth={1} className="text-[#7e22ce]" />
-                                </div>
-
                                 <div className="relative z-10">
                                     <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-6">
                                         {active.title}

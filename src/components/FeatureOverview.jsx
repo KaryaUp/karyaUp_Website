@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import {
   LayoutDashboard, Kanban, Briefcase, Zap, BarChart3, TrendingUp, ArrowRight
 } from 'lucide-react';
@@ -63,84 +63,89 @@ const features = [
   },
 ];
 
-/* ── Floating 3D Card ── */
-const FloatCard = ({ feature, index }) => {
-  const [hovered, setHovered] = useState(false);
+const rowVariants = {
+  hiddenLeft: { opacity: 0, x: -140 },
+  hiddenRight: { opacity: 0, x: 140 },
+  show: { opacity: 1, x: 0, transition: { duration: 0.85, ease: [0.22, 1, 0.36, 1] } },
+};
+
+/* ── Full-width rectangle row (smooth slide-in) ── */
+const FeatureRow = ({ feature, index }) => {
   const Icon = feature.icon;
+  const fromLeft = index % 2 === 0;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 40, rotateX: -20 }}
-      whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: 0.1 + index * 0.09, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      style={{ perspective: 900 }}
+      variants={rowVariants}
+      initial={fromLeft ? 'hiddenLeft' : 'hiddenRight'}
+      whileInView="show"
+      viewport={{ once: false, amount: 0.35 }}
+      className="w-full"
     >
-      <motion.div
-        onHoverStart={() => setHovered(true)}
-        onHoverEnd={() => setHovered(false)}
-        animate={hovered ? {
-          y: -14,
-          boxShadow: `0 32px 60px -10px ${feature.accent}40`,
-          scale: 1.02
-        } : {
-          y: 0,
-          boxShadow: '0 4px 20px -4px rgba(0,0,0,0.08)',
-          scale: 1
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 28 }}
-        className="bg-white border border-slate-200 rounded-[1.75rem] p-7 cursor-default h-full relative overflow-hidden"
-        style={{ transformStyle: 'preserve-3d' }}
+      <div
+        className="relative overflow-hidden bg-white border border-slate-100 rounded-2xl px-5 sm:px-8 py-4 sm:py-5"
+        style={{ boxShadow: '0 4px 20px -8px rgba(2,6,23,0.12)' }}
       >
-        {/* Shimmer shine on hover */}
-        <AnimatePresence>
-          {hovered && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className={`absolute inset-0 bg-gradient-to-br ${feature.shine} pointer-events-none`}
-            />
-          )}
-        </AnimatePresence>
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
 
-        {/* Icon + Tag inline pill */}
-        <div className="flex items-center gap-3 mb-5">
+          {/* Icon */}
           <div
-            className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 shadow-md"
-            style={{ background: `linear-gradient(135deg, ${feature.accent}22, ${feature.accent}44)`, border: `1.5px solid ${feature.accent}33` }}
+            className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 border"
+            style={{
+              borderColor: `${feature.accent}33`,
+              background: `linear-gradient(135deg, ${feature.accent}18, rgba(255,255,255,0.95))`,
+              boxShadow: `0 14px 34px -18px ${feature.accent}88, 0 8px 18px -12px rgba(2,6,23,0.16)`,
+            }}
           >
-            <Icon size={20} style={{ color: feature.accent }} />
+            <Icon size={17} style={{ color: feature.accent }} />
           </div>
-          <span className="text-xs font-bold uppercase tracking-widest" style={{ color: feature.accent }}>
-            {feature.tag}
-          </span>
+
+          {/* Text */}
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center gap-2 mb-0.5">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: feature.accent }}>
+                {feature.tag}
+              </span>
+            </div>
+            <h3 className="text-[15px] font-black text-slate-900 leading-snug">
+              {feature.title}
+            </h3>
+            <p className="text-slate-500 text-xs font-medium mt-0.5">
+              <strong className="text-slate-700">{feature.label}:</strong> {feature.desc}
+            </p>
+          </div>
+
+          {/* Stat (avoid "button" look) */}
+          <div className="flex-shrink-0">
+            <div
+              className="text-right"
+              style={{
+                borderColor: `${feature.accent}30`,
+              }}
+            >
+              <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                Metric
+              </div>
+              <div className="flex items-baseline justify-end gap-2">
+                <span className="text-xl sm:text-2xl font-black leading-none" style={{ color: feature.accent }}>
+                  {feature.stat}
+                </span>
+                <span className="text-slate-500 text-[11px] sm:text-xs font-semibold">
+                  {feature.statLabel}
+                </span>
+              </div>
+            </div>
+          </div>
+
         </div>
-
-        {/* Title */}
-        <h3 className="text-[17px] font-black text-slate-900 leading-snug mb-2">{feature.title}</h3>
-
-        {/* Desc */}
-        <p className="text-slate-500 text-sm font-medium flex items-start gap-1.5 mb-6">
-          <ArrowRight size={13} className="mt-0.5 flex-shrink-0 text-slate-400" />
-          <span><strong className="text-slate-700">{feature.label}:</strong> {feature.desc}</span>
-        </p>
-
-        {/* Stat */}
-        <div className="pt-5 border-t border-slate-100 flex items-end gap-2">
-          <span className="text-3xl font-black" style={{ color: feature.accent }}>{feature.stat}</span>
-          <span className="text-slate-400 text-sm font-medium mb-1">{feature.statLabel}</span>
-        </div>
-
-      </motion.div>
+      </div>
     </motion.div>
   );
 };
 
 const FeatureOverview = () => (
-  <section className="pt-6 sm:pt-10 pb-12 sm:pb-16 bg-white relative overflow-hidden">
-
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+  <section className="pt-10 sm:pt-14 pb-14 sm:pb-20 bg-white relative">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -167,10 +172,10 @@ const FeatureOverview = () => (
         </p>
       </motion.div>
 
-      {/* Card grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Full-width rows */}
+      <div className="space-y-6 sm:space-y-8 max-w-5xl mx-auto">
         {features.map((f, i) => (
-          <FloatCard key={f.tag} feature={f} index={i} />
+          <FeatureRow key={f.tag} feature={f} index={i} />
         ))}
       </div>
     </div>

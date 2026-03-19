@@ -151,9 +151,6 @@ const TeamsSection = () => {
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
                 className={`rounded-3xl p-8 sm:p-12 ${team.bg} border border-slate-100 relative overflow-hidden`}
               >
-                {/* Decorative blob */}
-                <div className={`absolute -top-20 -right-20 w-64 h-64 rounded-full bg-gradient-to-br ${team.gradient} opacity-10 blur-2xl pointer-events-none`} />
-
                 {/* Icon display */}
                 <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-slate-100 shadow-sm"
                   style={{ transform: 'translateZ(20px)' }}
