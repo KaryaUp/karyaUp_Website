@@ -316,10 +316,10 @@ const Navbar = () => {
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 py-3 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
-          ? "bg-white shadow-md  border-gray-100"
-          : isScrolled
-            ? "bg-white/70 backdrop-blur-md shadow-sm "
-            : "bg-transparent"
+        ? "bg-white shadow-md  border-gray-100"
+        : isScrolled
+          ? "bg-white/70 backdrop-blur-md shadow-sm "
+          : "bg-transparent"
         }`}
     >
       <div className="max-w-full mx-auto px-4 lg:px-4">

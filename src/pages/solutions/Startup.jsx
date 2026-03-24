@@ -168,7 +168,7 @@ export default function ProductDevelopment() {
                 Build the perfect organization that grows with your startup. KaryaUp's Hierarchy makes it easy to expand your team and manage more complex projects as you bring on more resources.
               </p>
               <div>
-                <button className="bg-[#f0f1f3] text-[#1f2328] px-7 py-3.5 rounded-xl font-bold hover:bg-[#e4e6e9] transition-colors inline-flex items-center gap-2 font-medium text-[1.05rem]">
+                <button className="bg-[#e4e6e9] text-[#1f2328] px-7 py-3.5 rounded-xl font-bold hover:bg-[#f0f1f3] transition-colors inline-flex items-center gap-2 font-medium text-[1.05rem]">
                   Get Started
                 </button>
               </div>

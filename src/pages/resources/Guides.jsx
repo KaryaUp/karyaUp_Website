@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
@@ -272,38 +272,8 @@ const bestPractices = [
 ];
 
 export default function Guides() {
-  const [activeSection, setActiveSection] = useState(guideSections[0].id);
   const [searchQuery, setSearchQuery] = useState("");
-
-  const navItems = useMemo(
-    () => guideSections.map(({ id, nav, icon }) => ({ id, nav, icon })),
-    []
-  );
-
-  useEffect(() => {
-    const sections = guideSections
-      .map((section) => document.getElementById(section.id))
-      .filter(Boolean);
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-        if (visible[0]?.target?.id) {
-          setActiveSection(visible[0].target.id);
-        }
-      },
-      {
-        rootMargin: "-20% 0px -55% 0px",
-        threshold: [0.15, 0.35, 0.6],
-      }
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
-  }, []);
+  const navItems = guideSections.map(({ id, nav, icon }) => ({ id, nav, icon }));
 
   const handleSearch = (event) => {
     event.preventDefault();
@@ -339,7 +309,7 @@ export default function Guides() {
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-emerald-700"
+                className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700"
               >
                 Resources <span className="opacity-60">/</span> Guides
               </motion.div>
@@ -542,18 +512,20 @@ export default function Guides() {
               <div className="sticky top-28">
                 <div className="rounded-[2rem] border border-slate-200 bg-white/90 backdrop-blur-xl p-4 shadow-[0_24px_60px_-44px_rgba(15,23,42,0.25)]">
                   <div className="rounded-[1.4rem] border border-slate-200 bg-white p-4 mb-2">
-                    <div className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">
+                    <div className="text-[11px] font-black uppercase tracking-[0.18em] text-purple-600">
                       Guides map
                     </div>
                     <div className="mt-2 text-2xl font-black leading-[1.05] text-slate-900">
                       KaryaUp workflow mastery
                     </div>
+                    <p className="mt-2 text-sm font-medium leading-relaxed text-slate-500">
+                      Use this navigation to jump through every guide section without losing context.
+                    </p>
                   </div>
 
                   <div className="space-y-1.5">
                     {navItems.map((item) => {
                       const NavIcon = item.icon;
-                      const active = activeSection === item.id;
                       return (
                         <button
                           key={item.id}
@@ -561,15 +533,11 @@ export default function Guides() {
                           onClick={() =>
                             document.getElementById(item.id)?.scrollIntoView({ behavior: "smooth", block: "start" })
                           }
-                          className={`w-full flex items-start gap-3 rounded-[1.2rem] px-3.5 py-3 text-left transition-all ${
-                            active
-                              ? "bg-slate-900 text-white shadow-[0_16px_30px_-22px_rgba(15,23,42,0.7)]"
-                              : "text-slate-500 hover:bg-slate-50"
-                          }`}
+                          className="w-full flex items-start gap-3 rounded-[1.2rem] px-3.5 py-3 text-left text-slate-600 transition-all hover:bg-slate-50"
                         >
-                          <NavIcon className={`mt-0.5 h-4 w-4 ${active ? "text-purple-300" : "text-slate-400"}`} />
+                          <NavIcon className="mt-0.5 h-4 w-4 text-slate-400" />
                           <span className="font-bold leading-snug">{item.nav}</span>
-                          <ChevronRight className={`ml-auto h-4 w-4 ${active ? "text-purple-300" : "text-slate-300"}`} />
+                          <ChevronRight className="ml-auto h-4 w-4 text-slate-300" />
                         </button>
                       );
                     })}

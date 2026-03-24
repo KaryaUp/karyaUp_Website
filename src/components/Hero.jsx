@@ -25,9 +25,13 @@ const Hero = () => {
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
             >
               The platform to<br /> run your <br />
-              <span className="glass-text-gradient-shimmer bg-gradient-to-r from-purple-600 via-fuchsia-600 to-purple-600 bg-[length:200%_auto] inline-block">
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
                 entire company
-              </span>
+              </motion.span>
             </motion.h1>
 
 
@@ -56,12 +60,24 @@ const Hero = () => {
               }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-8 mb-8"
             >
-              {/* Primary Button: Start Free Workspace (Reverted) */}
+              {/* Primary Button: Start Free Workspace (CSS Hover Effect via Tailwind) */}
               <Link
                 to="/start"
-                className="btn-primary w-full sm:w-auto px-8 py-4 rounded-full font-bold text-lg shadow-lg shadow-[#7e22ce]/30 hover:shadow-xl hover:shadow-[#7e22ce]/40 transition-all hover:-translate-y-1 text-center"
+                className="group relative overflow-hidden shrink-0 flex items-center justify-center font-bold text-[15px] z-10 w-[14em] h-[3.5em] rounded-[30em] transition-all duration-300"
+                style={{
+                  boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff"
+                }}
               >
-                Start Free Workspace
+                {/* Background base (Gradient) */}
+                <div className="absolute inset-0 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 -z-20" />
+
+                {/* Expanding background on hover (Solid White to avoid gradient bleed) */}
+                <div
+                  className="absolute top-0 left-0 h-full w-0 rounded-[30em] -z-10 transition-all duration-500 ease-in-out bg-white group-hover:w-full" />
+
+                <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-slate-800">
+                  Start Free Workspace
+                </span>
               </Link>
 
               {/* Video Button: Watch Video */}
