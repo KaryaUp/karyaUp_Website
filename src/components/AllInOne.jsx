@@ -4,7 +4,8 @@ import {
     Search, CheckSquare, Map, BookOpen, Mic, BarChart3, Target, Zap, 
     Video, Eye, LayoutDashboard, Clock, KanbanSquare, Plug, Headphones, ListChecks,
     Calendar, Table, Pencil, GanttChart, Inbox, Star, Timer, FormInput,
-    FolderKanban, FileText, CalendarDays, MessageSquare, Users
+    FolderKanban, FileText, CalendarDays, MessageSquare, Users,
+    Bell, Mail, IndianRupee, LayoutGrid, UserPlus, Briefcase, Activity, Tag
 } from 'lucide-react';
 
 // Import available assets from ../assets/
@@ -15,14 +16,14 @@ import featureTeam from '../assets/Team.jpeg';
 
 const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
     <div 
-        className={`flex-shrink-0 w-32 h-32 border border-gray-100 flex flex-col items-center justify-center gap-2 bg-white transition-all duration-500 group/tile relative
+        className={`flex-shrink-0 w-24 h-24 border border-gray-100 flex flex-col items-center justify-center gap-2 bg-white transition-all duration-500 group/tile relative
             ${isPaused 
                 ? 'bg-[#7e22ce]/10 backdrop-blur-md border-[#7e22ce]/20 shadow-xl z-10 scale-105' 
                 : 'hover:bg-[#7e22ce]/10 hover:backdrop-blur-xl hover:border-[#7e22ce]/30 hover:shadow-2xl hover:scale-110 hover:z-30 cursor-pointer'
             }`}
     >
         <div className={`transition-all duration-500 ${isPaused ? 'scale-110 text-[#7e22ce]' : 'text-gray-500 group-hover/tile:text-[#7e22ce] group-hover/tile:scale-110'}`}>
-            <Icon className="w-8 h-8" strokeWidth={1.5} />
+            <Icon className="w-6 h-6" strokeWidth={1.5} />
         </div>
         <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors duration-300 ${isPaused ? 'text-[#7e22ce]' : 'text-gray-500 group-hover/tile:text-[#7e22ce]'}`}>
             {label}
@@ -50,7 +51,7 @@ const FeatureCard = ({ title, icon: Icon, image, color }) => (
 
 const MarqueeRow = ({ icons, direction = "left", speed = 22, isPaused, onRowClick, maskHole = false }) => {
     const duplicatedIcons = [...icons, ...icons, ...icons, ...icons, ...icons, ...icons];
-    const totalWidth = icons.length * 128; // Tile width is 128px
+    const totalWidth = icons.length * 96; // Tile width is 96px
     
     return (
         <div 
@@ -93,34 +94,54 @@ const AllInOne = () => {
 
     const rows = [
         [
-            { icon: Search, label: "Search" }, { icon: CheckSquare, label: "Tasks" },
-            { icon: Map, label: "Mind Maps" }, { icon: BookOpen, label: "Wikis" },
-            { icon: Mic, label: "AI Notetaker" }, { icon: BarChart3, label: "Reporting" },
-            { icon: Target, label: "Goals" }, { icon: Zap, label: "Sprints" },
+            { icon: LayoutDashboard, label: "Dashboard" },
+            { icon: FolderKanban, label: "Projects" },
+            { icon: CheckSquare, label: "Tasks" },
+            { icon: FileText, label: "Notes" },
+            { icon: MessageSquare, label: "Chat" },
+            { icon: Bell, label: "Notifications" },
+            { icon: CalendarDays, label: "Calendar" },
+            { icon: Mail, label: "Gmail" },
         ],
         [
-            { icon: Video, label: "Clips" }, { icon: Eye, label: "Visibility" },
-            { icon: LayoutDashboard, label: "Dashboards" }, { icon: Clock, label: "Time" },
-            { icon: KanbanSquare, label: "Board" }, { icon: Plug, label: "Apps" },
-            { icon: Headphones, label: "Support" }, { icon: ListChecks, label: "Checklists" },
+            { icon: Clock, label: "Reminders" },
+            { icon: IndianRupee, label: "Profit" },
+            { icon: Zap, label: "Task Automation" },
+            { icon: BarChart3, label: "Analytics" },
+            { icon: LayoutGrid, label: "Applications" },
+            { icon: UserPlus, label: "Leads" },
+            { icon: Briefcase, label: "Deals" },
+            { icon: Clock, label: "Onboarding" },
         ],
         [
-            { icon: Calendar, label: "Schedule" }, { icon: Table, label: "Sheets" },
-            { icon: Pencil, label: "Whiteboard" }, { icon: GanttChart, label: "Gantt" },
-            { icon: Inbox, label: "Inbox" }, { icon: Star, label: "Favs" },
-            { icon: Timer, label: "Estimates" }, { icon: FormInput, label: "Forms" },
+            { icon: Users, label: "Clients" },
+            { icon: Activity, label: "Activities" },
+            { icon: FileText, label: "Quotations" },
+            { icon: BarChart3, label: "CRM Analytics" },
+            { icon: Pencil, label: "Whiteboard" },
+            { icon: GanttChart, label: "Gantt Chart" },
+            { icon: Users, label: "Team" },
+            { icon: Tag, label: "Brands" },
         ],
         [
-            { icon: Zap, label: "Automate" }, { icon: ListChecks, label: "Fields" },
-            { icon: Search, label: "Global" }, { icon: CheckSquare, label: "To-Do" },
-            { icon: Map, label: "Strategy" }, { icon: BookOpen, label: "Wiki" },
-            { icon: Mic, label: "Voice" }, { icon: BarChart3, label: "Analysis" },
+            { icon: Calendar, label: "Attendance" },
+            { icon: FileText, label: "Leave" },
+            { icon: IndianRupee, label: "Salary" },
+            { icon: LayoutDashboard, label: "Dashboard" },
+            { icon: FolderKanban, label: "Projects" },
+            { icon: CheckSquare, label: "Tasks" },
+            { icon: FileText, label: "My Notes" },
+            { icon: MessageSquare, label: "Chat" },
         ],
         [
-            { icon: LayoutDashboard, label: "View" }, { icon: Clock, label: "Track" },
-            { icon: KanbanSquare, label: "Plan" }, { icon: Plug, label: "Sync" },
-            { icon: Headphones, label: "Help" }, { icon: ListChecks, label: "Audit" },
-            { icon: Calendar, label: "Event" }, { icon: Table, label: "Data" },
+            { icon: Bell, label: "Notifications" },
+            { icon: CalendarDays, label: "Calendar" },
+            { icon: Mail, label: "Gmail" },
+            { icon: Clock, label: "Reminders" },
+            { icon: IndianRupee, label: "Salary" },
+            { icon: Zap, label: "Automation" },
+            { icon: BarChart3, label: "Analytics" },
+            { icon: LayoutGrid, label: "Applications" },
         ]
     ];
 

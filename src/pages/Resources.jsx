@@ -45,49 +45,7 @@ const sections = {
       </div>
     ),
   },
-  guides: {
-    badge: "Resources",
-    title: "Guides",
-    subtitle: "In-depth guides to help your team master project management, productivity, and KaryaUp.",
-    content: (
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <ArticleCard to="#" icon="📋" tag="Beginner" title="Getting Started with KaryaUp" desc="A complete beginner's guide to setting up your first workspace, inviting your team, and creating your first project." />
-        <ArticleCard to="#" icon="🔄" tag="Agile" title="The Complete Agile Guide for Teams" desc="Everything you need to know about sprints, retrospectives, and agile ceremonies using KaryaUp." />
-        <ArticleCard to="#" icon="📊" tag="Analytics" title="How to Measure Team Productivity" desc="Go beyond activity metrics. Learn how to measure output, quality, and impact that actually matters." />
-        <ArticleCard to="#" icon="⚡" tag="Advanced" title="Mastering KaryaUp Automations" desc="A thorough guide to building powerful automation rules that save your team hours every week." />
-        <ArticleCard to="#" icon="🏖️" tag="HR" title="The HR Leader's Guide to Leave & Attendance" desc="Best practices for managing time-off policies, approvals, and compliance for any team size." />
-        <ArticleCard to="#" icon="💵" tag="Finance" title="Project Profit Tracking from First Principles" desc="How to set up financial tracking in KaryaUp so you always know if projects are making money." />
-      </div>
-    ),
-  },
-  updates: {
-    badge: "Resources",
-    title: "Product Updates",
-    subtitle: "Stay up to date with every new feature, improvement, and fix we ship to KaryaUp.",
-    content: (
-      <div className="space-y-6">
-        {[
-          { version: "v2.5", date: "March 2026", emoji: "🚀", title: "Gantt Charts & Dependency Management", desc: "Full Gantt chart view with drag-to-reschedule, task dependencies, and milestone markers. Now generally available for all plans." },
-          { version: "v2.4", date: "February 2026", emoji: "⚡", title: "Automation Engine Upgrade", desc: "Faster, more reliable automations with support for multi-step flows, conditional branches, and external webhooks." },
-          { version: "v2.3", date: "January 2026", emoji: "📊", title: "Dashboard Custom Widgets", desc: "Build fully personalized dashboards with metric tiles, progress charts, and task lists using our new widget builder." },
-          { version: "v2.2", date: "December 2025", emoji: "💬", title: "Built-in Chat Channels", desc: "Real-time team messaging is now natively integrated. Create channels, thread conversations, and share files without leaving KaryaUp." },
-          { version: "v2.1", date: "November 2025", emoji: "📱", title: "Mobile App Redesign", desc: "Completely overhauled iOS and Android apps with faster navigation, offline support, and a cleaner interface." },
-        ].map((update) => (
-          <div key={update.version} className="flex gap-5 bg-gray-50 rounded-2xl p-6 border border-gray-100">
-            <div className="text-3xl shrink-0">{update.emoji}</div>
-            <div>
-              <div className="flex items-center gap-3 mb-1">
-                <span className="text-xs font-bold bg-violet-100 text-violet-700 px-2 py-0.5 rounded-full">{update.version}</span>
-                <span className="text-xs text-gray-400">{update.date}</span>
-              </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">{update.title}</h3>
-              <p className="text-sm text-gray-500 leading-relaxed">{update.desc}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    ),
-  },
+
   docs: {
     badge: "Resources",
     title: "Documentation",
@@ -157,8 +115,6 @@ const sections = {
 
 const allResources = [
   { label: "Blog", to: "/resources/blog", icon: "📝" },
-  { label: "Guides", to: "/resources/guides", icon: "📚" },
-  { label: "Product Updates", to: "/resources/updates", icon: "✨" },
   { label: "Documentation", to: "/resources/docs", icon: "📄" },
   { label: "Demo", to: "/resources/demo", icon: "🖥️" },
   { label: "Video Tutorials", to: "/resources/tutorials", icon: "▶️" },

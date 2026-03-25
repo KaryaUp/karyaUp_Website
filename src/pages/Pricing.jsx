@@ -325,7 +325,7 @@ export default function Pricing() {
                       
                       <div className="flex items-baseline gap-1">
                         <span className={`text-5xl font-black ${plan.popular ? 'text-white' : 'text-slate-900'}`}>
-                          ${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
+                          ₹{billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
                         </span>
                         <span className={`text-lg font-bold ${plan.popular ? 'text-white/60' : 'text-slate-400'}`}>/mo</span>
                       </div>
@@ -408,7 +408,7 @@ export default function Pricing() {
                                 <div className="flex flex-col items-center gap-3">
                                   <div className="text-base font-black text-slate-900">{plan.name}</div>
                                   <div className="text-[11px] font-bold text-slate-400">
-                                    {plan.name === 'Enterprise' ? 'Contact us' : `$${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice} / mo`}
+                                    {plan.name === 'Enterprise' ? 'Contact us' : `₹${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice} / mo`}
                                   </div>
                                   <button 
                                     className="mt-2 btn-primary rounded-full px-6 py-2 text-xs font-black transition-all"
@@ -553,7 +553,7 @@ export default function Pricing() {
                     {apps.filter(a => selectedApps.includes(a.id)).map(app => (
                       <div key={app.id} className="flex justify-between items-center pb-2.5 border-b border-slate-100 last:border-0 last:pb-0">
                         <span className="text-slate-500 font-bold text-sm tracking-tight">{app.name}</span>
-                        <span className="text-slate-900 font-black text-sm">${app.price} / user</span>
+                        <span className="text-slate-900 font-black text-sm">₹{app.price} / user</span>
                       </div>
                     ))}
                   </div>
@@ -561,11 +561,11 @@ export default function Pricing() {
                   <div className="pt-4 border-t border-slate-200 flex justify-between items-center mb-1">
                     <span className="text-slate-900 font-black text-base italic">Total</span>
                     <div className="text-slate-900 font-black text-xl flex items-center gap-1 uppercase tracking-tight">
-                      <NumberFlow value={currentTotal} prefix="$" format={{ notation: 'standard' }} /> <span className="text-xs text-slate-400">/year</span>
+                      <NumberFlow value={currentTotal} prefix="₹" format={{ notation: 'standard' }} /> <span className="text-xs text-slate-400">/year</span>
                     </div>
                   </div>
                   <p className="text-slate-400 font-bold text-[9px] uppercase tracking-widest text-right mb-8">
-                    KaryaUp for {userCount} users = <NumberFlow value={karyaUpPrice} prefix="$" format={{ notation: 'standard' }} /> / YEAR
+                    KaryaUp for {userCount} users = <NumberFlow value={karyaUpPrice} prefix="₹" format={{ notation: 'standard' }} /> / YEAR
                   </p>
                 </div>
 
@@ -573,7 +573,7 @@ export default function Pricing() {
                   <div>
                     <p className="text-slate-400 font-black text-[9px] uppercase tracking-widest mb-0.5">Savings</p>
                     <div className="text-2xl font-black text-[#7e22ce] tracking-tighter">
-                      <NumberFlow value={Math.max(0, savings)} prefix="$" format={{ notation: 'standard' }} />
+                      <NumberFlow value={Math.max(0, savings)} prefix="₹" format={{ notation: 'standard' }} />
                     </div>
                   </div>
                   <div className="text-[9px] font-bold text-slate-400 leading-tight max-w-[120px] text-right uppercase tracking-tighter">

@@ -29,10 +29,7 @@ export default function Enterprise() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <button className="relative px-8 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40
-            bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 
-            bg-[length:200%_200%] animate-gradient 
-            shadow-lg hover:scale-105 transition">
+            <button className="btn-primary px-8 py-4 text-lg font-semibold">
                 Get a Demo 
                 <span>→</span>
               </button>

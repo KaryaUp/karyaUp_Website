@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+
+import Brand1 from '../assets/Brand1.webp';
+import Brand2 from '../assets/Brand2.webp';
+import Brand3 from '../assets/Brand3.webp';
+import Brand4 from '../assets/Brand4.webp';
+import Brand5 from '../assets/Brand5.webp';
+import Brand6 from '../assets/Brand6.webp';
 
 const TrustedBy = () => {
     const brands = [
-        { name: 'Netflix', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg' },
-        { name: 'Stripe', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/ba/Stripe_Logo%2C_revised_2016.svg' },
-        { name: 'Uber', logo: 'https://upload.wikimedia.org/wikipedia/commons/5/58/Uber_logo_2018.svg' },
-        { name: 'Spotify', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_with_text.svg' },
-        { name: 'Logitech', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/17/Logitech_logo.svg' },
-        { name: 'T-Mobile', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/ee/T-Mobile_logo_2013.svg' }
+        { name: 'Brand 1', logo: Brand1 },
+        { name: 'Brand 2', logo: Brand2 },
+        { name: 'Brand 3', logo: Brand3 },
+        { name: 'Brand 4', logo: Brand4 },
+        { name: 'Brand 5', logo: Brand5 },
+        { name: 'Brand 6', logo: Brand6 }
     ];
 
     return (
-        <section className="py-8 sm:py-12 bg-white overflow-hidden border-t border-b border-black/[0.08]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <p className="text-xs sm:text-sm font-bold text-black-400 uppercase tracking-widest mb-4 sm:mb-6">
+        <section className="py-2 bg-white overflow-hidden border-t border-b border-black/[0.08]">
+            <div className="w-full px-6 sm:px-12 lg:px-20 text-center">
+                <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mt-3 mb-6">
                     Trusted by the best teams
                 </p>
-                <div className="group grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 place-items-center gap-x-8 gap-y-8 md:gap-x-12">
+                <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-10">
                     {brands.map((brand, index) => (
-                        <motion.div
+                        <div
                             key={index}
-                            whileHover={{ scale: 1.1 }}
-                            className="relative cursor-pointer transition-all duration-300 transform"
+                            className="relative"
                         >
                             <img
                                 src={brand.logo}
                                 alt={brand.name}
-                                className="h-5 sm:h-6 md:h-7 w-auto filter grayscale opacity-40 brightness-0 group-hover:grayscale-0 group-hover:opacity-100 group-hover:brightness-100 transition-all duration-500 ease-in-out"
+                                className={`
+                                    ${index < 5 ? 'h-14 sm:h-16 md:h-24' : 'h-10 sm:h-12 md:h-16'}
+                                    brightness-0 opacity-80 w-auto
+                                `}
                             />
-                        </motion.div>
+                        </div>
                     ))}
                 </div>
             </div>

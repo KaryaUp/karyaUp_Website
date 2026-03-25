@@ -136,15 +136,20 @@ html {
 
 @layer base {
   body {
-    @apply antialiased text-gray-900 bg-white;
+    @apply antialiased text-gray-900 bg-white overflow-x-hidden;
     font-family: plus-jakarta-sans, sans-serif;
   }
 }
 
 @layer components {
   .btn-primary {
-    @apply relative px-6 py-3 rounded-lg bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto] text-white font-semibold transition-all hover:opacity-100 hover:scale-[1.03] active:scale-95 shadow-lg shadow-purple-900/40 flex items-center justify-center gap-2 overflow-hidden;
-    animation: gradient-move 4s linear infinite;
+    @apply relative inline-flex shrink-0 items-center justify-center gap-2 overflow-hidden rounded-[30em] px-6 py-3 font-bold text-white transition-all duration-300 hover:-translate-y-0.5 active:scale-95;
+    background-image: linear-gradient(to right, #7e22ce, #d946ef);
+    box-shadow: 6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff;
+  }
+
+  .btn-primary:hover {
+    background-image: linear-gradient(to right, #6b21a8, #c026d3);
   }
 
   .btn-secondary {

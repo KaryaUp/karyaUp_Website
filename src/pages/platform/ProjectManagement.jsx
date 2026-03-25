@@ -157,7 +157,7 @@ export default function ProjectManagement() {
               </span>
             </div>
 
-            <button className="rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-6 py-3 text-sm font-bold text-white shadow-lg transition-transform duration-300 hover:scale-105">
+            <button className="btn-primary px-6 py-3 text-sm font-bold">
               Start managing projects with clarity
             </button>
           </div>

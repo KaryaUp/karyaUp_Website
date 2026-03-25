@@ -137,10 +137,7 @@ export default function TimeTracking() {
             <div className="space-y-3">
               <p className="text-sm font-bold text-slate-900 sm:text-base">{selectedSection.title}</p>
               <p className="text-sm leading-relaxed text-slate-600 sm:text-base">{selectedSection.text}</p>
-              <button
-                type="button"
-                className="rounded-xl bg-gradient-to-r from-pink-500 to-purple-600 px-5 py-2.5 text-sm font-bold text-white shadow-lg transition-transform duration-300 hover:scale-105"
-              >
+              <button type="button" className="btn-primary px-5 py-2.5 text-sm font-bold">
                 Track time with precision
               </button>
             </div>

@@ -5,7 +5,7 @@ import {
   CheckSquare, Kanban, Users, Clock, BarChart2, LayoutDashboard, CircleDollarSign,
   Megaphone, Contact,
   AlignLeft, MessageSquare, Video, UserCheck, CalendarOff, Banknote, Calendar, Zap, Timer, Blocks, PlayCircle, Bell,
-  FileText, BookOpen, Sparkles, FileCode, MonitorPlay, LogIn
+  FileText, FileCode, MonitorPlay, LogIn
 } from "lucide-react";
 import logo from "../assets/logo.png";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
@@ -121,8 +121,6 @@ const solutionsMegaSections = [
 
 const resourcesMegaSections = [
   { label: "Blog", to: "/resources/blog", icon: FileText, iconBg: "bg-indigo-50 text-indigo-600 border border-indigo-100", description: "Read the latest news, articles, and tips." },
-  { label: "Guides", to: "/resources/guides", icon: BookOpen, iconBg: "bg-emerald-50 text-emerald-600 border border-emerald-100", description: "In-depth resources and best practices." },
-  { label: "Product Updates", to: "/resources/updates", icon: Sparkles, iconBg: "bg-amber-50 text-amber-600 border border-amber-100", description: "See what's new and what's changed." },
   { label: "Documentation", to: "/resources/docs", icon: FileCode, iconBg: "bg-blue-50 text-blue-600 border border-blue-100", description: "Detailed guides on how to use every feature." },
   { label: "Demo", to: "/resources/demo", icon: MonitorPlay, iconBg: "bg-rose-50 text-rose-600 border border-rose-100", description: "Watch a quick overview of the platform." },
   { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconBg: "bg-purple-50 text-purple-600 border border-purple-100", description: "Step-by-step video guides and walkthroughs." },
@@ -560,7 +558,7 @@ const Navbar = () => {
                       <div className="flex gap-16 md:gap-32 w-full max-w-5xl px-8">
                         {/* Section 1 */}
                         <div className="flex flex-col gap-6 flex-1">
-                          {resourcesMegaSections.slice(0, 3).map((item) => (
+                          {resourcesMegaSections.slice(0, 2).map((item) => (
                             <Link
                               key={item.to}
                               to={item.to}
@@ -583,7 +581,7 @@ const Navbar = () => {
                         </div>
                         {/* Section 2 */}
                         <div className="flex flex-col gap-6 flex-1">
-                          {resourcesMegaSections.slice(3).map((item) => (
+                          {resourcesMegaSections.slice(2).map((item) => (
                             <Link
                               key={item.to}
                               to={item.to}

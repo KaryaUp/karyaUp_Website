@@ -51,10 +51,7 @@ const DataImport = () => {
                             <p className="text-lg sm:text-xl font-medium text-slate-500 mb-10 leading-relaxed max-w-xl mx-auto lg:mx-0">
                                 Move your entire workflow from ClickUp and Jira into Karyaup in one click. No data loss, just pure productivity.
                             </p>
-                            <button className="btn-primary flex items-center gap-2 group mx-auto lg:mx-0">
-                                Start Your Workspace
-                                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </button>
+                           
                         </motion.div>
                     </div>
 

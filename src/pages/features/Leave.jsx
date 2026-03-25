@@ -199,7 +199,7 @@ export default function Leave() {
                     <motion.button
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center justify-center gap-3 self-start rounded-2xl bg-gradient-to-r from-[#7e22ce] to-fuchsia-600 px-6 py-4 text-base font-black text-white shadow-lg shadow-purple-200/70"
+                      className="btn-primary self-start px-6 py-4 text-base font-black"
                     >
                       <Send className="h-4 w-4" />
                       Submit Request
@@ -313,7 +313,7 @@ export default function Leave() {
                               {request.status}
                             </div>
                             <div className="flex gap-2">
-                              <button className="inline-flex flex-1 items-center justify-center rounded-xl bg-gradient-to-r from-[#7e22ce] to-fuchsia-600 px-4 py-3 text-sm font-black text-white shadow-lg shadow-purple-200/60">
+                              <button className="btn-primary flex-1 px-4 py-3 text-sm font-black">
                                 Approve
                               </button>
                               <button className="inline-flex flex-1 items-center justify-center rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm font-black text-slate-700">

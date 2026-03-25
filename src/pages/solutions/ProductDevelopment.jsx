@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import dashboardImage from "../../assets/dashboard.jpeg";
+import FinalCTA from "../../components/FinalCTA";
 
 export default function ProductDevelopment() {
   return (
@@ -15,9 +16,9 @@ export default function ProductDevelopment() {
               AI-POWERED PRODUCT DEVELOPMENT
             </p>
 
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 mb-6">
+            <h1 className="text-3xl md:text-5xl font-extrabold leading-tight text-slate-900 mb-6">
               The everything app <br />
-              for product teams
+              <span className="text-6xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">for Product teams</span>
             </h1>
 
             <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
@@ -27,17 +28,15 @@ export default function ProductDevelopment() {
             </p>
 
             <div className="flex items-center gap-4 mb-6">
-              <button className="bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-slate-800 transition">
+            <button className="relative px-8 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40
+            bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 
+            bg-[length:200%_200%] animate-gradient 
+            shadow-lg hover:scale-105 transition">
                 Get started. It's FREE →
               </button>
               <p className="text-sm text-slate-500">
                 Free forever. <br /> No credit card.
               </p>
-            </div>
-
-            <div className="flex items-center gap-3 text-sm text-slate-500">
-              ⭐⭐⭐⭐⭐
-              <span>25,000+ reviews</span>
             </div>
           </div>
 
@@ -56,8 +55,7 @@ export default function ProductDevelopment() {
             </div>
 
             {/* Glow */}
-            <div className="absolute -top-10 -right-10 w-40 h-40 bg-purple-300/30 blur-3xl rounded-full"></div>
-            <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-pink-300/30 blur-3xl rounded-full"></div>
+           
           </motion.div>
 
         </div>
@@ -164,20 +162,7 @@ export default function ProductDevelopment() {
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
-      <section className="py-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
-        <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
-          Build products faster with KaryaUp
-        </h2>
-        <p className="mb-8">
-          Join thousands of teams managing product development smarter.
-        </p>
-
-        <button className="bg-white text-black px-8 py-3 rounded-xl font-semibold hover:scale-105 transition">
-          Start your workspace →
-        </button>
-      </section>
-
+      <FinalCTA />
     </div>
   );
-}                                                                                                                                                      
+}                                                                                                                                                            

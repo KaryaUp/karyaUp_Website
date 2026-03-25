@@ -145,12 +145,12 @@ export default function AttendanceHero() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <div className="flex flex-1 cursor-pointer items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-[#7e22ce] to-fuchsia-600 px-6 py-4 transition-all active:scale-95 hover:from-purple-700 hover:to-fuchsia-500">
+                  <button type="button" className="btn-primary flex-1 px-6 py-4">
                     <FileText size={16} className="text-white" />
                     <span className="text-[11px] font-black uppercase tracking-wider text-white">
                       Export Audit Log
                     </span>
-                  </div>
+                  </button>
                   <div className="flex w-14 cursor-pointer items-center justify-center rounded-2xl border border-purple-900/30 bg-slate-800 transition-all active:scale-95 hover:bg-slate-700">
                     <Download size={18} className="my-4 text-white" />
                   </div>

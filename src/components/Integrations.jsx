@@ -25,6 +25,11 @@ const Integrations = () => {
             description: 'Attach and manage your files directly from Google Drive within your KaryaUp projects.'
         },
         { 
+            name: 'Google Meet', 
+            logo: 'https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg',
+            description: 'Schedule meetings with a Google Meet link and manage your upcoming conferences with ease.'
+        },
+        { 
             name: 'Microsoft Teams', 
             logo: 'https://statics.teams.cdn.live.net/evergreen-assets/icons/Teams_Logo_v2025_80x80.png',
             description: 'Collaborate with your team on Microsoft Teams and sync your project progress effortlessly.'

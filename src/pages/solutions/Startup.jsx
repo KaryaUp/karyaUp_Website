@@ -20,7 +20,7 @@ export default function ProductDevelopment() {
             </h1>
 
             <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
-              Build your business for long-term success by organizing all of your ideas, workflows, and teamwork in a single, shared place.
+                Build your business for long-term success by organizing all of your ideas, workflows, and teamwork in a single, shared place.
             </p>
 
             <div className="flex items-center gap-4 mb-6">
@@ -33,11 +33,6 @@ export default function ProductDevelopment() {
               <p className="text-sm text-slate-500">
                 Free forever. <br /> No credit card.
               </p>
-            </div>
-
-            <div className="flex items-center gap-3 text-sm text-slate-500">
-              ⭐⭐⭐⭐⭐
-              <span>25,000+ reviews</span>
             </div>
           </div>
 
@@ -58,7 +53,6 @@ export default function ProductDevelopment() {
             {/* Glow */}
 
           </motion.div>
-
         </div>
       </section>
 
@@ -77,16 +71,20 @@ export default function ProductDevelopment() {
               <p className="text-[0.85rem] tracking-[0.2em] font-bold text-[#7B61FF] uppercase mb-6">
                 ROADMAP
               </p>
-              <h2 className="text-[2.5rem] md:text-[3.25rem] lg:text-[3.5rem] font-extrabold text-[#1f2328] leading-[1.05] mb-6 tracking-tight">
-                Connect your roadmaps to daily work.
-              </h2>
-              <p className="text-[1.15rem] text-slate-600 leading-[1.6] mb-10 max-w-lg">
+              <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 mb-6">
+              Connect Your <br />
+              <span className="text-6xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">Roadmap for daily work</span>
+              </h1>
+              <p className="text-[1.10rem] text-slate-600 leading-[1.6] mb-10 max-w-lg">
                 Manage everything from product roadmaps to sales pipelines in a single place with 10+ customizable views. Schedule releases on a Calendar, create bug tracking systems on a List, or adjust timelines on a Gantt chart.
               </p>
               <div>
-                <button className="bg-[#f0f1f3] text-[#1f2328] px-7 py-3.5 rounded-xl font-bold hover:bg-[#e4e6e9] transition-colors inline-flex items-center gap-2 font-medium text-[1.05rem]">
-                  Get Started
-                </button>
+              <button className="relative px-6 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40
+                bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 
+                bg-[length:200%_200%] animate-gradient 
+                shadow-lg hover:scale-105 transition">
+                  Get started
+              </button>
               </div>
             </motion.div>
           </div>
@@ -161,16 +159,20 @@ export default function ProductDevelopment() {
               <p className="text-[0.85rem] tracking-[0.2em] font-bold text-[#7B61FF] uppercase mb-6">
                 SCALE
               </p>
-              <h2 className="text-[2.5rem] md:text-[3.25rem] lg:text-[3.5rem] font-extrabold text-[#1f2328] leading-[1.05] mb-6 tracking-tight">
-                Scale from startup to unicorn.
-              </h2>
-              <p className="text-[1.15rem] text-slate-600 leading-[1.6] mb-10 max-w-lg">
+              <h1 className="text-3xl md:text-4xl font-extrabold leading-tight text-slate-900 mb-6">
+              Scale from <br />
+              <span className="text-6xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">startup to unicorn</span>
+              </h1>
+              <p className="text-[1.10rem] text-slate-600 leading-[1.6] mb-10 max-w-lg">
                 Build the perfect organization that grows with your startup. KaryaUp's Hierarchy makes it easy to expand your team and manage more complex projects as you bring on more resources.
               </p>
               <div>
-                <button className="bg-[#e4e6e9] text-[#1f2328] px-7 py-3.5 rounded-xl font-bold hover:bg-[#f0f1f3] transition-colors inline-flex items-center gap-2 font-medium text-[1.05rem]">
-                  Get Started
-                </button>
+              <button className="relative px-6 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40
+                bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 
+                bg-[length:200%_200%] animate-gradient 
+                shadow-lg hover:scale-105 transition">
+                  Get started
+              </button>
               </div>
             </motion.div>
           </div>
@@ -181,4 +183,4 @@ export default function ProductDevelopment() {
       <FinalCTA />
     </div>
   );
-}                                                                                                                                                             
+}                                                                                                                       

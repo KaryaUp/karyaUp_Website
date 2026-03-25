@@ -138,7 +138,7 @@ const TeamSolutions = () => {
 
     return (
         <section className=" pb-6 sm:pb-8 lg:pb-10 bg-[white]">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

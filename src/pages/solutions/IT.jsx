@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import dashboardImage from "../../assets/dashboard2.png";
 import karyaupImg from "../../assets/logo.png";
+import FinalCTA from "../../components/FinalCTA";
 
 export default function ProductDevelopment() {
   return (
@@ -18,7 +19,7 @@ export default function ProductDevelopment() {
 
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight text-slate-900 mb-6">
               The everything app <br />
-              for IT PMO teams
+              <span className="text-5xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 bg-clip-text text-transparent">for IT PMO teams</span>
             </h1>
 
             <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
@@ -26,7 +27,10 @@ export default function ProductDevelopment() {
             </p>
 
             <div className="flex items-center gap-4 mb-6">
-              <button className="bg-black text-white px-6 py-3 rounded-xl font-semibold hover:bg-slate-800 transition">
+            <button className="relative px-8 py-4 text-lg font-semibold text-white rounded-full bg-gradient-to-r from-purple-600 to-pink-500 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-pink-500/40
+            bg-gradient-to-r from-purple-600 via-pink-500 to-purple-600 
+            bg-[length:200%_200%] animate-gradient 
+            shadow-lg hover:scale-105 transition">
                 Get started. It's FREE →
               </button>
               <p className="text-sm text-slate-500">
@@ -34,10 +38,6 @@ export default function ProductDevelopment() {
               </p>
             </div>
 
-            <div className="flex items-center gap-3 text-sm text-slate-500">
-              ⭐⭐⭐⭐⭐
-              <span>25,000+ reviews</span>
-            </div>
           </div>
 
           {/* RIGHT IMAGE */}
@@ -214,100 +214,6 @@ export default function ProductDevelopment() {
       </section>
 
       {/* ================= HERO SECTION (UPDATED) ================= */}
-      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-28 bg-white text-center">
-        <div className="max-w-4xl mx-auto px-6">
-
-          <p className="text-sm tracking-[0.3em] text-indigo-500 font-semibold mb-4">
-            RESOURCE PLANNING AND EXECUTION
-          </p>
-
-          <h1 className="text-1xl md:text-5xl font-extrabold leading-tight text-slate-900 mb-6">
-            Keep operations on track <br />
-            and optimize team resources
-          </h1>
-
-          <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-10">
-            Balance workloads, prevent bottlenecks, and align with processes
-            that scale to your exact needs.
-          </p>
-
-          <button className="bg-black text-white px-8 py-4 rounded-xl text-lg font-semibold hover:bg-slate-800 transition shadow-lg">
-            Get started. It's FREE →
-          </button>
-
-          {/* ================= FEATURES SECTION ================= */}
-          <section className="bg-white py-10">
-            <div className="max-w-7xl mx-auto px-6">
-
-              <div className="grid md:grid-cols-3 gap-8">
-
-                {/* CARD 1 */}
-                <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition duration-300 group">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                    Board view to manage workflows
-                  </h3>
-
-                  <p className="text-slate-600 mb-6 leading-relaxed">
-                    Track progress at every stage with a flexible Kanban board that adapts to any workflow, with custom filtering and sorting.
-                  </p>
-
-                  <div className="relative rounded-2xl overflow-hidden border border-slate-200">
-                    <img
-                      src="https://images.unsplash.com/photo-1551281044-8d8f5f4c7a9b"
-                      alt="Board"
-                      className="w-full h-56 object-cover group-hover:scale-105 transition"
-                    />
-                    <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
-                  </div>
-                </div>
-
-                {/* CARD 2 */}
-                <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition duration-300 group">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                    Interactive spreadsheets for budget tracking
-                  </h3>
-
-                  <p className="text-slate-600 mb-6 leading-relaxed">
-                    Organize budgets, track vendor details, and analyze financials with AI-powered Custom Fields.
-                  </p>
-
-                  <div className="relative rounded-2xl overflow-hidden border border-slate-200">
-                    <img
-                      src="https://images.unsplash.com/photo-1460925895917-afdab827c52f"
-                      alt="Table"
-                      className="w-full h-56 object-cover group-hover:scale-105 transition"
-                    />
-                    <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
-                  </div>
-                </div>
-
-                {/* CARD 3 */}
-                <div className="bg-white rounded-3xl p-8 shadow-sm hover:shadow-xl transition duration-300 group">
-                  <h3 className="text-2xl font-bold text-slate-900 mb-4">
-                    Guest access for external collaboration
-                  </h3>
-
-                  <p className="text-slate-600 mb-6 leading-relaxed">
-                    Share approvals, project updates, and status reports securely with set permissions for external stakeholders.
-                  </p>
-
-                  <div className="relative rounded-2xl overflow-hidden border border-slate-200">
-                    <img
-                      src="https://images.unsplash.com/photo-1551434678-e076c223a692"
-                      alt="Chat"
-                      className="w-full h-56 object-cover group-hover:scale-105 transition"
-                    />
-                    <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-white to-transparent"></div>
-                  </div>
-                </div>
-
-              </div>
-
-            </div>
-          </section>
-
-        </div>
-      </section>
 
       {/* ================= TEMPLATES SECTION ================= */}
       <section className="py-24 bg-white overflow-hidden">
@@ -393,20 +299,7 @@ export default function ProductDevelopment() {
         </div>
       </section>
 
-      {/* ================= CTA ================= */}
-      <section className="py-20 bg-gradient-to-r from-pink-500 to-purple-600 text-white text-center">
-        <h2 className="text-3xl md:text-5xl font-extrabold mb-4">
-          Build products faster with KaryaUp
-        </h2>
-        <p className="mb-8">
-          Join thousands of teams managing product development smarter.
-        </p>
-
-        <button className="bg-white text-black px-8 py-3 rounded-xl font-semibold hover:scale-105 transition">
-          Start your workspace →
-        </button>
-      </section>
-
+      <FinalCTA />
     </div>
   );
-}                                                                                                                                                              
+}                                                                                                                                                            

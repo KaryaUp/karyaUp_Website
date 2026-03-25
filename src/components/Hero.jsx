@@ -63,18 +63,13 @@ const Hero = () => {
               {/* Primary Button: Start Free Workspace (CSS Hover Effect via Tailwind) */}
               <Link
                 to="/start"
-                className="group relative overflow-hidden shrink-0 flex items-center justify-center font-bold text-[15px] z-10 w-[14em] h-[3.5em] rounded-[30em] transition-all duration-300"
+                className="group relative z-10 flex h-[3.5em] w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"
                 style={{
                   boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff"
                 }}
               >
-                {/* Background base (Gradient) */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 -z-20" />
-
-                {/* Expanding background on hover (Solid White to avoid gradient bleed) */}
-                <div
-                  className="absolute top-0 left-0 h-full w-0 rounded-[30em] -z-10 transition-all duration-500 ease-in-out bg-white group-hover:w-full" />
-
+                <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full" />
                 <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-slate-800">
                   Start Free Workspace
                 </span>

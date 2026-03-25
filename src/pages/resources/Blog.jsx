@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ArrowRight, Clock, Sparkles, TrendingUp, BookOpen, Users, Send, ChevronLeft, Calendar, Share2, Twitter, Linkedin, Copy } from "lucide-react";
+import { Search, ArrowRight, Clock, Sparkles, TrendingUp, BookOpen, Users, Send, ChevronLeft, Calendar, Share2, Twitter, Linkedin, Copy, Check, CheckCircle2 } from "lucide-react";
+import { FocusIllust, TeamIllust, OpsIllust, LeadIllust, MeetingIllust } from "./BlogIllustrations";
 import article1 from "../../assets/work_analysis.jpeg";
 import article2 from "../../assets/projects.jpeg";
 import article3 from "../../assets/dashboard1.jpeg";
@@ -19,288 +20,219 @@ const EASING = [0.2, 0.8, 0.2, 1];
 
 const articles = [
   {
-    id: 1,
-    title: "The Future of Distributed Work in 2024",
-    excerpt: "How KaryaUp is redefining the way creative studios manage global talent and complex design systems.",
-    category: "Business",
+    id: "featured",
+    title: "Why Your Team Is Busy But Nothing Is Getting Done",
+    excerpt: "Busyness is not progress. Most teams confuse activity with output — and managers let it slide because the calendar looks full. Here's how to tell the difference, and what to actually fix.",
+    category: "Team Management",
     author: "Alex Rivers",
     role: "Head of Operations",
-    date: "March 15, 2024",
-    readTime: "5 min read",
+    date: "March 25, 2024",
+    readTime: "6 min read",
     image: article1,
+    illustration: <TeamIllust />,
+    hookStat: "73% of tasks on average to-do lists never get done.",
+    pullQuote: "A full calendar and an empty sprint are not the same problem — but they have the same root cause.",
     content: `
-      <p>The landscape of work has undergone a seismic shift, transition from the traditional office-centric model to a more fluid, distributed reality. As we move further into 2024, the tools and philosophies that govern this space are evolving at an unprecedented pace.</p>
-      <h2>The Shift to Asynchronous Collaboration</h2>
-      <p>One of the most significant changes we're observing is the prioritization of asynchronous communication over real-time meetings. Distributed teams are increasingly relying on structured documentation and powerful project management tools like KaryaUp to bridge the gap across time zones.</p>
-      <blockquote>"Architecture is the art of how to waste space." - Philip Johnson. In the digital world, we don't waste space, we optimize it for human connection.</blockquote>
-      <h2>Building Dynamic Design Systems</h2>
-      <p>Design systems are no longer static libraries; they are living ecosystems. Creative studios are now building systems that are not just responsive, but context-aware, adapting to the diverse needs of global talent.</p>
-      <p>As we look toward the future, the integration of AI-driven insights into our daily workflows will further redefine productivity, allowing creative teams to focus on what they do best: innovate.</p>
+      <p>Busyness is the ultimate hiding place. It feels like commitment, it looks like hard work, and it sounds like progress. But for most teams, it's just noise.</p>
+      <h2>The Paradox of Activity</h2>
+      <p>In modern workplaces, we've developed a cult of the 'busy'. We measure success by the density of our calendars and the speed of our Slack replies. However, research consistently shows that there is a diminishing return on hours worked. When teams are "always on," they lose the capacity for deep work—the very thing that drives actual results.</p>
+      <blockquote>"A full calendar and an empty sprint are not the same problem — but they have the same root cause."</blockquote>
+      <h2>Confusing Motion with Progress</h2>
+      <p>Motion is doing things; progress is getting things done. A team can spend forty hours a week in meetings discussing a feature, but if not a single line of code is written, that's motion without progress. Managers often let this slide because intervention feels like micro-management, or worse, because they are caught in the same cycle themselves.</p>
+      <h2>What to Actually Fix</h2>
+      <p>To break this cycle, leadership must prioritize outcome over output. This means setting clear, singular goals for the week and fiercely protecting the team's time. Stop asking "What did you do today?" and start asking "What did we ship today?"</p>
+    `
+  },
+  {
+    id: 1,
+    title: "The 3-Task Rule — Why Top Performers Never Write Long To-Do Lists",
+    excerpt: "Long task lists feel productive to write and useless to execute. The best performers work differently — and it starts with a number most people think is too small.",
+    category: "Productivity",
+    author: "Sarah Chen",
+    role: "Senior Product Designer",
+    date: "March 24, 2024",
+    readTime: "4 min read",
+    image: article2,
+    illustration: <FocusIllust />,
+    hookStat: "73% of tasks on average to-do lists never get done.",
+    content: `
+      <p>The secret to productivity isn't doing more; it's doing less of what doesn't matter. The 3-task rule is about radical prioritization.</p>
+      <h2>The Psychology of the To-Do List</h2>
+      <p>Most to-do lists are actually "wish lists." They are a dumping ground for every stray thought and obligation we encounter. By the time we look at the list, the sheer volume of tasks triggers a freeze response. We end up doing the easiest tasks first to get the hit of dopamine from crossing them off, while the most important work remains untouched.</p>
+      <blockquote>"Focus is a matter of deciding what you are not going to do."</blockquote>
+      <h2>Radical Simplification</h2>
+      <p>The 3-task rule is simple: before you start your day, identify the three things that, if completed, would make the day a success. Everything else is secondary. This constraint forces you to evaluate the weight of each task. If you have ten things to do, you have to ask: which of these actually move the needle?</p>
+      <h2>Executing with Intent</h2>
+      <p>Once you have your three, you tackle them in order of importance. This prevents the "productive procrastination" of clearing your inbox before starting a difficult design project. By narrowing your focus, you increase the intensity of your work.</p>
     `
   },
   {
     id: 2,
-    title: "Mastering Minimalist UI Components",
-    excerpt: "Why less is more when building scalable design languages for enterprise-grade SaaS products.",
-    category: "Design",
-    author: "Sarah Chen",
-    role: "Senior Product Designer",
-    date: "March 12, 2024",
-    readTime: "8 min read",
-    image: article2,
+    title: "Hiring for Culture Fit Is Killing Your Team's Potential",
+    excerpt: "Culture fit sounds smart until you realise you've built a room full of the same person. The teams that outperform aren't the ones that agree — they're the ones that argue well.",
+    category: "Team Management",
+    author: "Marcus Volt",
+    role: "Full Stack Lead",
+    date: "March 22, 2024",
+    readTime: "5 min read",
+    image: article3,
+    illustration: <TeamIllust />,
+    hookStat: "Teams with diverse thinking styles are 35% more likely to hit targets.",
     content: `
-      <p>In the world of enterprise SaaS, complexity is often unavoidable. However, the interface that houses this complexity should be anything but complicated. Mastery of minimalist UI components is the key to creating products that users love.</p>
-      <h2>The Core Pillars of Minimalism</h2>
-      <p>Minimalism isn't just about white space; it's about purpose. Every element on the screen should earn its place. We focus on clarity, hierarchy, and navigation as our guiding principles.</p>
-      <img src="${article6}" alt="Minimalist Design Example" class="rounded-2xl my-8 w-full h-auto object-cover" />
-      <h2>Scaling Design Languages</h2>
-      <p>When you're building for thousands of users, consistency is your best friend. A minimalist approach allows for a cleaner codebase and a more predictable user experience across the entire product suite.</p>
+      <p>Stop looking for people who fit in. Start looking for people who add something new. Culture add over culture fit.</p>
+      <h2>The Echo Chamber Effect</h2>
+      <p>When we hire for "culture fit," we are often subconsciously looking for people who remind us of ourselves. This leads to organizational stagnation. If everyone has the same background, the same education, and the same way of thinking, you will never see the blind spots in your strategy until it's too late.</p>
+      <blockquote>"Diversity is not just a metric; it's a competitive advantage."</blockquote>
+      <h2>Embracing Cognitive Friction</h2>
+      <p>The most innovative teams are those where ideas are challenged. This requires "culture add"—hiring people who bring a different perspective, a different set of experiences, or a different problem-solving style. This creates friction, which is uncomfortable but necessary for growth.</p>
+      <h2>How to Change Your Process</h2>
+      <p>Redefine your culture not as a set of personality traits, but as a set of values. Instead of asking "Would I grab a beer with this person?", ask "What part of our culture is currently missing that this person can provide?"</p>
     `
   },
   {
     id: 3,
-    title: "React Server Components: A Deep Dive",
-    excerpt: "Understanding the shift in mental models required to build high-performance modern web applications.",
-    category: "Development",
-    author: "Marcus Volt",
-    role: "Full Stack Lead",
-    date: "March 10, 2024",
-    readTime: "12 min read",
-    image: article3,
-    content: `<p>React Server Components represent one of the most significant architectural shifts in web development since the introduction of hooks. By allowing components to render on the server without being sent to the client, we're opening up new possibilities for performance and developer experience.</p>`
+    title: "The Hidden Cost of a Bad Leave Policy — And How to Fix It in a Day",
+    excerpt: "Most companies don't have a leave problem. They have a leave policy problem. Here's what a broken system actually costs you — in time, trust, and talent.",
+    category: "HR & Ops",
+    author: "Priya Sharma",
+    role: "HR Strategist",
+    date: "March 20, 2024",
+    readTime: "5 min read",
+    image: article4,
+    illustration: <OpsIllust />,
+    hookStat: "1 in 3 employees cite poor leave management as a reason to quit.",
+    content: `
+      <p>A broken leave policy is a silent killer of morale. If your team is afraid to take time off, you've already lost them.</p>
+      <h2>The Fear of Stepping Away</h2>
+      <p>Many companies offer "Unlimited PTO" only to find that employees take less time off than they did under a traditional accrual system. Why? Because without clear guidelines, taking leave feels like a sign of weakness or a lack of commitment. This leads to burnout and, eventually, a mass exodus of your best talent.</p>
+      <blockquote>"A policy isn't what's written in the handbook; it's how people feel when they use it."</blockquote>
+      <h2>The Financial Impact of Burnout</h2>
+      <p>High turnover is expensive. Replacing a senior employee can cost up to twice their annual salary in recruitment, onboarding, and lost productivity. A bad leave policy is effectively a hidden tax on your business operations.</p>
+      <h2>The 24-Hour Fix</h2>
+      <p>You can fix this today by implementing a "Minimum Leave Requirement." Tell your team they are required to take at least 15 days off per year. When people see that leadership values rest, they will feel safe enough to take it themselves.</p>
+    `
   },
   {
     id: 4,
-    title: "Building a Freelance Career That Scales",
-    excerpt: "From solo freelancer to agency owner — the strategies that actually work in 2024.",
-    category: "Freelancing",
-    author: "Priya Sharma",
-    role: "Freelance Strategist",
-    date: "March 08, 2024",
-    readTime: "6 min read",
-    image: article4,
-    content: `<p>The jump from solo freelancer to agency owner is less about doing more work and more about building better systems. In this guide, we explore the mental shifts and practical tools needed to scale your creative business.</p>`
+    title: "Stop Motivating Your Team. Start Removing What Demotivates Them.",
+    excerpt: "Motivation is not a manager's job. Removing friction is. The best leaders don't inspire — they clear the path and get out of the way.",
+    category: "Leadership",
+    author: "Jordan Lee",
+    role: "Experience Lead",
+    date: "March 18, 2024",
+    readTime: "4 min read",
+    image: article5,
+    illustration: <LeadIllust />,
+    hookStat: "Friction, not lack of motivation, causes 68% of disengagement at work.",
+    content: `
+      <p>Management is about removing obstacles, not cheerleading from the sidelines.</p>
+      <h2>The Illusion of Inspiration</h2>
+      <p>Many managers think their primary job is to give powerful speeches and "fire up" the team. This might work for an hour, but it doesn't solve the underlying issues. Most employees start their jobs motivated. They want to do good work. It's the bureaucracy, the useless meetings, and the broken tools that suck the life out of them.</p>
+      <blockquote>"Leadership is a service role. You serve the people doing the work."</blockquote>
+      <h2>Identifying Friction Points</h2>
+      <p>Instead of hiring an inspirational speaker, spend an hour a week asking each team member: "What is the most annoying thing about your job right now?" Is it a slow CI/CD pipeline? Is it a difficult stakeholder? Is it a lack of clarity on a project? That is where your work as a leader begins.</p>
+      <h2>Becoming a Path-Clearer</h2>
+      <p>Your success as a manager is measured by how invisible you are. If the path is clear, the team will run. Your job is to stay ahead of them, spotting the hurdles and removing them before the team even knows they exist.</p>
+    `
   },
   {
     id: 5,
-    title: "The Rise of Spatial Design Systems",
-    excerpt: "How 3D interfaces and spatial computing are reshaping the future of digital product design.",
-    category: "Design",
-    author: "Jordan Lee",
-    role: "Experience Lead",
-    date: "March 05, 2024",
-    readTime: "10 min read",
-    image: article5,
-    content: `<p>Spatial design is no longer just for VR enthusiasts. With the advent of new hardware and refined software ecosystems, 3D interfaces are becoming a core part of the digital designer's toolkit. We dive into the principles of Z-axis navigation and depth hierarchy.</p>`
-  },
-  {
-    id: 6,
-    title: "Data-Driven Decision Making for Startups",
-    excerpt: "Leveraging analytics and KPIs to make smarter business decisions from day one.",
-    category: "Business",
+    title: "Meetings Are Not the Problem. Purposeless Meetings Are.",
+    excerpt: "The meeting-hating culture has gone too far. Some meetings are irreplaceable — but only when they have a clear owner, a defined outcome, and a hard stop time.",
+    category: "Productivity",
     author: "Nina Patel",
     role: "Growth Advisor",
-    date: "March 01, 2024",
-    readTime: "7 min read",
+    date: "March 15, 2024",
+    readTime: "3 min read",
     image: article6,
-    content: `<p>Intuition is valuable, but data is undeniable. For startups looking to scale, building a culture of data-informed decision making is the difference between guessing and growing.</p>`
-  },
-  {
-    id: 7,
-    title: "Optimizing Web Performance in 2024",
-    excerpt: "Techniques for achieving lightning-fast load times in modern web applications.",
-    category: "Development",
-    author: "David Kim",
-    role: "Performance Engineer",
-    date: "Feb 28, 2024",
-    readTime: "9 min read",
-    image: article7,
-    content: `<p>Performance is a feature. In 2024, we're looking beyond simple minification to advanced hydration strategies and edge-side rendering to deliver sub-second experiences on any device.</p>`
-  },
-  {
-    id: 8,
-    title: "Building Collaborative Culture",
-    excerpt: "How to foster high-performance teams in a remote-first environment.",
-    category: "Business",
-    author: "Emma Wilson",
-    role: "People Ops Lead",
-    date: "Feb 25, 2024",
-    readTime: "6 min read",
-    image: article8,
-    content: `<p>Culture isn't a ping-pong table; it's the sum of your collective behaviors. In a distributed world, building culture requires intentionality, radical transparency, and a lot of high-quality documentation.</p>`
-  },
-  {
-    id: 9,
-    title: "Advanced Dashboard Architectures",
-    excerpt: "Designing data visualization systems that provide actionable insights at scale.",
-    category: "Design",
-    author: "Liam Chen",
-    role: "UI Architect",
-    date: "Feb 20, 2024",
-    readTime: "11 min read",
-    image: article9,
-    content: `<p>Dashboards are often where design meets the most complex data structures. We explore how to maintain clarity while surfacing deep insights using modular dashboard components.</p>`
-  },
-  {
-    id: 10,
-    title: "The Psychology of User Productivity",
-    excerpt: "Understanding how interface design ripples through user efficiency and focus.",
-    category: "Design",
-    author: "Sophia Reed",
-    role: "UX Researcher",
-    date: "Feb 15, 2024",
-    readTime: "8 min read",
-    image: article10,
-    content: `<p>Productivity is a psychological state as much as it is a tactical output. We study how color, spacing, and transition timing can influence focus and reduce cognitive load.</p>`
-  },
-  {
-    id: 11,
-    title: "Scaling SaaS Infrastructure",
-    excerpt: "Practical architectural patterns for growing your product from 1k to 1M users.",
-    category: "Development",
-    author: "Michael Scott",
-    role: "CTO",
-    date: "Feb 10, 2024",
-    readTime: "14 min read",
-    image: article11,
-    content: `<p>Scaling is about solving the problems you have today while not closing the door on tomorrow. We dissect the infra changes required at different stages of a SaaS lifecycle.</p>`
-  },
-  {
-    id: 12,
-    title: "Marketing for Solo Founders",
-    excerpt: "Effective customer acquisition strategies on a small budget.",
-    category: "Freelancing",
-    author: "Sarah Brown",
-    role: "Marketing Specialist",
-    date: "Feb 05, 2024",
-    readTime: "7 min read",
-    image: article12,
-    content: `<p>You don't need a multi-million dollar budget to find your first thousand users. This guide covers organic reach, content strategy, and community-led growth for solo founders.</p>`
+    illustration: <MeetingIllust />,
+    hookStat: "Employees spend 31 hours per month in unproductive meetings on average.",
+    content: `
+      <p>Don't ban meetings. Ban bad ones. Every meeting should have a cost-benefit analysis before the invite is sent.</p>
+      <h2>The Default State of Collaboration</h2>
+      <p>In many organizations, the default response to any problem is "let's have a meeting." This is a lazy way to collaborate. It offloads the work of thinking onto a group, usually resulting in a mediocre consensus rather than a sharp decision.</p>
+      <blockquote>"A meeting is a luxury. Treat it like one."</blockquote>
+      <h2>The Three Ingredients of a Good Meeting</h2>
+      <p>Every meeting must have: 1. A clear owner (who is in charge?), 2. A defined outcome (what do we need to decide?), and 3. A hard stop time. If you can't state the outcome in one sentence, you aren't ready to meet.</p>
+      <h2>Reclaiming Deep Work</h2>
+      <p>By drastically reducing meeting frequency, you give your team back the most valuable asset they have: their attention. Encourage "meeting-free Wednesdays" or dedicated blocks for deep work. You'll find that most things can be solved more efficiently over a well-written document than an hour-long call.</p>
+    `
   }
 ];
 
-const FloatingShape = ({ color, size, top, left, delay }) => (
-  <motion.div
-    animate={{
-      y: [0, 15, 0],
-      x: [0, 10, 0],
-      rotate: [0, 5, 0],
-      scale: [1, 1.05, 1],
-    }}
-    transition={{
-      duration: 6,
-      repeat: Infinity,
-      delay,
-      ease: "easeInOut",
-    }}
-    className={`absolute ${color} ${size} rounded-full blur-[80px] opacity-20 pointer-events-none z-0`}
-    style={{ top, left }}
-  />
-);
-
-
-const PerspectiveCard = ({ article, onClick }) => {
-  const [rotateX, setRotateX] = useState(0);
-  const [rotateY, setRotateY] = useState(0);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    setRotateX((y - centerY) / 25);
-    setRotateY(-(x - centerX) / 25);
-  };
-
-  const handleMouseLeave = () => {
-    setRotateX(0);
-    setRotateY(0);
-  };
-
+const PostRow = ({ article, onClick }) => {
   return (
     <motion.div
+      layout
       initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      onClick={() => onClick(article)}
-      style={{
-        perspective: "1000px",
-      }}
-      className="cursor-pointer group relative"
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, x: -10 }}
+      className="group py-16 border-b border-slate-100 flex flex-col md:flex-row gap-12 lg:gap-24 items-start"
     >
-      <motion.div
-        animate={{ rotateX, rotateY }}
-        transition={{ type: "spring", stiffness: 150, damping: 20 }}
-        className="bg-white rounded-[32px] p-6 border border-slate-100 shadow-xl shadow-purple-200/60 hover:shadow-2xl hover:shadow-purple-400/30 transition-shadow h-full flex flex-col"
-      >
-        <div className="relative aspect-[16/10] rounded-2xl overflow-hidden mb-6">
-          <img
-            src={article.image}
-            alt={article.title}
-            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-          />
-          <div className="absolute top-4 left-4">
-            <span className="bg-white/95 backdrop-blur-sm text-[#7e22ce] text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full shadow-lg border border-slate-100">
-              {article.category}
-            </span>
-          </div>
+      {/* Left Column (Content) */}
+      <div className="flex-1 text-left">
+        <div className="flex items-center gap-3 mb-6">
+          <div className="w-1.5 h-4 bg-[#7e22ce] rounded-full" />
+          <span className="text-[#7e22ce] text-[13px] font-black uppercase tracking-[0.2em]">{article.category}</span>
         </div>
+        
+        <h3 
+          onClick={() => onClick(article)}
+          className="text-[32px] md:text-[42px] font-black text-[#0A2540] mb-8 leading-[1.05] tracking-tight hover:text-[#7e22ce] cursor-pointer transition-colors"
+        >
+          {article.title}
+        </h3>
+        
+        <p className="text-[#425466] text-xl leading-relaxed mb-10 font-medium">
+          {article.excerpt}
+        </p>
 
-        <div className="flex flex-col flex-1">
-          <div className="flex items-center gap-3 text-slate-400 text-[11px] font-bold uppercase tracking-widest mb-3">
-            <span className="flex items-center gap-1"><Clock size={12} /> {article.readTime}</span>
-            <span>•</span>
-            <span>{article.date}</span>
+        <button 
+          onClick={() => onClick(article)}
+          className="text-[#7e22ce] font-black text-[15px] flex items-center gap-2 hover:gap-4 transition-all"
+        >
+          Read more <ArrowRight size={18} strokeWidth={3} />
+        </button>
+      </div>
+
+      {/* Right Column (Metadata + Image) */}
+      <div className="w-full md:w-[480px] lg:w-[540px] shrink-0">
+        {/* Top: Metadata */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10 sm:gap-6 mb-12">
+          <div className="text-[#425466] text-[15px] font-bold">
+            {article.date}
           </div>
           
-          <h3 className="text-2xl font-black text-slate-900 group-hover:text-[#7e22ce] transition-colors leading-tight mb-4">
-            {article.title}
-          </h3>
-          
-          <p className="text-slate-500 text-sm leading-relaxed mb-6 line-clamp-2 italic">
-            {article.excerpt}
-          </p>
-
-          <div className="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center font-bold text-[#7e22ce] text-sm border border-slate-100">
-                {article.author.charAt(0)}
-              </div>
-              <div>
-                <div className="text-slate-900 font-bold text-xs leading-none">{article.author}</div>
-                <div className="text-slate-400 text-[9px] mt-1.5 uppercase font-black tracking-widest">{article.role}</div>
-              </div>
+          <div className="flex items-center gap-5">
+            <div className="w-12 h-12 rounded-full bg-[#F6F9FC] border border-slate-100 flex items-center justify-center font-black text-[#0A2540] text-sm overflow-hidden">
+               {article.author.charAt(0)}
             </div>
-            <div className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-[#7e22ce] group-hover:text-white transition-all transform group-hover:translate-x-1 shadow-sm">
-              <ArrowRight size={18} strokeWidth={3} />
+            <div>
+              <div className="text-[#0A2540] font-black text-[15px] leading-tight mb-1">{article.author}</div>
+              <div className="text-[#425466] text-[11px] uppercase font-bold tracking-[0.2em]">{article.role}</div>
             </div>
           </div>
         </div>
-      </motion.div>
+
+        {/* Bottom: Post Image */}
+        <div 
+          onClick={() => onClick(article)}
+          className="relative aspect-video rounded-[40px] overflow-hidden cursor-pointer shadow-[0_40px_100px_-30px_rgba(0,0,0,0.1)] group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] transition-all bg-[#F6F9FC]"
+        >
+          {article.illustration ? (
+            article.illustration
+          ) : (
+            <img 
+              src={article.image} 
+              alt={article.title} 
+              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
+            />
+          )}
+        </div>
+      </div>
     </motion.div>
   );
 };
-
-const StatCard = ({ icon: Icon, value, label, delay }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay }}
-    className="bg-white rounded-3xl p-7 border border-slate-100 flex items-center gap-6 group hover:shadow-2xl hover:shadow-indigo-500/5 transition-all w-full"
-  >
-    <div className="p-4 bg-slate-50 rounded-2xl text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white transition-all shadow-sm">
-      <Icon size={28} strokeWidth={2.5} />
-    </div>
-    <div>
-      <div className="text-3xl font-black text-slate-900 leading-none mb-1.5">{value}</div>
-      <div className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">{label}</div>
-    </div>
-  </motion.div>
-);
 
 
 const ArticleDetail = ({ article, onBack }) => {
@@ -310,67 +242,77 @@ const ArticleDetail = ({ article, onBack }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
       className="bg-white min-h-screen pb-32 relative"
     >
-      <FloatingShape color="bg-indigo-300" size="w-96 h-96" top="-10%" left="70%" delay={0} />
-      <FloatingShape color="bg-purple-300" size="w-80 h-80" top="40%" left="-10%" delay={1} />
-
-      {/* Detail Header */}
-      <div className="border-b border-slate-100 sticky top-0 bg-white/80 backdrop-blur-xl z-50">
-        <div className="max-w-4xl mx-auto px-6 py-6 flex items-center justify-between">
+      {/* Minimalist Header */}
+      <div className="border-b border-slate-100 sticky top-0 bg-white/90 backdrop-blur-xl z-50">
+        <div className="max-w-5xl mx-auto px-6 py-5 flex items-center justify-between">
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-slate-600 hover:text-[#7e22ce] transition-colors font-bold text-sm bg-slate-50 px-4 py-2 rounded-full border border-slate-100"
+            className="flex items-center gap-2 text-[#0A2540] hover:text-[#7e22ce] transition-colors font-bold text-sm"
           >
             <ChevronLeft size={18} strokeWidth={3} />
-            Back to Journal
+            Back to Blog
           </button>
-          <div className="flex items-center gap-4">
-            <button className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-[#7e22ce] hover:bg-slate-100 transition-colors"><Twitter size={18} /></button>
-            <button className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-[#7e22ce] hover:bg-slate-100 transition-colors"><Linkedin size={18} /></button>
-            <button className="w-10 h-10 rounded-full bg-slate-50 flex items-center justify-center text-slate-400 hover:text-[#7e22ce] hover:bg-slate-100 transition-colors"><Copy size={18} /></button>
+          <div className="flex items-center gap-6">
+            <button className="text-slate-400 hover:text-[#0A2540] transition-colors"><Twitter size={18} /></button>
+            <button className="text-slate-400 hover:text-[#0A2540] transition-colors"><Linkedin size={18} /></button>
+            <div className="h-4 w-px bg-slate-200" />
+            <button className="bg-[#0A2540] text-white px-5 py-2 rounded-full text-xs font-black uppercase tracking-widest hover:bg-[#7e22ce] transition-all">
+              Share
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 pt-16 relative z-10">
-        <div className="flex items-center gap-4 mb-8">
-          <span className="text-[#7e22ce] text-xs font-black uppercase tracking-[0.2em] px-4 py-1.5 bg-indigo-50 rounded-full border border-indigo-100">
+      <div className="max-w-3xl mx-auto px-6 pt-20 relative z-10">
+        <div className="flex items-center gap-3 mb-8">
+          <div className="w-1 h-4 bg-[#7e22ce] rounded-full" />
+          <span className="text-[#7e22ce] text-[12px] font-black uppercase tracking-[0.2em]">
             {article.category}
           </span>
-          <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest flex items-center gap-2">
-            <Calendar size={14} />
+          <span className="mx-2 text-slate-200">/</span>
+          <span className="text-slate-400 text-[13px] font-semibold">
             {article.date}
           </span>
-          <span className="text-slate-400 text-[11px] font-bold uppercase tracking-widest flex items-center gap-2 border-l border-slate-200 pl-4">
-            <Clock size={14} />
+          <span className="mx-2 text-slate-200">/</span>
+          <span className="text-slate-400 text-[13px] font-semibold">
             {article.readTime}
           </span>
         </div>
 
-        <h1 className="text-4xl md:text-6xl font-black text-slate-900 leading-[1.1] tracking-tight mb-10">
+        <h1 className="text-[40px] md:text-[64px] font-black text-[#0A2540] leading-[1.05] tracking-tight mb-12">
           {article.title}
         </h1>
 
-        <div className="flex items-center gap-4 mb-16 border-t border-b border-slate-100 py-8">
-          <div className="w-14 h-14 rounded-2xl bg-[#7e22ce] flex items-center justify-center font-bold text-white text-2xl shadow-lg shadow-indigo-500/20">
+        <div className="flex items-center gap-5 mb-16 py-8 border-y border-slate-100">
+          <div className="w-12 h-12 rounded-xl bg-[#F6F9FC] border border-slate-100 flex items-center justify-center font-black text-[#0A2540] text-sm shadow-sm">
             {article.author.charAt(0)}
           </div>
           <div>
-            <div className="text-slate-900 font-extrabold text-lg tracking-tight leading-none mb-1.5">{article.author}</div>
-            <div className="text-[#7e22ce] text-xs font-bold uppercase tracking-widest">{article.role}</div>
+            <div className="text-[#0A2540] font-black text-lg tracking-tight leading-none mb-1.5">{article.author}</div>
+            <div className="text-[#425466] text-[10px] uppercase font-bold tracking-[0.2em]">{article.role}</div>
           </div>
         </div>
 
-        <div className="w-full aspect-video rounded-[40px] overflow-hidden mb-20 shadow-2xl shadow-indigo-500/15 border border-slate-100">
-          <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+        <div className="relative aspect-[16/9] rounded-[40px] overflow-hidden mb-20 shadow-[0_40px_100px_-30px_rgba(0,0,0,0.1)] bg-[#F6F9FC]">
+          {article.illustration ? (
+            article.illustration
+          ) : (
+            <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+          )}
         </div>
 
         <article
-          className="prose prose-slate prose-xl max-w-none prose-headings:text-slate-900 prose-headings:font-black prose-p:text-slate-600 prose-p:leading-relaxed prose-blockquote:border-l-4 prose-blockquote:border-[#7e22ce] prose-blockquote:bg-slate-50 prose-blockquote:p-8 prose-blockquote:rounded-r-3xl prose-blockquote:italic prose-img:rounded-3xl prose-img:shadow-2xl"
+          className="prose prose-slate prose-xl max-w-none 
+            prose-headings:text-[#0A2540] prose-headings:font-black prose-headings:tracking-tight
+            prose-p:text-[#425466] prose-p:leading-relaxed prose-p:font-medium
+            prose-blockquote:border-l-4 prose-blockquote:border-[#635BFF] prose-blockquote:bg-[#F6F9FC] prose-blockquote:p-10 prose-blockquote:rounded-2xl prose-blockquote:italic
+            prose-strong:text-[#0A2540] prose-strong:font-black
+            prose-img:rounded-[32px] prose-img:shadow-xl"
           dangerouslySetInnerHTML={{ __html: article.content }}
         />
       </div>
@@ -434,7 +376,7 @@ export default function Blog() {
     });
   };
 
-  const categories = ["All", "Design", "Development", "Business", "Freelancing"];
+  const categories = ["All", "Team Management", "Productivity", "Product Updates", "HR & Ops", "Leadership"];
 
   const handleSearch = () => {
     setAppliedSearch(searchQuery);
@@ -487,88 +429,188 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-24 overflow-hidden">
-        <FloatingShape color="bg-indigo-300" size="w-96 h-96" top="-10%" left="80%" delay={0} />
-        <FloatingShape color="bg-purple-300" size="w-80 h-80" top="20%" left="-10%" delay={1} />
-        <FloatingShape color="bg-emerald-200" size="w-64 h-64" top="60%" left="70%" delay={2} />
+      <section className="relative pt-24 pb-16 overflow-hidden">
+        <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
+        <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
 
-        <div className="max-w-7xl mx-auto px-6 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-indigo-50 px-4 py-2 rounded-full text-[#7e22ce] text-xs font-black uppercase tracking-[0.2em] mb-8 border border-indigo-100"
-          >
-            <Sparkles size={14} strokeWidth={3} />
-            The KaryaUp Journal
-          </motion.div>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-[56px] md:text-[100px] font-black text-slate-900 leading-[0.9] tracking-[-0.05em] mb-10"
-          >
-            Insights for the <br />{" "}
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div className="text-center lg:text-left">
+                <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest"
+              >
+                Blog — Ideas Worth Running With
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                className="mt-5 text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.06]"
+              >
+                Not another <br />
+                <motion.span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  productivity blog.
+                </motion.span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                className="mt-6 space-y-4 max-w-2xl mx-auto lg:mx-0"
+              >
+                <div className="flex items-start gap-3.5 text-left">
+                  <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                    <CheckCircle2 className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
+                  </div>
+                  <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                    Real talk on how modern teams work, lead, and grow — written by people who've actually felt the pressure of a missed deadline.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
+                className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto lg:mx-0"
+              >
+                {["Guides", "Leadership", "Ops", "Templates"].map((tag) => (
+                  <div key={tag} className="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-purple-200 hover:bg-purple-50/50 transition-all duration-300">
+                    <div className="w-5 h-5 rounded-md bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Check className="w-3 h-3 text-[#7e22ce] stroke-[4]" />
+                    </div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-600 truncate">{tag}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative lg:-mr-10"
             >
-              next generation.
-            </motion.span>
-          </motion.h1>
+              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
 
-          <motion.p 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-slate-500 max-w-2xl mx-auto leading-relaxed mb-16 font-medium"
-          >
-            Deep dives into design systems, engineering culture, and the future of digital product development at scale.
-          </motion.p>
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white p-4 sm:p-5">
+                <div className="relative rounded-[1.7rem] border border-slate-200 bg-[radial-gradient(circle_at_top,#faf5ff,white_58%)] p-5 sm:p-6 min-h-[470px]">
+                  <div className="flex items-center justify-between gap-4">
+                    <div>
+                      <div className="text-[11px] font-black uppercase tracking-[0.18em] text-purple-700">
+                        Editorial Desk
+                      </div>
+                      <div className="mt-2 text-2xl font-black tracking-tight text-slate-900">
+                        Stories that move work
+                      </div>
+                    </div>
+                    <div className="rounded-full border border-purple-200 bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.18em] text-purple-700 shadow-sm">
+                      12 fresh reads
+                    </div>
+                  </div>
 
-          {/* Stats Bar */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            <StatCard icon={BookOpen} value="120+" label="Articles Published" delay={0.3} />
-            <StatCard icon={TrendingUp} value="50K+" label="Monthly Readers" delay={0.4} />
-            <StatCard icon={Users} value="15+" label="Industry Experts" delay={0.5} />
+                  <div className="relative mt-8 flex justify-center">
+                    <div className="absolute left-0 top-8 hidden w-[190px] rounded-[1.4rem] border border-slate-200 bg-white p-4 shadow-xl lg:block">
+                      <div className="flex items-center gap-3">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-purple-100 text-[#7e22ce]">
+                          <TrendingUp className="h-5 w-5" />
+                        </div>
+                        <div>
+                          <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                            Most read
+                          </div>
+                          <div className="mt-1 text-sm font-black leading-tight text-slate-900">
+                            Productivity systems
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="relative w-full max-w-[420px]">
+                      <img
+                        src={dashboardMockup}
+                        alt="KaryaUp blog and newsletter visual"
+                        className="w-full h-auto object-contain drop-shadow-[0_28px_60px_rgba(15,23,42,0.16)]"
+                      />
+                    </div>
+
+                    <div className="absolute right-0 top-20 hidden w-[210px] rounded-[1.4rem] border border-slate-200 bg-white p-4 shadow-xl lg:block">
+                      <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                        Featured now
+                      </div>
+                      <div className="mt-2 text-sm font-black leading-tight text-slate-900">
+                        {articles[0].title}
+                      </div>
+                      <div className="mt-3 inline-flex items-center gap-2 rounded-full bg-purple-50 px-3 py-1 text-[10px] font-black uppercase tracking-[0.14em] text-purple-700">
+                        <BookOpen className="h-3.5 w-3.5" />
+                        {articles[0].category}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 grid gap-3 sm:grid-cols-3">
+                    {articles.slice(0, 3).map((article) => (
+                      <div
+                        key={article.id}
+                        onClick={() => openArticle(article)}
+                        className="group rounded-[1.25rem] border border-slate-200 bg-white px-4 py-3 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:border-purple-200"
+                      >
+                        <div className="text-[10px] font-black uppercase tracking-[0.18em] text-slate-400">
+                          {article.category}
+                        </div>
+                          <div className="mt-2 text-sm font-black leading-snug text-slate-900 group-hover:text-[#0048E5] transition-colors">
+                            {article.title}
+                          </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Search Section */}
-      <section className="py-12 bg-slate-50 border-y border-slate-100 relative z-20">
-        <div className="max-w-7xl mx-auto px-6 flex justify-center">
-          <div className="w-full md:max-w-2xl relative flex items-center gap-3">
-             <div className="relative flex-1">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                <input
-                  type="text"
-                  placeholder="Search articles..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleSearch()}
-                  className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white border border-slate-200 focus:ring-4 focus:ring-[#7e22ce]/10 focus:border-[#7e22ce] transition-all outline-none text-slate-900 font-bold"
-                />
-             </div>
-             <button 
-              onClick={handleSearch}
-              className="bg-[#7e22ce] text-white px-8 py-4 rounded-2xl font-black text-sm shadow-xl shadow-indigo-500/20 hover:scale-105 active:scale-95 transition-all"
-             >
-                Search
-             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Articles Grid */}
-      <section className=" relative">
+      {/* Category Navigation (Horizontal Pill List) */}
+      <section className="sticky top-[72px] z-30 bg-white/80 backdrop-blur-md border-b border-slate-100 py-3">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
-              {filteredArticles.map((article) => (
-                <PerspectiveCard
+          <div className="flex justify-center overflow-x-auto no-scrollbar">
+            <div className="flex items-center justify-center gap-2 flex-wrap">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-6 py-2 rounded-full text-[14px] font-bold transition-all whitespace-nowrap ${
+                    activeCategory === cat
+                      ? "bg-[#0A2540] text-white"
+                      : "bg-transparent text-[#425466] hover:bg-[#F6F9FC] hover:text-[#0A2540]"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Articles Feed - Stripe List Style */}
+      <section className="relative py-24 min-h-[600px]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex flex-col">
+            <AnimatePresence mode="popLayout" initial={false}>
+              {filteredArticles
+                .filter(a => activeCategory !== "All" || appliedSearch || a.id !== "featured")
+                .map((article) => (
+                <PostRow
                   key={article.id}
                   article={article}
                   onClick={openArticle}
@@ -586,9 +628,9 @@ export default function Blog() {
               <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Search size={32} className="text-slate-300" />
               </div>
-              <h3 className="text-2xl font-black text-slate-900 mb-2">No matches found</h3>
+              <h3 className="text-2xl font-black text-[#0A2540] mb-2">No matches found</h3>
               <p className="text-slate-400 font-medium">Try adjusting your search or category filters.</p>
-              <button 
+              <button
                 onClick={() => { setSearchQuery(""); setAppliedSearch(""); setActiveCategory("All"); }}
                 className="mt-8 text-[#7e22ce] font-black uppercase tracking-widest text-sm hover:underline"
               >
@@ -599,167 +641,113 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Recent Highlights - Horizontal Scroll Carousel */}
-      <section className="py-24 bg-gradient-to-br from-[#faf7ff] via-white to-[#f5f3ff] overflow-hidden">
-        <div className="max-w-5xl mx-auto px-6 mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="flex flex-col md:flex-row md:items-end justify-between gap-6"
-          >
-            <div>
-              <span className="text-[#7e22ce] text-xs font-black uppercase tracking-[0.25em] mb-3 block">From the journal</span>
-              <h2 className="text-4xl md:text-5xl font-black text-slate-900 tracking-tight leading-none mb-4">Recent Highlights</h2>
-              <p className="text-slate-500 font-medium max-w-md">
-                A curated selection of our most popular insights, guides, and updates from the KaryaUp team.
-              </p>
-            </div>
-          </motion.div>
-        </div>
+      {/* Premium Dark Newsletter Section - FeatureCTA Style */}
+      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 group">
+        <div className="relative rounded-[3rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch border border-white/5 p-6 lg:p-10">
+          {/* Ambient Background Gradients */}
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(126,34,206,0.25),transparent_50%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(99,91,255,0.15),transparent_40%)] pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(168,85,247,0.1),transparent_40%)] pointer-events-none" />
 
-        {/* Scrollable Row */}
-        <div className="max-w-7xl mx-auto px-6">
-          <div
-            className="flex gap-6 overflow-x-auto pb-8 scroll-smooth"
-            style={{ scrollSnapType: "x mandatory", WebkitOverflowScrolling: "touch", scrollbarWidth: "none", msOverflowStyle: "none" }}
-          >
-          {articles.slice(0, 6).map((article, i) => {
-            return (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, x: 30 }}
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 w-full">
+            {/* Left Content */}
+            <div className="max-w-2xl text-left flex-[1.2]">
+              <motion.div 
+                initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.07 }}
-                style={{ scrollSnapAlign: "start" }}
-                className="w-[300px] rounded-[32px] flex flex-col justify-between border border-slate-200 bg-white shadow-[0_24px_60px_-40px_rgba(15,23,42,0.28)] shrink-0 h-[500px] p-8 group transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_28px_80px_-38px_rgba(126,34,206,0.22)]"
+                className="text-[#635BFF] text-[13px] font-black uppercase tracking-[0.3em] mb-6 flex items-center gap-2"
               >
-                {/* Top */}
-                <div className="flex flex-col gap-5">
-                  <span className="inline-block text-[11px] font-black uppercase tracking-[0.2em] bg-purple-50 text-purple-700 border border-purple-100 px-4 py-2 rounded-full w-fit">
-                    {article.category}
-                  </span>
-                  <h3 className="text-[22px] font-extrabold leading-snug tracking-tight text-slate-900 group-hover:text-[#7e22ce] transition-colors duration-300">
-                    {article.title}
-                  </h3>
-                  <p className="text-[14px] leading-relaxed text-slate-500 font-medium">
-                    {article.excerpt}
-                  </p>
-                  <div className="flex items-center gap-2 text-[12px] font-bold text-slate-400 mt-2">
-                    <Clock size={12} />
-                    <span>{article.readTime}</span>
-                    <span>·</span>
-                    <span>{article.date}</span>
-                  </div>
-                </div>
-
-                {/* Bottom */}
-                <div className="pt-5 border-t border-slate-100">
-                  <div className="w-9 h-9 rounded-full flex items-center justify-center font-black text-sm mb-3 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 text-white">
-                    {article.author.charAt(0)}
-                  </div>
-                  <div className="font-bold text-[14px] text-slate-900">{article.author}</div>
-                  <div className="text-[11px] mt-0.5 text-slate-400 font-semibold uppercase tracking-wide">{article.role}</div>
-                </div>
+                <div className="w-8 h-[1px] bg-[#635BFF]/30" />
+                Weekly Drop
               </motion.div>
-            );
-          })}
+              
+              <motion.h2 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.05] tracking-tight drop-shadow-2xl"
+              >
+                One idea. Every Tuesday. <br />
+                <motion.span 
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  Straight to your inbox.
+                </motion.span>
+              </motion.h2>
+              
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed max-w-xl mb-0"
+              >
+                No roundups. No recycled tips. Just one sharp, useful idea your team can act on before the week is out. Joined by 8,000+ managers already.
+              </motion.p>
+            </div>
+
+            {/* Right Form */}
+            <div className="w-full lg:w-[460px] flex-1">
+              <motion.form 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+                onSubmit={handleSubscribe} 
+                className="flex flex-col gap-5 p-2 rounded-[2.5rem]"
+              >
+                <div className="relative group/input">
+                  <input
+                    type="email"
+                    placeholder="Your work email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-8 py-5 rounded-[1.5rem] bg-white/5 border border-white/10 outline-none focus:border-[#635BFF]/50 focus:ring-4 focus:ring-[#635BFF]/10 transition-all font-bold text-white shadow-inner backdrop-blur-sm placeholder:text-slate-500"
+                  />
+                  <div className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-r from-[#635BFF]/20 to-purple-500/20 opacity-0 group-focus-within/input:opacity-100 transition-opacity pointer-events-none -z-10 blur-xl" />
+                </div>
+                
+                <motion.button 
+                  whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(99,91,255,0.3)" }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full bg-white text-black py-5 rounded-[1.5rem] font-black text-base uppercase tracking-widest hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden"
+                >
+                  <span className="relative z-10 flex items-center justify-center gap-2">
+                    Get the Tuesday Drop <ArrowRight size={18} strokeWidth={3} />
+                  </span>
+                </motion.button>
+
+                <div className="flex flex-col items-center gap-3 mt-2">
+                  <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em]">
+                    No spam. Unsubscribe in one click. Always free.
+                  </p>
+                  
+                  <AnimatePresence>
+                    {subscribeStatus && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        className={`text-[12px] font-black uppercase tracking-widest ${
+                          subscribeStatus === "success" ? "text-emerald-400" : "text-red-400"
+                        }`}
+                      >
+                        {message}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              </motion.form>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Newsletter - Feature CTA Style */}
-      <section className="pt-16 pb-28 px-6">
-        <div className="max-w-6xl mx-auto group">
-          <motion.div
-            whileHover={{ y: -8 }}
-            className="relative rounded-[2.5rem] overflow-hidden bg-black border border-white/5 p-3 lg:p-8"
-          >
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(168,85,247,0.65),transparent_52%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(236,72,153,0.2),transparent_42%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.26),transparent_44%)] pointer-events-none" />
-            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(88,28,135,0.18),rgba(10,10,18,0)_40%,rgba(126,34,206,0.16))] pointer-events-none" />
-
-            <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-10 lg:gap-0">
-              <div className="flex-[0.62] text-left flex flex-col justify-center pt-6 lg:pt-10 pb-4 lg:pb-8 pl-4 lg:pl-10">
-                <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight leading-[0.95] mb-4">
-                  Get the latest <br />
-                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70">
-                    KaryaUp
-                  </span>{" "}
-                  insights.
-                </h2>
-                <h3 className="text-2xl sm:text-3xl font-bold text-white mb-5 tracking-tight">
-                  Subscribe for more articles
-                </h3>
-                <p className="text-slate-400 text-sm sm:text-base font-medium mb-8 max-w-md leading-relaxed">
-                  Stay updated with the latest insights and updates on the future of work.
-                </p>
-
-                <form className="max-w-xl" onSubmit={handleSubscribe}>
-                  <div className="flex flex-col sm:flex-row gap-4 mb-5">
-                    <input
-                      type="email"
-                      placeholder="Enter your email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="flex-1 px-7 py-4 rounded-[1.25rem] bg-white border border-white/20 focus:ring-4 focus:ring-purple-500/20 outline-none font-bold text-slate-900 placeholder:text-slate-400 transition-all shadow-xl"
-                    />
-                    <button className="bg-white text-black px-8 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl self-start">
-                      Subscribe
-                    </button>
-                  </div>
-                  {subscribeStatus && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      className={`p-4 rounded-2xl flex items-center justify-center text-sm font-black backdrop-blur-md ${
-                        subscribeStatus === "success"
-                          ? "bg-emerald-500/20 text-emerald-100 border border-emerald-500/30"
-                          : "bg-red-500/20 text-red-100 border border-red-500/30"
-                      }`}
-                    >
-                      {message}
-                    </motion.div>
-                  )}
-                </form>
-              </div>
-
-              <div className="flex-[1.2] relative mt-8 lg:mt-0 flex items-center justify-end p-4 lg:p-6 lg:pr-10">
-                <motion.div
-                  initial={{ opacity: 0, x: 80, scale: 0.95 }}
-                  whileInView={{ opacity: 1, x: 0, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative w-[100%] lg:w-[88%] translate-x-0 lg:translate-x-3"
-                >
-                  <motion.div
-                    animate={{
-                      rotateY: [-5, 5, -5],
-                      rotateX: [2, -2, 2],
-                      y: [0, -10, 0],
-                    }}
-                    transition={{
-                      duration: 6,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    style={{ transformStyle: "preserve-3d" }}
-                    className="relative"
-                  >
-                    <img
-                      src={dashboardMockup}
-                      alt="Product Showcase"
-                      className="relative w-full h-auto object-contain transition-all duration-500 z-10"
-                    />
-                  </motion.div>
-                </motion.div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+    
     </div>
   );
 }

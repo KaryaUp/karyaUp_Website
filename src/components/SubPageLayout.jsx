@@ -19,7 +19,7 @@ export const CTABanner = ({ title, desc, btnLabel = "Start Free →", btnTo = "/
       <h3 className={`text-2xl font-bold ${titleColor} mb-2`}>{title}</h3>
       <p className={`${titleColor} opacity-70 text-sm`}>{desc}</p>
     </div>
-    <Link to={btnTo} className={`shrink-0 ${btnColor} text-white px-6 py-3 rounded-xl font-semibold hover:opacity-90 transition-colors`}>
+    <Link to={btnTo} className="btn-primary px-6 py-3">
       {btnLabel}
     </Link>
   </div>

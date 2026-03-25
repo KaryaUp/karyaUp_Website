@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, ArrowRight, Quote, Sparkles, Star, Globe, ShieldCheck, Heart } from "lucide-react";
+import { Link } from "react-router-dom";
 import BorderBeam from "./BorderBeam";
 
 const FinalCTA = () => {
@@ -27,59 +28,59 @@ const FinalCTA = () => {
 
   return (
     <section className="pt-8 pb-0 sm:pt-12 sm:pb-0 bg-white relative overflow-hidden font-sans">
-      
+
       {/* Background Mesh Gradient (Clarity Engine) */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.div 
-          animate={{ 
+        <motion.div
+          animate={{
             scale: isHoveringCTA ? 1.2 : 1,
-            opacity: isHoveringCTA ? 0.4 : 0.2 
+            opacity: isHoveringCTA ? 0.4 : 0.2
           }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(126,34,206,0.15)_0%,transparent_70%)] rounded-full blur-[120px]" 
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(126,34,206,0.15)_0%,transparent_70%)] rounded-full blur-[120px]"
         />
-        
+
 
         {/* Moving Mesh blobs */}
-        <motion.div 
+        <motion.div
           animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
           transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-0 right-0 w-[600px] h-[600px] bg-fuchsia-100/30 rounded-full blur-[100px]" 
+          className="absolute top-0 right-0 w-[600px] h-[600px] bg-fuchsia-100/30 rounded-full blur-[100px]"
         />
-        <motion.div 
+        <motion.div
           animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
           transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-100/30 rounded-full blur-[100px]" 
+          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-100/30 rounded-full blur-[100px]"
         />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* The Centric Hub (Glass Card) */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="bg-white/40 backdrop-blur-3xl border border-slate-200/50 rounded-[3rem] p-8 sm:p-12 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
         >
-          
+
           {/* Data Flow Lines (Simplified Vector Art) */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
             <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <motion.path 
-                d="M-50 300C200 300 300 100 500 300C700 500 800 300 1050 300" 
-                stroke="#7e22ce" strokeWidth="2" strokeDasharray="10 10" 
+              <motion.path
+                d="M-50 300C200 300 300 100 500 300C700 500 800 300 1050 300"
+                stroke="#7e22ce" strokeWidth="2" strokeDasharray="10 10"
                 animate={{ strokeDashoffset: [-100, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
               />
-              <motion.path 
-                d="M-50 150C300 150 400 350 500 350C600 350 700 150 1050 150" 
-                stroke="#f5d0fe" strokeWidth="2" strokeDasharray="8 8" 
+              <motion.path
+                d="M-50 150C300 150 400 350 500 350C600 350 700 150 1050 150"
+                stroke="#f5d0fe" strokeWidth="2" strokeDasharray="8 8"
                 animate={{ strokeDashoffset: [100, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
               />
             </svg>
           </div>
 
           <div className="relative z-10 text-center">
-            
+
             {/* Trust Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -92,7 +93,7 @@ const FinalCTA = () => {
 
             {/* Testimonial Marquee (Infinite Scroll) - Seamless Loop */}
             <div className="mb-12 overflow-hidden relative w-full h-12 flex items-center">
-              <motion.div 
+              <motion.div
                 animate={{ x: ["-50%", "0%"] }}
                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                 className="flex items-center gap-20 whitespace-nowrap"
@@ -116,7 +117,7 @@ const FinalCTA = () => {
             {/* Main Value Prop */}
             <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-8">
               Run your entire <br />
-              <motion.span 
+              <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-400% center"] }}
                 transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
@@ -134,23 +135,27 @@ const FinalCTA = () => {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
-              <motion.button 
+              <Link
+                to="/start"
                 onMouseEnter={() => setIsHoveringCTA(true)}
                 onMouseLeave={() => setIsHoveringCTA(false)}
-                whileHover={{ scale: 1.05, y: -4 }}
-                whileTap={{ scale: 0.95 }}
-                className="btn-primary group relative px-10 py-5 rounded-3xl !text-white font-black text-lg shadow-[0_20px_50px_-10px_rgba(126,34,206,0.5)] overflow-hidden w-full sm:w-auto"
+                className="group relative z-10 flex h-[3.5em] w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"
+                style={{
+                  boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff"
+                }}
               >
-                <span className="relative z-10 flex items-center justify-center gap-4">
+                <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full" />
+                <span className="relative z-10 flex items-center justify-center gap-4 text-white transition-colors duration-300 group-hover:text-slate-800">
                   Start Free Workspace
                   <ArrowRight size={22} className="group-hover:translate-x-1.5 transition-transform" />
                 </span>
-              </motion.button>
+              </Link>
 
-              <motion.button 
+              <motion.button
                 whileHover={{ backgroundColor: "rgba(241, 245, 249, 1)", scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-5 rounded-3xl border-2 border-slate-200 text-slate-900 font-black text-lg transition-all w-full sm:w-auto"
+                className="px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all w-full sm:w-auto"
               >
                 Book a Demo
               </motion.button>

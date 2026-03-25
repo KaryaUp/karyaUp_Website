@@ -56,15 +56,13 @@ import TemplateMarketing from "./pages/solutions/TemplateMarketing";
 
 // Resources sub-pages
 import Blog from "./pages/resources/Blog";
-import Guides from "./pages/resources/Guides";
-import ProductUpdates from "./pages/resources/ProductUpdates";
 import Documentation from "./pages/resources/Documentation";
 import Demo from "./pages/resources/Demo";
 import VideoTutorials from "./pages/resources/VideoTutorials";
 
 function App() {
   return (
-    <div className="min-h-screen font-sans overflow-x-hidden">
+    <div className="min-h-screen font-sans">
       <ScrollToTop />
       <Navbar />
       <main>
@@ -124,8 +122,6 @@ function App() {
 
           {/* Resources sub-pages */}
           <Route path="/resources/blog" element={<Blog />} />
-          <Route path="/resources/guides" element={<Guides />} />
-          <Route path="/resources/updates" element={<ProductUpdates />} />
           <Route path="/resources/docs" element={<Documentation />} />
           <Route path="/resources/demo" element={<Demo />} />
           <Route path="/resources/tutorials" element={<VideoTutorials />} />
