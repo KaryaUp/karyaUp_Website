@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React from 'react';
 
 import Brand1 from '../assets/Brand1.webp';
 import Brand2 from '../assets/Brand2.webp';
@@ -19,22 +18,43 @@ const TrustedBy = () => {
     ];
 
     return (
-        <section className="py-2 bg-white overflow-hidden border-t border-b border-black/[0.08]">
-            <div className="w-full px-6 sm:px-12 lg:px-20 text-center">
-                <p className="text-xs sm:text-sm font-bold text-slate-400 uppercase tracking-widest mt-3 mb-6">
+        <section className="bg-white overflow-hidden border-t border-b border-black/[0.08] py-0 sm:py-0">
+            <div className="w-full px-4 py-0 sm:px-12 sm:py-0 lg:px-20 text-center">
+                <p className="text-[10px] sm:text-sm font-bold text-slate-400 uppercase tracking-[0.18em] leading-none mb-1 sm:mb-0">
                     Trusted by the best teams
                 </p>
-                <div className="flex flex-wrap items-center justify-between gap-x-8 gap-y-10">
+
+                <div className="sm:hidden">
+                    <div className="flex items-center justify-between gap-3">
                     {brands.map((brand, index) => (
                         <div
                             key={index}
-                            className="relative"
+                            className="flex min-h-[20px] min-w-0 items-center justify-center"
                         >
                             <img
                                 src={brand.logo}
                                 alt={brand.name}
                                 className={`
-                                    ${index < 5 ? 'h-14 sm:h-16 md:h-24' : 'h-10 sm:h-12 md:h-16'}
+                                    ${index < 5 ? 'h-6' : 'h-5'}
+                                    brightness-0 opacity-80 w-auto max-w-full object-contain
+                                `}
+                            />
+                        </div>
+                    ))}
+                    </div>
+                </div>
+
+                <div className="hidden sm:flex flex-nowrap items-center justify-between gap-3 sm:gap-x-8">
+                    {brands.map((brand, index) => (
+                        <div
+                            key={index}
+                            className="relative shrink-0"
+                        >
+                            <img
+                                src={brand.logo}
+                                alt={brand.name}
+                                className={`
+                                    ${index < 5 ? 'h-6 sm:h-14 md:h-20 lg:h-24' : 'h-5 sm:h-10 md:h-14 lg:h-16'}
                                     brightness-0 opacity-80 w-auto
                                 `}
                             />

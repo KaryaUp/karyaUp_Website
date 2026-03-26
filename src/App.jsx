@@ -14,6 +14,8 @@ import Pricing from "./pages/Pricing";
 import Privacy from "./pages/Privacy";
 import Login from "./pages/Login";
 import StartWorkspace from "./pages/StartWorkspace";
+import BookDemo from "./pages/BookDemo";
+import ContactUs from "./pages/ContactUs";
 import NotFound from "./pages/NotFound";
 
 // Platform sub-pages
@@ -63,10 +65,10 @@ import VideoTutorials from "./pages/resources/VideoTutorials";
 
 function App() {
   return (
-    <div className="min-h-screen font-sans">
+    <div className="min-h-screen font-sans w-full max-w-full overflow-x-hidden">
       <ScrollToTop />
       <Navbar />
-      <main>
+      <main className="w-full max-w-full overflow-x-hidden">
         <Routes>
           {/* Main pages */}
           <Route path="/" element={<Home />} />
@@ -78,6 +80,8 @@ function App() {
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/login" element={<Login />} />
           <Route path="/start" element={<StartWorkspace />} />
+          <Route path="/book-demo" element={<BookDemo />} />
+          <Route path="/contact-us" element={<ContactUs />} />
 
           {/* Platform sub-pages */}
           <Route path="/platform/project-management" element={<ProjectManagement />} />
@@ -103,7 +107,7 @@ function App() {
           <Route path="/features/integrations" element={<Integrations />} />
 
           {/* Solutions sub-pages — Teams */}
-          <Route path="/solutions/project-management" element={<SolProjectManagement />} />
+          
           <Route path="/solutions/product-development" element={<ProductDevelopment />} />
           <Route path="/solutions/operations" element={<Operations />} />
           <Route path="/solutions/it" element={<IT />} />
@@ -118,9 +122,9 @@ function App() {
           <Route path="/solutions/agency" element={<Agency />} />
 
           {/* Solutions sub-pages — Templates */}
-          <Route path="/solutions/templates/project-management" element={<TemplateProjectManagement />} />
-          <Route path="/solutions/templates/crm" element={<TemplateCRM />} />
-          <Route path="/solutions/templates/marketing" element={<TemplateMarketing />} />
+          <Route path="/solutions/project-management" element={<TemplateProjectManagement />} />
+          <Route path="/solutions/crm" element={<TemplateCRM />} />
+          <Route path="/solutions/marketing" element={<TemplateMarketing />} />
 
           {/* Resources sub-pages */}
           <Route path="/resources/blog" element={<Blog />} />

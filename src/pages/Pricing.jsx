@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 import { 
   Check, X, HelpCircle, ArrowRight, Zap, 
   Shield, Star, Rocket, Globe, Minus, Plus,
@@ -7,6 +8,8 @@ import {
 } from "lucide-react";
 import NumberFlow from "@number-flow/react";
 import microsoftTeamsLogo from "../assets/MicrosoftTeam.png";
+
+const authUrl = "https://karyaup.com/auth";
 
 const plans = [
   {
@@ -348,7 +351,8 @@ export default function Pricing() {
                       ))}
                     </div>
 
-                    <button 
+                    <a
+                      href={plan.name === "Enterprise" ? "/contact-us" : authUrl}
                       className={`w-full py-4 rounded-full font-black transition-all flex items-center justify-center gap-2 ${
                         plan.popular 
                           ? 'bg-white text-[#7e22ce] hover:bg-slate-50 shadow-xl shadow-purple-900/30 active:scale-95' 
@@ -357,7 +361,7 @@ export default function Pricing() {
                     >
                       {plan.buttonText}
                       <ArrowRight size={18} />
-                    </button>
+                    </a>
                   </div>
                 </motion.div>
               );
@@ -410,11 +414,12 @@ export default function Pricing() {
                                   <div className="text-[11px] font-bold text-slate-400">
                                     {plan.name === 'Enterprise' ? 'Contact us' : `₹${billingCycle === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice} / mo`}
                                   </div>
-                                  <button 
+                                  <a
+                                    href={plan.name === "Enterprise" ? "/contact-us" : authUrl}
                                     className="mt-2 btn-primary rounded-full px-6 py-2 text-xs font-black transition-all"
                                   >
                                     {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
-                                  </button>
+                                  </a>
                                 </div>
                               </th>
                             );
@@ -581,9 +586,9 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <button className="w-full btn-primary rounded-full py-3.5 font-black text-sm shadow-md shadow-purple-900/10">
+                <a href={authUrl} className="w-full btn-primary rounded-full py-3.5 font-black text-sm shadow-md shadow-purple-900/10 flex items-center justify-center">
                   Start Saving Today
-                </button>
+                </a>
               </div>
             </div>
           </div>
@@ -677,10 +682,10 @@ export default function Pricing() {
 
 
         {/* Premium CTA with Mesh Gradient & Texture */}
-        <section className="pt-12 pb-32 px-4 relative">
+        <section className="pt-8 pb-24 px-4 relative">
           <motion.div 
             whileHover={{ y: -10 }}
-            className="max-w-screen-xl mx-auto rounded-[4.5rem] p-16 md:p-24 relative overflow-hidden text-center shadow-[0_50px_120px_-20px_rgba(126,34,206,0.25)] border border-white/10 group"
+            className="max-w-6xl mx-auto rounded-[3.25rem] p-10 md:p-14 relative overflow-hidden text-center shadow-[0_40px_100px_-24px_rgba(126,34,206,0.25)] border border-white/10 group"
           >
             {/* Mesh Gradient Background */}
             <div className="absolute inset-0 bg-[#7e22ce]" />
@@ -740,25 +745,25 @@ export default function Pricing() {
             </div>
 
             {/* Glass Inner Glow */}
-            <div className="absolute inset-0 rounded-[4.5rem] border border-white/20 pointer-events-none shadow-[inset_0_2px_10px_rgba(255,255,255,0.1)]" />
+            <div className="absolute inset-0 rounded-[3.25rem] border border-white/20 pointer-events-none shadow-[inset_0_2px_10px_rgba(255,255,255,0.1)]" />
 
             <div className="relative z-10">
-              <h2 className="text-5xl md:text-8xl font-black text-white mb-8 tracking-tighter leading-[0.9]">
+              <h2 className="text-4xl md:text-6xl font-black text-white mb-5 tracking-tighter leading-[0.92]">
                 Transform your <br /> 
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-white/90 to-white/70">workflow</span> today.
               </h2>
-              <p className="text-white/80 text-xl md:text-2xl font-medium mb-12 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-white/80 text-base md:text-lg font-medium mb-8 max-w-2xl mx-auto leading-relaxed">
                 Join thousands of high-performing teams who have already leveled up 
                 their productivity with KaryaUp. From automated payroll to AI-driven project insights, 
                 everything you need is just one click away.
               </p>
-              <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                <button className="px-10 py-5 bg-white text-[#7e22ce] rounded-[2rem] font-black text-lg hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-2xl">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href={authUrl} className="px-7 py-3.5 bg-white text-[#7e22ce] rounded-[1.5rem] font-black text-base hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-2xl">
                   Get Started for Free
-                </button>
-                <button className="px-10 py-5 bg-white/10 backdrop-blur-md text-white rounded-[2rem] font-black text-lg hover:bg-white/20 transition-all border border-white/20">
+                </a>
+                <Link to="/contact-us" className="px-7 py-3.5 bg-white/10 backdrop-blur-md text-white rounded-[1.5rem] font-black text-base hover:bg-white/20 transition-all border border-white/20">
                   Contact Sales
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>

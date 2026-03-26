@@ -11,6 +11,8 @@ import logo from "../assets/logo.png";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
 import BorderBeam from "./BorderBeam";
 
+const authUrl = "https://www.karyaup.com/auth";
+
 const navItems = [
   { label: "Platform" },
   { label: "Features" },
@@ -27,14 +29,13 @@ const platformMegaSections = {
   manage: [
     { label: "Boss Dashboard", sublabel: "High-level overview", to: "/platform/boss-dashboard", icon: PieChart, iconColor: "text-indigo-600" },
     { label: "Profit Tracking", sublabel: "Budgets & profitability", to: "/platform/profit-tracking", icon: Wallet, iconColor: "text-emerald-600" },
-    { label: "Attendance & Leave", sublabel: "HR at a glance", to: "/features/attendance", icon: UserCheck, iconColor: "text-teal-600" },
-  ],
-  featured: [
-    { label: "All-in-One Workspace", to: "/platform/project-management", icon: LayoutDashboard, iconColor: "text-violet-600", description: "Every tool your team needs under one roof." },
-    { label: "Salary & Payroll", to: "/features/salary", icon: Banknote, iconColor: "text-green-600", description: "Automate payroll and keep finances on track." },
-    { label: "Automations", to: "/features/automations", icon: Zap, iconColor: "text-orange-500", description: "Save time by automating repetitive workflows." },
   ],
 };
+
+const platformMegaColumns = [
+  platformMegaSections.core,
+  platformMegaSections.manage,
+];
 
 const featuresMegaSections = [
   {
@@ -94,9 +95,9 @@ const solutionsMegaSections = {
     { label: "Agency", sublabel: "Clients & deliverables", to: "/solutions/agency", icon: Briefcase, iconColor: "text-rose-600" },
   ],
   templates: [
-    { label: "Project Management", to: "/solutions/templates/project-management", icon: Kanban, iconColor: "text-blue-600", description: "Roadmaps, backlogs, agile dev." },
-    { label: "Sales / CRM", to: "/solutions/templates/crm", icon: Contact, iconColor: "text-orange-500", description: "Leads, deals, and contacts." },
-    { label: "Marketing", to: "/solutions/templates/marketing", icon: Megaphone, iconColor: "text-indigo-500", description: "Campaigns, assets, wikis." },
+    { label: "Project Management", to: "/solutions/project-management", icon: Kanban, iconColor: "text-blue-600", description: "Roadmaps, backlogs, agile dev." },
+    { label: "Sales / CRM", to: "/solutions/crm", icon: Contact, iconColor: "text-orange-500", description: "Leads, deals, and contacts." },
+    { label: "Marketing", to: "/solutions/marketing", icon: Megaphone, iconColor: "text-indigo-500", description: "Campaigns, assets, wikis." },
   ],
 };
 
@@ -107,9 +108,20 @@ const resourcesMegaSections = [
   { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconColor: "text-purple-600", description: "Step-by-step video guides and walkthroughs." },
 ];
 
+const mobileMenuSections = {
+  Platform: [...platformMegaSections.core, ...platformMegaSections.manage],
+  Features: featuresMegaSections.flatMap((section) => section.items),
+  Solutions: [
+    ...solutionsMegaSections.byTeam,
+    ...solutionsMegaSections.bySize,
+    ...solutionsMegaSections.templates,
+  ],
+  Resources: resourcesMegaSections,
+};
+
 import { motion, AnimatePresence } from "framer-motion";
 
-const StartWorkspaceButton = ({ to, onClick, size = "sm" }) => {
+const StartWorkspaceButton = ({ href, onClick, size = "sm" }) => {
   const [hovered, setHovered] = useState(false);
   const angleRef = useRef(0);
   const rafRef = useRef(null);
@@ -141,8 +153,8 @@ const StartWorkspaceButton = ({ to, onClick, size = "sm" }) => {
   }, [hovered]);
 
   return (
-    <Link
-      to={to}
+    <a
+      href={href}
       onClick={onClick}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -182,7 +194,7 @@ const StartWorkspaceButton = ({ to, onClick, size = "sm" }) => {
           className="transition-transform group-hover:translate-x-1"
         />
       </span>
-    </Link>
+    </a>
   );
 };
 
@@ -194,6 +206,7 @@ const Navbar = () => {
   const [isSolutionsOpen, setIsSolutionsOpen] = useState(false);
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const [mobileOpenSection, setMobileOpenSection] = useState(null);
   const platformTimerRef = useRef(null);
   const featuresTimerRef = useRef(null);
   const solutionsTimerRef = useRef(null);
@@ -205,6 +218,7 @@ const Navbar = () => {
     setIsSolutionsOpen(false);
     setIsResourcesOpen(false);
     setIsOpen(false); // Close mobile menu too
+    setMobileOpenSection(null);
     [platformTimerRef, featuresTimerRef, solutionsTimerRef, resourcesTimerRef].forEach(ref => {
       if (ref.current) { clearTimeout(ref.current); ref.current = null; }
     });
@@ -288,8 +302,9 @@ const Navbar = () => {
     }, 500);
   };
 
+  const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
   const linkBase =
-    "text-base font-semibold text-slate-700 hover:text-primary transition-all";
+    `text-base font-semibold transition-all ${isOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
   const linkActive = "text-primary";
 
   return (
@@ -313,7 +328,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
-                  className="h-11 w-auto group-hover:scale-105 transition-transform duration-300"
+                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isOverlayNav ? "brightness-0 invert" : ""}`}
                 />
               </Link>
 
@@ -357,27 +372,29 @@ const Navbar = () => {
 
                 {isPlatformOpen && (
                   <div className="absolute left-0 top-full w-full bg-white border-b border-slate-200 shadow-xl animate-slide-down origin-top">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-                      <div className="grid grid-cols-2 gap-x-4 gap-y-1 w-full max-w-4xl px-8 mx-auto">
-                        {platformMegaSections.map((item) => (
-                          <Link
-                            key={item.to}
-                            to={item.to}
-                            onClick={closeAllMenus}
-                            className="flex items-start gap-4 p-4 rounded-[16px] bg-white border border-transparent hover:border-purple-100 hover:bg-purple-50/30 hover:shadow-[0_8px_30px_rgb(126,34,206,0.06)] transition-all duration-300 group"
-                          >
-                            {item.icon && (
-                              <div className="flex items-center justify-center shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:-rotate-3">
-                                <item.icon size={24} strokeWidth={2} className={item.iconColor || 'text-purple-600'} />
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                      <div className="flex gap-16 md:gap-32 w-full max-w-5xl px-8">
+                        {platformMegaColumns.map((column, index) => (
+                          <div key={index} className="flex flex-col gap-6 flex-1">
+                            {column.map((item) => (
+                            <Link
+                              key={item.to}
+                              to={item.to}
+                              onClick={closeAllMenus}
+                              className="flex items-start gap-4 text-sm font-medium text-slate-800 hover:text-primary transition-colors group"
+                            >
+                              {item.icon && (
+                                <div className="flex items-center justify-center shrink-0 transition-all group-hover:scale-110 group-hover:-rotate-3">
+                                  <item.icon size={24} strokeWidth={2} className={item.iconColor || 'text-purple-600'} />
+                                </div>
+                              )}
+                              <div className="flex flex-col">
+                                <span className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</span>
+                                <span className="text-xs text-slate-400">{item.description || item.sublabel}</span>
                               </div>
-                            )}
-                            <div className="flex flex-col">
-                              <span className="font-extrabold text-[16px] mb-1 text-slate-900 group-hover:text-[#7e22ce] transition-colors">{item.label}</span>
-                              <span className="text-[13px] text-slate-500 font-medium leading-relaxed group-hover:text-slate-600 transition-colors">
-                                {item.description}
-                              </span>
-                            </div>
-                          </Link>
+                            </Link>
+                            ))}
+                          </div>
                         ))}
                       </div>
                     </div>
@@ -553,8 +570,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
+                                <span className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</span>
+                                <span className="text-xs text-slate-400">
                                   {item.description}
                                 </span>
                               </div>
@@ -576,8 +593,8 @@ const Navbar = () => {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="font-bold text-[17px] mb-1 text-black">{item.label}</span>
-                                <span className="text-[15px] text-gray-500 font-normal leading-snug">
+                                <span className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</span>
+                                <span className="text-xs text-slate-400">
                                   {item.description}
                                 </span>
                               </div>
@@ -595,21 +612,21 @@ const Navbar = () => {
           <div className="hidden md:flex flex-1"></div>
 
           <div className="flex-none hidden md:flex items-center space-x-4">
-            <Link
-              to="/login"
+            <a
+              href={authUrl}
               onClick={closeAllMenus}
-              className="group flex items-center gap-2 font-semibold text-slate-700 hover:text-primary transition-all"
+              className={`group flex items-center gap-2 font-semibold transition-all ${isOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
             >
-              <LogIn size={16} className="text-primary group-hover:-translate-x-0.5 transition-transform" />
+              <LogIn size={16} className={`${isOverlayNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
               <span className="text-[14px]">Log in</span>
-            </Link>
-            <StartWorkspaceButton to="/start" onClick={closeAllMenus} />
+            </a>
+            <StartWorkspaceButton href={authUrl} onClick={closeAllMenus} />
           </div>
 
-          <div className="md:hidden">
+          <div className="ml-auto md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-600 p-2 hover:bg-gray-100 rounded-lg transition-colors"
+              className={`p-2 rounded-lg transition-colors ${isOverlayNav ? "text-white hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -638,24 +655,61 @@ const Navbar = () => {
               ) : (
                 <div
                   key={item.label}
-                  className="block rounded-xl px-4 py-3 text-base font-semibold text-slate-700 pointer-events-none opacity-60"
+                  className="rounded-xl border border-gray-100 bg-white overflow-hidden"
                 >
-                  {item.label}
+                  <button
+                    type="button"
+                    onClick={() => setMobileOpenSection((prev) => prev === item.label ? null : item.label)}
+                    className="w-full flex items-center justify-between px-4 py-3 text-base font-semibold text-slate-700"
+                  >
+                    <span>{item.label}</span>
+                    <ChevronDown
+                      className={`w-4 h-4 ml-4 shrink-0 transition-transform duration-200 ${mobileOpenSection === item.label ? "rotate-180" : ""}`}
+                    />
+                  </button>
+                  {mobileOpenSection === item.label && (
+                    <div className="px-2 pb-2">
+                      <div className="rounded-xl bg-slate-50 border border-slate-100 overflow-hidden">
+                        {(mobileMenuSections[item.label] || []).map((subItem) => (
+                          <Link
+                            key={subItem.to}
+                            to={subItem.to}
+                            onClick={closeAllMenus}
+                            className="flex items-start gap-3 px-3 py-3 text-sm text-slate-700 hover:bg-white transition-colors border-b border-slate-100 last:border-b-0"
+                          >
+                            {subItem.icon && (
+                              <subItem.icon
+                                size={18}
+                                strokeWidth={2}
+                                className={`${subItem.iconColor || "text-purple-600"} mt-0.5 shrink-0`}
+                              />
+                            )}
+                            <div className="flex flex-col text-left">
+                              <span className="font-semibold text-slate-800">{subItem.label}</span>
+                              <span className="text-xs text-slate-400">
+                                {subItem.sublabel || subItem.description}
+                              </span>
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               )
             ))}
 
             <div className="pt-6 pb-4 border-t border-gray-100 flex flex-col gap-3">
-              <Link
-                to="/login"
+              <a
+                href={authUrl}
                 onClick={() => setIsOpen(false)}
                 className="w-full flex justify-center items-center gap-2 rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-semibold text-slate-700 hover:bg-gray-50 transition"
               >
                 <LogIn size={18} /> Log in
-              </Link>
+              </a>
               <div className="flex justify-center w-full mt-2 pb-1">
                 <StartWorkspaceButton
-                  to="/start"
+                  href={authUrl}
                   onClick={() => setIsOpen(false)}
                   size="lg"
                 />

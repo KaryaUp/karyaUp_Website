@@ -2,6 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import logo from '../assets/logo.png';
 
+const authUrl = "https://www.karyaup.com/auth";
+
 export default function FeatureCTA({ 
   title, 
   description, 
@@ -14,6 +16,10 @@ export default function FeatureCTA({
   titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.1] mb-3 tracking-tight drop-shadow-lg",
   imageOuterClassName = "relative w-[105%] lg:w-full translate-x-2 lg:translate-x-6"
 }) {
+  const handleAuthRedirect = () => {
+    window.location.href = authUrl;
+  };
+
   return (
     <section className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 group ${containerClassName}`}>
       <div className={`relative rounded-[2.5rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch border border-white/5 ${paddingClassName}`}>
@@ -62,10 +68,12 @@ export default function FeatureCTA({
           >
             {description}
           </motion.p>
-          <motion.button 
+          <motion.button
+            type="button"
+            onClick={handleAuthRedirect}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
             whileTap={{ scale: 0.98 }}
-            className="bg-white text-black px-10 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden self-start"
+            className="bg-white text-black px-10 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden self-start cursor-pointer"
           >
             <span className="relative z-10">{buttonText}</span>
           </motion.button>

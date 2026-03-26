@@ -9,7 +9,6 @@ import BorderBeam from "./BorderBeam";
 const FinalCTA = () => {
   const [isHoveringCTA, setIsHoveringCTA] = useState(false);
   const [speed, setSpeed] = useState(1);
-
   const testimonials = [
     "Reduced tool usage by 70% — everything is now in one place.",
     "We improved execution speed within the first week.",
@@ -54,27 +53,30 @@ const FinalCTA = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
         {/* The Centric Hub (Glass Card) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="bg-white/40 backdrop-blur-3xl border border-slate-200/50 rounded-[3rem] p-8 sm:p-12 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
+          className="mt-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.65)_100%)] backdrop-blur-3xl border border-slate-200/60 rounded-[3rem] px-6 py-7 sm:px-10 sm:py-9 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
         >
-
-          {/* Data Flow Lines (Simplified Vector Art) */}
-          <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-20">
-            <svg className="w-full h-full" viewBox="0 0 1000 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div className="absolute inset-0 pointer-events-none opacity-30">
+            <svg className="h-full w-full" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
               <motion.path
-                d="M-50 300C200 300 300 100 500 300C700 500 800 300 1050 300"
-                stroke="#7e22ce" strokeWidth="2" strokeDasharray="10 10"
-                animate={{ strokeDashoffset: [-100, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+                d="M-60 180C160 120 280 90 470 180C690 285 860 360 1260 240"
+                stroke="rgba(216,180,254,0.9)"
+                strokeWidth="3"
+                strokeDasharray="18 16"
+                animate={{ strokeDashoffset: [-120, 0] }}
+                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               />
               <motion.path
-                d="M-50 150C300 150 400 350 500 350C600 350 700 150 1050 150"
-                stroke="#f5d0fe" strokeWidth="2" strokeDasharray="8 8"
-                animate={{ strokeDashoffset: [100, 0] }} transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+                d="M-40 540C220 450 360 410 600 520C810 610 980 600 1240 500"
+                stroke="rgba(244,114,182,0.65)"
+                strokeWidth="2.5"
+                strokeDasharray="14 14"
+                animate={{ strokeDashoffset: [120, 0] }}
+                transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
               />
             </svg>
           </div>
@@ -85,14 +87,14 @@ const FinalCTA = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-black uppercase tracking-[0.2em] mb-12 shadow-sm"
+              className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-black uppercase tracking-[0.2em] mb-8 shadow-sm"
             >
               <ShieldCheck size={14} className="text-[#7e22ce]" />
               The execution standard for elite teams
             </motion.div>
 
             {/* Testimonial Marquee (Infinite Scroll) - Seamless Loop */}
-            <div className="mb-12 overflow-hidden relative w-full h-12 flex items-center">
+            <div className="mb-8 overflow-hidden relative w-full h-12 flex items-center">
               <motion.div
                 animate={{ x: ["-50%", "0%"] }}
                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
@@ -115,7 +117,7 @@ const FinalCTA = () => {
             </div>
 
             {/* Main Value Prop */}
-            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-8">
+            <h2 className="text-4xl sm:text-6xl lg:text-7xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-6">
               Run your entire <br />
               <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
@@ -126,7 +128,7 @@ const FinalCTA = () => {
               </motion.span>
             </h2>
 
-            <p className="text-lg sm:text-2xl text-slate-500 font-medium max-w-2xl mx-auto mb-10 leading-relaxed">
+            <p className="text-lg sm:text-2xl text-slate-500 font-medium max-w-2xl mx-auto mb-8 leading-relaxed">
               Stop switching tools. Start moving work forward. <br />
               <span className="text-slate-900 font-black">
                 Execution speed increased by up to <span className="text-[#7e22ce]">{speed.toFixed(1)}x</span>.
@@ -136,7 +138,7 @@ const FinalCTA = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link
-                to="/start"
+                to="https://www.karyaup.com/auth"
                 onMouseEnter={() => setIsHoveringCTA(true)}
                 onMouseLeave={() => setIsHoveringCTA(false)}
                 className="group relative z-10 flex h-[3.5em] w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"
@@ -152,17 +154,21 @@ const FinalCTA = () => {
                 </span>
               </Link>
 
-              <motion.button
-                whileHover={{ backgroundColor: "rgba(241, 245, 249, 1)", scale: 1.05 }}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all w-full sm:w-auto"
               >
-                Book a Demo
-              </motion.button>
+                <Link
+                  to="/book-demo"
+                  className="inline-flex w-full sm:w-auto items-center justify-center px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all hover:bg-slate-100"
+                >
+                  Book a Demo
+                </Link>
+              </motion.div>
             </div>
 
             {/* Bottom Proof - Enhanced Visibility */}
-            <div className="mt-12 flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-80">
+            <div className="mt-8 flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-80">
               <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
                 <Globe size={18} className="text-purple-600" /> 10,000+ Global Teams
               </div>

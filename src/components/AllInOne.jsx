@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { 
     Search, CheckSquare, Map, BookOpen, Mic, BarChart3, Target, Zap, 
     Video, Eye, LayoutDashboard, Clock, KanbanSquare, Plug, Headphones, ListChecks,
@@ -32,7 +32,7 @@ const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
 );
 
 const FeatureCard = ({ title, icon: Icon, image, color }) => (
-    <div className="w-80   h-[192px] bg-white border border-gray-100 flex flex-col relative overflow-hidden group/card shadow-sm hover:shadow-md transition-shadow duration-300">
+    <div className="w-full sm:w-80 max-w-[150px] sm:max-w-none h-[120px] sm:h-[192px] bg-white border border-gray-100 flex flex-col relative overflow-hidden group/card shadow-sm hover:shadow-md transition-shadow duration-300">
         <div className="absolute top-2 left-2 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 border border-gray-100 rounded-sm">
             <div className="p-1 bg-gray-50 rounded-sm">
                 <Icon className="w-3 h-3" style={{ color }} strokeWidth={2} />
@@ -49,7 +49,15 @@ const FeatureCard = ({ title, icon: Icon, image, color }) => (
     </div>
 );
 
-const MarqueeRow = ({ icons, direction = "left", speed = 22, isPaused, onRowClick, maskHole = false }) => {
+const MarqueeRow = ({
+    icons,
+    direction = "left",
+    speed = 22,
+    isPaused,
+    onRowClick,
+    maskHole = false,
+    maskWidth = 320
+}) => {
     const duplicatedIcons = [...icons, ...icons, ...icons, ...icons, ...icons, ...icons];
     const totalWidth = icons.length * 96; // Tile width is 96px
     
@@ -58,8 +66,8 @@ const MarqueeRow = ({ icons, direction = "left", speed = 22, isPaused, onRowClic
             className="flex overflow-hidden cursor-pointer border-y border-gray-100 w-full relative group/row"
             onClick={onRowClick}
             style={maskHole ? {
-                maskImage: 'linear-gradient(to right, black 0%, black calc(50% - 320px), transparent calc(50% - 320px), transparent calc(50% + 320px), black calc(50% + 320px), black 100%)',
-                WebkitMaskImage: 'linear-gradient(to right, black 0%, black calc(50% - 320px), transparent calc(50% - 320px), transparent calc(50% + 320px), black calc(50% - 320px), black 100%)'
+                maskImage: `linear-gradient(to right, black 0%, black calc(50% - ${maskWidth}px), transparent calc(50% - ${maskWidth}px), transparent calc(50% + ${maskWidth}px), black calc(50% + ${maskWidth}px), black 100%)`,
+                WebkitMaskImage: `linear-gradient(to right, black 0%, black calc(50% - ${maskWidth}px), transparent calc(50% - ${maskWidth}px), transparent calc(50% + ${maskWidth}px), black calc(50% + ${maskWidth}px), black 100%)`
             } : {}}
         >
             <motion.div 
@@ -85,6 +93,28 @@ const MarqueeRow = ({ icons, direction = "left", speed = 22, isPaused, onRowClic
 
 const AllInOne = () => {
     const [pausedRowIndex, setPausedRowIndex] = useState(null);
+    const [maskWidth, setMaskWidth] = useState(320);
+
+    useEffect(() => {
+        const updateMaskWidth = () => {
+            if (window.innerWidth < 640) {
+                setMaskWidth(0);
+                return;
+            }
+
+            if (window.innerWidth < 1024) {
+                setMaskWidth(180);
+                return;
+            }
+
+            setMaskWidth(320);
+        };
+
+        updateMaskWidth();
+        window.addEventListener("resize", updateMaskWidth);
+
+        return () => window.removeEventListener("resize", updateMaskWidth);
+    }, []);
 
     const handleRowClick = (idx) => {
         setPausedRowIndex(pausedRowIndex === idx ? null : idx);
@@ -147,7 +177,7 @@ const AllInOne = () => {
 
     return (
         <section 
-            className="bg-white relative flex flex-col items-center justify-center min-h-[1000px] select-none overflow-hidden"
+            className="w-full max-w-full bg-white relative flex flex-col items-center justify-center min-h-[680px] sm:min-h-[720px] lg:min-h-[760px] xl:min-h-[780px] select-none overflow-x-hidden overflow-y-hidden"
             onClick={(e) => {
                 // If clicking outside marquee rows, resume all
                 if (!e.target.closest('.group\\/row')) resumeAll();
@@ -159,7 +189,7 @@ const AllInOne = () => {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="flex flex-col items-center mb-8"
+                    className="flex flex-col items-center mb-4 sm:mb-4 lg:mb-5"
                 >
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 mb-6 shadow-sm">
                         <Zap className="w-3.5 h-3.5 text-[#7e22ce]" />
@@ -189,15 +219,15 @@ const AllInOne = () => {
                     />
                     <MarqueeRow 
                         icons={rows[1]} direction="right" speed={22} 
-                        isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={true}
+                        isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth}
                     />
                     <MarqueeRow 
                         icons={rows[2]} direction="left" speed={22} 
-                        isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={true}
+                        isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth}
                     />
                     <MarqueeRow 
                         icons={rows[3]} direction="right" speed={22} 
-                        isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={true}
+                        isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth}
                     />
                     <MarqueeRow 
                         icons={rows[4]} direction="left" speed={22} 
@@ -206,8 +236,8 @@ const AllInOne = () => {
                 </div>
 
                 {/* The Middle Image Cluster */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="grid grid-cols-2 gap-0 border border-gray-100 bg-white pointer-events-auto mt-0 shadow-2xl">
+                <div className="absolute inset-0 flex items-center justify-center px-3 sm:px-0 pointer-events-none">
+                    <div className="grid w-full sm:w-auto max-w-[280px] sm:max-w-[360px] lg:max-w-none grid-cols-2 gap-0 border border-gray-100 bg-white pointer-events-auto mt-0 shadow-2xl">
                         <FeatureCard 
                             title="Projects" 
                             icon={FolderKanban} 

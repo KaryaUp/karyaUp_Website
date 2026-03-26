@@ -1,18 +1,29 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Play, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Play, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
-import DashboardImg from "../assets/dashboard2.png";
+import HeroBg from "../assets/Hero_BG.png";
 
 const Hero = () => {
   return (
-    <section className="relative overflow-hidden bg-white pt-24 pb-8 sm:pt-24 sm:pb-12 lg:pt-28 lg:pb-16 min-h-[calc(100vh-80px)] flex items-start justify-center">
+    <section
+      id="hero-section"
+      className="relative overflow-hidden bg-white min-h-screen pt-24 pb-12 sm:pt-24 sm:pb-14 lg:pt-28 lg:pb-16 flex items-center justify-center"
+    >
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <img
+          src={HeroBg}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full scale-105 object-cover blur-[6px]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.2)_0%,rgba(15,23,42,0.12)_34%,rgba(15,23,42,0.22)_100%)]" />
+      </div>
 
       {/* Hero Content Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Side: Text Content */}
-          <div className="text-center lg:text-left">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div className="flex min-h-[calc(100vh-96px)] flex-col items-center justify-center text-center">
+          <div className="max-w-4xl">
             <motion.h1
               initial={{ opacity: 0, y: 40, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
@@ -22,9 +33,10 @@ const Hero = () => {
                 stiffness: 100,
                 delay: 0.1
               }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
+              className="text-[2.9rem] sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[0.98] mb-5 drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)]"
             >
-              The platform to<br /> run your <br />
+              The platform to run your
+              <br />
               <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -44,9 +56,9 @@ const Hero = () => {
                 stiffness: 100,
                 delay: 0.5
               }}
-              className="text-lg sm:text-xl font-bold text-slate-800/90 mb-5"
+              className="mx-auto max-w-2xl text-lg sm:text-xl font-bold text-white/90 mb-6"
             >
-              KaryaUp replaces <span className="text-[#7e22ce]">6+ tools</span> with one unified system.
+              KaryaUp replaces <span className="text-[#e9d5ff]">6+ tools</span> with one unified system.
             </motion.p>
 
             <motion.div
@@ -58,74 +70,54 @@ const Hero = () => {
                 stiffness: 100,
                 delay: 0.7
               }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 sm:gap-8 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 w-full"
             >
-              {/* Primary Button: Start Free Workspace (CSS Hover Effect via Tailwind) */}
               <Link
-                to="/start"
-                className="group relative z-10 flex h-[3.5em] w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"
+                to="https://www.karyaup.com/auth"
+                className="group relative z-10 flex h-[3.5em] w-full max-w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300 active:scale-95"
                 style={{
-                  boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff"
+                  boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)"
                 }}
               >
                 <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
-                <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full" />
-                <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-slate-800">
+                <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full group-active:w-full" />
+                <span className="relative z-10 text-white transition-colors duration-300 group-hover:text-slate-800 group-active:text-slate-800">
                   Start Free Workspace
                 </span>
               </Link>
 
               {/* Video Button: Watch Video */}
               <button
-                className="group flex items-center gap-4 text-slate-700 font-black text-base transition-colors hover:text-[#7e22ce]"
+                className="group flex items-center gap-4 text-white font-black text-base transition-colors hover:text-[#f5d0fe]"
               >
-                <div className="w-12 h-12 rounded-full bg-white shadow-lg shadow-slate-200/50 flex items-center justify-center border border-slate-100 group-hover:scale-110 transition-transform">
-                  <Play className="w-5 h-5 fill-slate-800 text-slate-800 ml-0.5 group-hover:fill-[#7e22ce] group-hover:text-[#7e22ce] transition-colors" />
+                <div className="w-12 h-12 rounded-full bg-white/14 shadow-lg shadow-slate-900/20 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
+                  <Play className="w-5 h-5 fill-white text-white ml-0.5 group-hover:fill-[#f5d0fe] group-hover:text-[#f5d0fe] transition-colors" />
                 </div>
                 Watch Video
               </button>
             </motion.div>
 
-            {/* Trust Markers: Vertical Stack (Top and Bottom) */}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.9 }}
-              className="flex flex-col items-center lg:items-start gap-2.5 text-sm font-semibold text-slate-500/90"
+              className="flex flex-col items-center gap-2.5 text-sm font-semibold text-white/80"
             >
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-center">
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 stroke-[2.5]" />
                 <p>No credit card required </p>
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 text-center">
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 stroke-[2.5]" />
                 <p className="flex items-center">
-                  • Setup in minutes
-                  <span className="ml-2 inline-flex items-center justify-center bg-purple-50 border border-purple-100 text-[#7e22ce] px-2 py-0.5 text-xs rounded-md font-black italic">
+                  Setup in minutes
+                  <span className="ml-2 inline-flex items-center justify-center bg-white/10 border border-white/15 text-white px-2 py-0.5 text-xs rounded-md font-black italic backdrop-blur-sm">
                     &lt; 5 minutes
                   </span>
                 </p>
               </div>
             </motion.div>
           </div>
-
-          {/* Right Side: High-Fidelity App Card (Tasks Style) */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-            className="relative lg:-mr-24 xl:-mr-40"
-          >
-            <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl bg-white shadow-2xl">
-              <img
-                src={DashboardImg}
-                alt="KaryaUp Dashboard Overview"
-                className="w-full h-[280px] sm:h-[340px] lg:h-[380px] object-cover object-left"
-              />
-              {/* Ultra-smooth, wide right-side fade (Vanishing look) */}
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-[35%] lg:w-[45%] bg-gradient-to-r from-transparent via-white/50 to-white" />
-            </div>
-          </motion.div>
         </div>
       </div>
     </section>

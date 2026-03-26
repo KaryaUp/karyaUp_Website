@@ -66,11 +66,11 @@ const FeatureShowcase = () => {
   }, [activeFeature, activeData]);
 
   return (
-    <div className="w-full h-screen p-4 md:p-8 max-w-[1700px] mx-auto flex items-center justify-center bg-[#F9FAFC]">
+    <div className="w-full max-w-full min-h-[70vh] md:h-screen p-3 sm:p-4 md:p-8 mx-auto flex items-center justify-center bg-[#F9FAFC] overflow-x-hidden">
       {/* outer spacing */}
-      <div className="flex w-full h-[100%] max-h-[90vh] rounded-2xl overflow-hidden">
+      <div className="flex w-full max-w-full h-[520px] sm:h-[620px] md:h-[100%] max-h-[90vh] rounded-2xl overflow-hidden">
         {/* Sidebar */}
-        <nav className="flex flex-col items-center py-4 bg-[#7e22ce] w-16 shrink-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-30">
+        <nav className="flex flex-col items-center py-4 bg-[#7e22ce] w-12 sm:w-16 shrink-0 overflow-y-auto overflow-x-hidden no-scrollbar relative z-30">
           {features.map((feature) => {
             const isActive = activeFeature === feature.id;
             const Icon = feature.icon;
@@ -91,7 +91,7 @@ const FeatureShowcase = () => {
 
                 {/* Tooltip (Pinbar) that breaks out of the button */}
                 <div
-                  className="absolute left-[50px] px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 visibility-hidden group-hover:opacity-100 group-hover:visibility-visible transition-all duration-200 z-[9999] pointer-events-none drop-shadow-md"
+                  className="absolute left-[50px] hidden sm:block px-2 py-1 rounded text-xs whitespace-nowrap opacity-0 visibility-hidden group-hover:opacity-100 group-hover:visibility-visible transition-all duration-200 z-[9999] pointer-events-none drop-shadow-md"
                   style={{ backgroundColor: "#000", color: "#fff" }}
                 >
                   {feature.label}
@@ -107,7 +107,7 @@ const FeatureShowcase = () => {
         </nav>
 
         {/* Image Section */}
-        <div className="flex-1 overflow-hidden bg-slate-50 grow flex items-center justify-center p-2">
+        <div className="min-w-0 flex-1 overflow-hidden bg-slate-50 grow flex items-center justify-center p-2">
           <img
             src={currentImage}
             alt={activeData.label}

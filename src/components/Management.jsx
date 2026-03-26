@@ -14,7 +14,7 @@ const Management = () => {
     return (
         <section className="py-12 sm:py-16 lg:py-20 bg-white overflow-hidden relative">
             <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
-                <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
                     {/* Text and Features Side (40% Width) - Condensed */}
                     <div className="lg:flex-[0.4] w-full">
                         <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-6">
@@ -50,7 +50,7 @@ const Management = () => {
                         initial={{ opacity: 0, x: 60 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                        className="lg:flex-[0.6] relative w-full lg:-mr-32 xl:-mr-56"
+                        className="lg:flex-[0.6] relative w-full max-w-xl mx-auto lg:max-w-none lg:mx-0 lg:-mr-24 xl:-mr-40"
                     >
                         {/* Vanishing Card Container */}
                         <div className="relative overflow-hidden border border-slate-200/80 rounded-[2.5rem] bg-white shadow-2xl shadow-purple-900/5">

@@ -1,18 +1,23 @@
-import React from "react";
-import Page from "../components/Page";
+import React, { useEffect } from "react";
+
+const clickupUrl = "https://clickup.com";
 
 export default function StartWorkspace() {
+  useEffect(() => {
+    window.location.replace(clickupUrl);
+  }, []);
+
   return (
-    <Page
-      title="Start your workspace"
-      subtitle="Create a workspace and begin collaborating with your team."
-    >
-      <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm max-w-md">
-        <p className="text-slate-600">
-          This is a placeholder for the workspace creation flow. Implement
-          onboarding steps here.
-        </p>
+    <div className="flex min-h-screen items-center justify-center bg-white px-4 text-center">
+      <div>
+        <p className="text-lg font-semibold text-slate-900">Redirecting to ClickUp...</p>
+        <a
+          href={clickupUrl}
+          className="mt-4 inline-flex rounded-xl bg-slate-900 px-5 py-3 text-sm font-bold text-white"
+        >
+          Continue
+        </a>
       </div>
-    </Page>
+    </div>
   );
 }

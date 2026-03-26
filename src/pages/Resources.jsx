@@ -72,7 +72,7 @@ const sections = {
         <p className="text-gray-500 mb-2 max-w-md mx-auto">Get a personalized walkthrough of KaryaUp with one of our product specialists. We'll tailor it to your team's specific workflow and answer all your questions.</p>
         <p className="text-sm text-violet-600 font-medium mb-8">30-minute sessions available Monday–Friday, 9am–6pm IST</p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/start" className="inline-block bg-violet-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-violet-700 transition-colors">
+          <Link to="/book-demo" className="inline-block bg-violet-600 text-white px-8 py-3 rounded-xl font-semibold hover:bg-violet-700 transition-colors">
             Book a Demo
           </Link>
           <Link to="/resources/tutorials" className="inline-block border border-gray-300 text-gray-700 px-8 py-3 rounded-xl font-semibold hover:bg-gray-50 transition-colors">

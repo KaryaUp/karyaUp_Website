@@ -16,24 +16,23 @@ import FinalCTA from "../components/FinalCTA";
 
 export default function Home() {
   return (
-    <>
+    <div className="w-full max-w-full overflow-x-hidden">
       <Hero />
-        <TrustedBy /> 
-      <ScatteredWork />
-      {/* <FeatureShowcase /> */}
-      
-     
-       <AllInOne /> 
-      
-      {/* <Roles /> */}
-      <TeamSolutions />
-      <WorkIntelligence />
-      <FeatureOverview />
-      <TeamsSection />
-      <Integrations />
-      <DataImport />
-      <Management /> 
-      <FinalCTA />
-    </>
+      <div className="[&>section]:!pt-8 [&>section]:!pb-8 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12">
+        <TrustedBy />
+        <ScatteredWork />
+        {/* <FeatureShowcase /> */}
+        <AllInOne />
+        {/* <Roles /> */}
+        <TeamSolutions />
+        <WorkIntelligence />
+        <FeatureOverview />
+        <TeamsSection />
+        <Integrations />
+        <DataImport />
+        <Management />
+        <FinalCTA />
+      </div>
+    </div>
   );
 }

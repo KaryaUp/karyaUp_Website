@@ -3,6 +3,10 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-x: clip;
+  width: 100%;
+  max-width: 100%;
 }
 
 @theme {
@@ -135,6 +139,15 @@ html {
 }
 
 @layer base {
+  html,
+  body,
+  #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+
   body {
     @apply antialiased text-gray-900 bg-white overflow-x-hidden;
     font-family: plus-jakarta-sans, sans-serif;

@@ -94,8 +94,36 @@ const TeamsSection = () => {
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
 
+          {/* LEFT: mobile selector grid */}
+          <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 lg:hidden">
+            {teams.map((t, i) => {
+              const TIcon = t.icon;
+              const isActive = active === i;
+
+              return (
+                <button
+                  key={t.label}
+                  onClick={() => setActive(i)}
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border transition-all ${
+                    isActive
+                      ? `${t.bg} border-purple-200 shadow-sm`
+                      : 'border-slate-200 bg-white'
+                  }`}
+                >
+                  <div
+                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
+                      isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
+                    }`}
+                  >
+                    <TIcon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+
           {/* LEFT: stacked selectable rows */}
-          <div className="lg:col-span-4 flex flex-col divide-y divide-slate-100">
+          <div className="hidden lg:col-span-4 lg:flex lg:flex-col lg:divide-y lg:divide-slate-100">
             {teams.map((t, i) => {
               const TIcon = t.icon;
               const isActive = active === i;
@@ -149,10 +177,10 @@ const TeamsSection = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -24 }}
                 transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className={`rounded-3xl p-8 sm:p-12 ${team.bg} border border-slate-100 relative overflow-hidden`}
+                className={`relative overflow-hidden rounded-3xl border border-slate-100 p-6 sm:p-10 lg:p-12 ${team.bg}`}
               >
                 {/* Icon display */}
-                <div className="w-16 h-16 rounded-2xl bg-white flex items-center justify-center mb-8 border border-slate-100 shadow-sm"
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16"
                   style={{ transform: 'translateZ(20px)' }}
                 >
                   <Icon size={28} style={{ color: team.accentColor || '#7e22ce' }} className={`bg-clip-text text-transparent bg-gradient-to-br ${team.gradient}`} />
@@ -164,18 +192,18 @@ const TeamsSection = () => {
                     {team.label}
                   </span>
 
-                  <h3 className="text-2xl sm:text-3xl font-black text-slate-900 leading-snug mt-2 mb-4">
+                  <h3 className="mt-2 mb-4 text-xl font-black leading-snug text-slate-900 sm:text-3xl">
                     {team.headline}
                   </h3>
 
-                  <p className="text-slate-500 text-base font-medium italic mb-10">
+                  <p className="mb-7 text-sm font-medium italic text-slate-500 sm:mb-10 sm:text-base">
                     "{team.result}"
                   </p>
 
                   {/* Visual Statistic */}
                   <div className="flex flex-col gap-1">
                     <div className="flex items-baseline gap-2">
-                      <span className={`text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
+                      <span className={`text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r sm:text-4xl ${team.textGrad}`}>
                         {team.stat.split(',')[0]}
                       </span>
                       <span className="text-slate-400 text-sm font-bold uppercase tracking-wider">

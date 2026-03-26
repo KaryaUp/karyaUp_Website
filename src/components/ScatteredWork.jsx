@@ -148,7 +148,7 @@ export default function ScatteredWork() {
             </div>
 
             {/* List and Outcome Section */}
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mt-8">
+            <div className="mt-8 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
               {/* Transformation Steps */}
               <div className="space-y-4">
                 {[
@@ -156,7 +156,7 @@ export default function ScatteredWork() {
                   { text: "Move the Karya.", icon: Zap },
                   { text: "Complete the Karya.", icon: Rocket },
                 ].map((step, i) => (
-                  <div key={i} className="flex items-center gap-4 py-1">
+                  <div key={i} className="flex items-center justify-center gap-4 py-1 sm:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-[#7e22ce]" />
                     <span className="text-lg font-black text-slate-800">{step.text}</span>
                   </div>
@@ -167,7 +167,7 @@ export default function ScatteredWork() {
               <motion.div 
                 initial={{ scale: 0.95, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
-                className="p-5 bg-slate-900 rounded-[2rem] text-white flex flex-col gap-4 shadow-xl shadow-purple-900/20 relative overflow-hidden min-w-[200px]"
+                className="relative min-w-[200px] overflow-hidden rounded-[2rem] bg-slate-900 p-5 text-white flex flex-col gap-4 shadow-xl shadow-purple-900/20"
               >
                 <div className="absolute inset-0 bg-gradient-to-br from-[#7e22ce]/10 to-transparent pointer-events-none" />
                 <div className="relative z-10 flex items-center gap-4">

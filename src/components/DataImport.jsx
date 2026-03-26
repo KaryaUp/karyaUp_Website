@@ -22,7 +22,7 @@ const DataImport = () => {
     };
 
     return (
-        <section className="pt-5 lg:pt-5 bg-white overflow-hidden relative">
+        <section className="pt-0 lg:pt-0 bg-white overflow-x-hidden overflow-y-hidden relative">
             <div className="max-w-7xl mx-auto px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
                     
@@ -56,7 +56,7 @@ const DataImport = () => {
                     </div>
 
                     {/* Right: Visual Area (Stretched Horizontal Flow) */}
-                    <div className="flex-[0.55] relative w-full h-[500px] flex items-center justify-center lg:justify-end pr-4 lg:pr-12">
+                    <div className="flex-[0.55] relative w-full max-w-full overflow-hidden h-[420px] sm:h-[500px] flex items-center justify-center lg:justify-end pr-0 sm:pr-4 lg:pr-12">
                         
                         {/* Central Hub (Karyaup) - Far Right */}
                         <div className="relative z-30">
@@ -100,7 +100,7 @@ const DataImport = () => {
                       
 
                         {/* Animated Converging File Icons */}
-                        <div className="absolute inset-0 z-40 pointer-events-none overflow-visible">
+                        <div className="absolute inset-0 z-40 pointer-events-none overflow-hidden hidden sm:block">
                             {/* Files from ClickUp */}
                             {[0, 1, 2].map((i) => (
                                 <motion.div
