@@ -167,23 +167,23 @@ const PostRow = ({ article, onClick }) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, x: -10 }}
-      className="group py-16 border-b border-slate-100 flex flex-col md:flex-row gap-12 lg:gap-24 items-start"
+      className="group py-10 md:py-16 border-b border-slate-100 flex flex-col md:flex-row gap-7 md:gap-12 lg:gap-24 items-start"
     >
       {/* Left Column (Content) */}
       <div className="flex-1 text-left">
-        <div className="flex items-center gap-3 mb-6">
+        <div className="flex items-center gap-3 mb-4 md:mb-6">
           <div className="w-1.5 h-4 bg-[#7e22ce] rounded-full" />
           <span className="text-[#7e22ce] text-[13px] font-black uppercase tracking-[0.2em]">{article.category}</span>
         </div>
         
         <h3 
           onClick={() => onClick(article)}
-          className="text-[32px] md:text-[42px] font-black text-[#0A2540] mb-8 leading-[1.05] tracking-tight cursor-pointer transition-colors"
+          className="text-[28px] sm:text-[32px] md:text-[42px] font-black text-[#0A2540] mb-5 md:mb-8 leading-[1.05] tracking-tight cursor-pointer transition-colors"
         >
           {article.title}
         </h3>
         
-        <p className="text-[#425466] text-xl leading-relaxed mb-10 font-medium">
+        <p className="text-[#425466] text-lg md:text-xl leading-relaxed mb-6 md:mb-10 font-medium">
           {article.excerpt}
         </p>
 
@@ -198,7 +198,7 @@ const PostRow = ({ article, onClick }) => {
       {/* Right Column (Metadata + Image) */}
       <div className="w-full md:w-[480px] lg:w-[540px] shrink-0">
         {/* Top: Metadata */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-10 sm:gap-6 mb-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 mb-6 md:mb-12">
           <div className="text-[#425466] text-[15px] font-bold">
             {article.date}
           </div>
@@ -429,7 +429,7 @@ export default function Blog() {
 
   return (
     <div className="min-h-screen bg-white font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
-      <section className="relative min-h-screen pt-2 pb-2 lg:pt-2 lg:pb-2 overflow-hidden flex items-center">
+      <section className="relative min-h-screen pt-24 sm:pt-28 lg:pt-2 pb-2 lg:pb-2 overflow-hidden flex items-center">
         <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
         <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
 
@@ -496,7 +496,7 @@ export default function Blog() {
         </div>
       </section>
       {/* Articles Feed - Stripe List Style */}
-      <section className="relative pt-10 pb-24 min-h-[600px]">
+      <section className="relative pt-10 pb-12 sm:pb-12 lg:pb-14 min-h-[600px]">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col">
             <AnimatePresence mode="popLayout" initial={false}>
@@ -535,21 +535,21 @@ export default function Blog() {
       </section>
 
       {/* Premium Dark Newsletter Section - FeatureCTA Style */}
-      <section className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 group">
-        <div className="relative rounded-[3rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch border border-white/5 p-6 lg:p-10">
+      <section className="pt-2 pb-8 sm:pt-4 sm:pb-10 lg:pt-4 lg:pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 group">
+        <div className="relative rounded-[2rem] sm:rounded-[2.5rem] lg:rounded-[3rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch border border-white/5 p-5 sm:p-6 lg:p-10">
           {/* Ambient Background Gradients */}
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(126,34,206,0.25),transparent_50%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(99,91,255,0.15),transparent_40%)] pointer-events-none" />
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(168,85,247,0.1),transparent_40%)] pointer-events-none" />
 
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-24 w-full">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 sm:gap-10 lg:gap-24 w-full">
             {/* Left Content */}
-            <div className="max-w-2xl text-left flex-[1.2]">
+            <div className="max-w-2xl text-center lg:text-left flex-[1.2] mx-auto lg:mx-0">
               <motion.div 
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                className="text-[#635BFF] text-[13px] font-black uppercase tracking-[0.3em] mb-6 flex items-center gap-2"
+                className="text-[#635BFF] text-[11px] sm:text-[13px] font-black uppercase tracking-[0.24em] sm:tracking-[0.3em] mb-4 sm:mb-6 flex items-center justify-center lg:justify-start gap-2"
               >
                 <div className="w-8 h-[1px] bg-[#635BFF]/30" />
                 Weekly Drop
@@ -560,7 +560,7 @@ export default function Blog() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-[1.05] tracking-tight drop-shadow-2xl"
+                className="text-[30px] sm:text-4xl md:text-5xl lg:text-6xl font-black text-white mb-4 sm:mb-6 leading-[1.08] sm:leading-[1.05] tracking-tight drop-shadow-2xl"
               >
                 One idea. Every Tuesday. <br />
                 <motion.span 
@@ -577,21 +577,21 @@ export default function Blog() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2 }}
-                className="text-slate-400 text-lg md:text-xl font-medium leading-relaxed max-w-xl mb-0"
+                className="text-slate-400 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 mb-0"
               >
                 No roundups. No recycled tips. Just one sharp, useful idea your team can act on before the week is out. Joined by 8,000+ managers already.
               </motion.p>
             </div>
 
             {/* Right Form */}
-            <div className="w-full lg:w-[460px] flex-1">
+            <div className="w-full max-w-md lg:max-w-none lg:w-[460px] flex-1 mx-auto">
               <motion.form 
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.3 }}
                 onSubmit={handleSubscribe} 
-                className="flex flex-col gap-5 p-2 rounded-[2.5rem]"
+                className="flex flex-col gap-4 sm:gap-5 p-1.5 sm:p-2 rounded-[2rem] sm:rounded-[2.5rem]"
               >
                 <div className="relative group/input">
                   <input
@@ -599,22 +599,22 @@ export default function Blog() {
                     placeholder="Your work email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-8 py-5 rounded-[1.5rem] bg-white/5 border border-white/10 outline-none focus:border-[#635BFF]/50 focus:ring-4 focus:ring-[#635BFF]/10 transition-all font-bold text-white shadow-inner backdrop-blur-sm placeholder:text-slate-500"
+                    className="w-full px-5 sm:px-8 py-3.5 sm:py-5 rounded-[1.15rem] sm:rounded-[1.5rem] bg-white/5 border border-white/10 outline-none focus:border-[#635BFF]/50 focus:ring-4 focus:ring-[#635BFF]/10 transition-all font-bold text-base sm:text-lg text-white shadow-inner backdrop-blur-sm placeholder:text-slate-500"
                   />
-                  <div className="absolute inset-0 rounded-[1.5rem] bg-gradient-to-r from-[#635BFF]/20 to-purple-500/20 opacity-0 group-focus-within/input:opacity-100 transition-opacity pointer-events-none -z-10 blur-xl" />
+                  <div className="absolute inset-0 rounded-[1.15rem] sm:rounded-[1.5rem] bg-gradient-to-r from-[#635BFF]/20 to-purple-500/20 opacity-0 group-focus-within/input:opacity-100 transition-opacity pointer-events-none -z-10 blur-xl" />
                 </div>
                 
                 <motion.button 
                   whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(99,91,255,0.3)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full bg-white text-black py-5 rounded-[1.5rem] font-black text-base uppercase tracking-widest hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden"
+                  className="w-full bg-white text-black py-3.5 sm:py-5 rounded-[1.15rem] sm:rounded-[1.5rem] font-black text-[13px] sm:text-base uppercase tracking-[0.12em] sm:tracking-widest hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden"
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     Get the Tuesday Drop <ArrowRight size={18} strokeWidth={3} />
                   </span>
                 </motion.button>
 
-                <div className="flex flex-col items-center gap-3 mt-2">
+                <div className="flex flex-col items-center gap-2.5 sm:gap-3 mt-1 sm:mt-2 text-center">
                   <p className="text-[10px] text-slate-500 font-black uppercase tracking-[0.2em]">
                     No spam. Unsubscribe in one click. Always free.
                   </p>

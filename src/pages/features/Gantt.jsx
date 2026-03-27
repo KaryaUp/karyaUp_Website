@@ -11,13 +11,13 @@ import FeatureCTA from "../../components/FeatureCTA";
 
 export default function Gantt() {
   return (
-    <div className="min-h-screen bg-white pt-24 pb-20">
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20">
       {/* Hero Section */}
-      <section className="relative">
+      <section className="relative pt-4 sm:pt-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -31,7 +31,7 @@ export default function Gantt() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+                className="mt-4 sm:mt-5 text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
               >
                 The ultimate{" "}
                 <span className="block">
@@ -50,13 +50,13 @@ export default function Gantt() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-6 space-y-4 max-w-2xl mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full mx-auto lg:mx-0"
               >
-                <div className="flex items-start gap-3.5 text-left">
-                  <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
+                <div className="flex items-start gap-3 text-left">
+                  <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
                   </div>
-                  <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                  <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
                     Timelines that tell the truth. Map dependencies, adjust milestones in real time, and finally answer the question everyone's afraid to ask: are we on track?
                   </p>
                 </div>
@@ -66,7 +66,7 @@ export default function Gantt() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto lg:mx-0"
+                className="mt-6 sm:mt-8 grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-x-4 sm:gap-y-3 max-w-xs sm:max-w-md w-full mx-auto lg:mx-0"
               >
                 {[
                   { label: "Dependencies", icon: Activity },
@@ -74,11 +74,11 @@ export default function Gantt() {
                   { label: "Critical path", icon: TrendingUp },
                   { label: "Gantt", icon: Calendar }
                 ].map((tag) => (
-                  <div key={tag.label} className="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-purple-200 hover:bg-purple-50/50 transition-all duration-300">
-                    <div className="w-5 h-5 rounded-md bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <tag.icon className="w-3 h-3 text-[#7e22ce] stroke-[4]" />
+                  <div key={tag.label} className="group flex items-center gap-2.5 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-purple-200 hover:bg-purple-50/50 transition-all duration-300">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <tag.icon className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#7e22ce] stroke-[4]" />
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-600 truncate">{tag.label}</span>
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.12em] text-slate-600 truncate">{tag.label}</span>
                   </div>
                 ))}
               </motion.div>
@@ -89,14 +89,14 @@ export default function Gantt() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-24 xl:-mr-40"
             >
               <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
               <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
                 <img
                   src={ganttImg}
                   alt="KaryaUp Gantt Chart"
-                  className="w-full h-[360px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                  className="w-full h-[240px] sm:h-[420px] lg:h-[500px] object-cover object-left"
                 />
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
               </div>
@@ -174,7 +174,7 @@ export default function Gantt() {
                 {isReverse ? (
                   <>
                     {/* Image Side (Left) */}
-                    <div className="p-4 sm:p-6 lg:p-8 bg-slate-50/40 flex items-center justify-center overflow-hidden h-[250px] sm:h-[350px] lg:h-[450px]">
+                    <div className="order-2 lg:order-1 p-4 sm:p-6 lg:p-8 bg-slate-50/40 flex items-center justify-center overflow-hidden h-[220px] sm:h-[350px] lg:h-[450px]">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -185,29 +185,29 @@ export default function Gantt() {
                         <img 
                           src={item.image} 
                           alt={item.title}
-                          className="w-full h-full object-contain rounded-xl shadow-2xl shadow-slate-900/10 grayscale-[15%] hover:grayscale-0 transition-all duration-700 ease-out"
+                          className="w-full h-full max-w-[420px] object-contain rounded-xl shadow-2xl shadow-slate-900/10 grayscale-[15%] hover:grayscale-0 transition-all duration-700 ease-out"
                         />
                       </motion.div>
                     </div>
 
                     {/* Content Side (Right) */}
-                    <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-14 bg-white">
+                    <div className="order-1 lg:order-2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left p-6 sm:p-10 lg:p-14 bg-white">
                       <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center justify-center lg:justify-start gap-3 mb-3 sm:mb-4">
                           <div className="w-1.5 h-6 bg-[#7e22ce] rounded-full" />
                           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce]">
                             {item.header}
                           </span>
                         </div>
-                        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-8">
+                        <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-4 sm:mb-8">
                           {item.title}
                         </h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-8">
+                        <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-5 sm:mb-8">
                           {item.desc}
                         </p>
                         <div className="inline-flex px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-[10px] font-black text-purple-700 uppercase tracking-widest">
@@ -219,23 +219,23 @@ export default function Gantt() {
                 ) : (
                   <>
                     {/* Content Side (Left) */}
-                    <div className="flex flex-col justify-center p-8 sm:p-10 lg:p-14 bg-white">
+                    <div className="order-1 lg:order-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left p-6 sm:p-10 lg:p-14 bg-white">
                       <motion.div
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
                       >
-                        <div className="flex items-center gap-3 mb-4">
+                        <div className="flex items-center justify-center lg:justify-start gap-3 mb-3 sm:mb-4">
                           <div className="w-1.5 h-6 bg-[#7e22ce] rounded-full" />
                           <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce]">
                             {item.header}
                           </span>
                         </div>
-                        <h3 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-8">
+                        <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-4 sm:mb-8">
                           {item.title}
                         </h3>
-                        <p className="text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-8">
+                        <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-5 sm:mb-8">
                           {item.desc}
                         </p>
                         <div className="inline-flex px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-[10px] font-black text-purple-700 uppercase tracking-widest">
@@ -245,7 +245,7 @@ export default function Gantt() {
                     </div>
 
                     {/* Image Side (Right) */}
-                    <div className="p-4 sm:p-6 lg:p-8 bg-slate-50/40 flex items-center justify-center overflow-hidden h-[250px] sm:h-[350px] lg:h-[450px]">
+                    <div className="order-2 lg:order-2 p-4 sm:p-6 lg:p-8 bg-slate-50/40 flex items-center justify-center overflow-hidden h-[220px] sm:h-[350px] lg:h-[450px]">
                       <motion.div
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -256,7 +256,7 @@ export default function Gantt() {
                         <img 
                           src={item.image} 
                           alt={item.title}
-                          className="w-full h-full object-contain rounded-xl shadow-2xl shadow-slate-900/10 grayscale-[15%] hover:grayscale-0 transition-all duration-700 ease-out"
+                          className="w-full h-full max-w-[420px] object-contain rounded-xl shadow-2xl shadow-slate-900/10 grayscale-[15%] hover:grayscale-0 transition-all duration-700 ease-out"
                         />
                       </motion.div>
                     </div>
@@ -273,6 +273,7 @@ export default function Gantt() {
         description="Work smarter with visual timelines that can live in your whiteboards, chat, calendar—anywhere you work."
         image={ganttImg}
         imageAlt="KaryaUp Gantt Timeline"
+        containerClassName="mt-12 sm:mt-16 lg:mt-24"
       />
     </div>
   );

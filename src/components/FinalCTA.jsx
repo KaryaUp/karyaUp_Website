@@ -28,37 +28,13 @@ const FinalCTA = () => {
   return (
     <section className="pt-0 pb-0 sm:pt-0 sm:pb-0 bg-white relative overflow-hidden font-sans">
 
-      {/* Background Mesh Gradient (Clarity Engine) */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <motion.div
-          animate={{
-            scale: isHoveringCTA ? 1.2 : 1,
-            opacity: isHoveringCTA ? 0.4 : 0.2
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-[radial-gradient(circle,rgba(126,34,206,0.15)_0%,transparent_70%)] rounded-full blur-[120px]"
-        />
-
-
-        {/* Moving Mesh blobs */}
-        <motion.div
-          animate={{ x: [0, 40, 0], y: [0, -30, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-0 right-0 w-[600px] h-[600px] bg-fuchsia-100/30 rounded-full blur-[100px]"
-        />
-        <motion.div
-          animate={{ x: [0, -40, 0], y: [0, 30, 0] }}
-          transition={{ duration: 18, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-purple-100/30 rounded-full blur-[100px]"
-        />
-      </div>
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* The Centric Hub (Glass Card) */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.65)_100%)] backdrop-blur-3xl border border-slate-200/60 rounded-[3rem] px-6 py-7 sm:px-10 sm:py-9 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
+          className="mt-8 sm:mt-12 lg:mt-16 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.65)_100%)] backdrop-blur-3xl border border-slate-200/60 rounded-[3rem] px-6 py-7 sm:px-10 sm:py-9 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
         >
           <div className="absolute inset-0 pointer-events-none opacity-30">
             <svg className="h-full w-full" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -185,31 +161,7 @@ const FinalCTA = () => {
           {/* Shimmer Overlay on card */}
           <div className="absolute inset-0 border-[3px] border-white/40 rounded-[4rem] pointer-events-none" />
         </motion.div>
-
       </div>
-
-      {/* Extreme Floating Particles (Clarity Sparks) */}
-      {[...Array(20)].map((_, i) => (
-        <motion.div
-          key={i}
-          className="absolute w-1 h-1 bg-purple-300 rounded-full pointer-events-none z-0"
-          animate={{
-            y: [-1200, -100],
-            x: [Math.random() * 200 - 100, Math.random() * 200 - 100],
-            opacity: [0, 0.3, 0],
-            scale: [0, 1.2, 0]
-          }}
-          transition={{
-            duration: 8 + Math.random() * 8,
-            repeat: Infinity,
-            delay: Math.random() * 10
-          }}
-          style={{
-            left: `${Math.random() * 100}%`,
-            bottom: "-20px"
-          }}
-        />
-      ))}
     </section>
   );
 };

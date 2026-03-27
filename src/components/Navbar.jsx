@@ -304,15 +304,15 @@ const Navbar = () => {
 
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
   const linkBase =
-    `text-base font-semibold transition-all ${isOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
+    `text-base font-semibold transition-all ${isOverlayNav ? "text-slate-700 hover:text-primary md:text-white md:hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
   const linkActive = "text-primary";
 
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 py-3 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
-        ? "bg-white shadow-md  border-gray-100"
+        ? "bg-white md:shadow-md border-gray-100"
         : isScrolled
-          ? "bg-white/70 backdrop-blur-md shadow-sm "
+          ? "bg-white md:bg-white/70 md:backdrop-blur-md md:shadow-sm"
           : "bg-slate-950/18 backdrop-blur-sm"
         }`}
     >
@@ -328,7 +328,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
-                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isOverlayNav ? "brightness-0 invert" : ""}`}
+                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isOverlayNav ? "md:brightness-0 md:invert" : ""}`}
                 />
               </Link>
 
@@ -626,7 +626,7 @@ const Navbar = () => {
           <div className="ml-auto md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${isOverlayNav ? "text-white hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
+              className={`p-2 rounded-lg transition-colors ${isOverlayNav ? "text-gray-600 hover:bg-gray-100 md:text-white md:hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

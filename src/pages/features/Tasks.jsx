@@ -1,30 +1,28 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, Sparkles, Activity, BarChart3, Clock, Target, Calendar, Share2, LayoutDashboard } from "lucide-react";
-import Heroimg from "../../assets/Heroimg.png";
+import { Check, Sparkles, Activity } from "lucide-react";
 import Task2 from "../../assets/Task2.png";
 import AgentAssign from "../../assets/Agent-Assign.png";
 import FeatureCTA from "../../components/FeatureCTA";
 
-import logo from "../../assets/logo.png";
-import BorderBeam from "../../components/BorderBeam";
-
-const tags = "Assignees · Due dates · Priorities · Sub-tasks";
-
 export default function Tasks() {
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+
   return (
-    <div className="min-h-screen bg-white pt-24 pb-20">
-      {/* Hero */}
-      <section className="relative">
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20">
+
+      {/* ── Hero ── */}
+      <section className={`relative pt-4 sm:pt-6 lg:pt-8 ${sectionSpacing}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
+
             {/* Left */}
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] sm:text-xs font-black uppercase tracking-widest"
               >
                 Features <span className="opacity-60">/</span> Tasks
               </motion.div>
@@ -33,7 +31,7 @@ export default function Tasks() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
               >
                 A task management features
                 <span className="block">
@@ -45,7 +43,6 @@ export default function Tasks() {
                   >
                     saves time
                   </motion.span>
-
                 </span>
               </motion.h1>
 
@@ -53,17 +50,17 @@ export default function Tasks() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-6 space-y-4 max-w-2xl mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
               >
                 {[
                   "Every piece of work, owned and visible.",
                   "Assign, prioritize, and track tasks across your team without losing anything between conversations and meetings."
                 ].map((text, i) => (
-                  <div key={i} className="flex items-start gap-3.5 text-left">
-                    <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
                     </div>
-                    <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
                       {text}
                     </p>
                   </div>
@@ -74,60 +71,60 @@ export default function Tasks() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto lg:mx-0"
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md"
               >
                 {["Assignees", "Due dates", "Priorities", "Sub-tasks"].map((tag) => (
-                  <div key={tag} className="group flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300">
-                    <div className="w-5 h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <Check className="w-3 h-3 text-emerald-600 stroke-[4]" />
+                  <div key={tag} className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Check className="w-2.5 h-2.5 text-emerald-600 stroke-[4]" />
                     </div>
-                    <span className="text-[10px] font-black uppercase tracking-[0.12em] text-slate-600 truncate">{tag}</span>
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] text-slate-600 truncate">{tag}</span>
                   </div>
                 ))}
               </motion.div>
             </div>
 
-            {/* Right */}
+            {/* Right – Image */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
                 <img
                   src={Task2}
                   alt="KaryaUp task management"
-                  className="w-full h-[360px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                  className="w-full h-[220px] sm:h-[300px] md:h-[380px] lg:h-[460px] xl:h-[500px] object-cover object-left"
                 />
-                {/* Right-side invisible/fade effect like reference */}
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-36 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* AI Agent */}
-      <section className="mt-14 sm:mt-18">
+      {/* ── AI Agent ── */}
+      <section className={sectionSpacing}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, amount: 0.3 }}
+              viewport={{ once: false, amount: 0.2 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="border border-slate-200 rounded-3xl bg-white overflow-hidden"
+              className="border border-slate-200 rounded-2xl sm:rounded-3xl bg-white overflow-hidden"
               style={{ boxShadow: "0 18px 50px -36px rgba(2,6,23,0.28)" }}
             >
-              <div className="p-6 sm:p-8 lg:p-10">
-                <div className="flex items-center gap-2 text-purple-700 font-black uppercase tracking-widest text-xs">
-                  <Sparkles className="w-4 h-4" />
+              <div className="p-5 sm:p-8 lg:p-10 text-center lg:text-left">
+                {/* Header */}
+                <div className="flex items-center justify-center lg:justify-start gap-2 text-purple-700 font-black uppercase tracking-widest text-[10px] sm:text-xs">
+                  <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   AI Agent for Tasks
                 </div>
-                <h2 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight tracking-tight">
-                  Prompt it. The agent <br className="hidden sm:block" />{" "}
+                <h2 className="mt-4 sm:mt-5 text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-tight tracking-tight">
+                  Prompt it. The agent{" "}
+                  <br className="hidden sm:block" />
                   <motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -136,41 +133,38 @@ export default function Tasks() {
                     automates everything.
                   </motion.span>
                 </h2>
-                <p className="mt-2 text-slate-600 font-medium max-w-3xl">
+                <p className="mt-2 text-sm sm:text-base text-slate-600 font-medium max-w-3xl mx-auto lg:mx-0 leading-relaxed">
                   KaryaUp comes with an integrated agent that can take your prompt, break the work into tasks, assign owners,
                   set priority + due dates, and keep progress updated — all inside your workspace.
                 </p>
 
-                <div className="mt-7 grid lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-                  {/* Prompt panel */}
-                  <div className="lg:col-span-5 flex items-center justify-center">
-                    <div className="relative h-[380px] w-fit p-[1.5px] rounded-3xl overflow-hidden group">
-                      {/* Animated Rainbow Border */}
-                      <div
-                        className="absolute inset-[-100%] bg-[conic-gradient(from_var(--border-angle),#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3,#ff0000)] animate-[spin-border_4s_linear_infinite]"
-                      />
+                {/* Two-col layout */}
+                <div className="mt-6 sm:mt-7 grid lg:grid-cols-12 gap-5 sm:gap-6 lg:gap-8 items-stretch">
 
-                      {/* Image Wrapper */}
-                      <div className="relative h-full w-full bg-white rounded-[calc(1.5rem-1.5px)] flex items-center justify-center p-8 z-10">
+                  {/* Prompt panel / image */}
+                  <div className="lg:col-span-5 flex items-center justify-center">
+                    <div className="relative h-[200px] sm:h-[300px] lg:h-[360px] w-fit max-w-full p-[1.25px] sm:p-[1.5px] rounded-[1.25rem] sm:rounded-3xl overflow-hidden group mx-auto">
+                      <div className="absolute inset-[-100%] bg-[conic-gradient(from_var(--border-angle),#ff0000,#ff7f00,#ffff00,#00ff00,#0000ff,#4b0082,#9400d3,#ff0000)] animate-[spin-border_4s_linear_infinite]" />
+                      <div className="relative h-full w-full bg-white rounded-[calc(1.25rem-1.25px)] sm:rounded-[calc(1.5rem-1.5px)] flex items-center justify-center p-2.5 sm:p-6 lg:p-8 z-10">
                         <img
                           src={AgentAssign}
                           alt="AI Agent Workflow"
-                          className="h-full w-auto object-contain transform group-hover:scale-[1.03] transition-transform duration-500"
+                          className="h-full w-auto max-w-[220px] sm:max-w-none object-contain mx-auto transform group-hover:scale-[1.03] transition-transform duration-500"
                         />
                       </div>
                     </div>
                   </div>
 
                   {/* Output panel */}
-                  <div className="lg:col-span-7 h-full">
-                    <div className="border border-slate-200 rounded-3xl bg-white overflow-hidden h-[380px] flex flex-col shadow-sm">
-                      <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between flex-shrink-0 bg-white">
-                        <div className="text-xs font-black uppercase tracking-widest text-slate-500">
+                  <div className="lg:col-span-7">
+                    <div className="border border-slate-200 rounded-2xl sm:rounded-3xl bg-white overflow-hidden flex flex-col shadow-sm min-h-[300px] sm:min-h-[340px] lg:h-[360px]">
+                      <div className="px-4 py-3 sm:px-5 sm:py-4 border-b border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-1 sm:gap-4 flex-shrink-0 bg-white text-center sm:text-left">
+                        <div className="text-[10px] sm:text-xs font-black uppercase tracking-widest text-slate-500">
                           Generated tasks
                         </div>
-                        <div className="text-xs font-semibold text-slate-400">Auto-assigned • Auto-dated</div>
+                        <div className="text-[10px] sm:text-xs font-semibold text-slate-400">Auto-assigned · Auto-dated</div>
                       </div>
-                      <div className="p-4 grid gap-3 overflow-y-auto flex-1 custom-scrollbar">
+                      <div className="p-3 sm:p-4 grid gap-2 sm:gap-3 overflow-y-auto flex-1">
                         {[
                           { title: "Finalize landing page wireframe", owner: "Aisha", due: "Wed", pr: "High" },
                           { title: "Implement landing page sections", owner: "Rahul", due: "Thu", pr: "High" },
@@ -181,22 +175,22 @@ export default function Tasks() {
                             key={t.title}
                             initial={{ opacity: 0, y: 10 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: false, amount: 0.4 }}
+                            viewport={{ once: false, amount: 0.3 }}
                             transition={{ duration: 0.5, delay: 0.05 * i, ease: [0.22, 1, 0.36, 1] }}
-                            className="border border-slate-200 rounded-xl px-4 py-3 flex items-center gap-3"
+                            className="border border-slate-200 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 flex items-center gap-2 sm:gap-3"
                           >
-                            <span className="w-7 h-7 rounded-lg bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                              <Check className="w-4 h-4 text-[#7e22ce]" />
+                            <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                              <Check className="w-3 h-3 sm:w-4 sm:h-4 text-[#7e22ce]" />
                             </span>
                             <div className="min-w-0 flex-1">
-                              <div className="font-black text-slate-900 truncate">{t.title}</div>
-                              <div className="mt-0.5 text-xs font-semibold text-slate-500 flex flex-wrap gap-x-3 gap-y-1">
+                              <div className="font-black text-slate-900 text-xs sm:text-sm truncate">{t.title}</div>
+                              <div className="mt-0.5 text-[10px] sm:text-xs font-semibold text-slate-500 flex flex-wrap gap-x-2 sm:gap-x-3 gap-y-0.5">
                                 <span>Owner: <span className="text-slate-700">{t.owner}</span></span>
                                 <span>Due: <span className="text-slate-700">{t.due}</span></span>
                               </div>
                             </div>
                             <span
-                              className="text-[11px] font-black uppercase tracking-[0.18em] px-2.5 py-1 rounded-full border"
+                              className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.12em] px-2 py-1 rounded-full border flex-shrink-0"
                               style={{
                                 borderColor: t.pr === "High" ? "rgba(239,68,68,0.35)" : "rgba(148,163,184,0.45)",
                                 background: t.pr === "High" ? "rgba(239,68,68,0.08)" : "rgba(148,163,184,0.10)",
@@ -208,8 +202,8 @@ export default function Tasks() {
                           </motion.div>
                         ))}
                       </div>
-                      <div className="px-4 pb-4">
-                        <div className="text-xs font-semibold text-slate-500">
+                      <div className="px-4 pb-3 sm:pb-4">
+                        <div className="text-[10px] sm:text-xs font-semibold text-slate-500">
                           The agent can also update statuses, reassign owners, and add subtasks from a single prompt.
                         </div>
                       </div>
@@ -222,87 +216,55 @@ export default function Tasks() {
         </div>
       </section>
 
-      {/* Task Analytics Feature Highlight */}
-      <section className="mt-12 sm:mt-16 py-8 sm:py-16 bg-white relative overflow-hidden">
+      {/* ── Task Analytics ── */}
+      <section className={`${sectionSpacing} bg-white relative overflow-hidden`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-12 lg:gap-20 items-center">
-            {/* Curved SVG Chart */}
+          <div className="grid lg:grid-cols-[1.2fr_1fr] gap-10 sm:gap-12 lg:gap-20 items-center">
+
+            {/* Chart */}
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
+              initial={{ opacity: 0, x: -40 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: false, margin: "-100px" }}
+              viewport={{ once: false, margin: "-80px" }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
               className="relative order-2 lg:order-1 w-full flex items-center justify-center lg:justify-start"
             >
-              <div className="relative z-10 h-[350px] w-full flex flex-col pl-12">
+              <div className="relative z-10 h-[240px] sm:h-[300px] lg:h-[350px] w-full max-w-[560px] mx-auto lg:mx-0 flex flex-col pl-2 sm:pl-10 lg:pl-12">
                 <div className="flex-1 relative overflow-hidden">
                   <svg className="w-full h-full overflow-visible" viewBox="0 0 800 300" preserveAspectRatio="none">
-                    {/* Horizontal Grid Lines */}
                     {[0, 1, 2, 3, 4].map(i => (
-                      <line
-                        key={i}
-                        x1="0"
-                        y1={i * 75}
-                        x2="800"
-                        y2={i * 75}
-                        stroke="#f1f5f9"
-                        strokeWidth="1.5"
-                        strokeDasharray="4,4"
-                      />
+                      <line key={i} x1="0" y1={i * 75} x2="800" y2={i * 75} stroke="#f1f5f9" strokeWidth="1.5" strokeDasharray="4,4" />
                     ))}
-
-                    {/* Y-Axis Labels */}
                     {[20, 15, 10, 5, 0].map((v, i) => (
-                      <text
-                        key={v}
-                        x="-45"
-                        y={i * 75 + 5}
-                        className="text-[12px] fill-slate-400 font-bold select-none"
-                      >
-                        {v}
-                      </text>
+                      <text key={v} x="-45" y={i * 75 + 5} className="text-[12px] fill-slate-400 font-bold select-none">{v}</text>
                     ))}
-
                     <motion.path
                       d="M0,150 C50,150 70,240 120,240 C150,240 170,225 220,225 C270,225 290,300 340,300 C390,300 420,0 470,0 C520,0 550,255 600,255 C630,255 650,300 700,300 C730,300 750,45 800,255"
-                      fill="none"
-                      stroke="#6366f1"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
+                      fill="none" stroke="#6366f1" strokeWidth="3.5" strokeLinecap="round"
                       initial={{ pathLength: 0 }}
                       whileInView={{ pathLength: 1 }}
                       transition={{ duration: 3, ease: "easeInOut" }}
                     />
-
                     <motion.path
                       d="M0,300 C50,300 80,150 130,150 C180,150 200,300 250,300 L450,300 C500,300 530,90 580,90 C630,90 650,250 700,250 C750,250 780,300 800,300"
-                      fill="none"
-                      stroke="#10b981"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
+                      fill="none" stroke="#10b981" strokeWidth="3.5" strokeLinecap="round"
                       initial={{ pathLength: 0 }}
                       whileInView={{ pathLength: 1 }}
                       transition={{ duration: 3, ease: "easeInOut", delay: 0.3 }}
                     />
-
                     <motion.path
                       d="M0,300 L250,300 C300,300 320,165 370,165 C420,165 450,285 500,285 L600,285 C650,285 680,225 730,225 C760,225 780,150 800,300"
-                      fill="none"
-                      stroke="#f59e0b"
-                      strokeWidth="3.5"
-                      strokeLinecap="round"
+                      fill="none" stroke="#f59e0b" strokeWidth="3.5" strokeLinecap="round"
                       initial={{ pathLength: 0 }}
                       whileInView={{ pathLength: 1 }}
                       transition={{ duration: 3, ease: "easeInOut", delay: 0.6 }}
                     />
                   </svg>
-
-                  {/* Right-side fade effect */}
-                  <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-48 bg-gradient-to-r from-transparent to-white z-20" />
+                  <div className="pointer-events-none absolute inset-y-0 right-0 w-20 sm:w-32 lg:w-48 bg-gradient-to-r from-transparent to-white z-20" />
                 </div>
 
-                {/* X-Axis Labels */}
-                <div className="flex justify-between text-[11px] font-bold text-slate-400 select-none px-2 mt-2">
+                {/* X-Axis */}
+                <div className="flex justify-between text-[8px] sm:text-[10px] font-bold text-slate-400 select-none px-1 sm:px-2 mt-2">
                   <span>2026-02-20</span>
                   <span>2026-03-11</span>
                   <span>2026-03-15</span>
@@ -310,43 +272,41 @@ export default function Tasks() {
                 </div>
 
                 {/* Legend */}
-                <div className="mt-6 flex flex-wrap justify-center gap-x-10 gap-y-4">
+                <div className="mt-4 sm:mt-5 lg:mt-6 flex flex-wrap justify-center gap-x-4 sm:gap-x-8 lg:gap-x-10 gap-y-2 sm:gap-y-3">
                   {[
                     { l: "Completed", c: "#10b981" },
                     { l: "Overdue", c: "#f59e0b" },
                     { l: "Active (created)", c: "#6366f1" }
                   ].map(i => (
-                    <div key={i.l} className="flex items-center gap-3 group">
-                      <div className="relative w-8 h-4 flex items-center justify-center">
-                        <div className="w-full h-[3px] rounded-full" style={{ backgroundColor: i.c }} />
-                        <div className="absolute w-2.5 h-2.5 rounded-full border-2 border-white shadow-sm ring-1 ring-slate-100" style={{ backgroundColor: i.c }} />
+                    <div key={i.l} className="flex items-center gap-2 sm:gap-3 group">
+                      <div className="relative w-6 h-3 sm:w-8 sm:h-4 flex items-center justify-center">
+                        <div className="w-full h-[2.5px] sm:h-[3px] rounded-full" style={{ backgroundColor: i.c }} />
+                        <div className="absolute w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full border-2 border-white shadow-sm ring-1 ring-slate-100" style={{ backgroundColor: i.c }} />
                       </div>
-                      <span className="text-[11px] font-black uppercase tracking-widest text-slate-500 group-hover:text-slate-900 transition-colors">
+                      <span className="text-[9px] sm:text-[11px] font-black uppercase tracking-widest text-slate-500 group-hover:text-slate-900 transition-colors">
                         {i.l}
                       </span>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Decorative background glow */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-gradient-to-br from-purple-100/60 to-blue-100/40 rounded-full blur-[140px] -z-10 animate-pulse" />
             </motion.div>
 
-            {/* Text Content */}
+            {/* Text */}
             <motion.div
-              initial={{ opacity: 0, x: 50 }}
+              initial={{ opacity: 0, x: 40 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-              className="order-1 lg:order-2"
+              className="order-1 lg:order-2 text-center lg:text-left flex flex-col items-center lg:items-start"
             >
-              <div className="inline-flex items-center gap-2 px-1 py-1 rounded-full bg-[#7e22ce]/10 border border-[#7e22ce]/20 text-[#7e22ce] text-[10px] font-black uppercase tracking-widest mb-6">
-                <Activity className="w-3.5 h-3.5" />
+              <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-[#7e22ce]/10 border border-[#7e22ce]/20 text-[#7e22ce] text-[10px] font-black uppercase tracking-widest mb-4 sm:mb-6">
+                <Activity className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                 Visual Analytics
               </div>
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight tracking-tight">
-                Turn your task data into <br className="hidden lg:block" />
+              <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 leading-tight tracking-tight">
+                Turn your task data into{" "}
+                <br className="hidden lg:block" />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -355,22 +315,22 @@ export default function Tasks() {
                   actionable insights.
                 </motion.span>
               </h2>
-              <p className="mt-6 text-lg text-slate-600 font-medium leading-relaxed">
+              <p className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed max-w-lg mx-auto lg:mx-0">
                 Gain a birds-eye view of your productivity. Track progress, identify bottlenecks,
                 and optimize your team's workflow with built-in, real-time analytics.
               </p>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-6 sm:mt-8 space-y-3 sm:space-y-4 w-full max-w-lg">
                 {[
                   "Custom filters for members, status, and priority",
                   "Real-time completion and trend tracking",
                   "Visual work distribution across your whole team"
                 ].map((item) => (
-                  <div key={item} className="flex items-center gap-3">
-                    <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <div key={item} className="flex items-center gap-3 justify-center lg:justify-start">
+                    <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-emerald-100 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600" />
                     </div>
-                    <span className="text-slate-700 font-bold">{item}</span>
+                    <span className="text-sm sm:text-base text-slate-700 font-bold text-left">{item}</span>
                   </div>
                 ))}
               </div>
@@ -379,12 +339,13 @@ export default function Tasks() {
         </div>
       </section>
 
-      {/* Feature CTA Section */}
+      {/* ── Feature CTA ── */}
       <FeatureCTA
         title={<>Tasks that connect to <br /> everything you do</>}
         description="Work smarter with tasks that can live in your whiteboards, chat, calendar—anywhere you work."
         image={Task2}
         imageAlt="KaryaUp Task Interface"
+        containerClassName="mt-0"
       />
     </div>
   );

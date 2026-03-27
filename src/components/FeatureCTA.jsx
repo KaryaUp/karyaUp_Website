@@ -14,7 +14,7 @@ export default function FeatureCTA({
   containerClassName = "mt-24 mb-10",
   paddingClassName = "p-3 lg:p-8",
   titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.1] mb-3 tracking-tight drop-shadow-lg",
-  imageOuterClassName = "relative w-[105%] lg:w-full translate-x-2 lg:translate-x-6"
+  imageOuterClassName = "relative w-full max-w-[320px] sm:max-w-[520px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
 }) {
   const handleAuthRedirect = () => {
     window.location.href = authUrl;
@@ -29,12 +29,12 @@ export default function FeatureCTA({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.1),transparent_40%)] pointer-events-none" />
         
         {/* Left Content Area */}
-        <div className="flex-[0.5] xl:flex-[0.6] z-20 text-left flex flex-col justify-center pt-6 lg:pt-10 pb-4 lg:pb-8 pl-4 lg:pl-10">
+        <div className="flex-[0.5] xl:flex-[0.6] z-20 text-center lg:text-left flex flex-col items-center lg:items-start justify-center pt-6 lg:pt-10 pb-4 lg:pb-8 px-4 lg:pl-10 lg:pr-0">
           <motion.div 
              initial={{ opacity: 0, x: -20 }}
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true }}
-             className="relative h-11 mb-6 self-start flex items-center gap-3"
+             className="relative h-11 mb-6 self-center lg:self-start flex items-center gap-3"
           >
             {/* Dual-layer Logo: Colorful Icon + White Text */}
             <div className="relative h-full flex items-center">
@@ -64,7 +64,7 @@ export default function FeatureCTA({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-400 text-sm font-medium mb-6 max-w-xs leading-relaxed"
+            className="text-slate-400 text-sm font-medium mb-6 max-w-xs mx-auto lg:mx-0 leading-relaxed"
           >
             {description}
           </motion.p>
@@ -73,14 +73,14 @@ export default function FeatureCTA({
             onClick={handleAuthRedirect}
             whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
             whileTap={{ scale: 0.98 }}
-            className="bg-white text-black px-10 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden self-start cursor-pointer"
+            className="bg-white text-black px-8 sm:px-10 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden self-center lg:self-start cursor-pointer"
           >
             <span className="relative z-10">{buttonText}</span>
           </motion.button>
         </div>
 
         {/* Right Content Area: Interface Showcase with Glows */}
-        <div className="flex-[1.5] xl:flex-[1.4] relative mt-12 lg:mt-0 flex items-center justify-end p-4 lg:p-6 lg:pr-10">
+        <div className="flex-[1.5] xl:flex-[1.4] relative mt-10 lg:mt-0 flex items-center justify-center lg:justify-end p-4 lg:p-6 lg:pr-10">
            <motion.div 
              initial={{ opacity: 0, x: 80, scale: 0.95 }}
              whileInView={{ opacity: 1, x: 0, scale: 1 }}
