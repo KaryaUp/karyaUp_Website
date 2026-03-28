@@ -9,59 +9,64 @@ import Brand6 from '../assets/Brand6.webp';
 
 const TrustedBy = () => {
     const brands = [
-        { name: 'Brand 1', logo: Brand1 },
-        { name: 'Brand 2', logo: Brand2 },
-        { name: 'Brand 3', logo: Brand3 },
-        { name: 'Brand 4', logo: Brand4 },
-        { name: 'Brand 5', logo: Brand5 },
-        { name: 'Brand 6', logo: Brand6 }
+        { name: 'Kripal Homes', logo: Brand1 },
+        { name: 'Pehnaava', logo: Brand2 },
+        { name: 'Rayon Lab Tech', logo: Brand3 },
+        { name: 'The Diet Diary', logo: Brand4 },
+        { name: 'Zenithive', logo: Brand5 },
+        { name: 'Utopia', logo: Brand6 }
     ];
 
+    // Triple the array to ensure the screen is always full during animation
+    const marqueeBrands = [...brands, ...brands, ...brands];
+
     return (
-        <section className="bg-white overflow-hidden border-t border-b border-black/[0.08] py-0 sm:py-0">
-            <div className="w-full px-4 py-0 sm:px-12 sm:py-0 lg:px-20 text-center">
-                <p className="text-[10px] sm:text-sm font-bold text-slate-400 uppercase tracking-[0.18em] leading-none mb-1 sm:mb-0">
+        <section className="bg-white border-y border-black/[0.08] overflow-hidden w-full pt-6 py-2">
+            <div className="flex flex-col items-center">
+                
+                <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-[0.25em] m-0 mb-6 leading-none">
                     Trusted by the best teams
                 </p>
 
-                <div className="sm:hidden">
-                    <div className="flex items-center justify-between gap-3">
-                    {brands.map((brand, index) => (
-                        <div
-                            key={index}
-                            className="flex min-h-[20px] min-w-0 items-center justify-center"
-                        >
-                            <img
-                                src={brand.logo}
-                                alt={brand.name}
-                                className={`
-                                    ${index < 5 ? 'h-6' : 'h-5'}
-                                    brightness-0 opacity-80 w-auto max-w-full object-contain
-                                `}
-                            />
-                        </div>
-                    ))}
+                <div className="relative flex overflow-x-hidden w-full">
+                    {/* The animation class 'animate-infinite-scroll' is defined in the style tag below */}
+                    <div className="flex items-center whitespace-nowrap animate-infinite-scroll">
+                        {marqueeBrands.map((brand, index) => (
+                            <div 
+                                key={index} 
+                                // Increased horizontal margin (mx-16 to mx-24) for more space
+                                className="mx-12 sm:mx-16 md:mx-20 lg:mx-24 flex items-center shrink-0"
+                            >
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    /* LOGOS MADE LARGER:
+                                       Mobile: h-10 (was h-6)
+                                       Desktop: h-16 to h-20 (was h-12)
+                                    */
+                                    className="h-10 sm:h-16 md:h-20 w-auto brightness-0 opacity-70 hover:opacity-100 transition-opacity duration-300 block object-contain"
+                                />
+                            </div>
+                        ))}
                     </div>
                 </div>
-
-                <div className="hidden sm:flex flex-nowrap items-center justify-between gap-3 sm:gap-x-8">
-                    {brands.map((brand, index) => (
-                        <div
-                            key={index}
-                            className="relative shrink-0"
-                        >
-                            <img
-                                src={brand.logo}
-                                alt={brand.name}
-                                className={`
-                                    ${index < 5 ? 'h-6 sm:h-14 md:h-20 lg:h-24' : 'h-5 sm:h-10 md:h-14 lg:h-16'}
-                                    brightness-0 opacity-80 w-auto
-                                `}
-                            />
-                        </div>
-                    ))}
-                </div>
             </div>
+
+            {/* Injected CSS for the smooth marquee effect */}
+            <style dangerouslySetInnerHTML={{ __html: `
+                @keyframes scroll {
+                    0% { transform: translateX(0); }
+                    100% { transform: translateX(-33.33%); }
+                }
+                .animate-infinite-scroll {
+                    display: flex;
+                    width: max-content;
+                    animation: scroll 35s linear infinite;
+                }
+                .animate-infinite-scroll:hover {
+                    animation-play-state: paused;
+                }
+            `}} />
         </section>
     );
 };

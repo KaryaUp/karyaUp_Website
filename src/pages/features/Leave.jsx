@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import FeatureCTA from "../../components/FeatureCTA";
 import leaveImg from "../../assets/Leave.png";
+import { Helmet } from "react-helmet-async";
 
 const leaveTags = [
   "Custom leave types",
@@ -55,14 +56,50 @@ const leaveRequests = [
 
 export default function Leave() {
   return (
-    <div className="min-h-screen bg-white pb-20">
-      <section className="relative overflow-hidden min-h-screen pt-28">
+    <>
+      <Helmet>
+  <title>Leave Management System | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Manage employee leave requests بسهولة with Karyaup. Track approvals, leave balances, and holidays with an efficient leave management system."
+  />
+
+  <meta
+    name="keywords"
+    content="leave management system, employee leave tracking, leave approval workflow, HR management, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Leave Management System | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Simplify leave requests, approvals, and tracking for your team."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/features/leave"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/features/leave"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
         <div className="absolute top-0 right-0 -z-10 h-[580px] w-[580px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
         <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
 
         <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-7xl items-center px-4 sm:px-6 lg:px-8">
           <div className="grid w-full items-start gap-10 lg:grid-cols-2 lg:gap-14">
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -77,7 +114,7 @@ export default function Leave() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-5 text-4xl font-black tracking-tight leading-[1.06] text-slate-900 sm:text-5xl lg:text-6xl"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight leading-[1.06] text-slate-900"
               >
                 Leave
                 <span className="mt-2 block">
@@ -96,7 +133,7 @@ export default function Leave() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mx-auto mt-6 max-w-2xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg lg:mx-0"
+                className="mx-auto mt-5 sm:mt-6 max-w-2xl text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-slate-600 lg:mx-0"
               >
                 A leave policy that actually runs itself. From application to
                 approval to calendar update, every step is automated, every
@@ -108,17 +145,17 @@ export default function Leave() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mx-auto mt-8 grid max-w-xl grid-cols-1 gap-3 sm:grid-cols-2 lg:mx-0"
+                className="mx-auto mt-8 grid w-full max-w-xs grid-cols-2 gap-2 sm:max-w-md sm:gap-3 lg:mx-0"
               >
                 {leaveTags.map((tag) => (
                   <div
                     key={tag}
-                    className="group flex items-center gap-3 rounded-xl border border-slate-200/70 bg-white/90 px-3.5 py-2.5 shadow-sm transition-all duration-300 hover:border-purple-200 hover:bg-purple-50/60"
+                    className="group flex items-center gap-2 sm:gap-3 rounded-xl border border-slate-200/70 bg-white/90 px-3 py-2 sm:px-3.5 sm:py-2.5 shadow-sm transition-all duration-300 hover:border-purple-200 hover:bg-purple-50/60"
                   >
-                    <div className="flex h-5 w-5 items-center justify-center rounded-md border border-purple-200 bg-purple-100">
-                      <Check className="h-3 w-3 stroke-[4] text-[#7e22ce]" />
+                    <div className="flex h-4 w-4 sm:h-5 sm:w-5 items-center justify-center rounded-md border border-purple-200 bg-purple-100">
+                      <Check className="h-2.5 w-2.5 sm:h-3 sm:w-3 stroke-[4] text-[#7e22ce]" />
                     </div>
-                    <span className="truncate text-[10px] font-black uppercase tracking-[0.12em] text-slate-600">
+                    <span className="truncate text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] sm:tracking-[0.12em] text-slate-600">
                       {tag}
                     </span>
                   </div>
@@ -130,15 +167,13 @@ export default function Leave() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-12 lg:-mt-2"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 lg:-mt-2"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/10 to-transparent blur-3xl opacity-60" />
-
               <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white">
                 <div className="relative border-b border-slate-100 bg-slate-50/80 px-6 py-4">
-                  <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <h3 className="flex items-center gap-2 text-3xl font-black tracking-tight text-slate-900">
+                  <div className="flex flex-col items-center text-center gap-4 sm:flex-row sm:items-start sm:justify-between sm:text-left">
+                    <div className="flex flex-col items-center sm:items-start">
+                      <h3 className="flex items-center justify-center gap-2 text-3xl font-black tracking-tight text-slate-900 sm:justify-start">
                         <Plane className="h-7 w-7 text-[#7e22ce]" />
                         Request Leave
                       </h3>
@@ -154,7 +189,7 @@ export default function Leave() {
                   </div>
                 </div>
 
-                <div className="relative px-6 py-4 sm:px-7 sm:py-4">
+                <div className="relative px-6 py-4 text-center sm:px-7 sm:py-4 sm:text-left">
                   <div className="grid gap-4 sm:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-sm font-black text-slate-900">
@@ -195,17 +230,17 @@ export default function Leave() {
                     </div>
                   </div>
 
-                  <div className="mt-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
                     <motion.button
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
-                      className="btn-primary self-start px-6 py-4 text-base font-black"
+                      className="btn-primary self-center px-6 py-4 text-base font-black sm:self-start"
                     >
                       <Send className="h-4 w-4" />
                       Submit Request
                     </motion.button>
 
-                    <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-purple-700">
+                    <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-purple-700">
                       <ClipboardCheck className="h-3.5 w-3.5" />
                       Auto routes to approver
                     </div>
@@ -334,7 +369,7 @@ export default function Leave() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="order-1 lg:order-2"
+              className="order-1 lg:order-2 flex flex-col items-center text-center lg:items-start lg:text-left"
             >
               <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-700">
                 <Layers3 className="h-3.5 w-3.5" />
@@ -358,13 +393,13 @@ export default function Leave() {
                 spreadsheets, and calendars.
               </p>
 
-              <div className="mt-8 space-y-4">
+              <div className="mt-8 space-y-4 w-full max-w-2xl">
                 {[
                   "Every employee request arrives in one prioritized queue",
                   "Managers can approve or reject instantly with full context",
                   "Overlap alerts flag coverage risk before decisions are made",
                 ].map((item) => (
-                  <div key={item} className="flex items-start gap-3">
+                  <div key={item} className="flex items-start justify-center gap-3 text-left lg:justify-start">
                     <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-purple-100 text-[#7e22ce]">
                       <Check className="h-3.5 w-3.5" />
                     </div>
@@ -393,6 +428,7 @@ export default function Leave() {
         imageClassName="w-full max-w-[640px]"
         imageOuterClassName="relative w-[92%] lg:w-[82%] translate-x-0 lg:translate-x-2"
       />
-    </div>
+      </div>
+      </>
   );
 }

@@ -2,19 +2,67 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Check, MessageSquare, Hash, FileText, Reply, Users, Bot, Sparkles, Send } from "lucide-react";
 import { FeatureCard, CTABanner } from "../../components/SubPageLayout";
+
 import FeatureCTA from "../../components/FeatureCTA";
 import agentAssignImg from "../../assets/Agent-Assign.png";
 import chatImg from "../../assets/chat.png";
 
+import { Helmet } from "react-helmet-async";
+
 export default function Chat() {
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+
   return (
-    <div className="min-h-screen bg-white pt-24 pb-0">
+    <>
+      <Helmet>
+        {/* Title (Chrome Tab) */}
+        <title>Team Chat & Collaboration | Karyaup Features</title>
+
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content="Collaborate with your team using Karyaup chat. Message inside projects, tasks, and teams with threaded replies, direct messages, and AI-powered workflows."
+        />
+
+        {/* Keywords */}
+        <meta
+          name="keywords"
+          content="team chat software, project communication tool, collaboration platform, chat inside tasks, AI chat assistant, Karyaup"
+        />
+
+        {/* Author */}
+        <meta name="author" content="Karyaup" />
+
+        {/* Open Graph (Essential Only) */}
+        <meta
+          property="og:title"
+          content="Team Chat & Collaboration | Karyaup"
+        />
+        <meta
+          property="og:description"
+          content="Chat inside projects and tasks with real-time collaboration and AI-powered assistance."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://karyaup.com/features/chat"
+        />
+        <meta property="og:site_name" content="Karyaup" />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://karyaup.com/features/chat"
+        />
+      </Helmet>
+
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       {/* Hero Section */}
-      <section className="relative mb-20">
+      <section className={`relative pt-4 sm:pt-6 lg:pt-8 ${sectionSpacing}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -28,7 +76,7 @@ export default function Chat() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
               >
                 Where Conversations
                 <span className="block mt-2">
@@ -47,7 +95,7 @@ export default function Chat() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-6 space-y-4 max-w-2xl mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-4 max-w-2xl w-full mx-auto lg:mx-0"
               >
                 <div className="flex items-start gap-3.5 text-left">
                   <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
@@ -86,10 +134,8 @@ export default function Chat() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-16"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-
               {/* Chat Card */}
               <div className="relative border border-purple-900/30 rounded-3xl shadow-2xl shadow-purple-900/20 bg-slate-950 overflow-hidden flex flex-col h-[400px] sm:h-[450px]">
                 {/* Glow blobs */}
@@ -187,12 +233,12 @@ export default function Chat() {
       </section>
 
       {/* Three Chat Modes Section */}
-      <section className="bg-slate-50/50 border-y border-slate-200/50 py-20 mt-12 mb-16 relative overflow-hidden">
+      <section className={`${sectionSpacing} bg-slate-50/50 border-y border-slate-200/50 relative overflow-hidden`}>
         {/* Subtle background glow */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-gradient-to-b from-purple-500/5 to-transparent blur-3xl -z-10 pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12 lg:mb-16">
             <motion.h2
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -219,19 +265,19 @@ export default function Chat() {
             </motion.p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8">
             {/* 1. Group Chat */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
               <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-fuchsia-600/15 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10 w-12 h-12 rounded-2xl bg-emerald-100 border border-emerald-200 flex items-center justify-center mb-6 text-emerald-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
+              <div className="relative z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-emerald-100 border border-emerald-200 flex items-center justify-center mb-4 sm:mb-6 text-emerald-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
                 <Users className="w-6 h-6" />
               </div>
-              <h3 className="relative z-10 text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-3">Group Chat</h3>
-              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-8 min-h-[48px] transition-colors duration-500">"Collaborate with your entire team in real time"</p>
-              <div className="relative z-10 space-y-4">
+              <h3 className="relative z-10 text-xl sm:text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-2 sm:mb-3">Group Chat</h3>
+              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-5 sm:mb-8 min-h-0 sm:min-h-[48px] transition-colors duration-500">"Collaborate with your entire team in real time"</p>
+              <div className="relative z-10 space-y-3 sm:space-y-4">
                 {["Team discussions", "File sharing", "Mentions & threads", "Instant updates"].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors duration-500">
@@ -244,17 +290,17 @@ export default function Chat() {
             </div>
 
             {/* 2. Personal Chat */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-fuchsia-600/15 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10 w-12 h-12 rounded-2xl bg-blue-100 border border-blue-200 flex items-center justify-center mb-6 text-blue-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
+              <div className="relative z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-blue-100 border border-blue-200 flex items-center justify-center mb-4 sm:mb-6 text-blue-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
                 <MessageSquare className="w-6 h-6" />
               </div>
-              <h3 className="relative z-10 text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-3">Personal Chat</h3>
-              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-8 min-h-[48px] transition-colors duration-500">"Quick 1:1 conversations without noise"</p>
-              <div className="relative z-10 space-y-4">
+              <h3 className="relative z-10 text-xl sm:text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-2 sm:mb-3">Personal Chat</h3>
+              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-5 sm:mb-8 min-h-0 sm:min-h-[48px] transition-colors duration-500">"Quick 1:1 conversations without noise"</p>
+              <div className="relative z-10 space-y-3 sm:space-y-4">
                 {["Direct messaging", "Fast decision-making", "Private discussions"].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors duration-500">
@@ -267,17 +313,17 @@ export default function Chat() {
             </div>
 
             {/* 3. Project-Based Chat */}
-            <div className="bg-white border border-slate-200 rounded-3xl p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
+            <div className="bg-white border border-slate-200 rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/40 relative overflow-hidden group hover:bg-slate-950 hover:border-purple-500/50 hover:shadow-2xl hover:shadow-purple-900/30 transition-all duration-500 cursor-default">
               <div className="absolute top-0 right-0 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none group-hover:opacity-0 transition-opacity duration-500" />
               <div className="absolute top-0 right-0 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-fuchsia-600/15 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10 w-12 h-12 rounded-2xl bg-purple-100 border border-purple-200 flex items-center justify-center mb-6 text-purple-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
+              <div className="relative z-10 w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-100 border border-purple-200 flex items-center justify-center mb-4 sm:mb-6 text-purple-600 group-hover:bg-purple-900/40 group-hover:border-purple-500/30 group-hover:text-purple-400 transition-colors duration-500">
                 <Hash className="w-6 h-6" />
               </div>
-              <h3 className="relative z-10 text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-3">Project-Based Chat</h3>
-              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-8 min-h-[48px] transition-colors duration-500">"Every project gets its own conversation space"</p>
-              <div className="relative z-10 space-y-4">
+              <h3 className="relative z-10 text-xl sm:text-2xl font-black text-slate-900 group-hover:text-white transition-colors duration-500 mb-2 sm:mb-3">Project-Based Chat</h3>
+              <p className="relative z-10 text-slate-600 group-hover:text-slate-300 font-medium mb-5 sm:mb-8 min-h-0 sm:min-h-[48px] transition-colors duration-500">"Every project gets its own conversation space"</p>
+              <div className="relative z-10 space-y-3 sm:space-y-4">
                 {["Chat inside projects", "Context never lost", "Link tasks, files, updates"].map((item, i) => (
                   <div key={i} className="flex items-center gap-3">
                     <div className="w-5 h-5 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0 group-hover:bg-purple-500/20 group-hover:text-purple-400 transition-colors duration-500">
@@ -300,7 +346,7 @@ export default function Chat() {
 
 
       {/* AI Agent Section */}
-      <section className="relative bg-slate-950 py-8 lg:py-12 overflow-hidden w-full mt-10">
+      <section className={`${sectionSpacing} relative bg-slate-950 overflow-hidden w-full`}>
         {/* Animated Cyber/Circuit Background mimicking reference image */}
         <div className="absolute top-0 left-0 w-full h-full opacity-30 pointer-events-none select-none overflow-hidden">
           <svg className="w-full h-full" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -464,9 +510,10 @@ export default function Chat() {
         description="Communicate seamlessly within your tasks, documents, and workflows—so you never lose context."
         image={chatImg}
         imageAlt="KaryaUp Chat Interface"
-        containerClassName="mt-10 mb-6"
-        paddingClassName="p-3 lg:p-4 lg:py-6"
+        containerClassName="mt-8 sm:mt-10 lg:mt-12"
+        paddingClassName="p-3 pt-6 sm:p-4 lg:p-4 lg:py-6"
       />
-    </div>
+      </div>
+      </>
   );
 }

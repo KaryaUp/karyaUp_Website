@@ -12,6 +12,8 @@ import Solutions from "./pages/Solutions";
 import Resources from "./pages/Resources";
 import Pricing from "./pages/Pricing";
 import Privacy from "./pages/Privacy";
+import TermsOfService from "./pages/TermsOfService";
+import Disclaimer from "./pages/Disclaimer";
 import Login from "./pages/Login";
 import StartWorkspace from "./pages/StartWorkspace";
 import BookDemo from "./pages/BookDemo";
@@ -40,6 +42,7 @@ import Scheduling from "./pages/features/Scheduling";
 import Automations from "./pages/features/Automations";
 import FeaturesTimeTracking from "./pages/features/FeaturesTimeTracking";
 import Integrations from "./pages/features/Integrations";
+import WatchDemo from "./pages/features/Watch_Demo";
 
 // Solutions sub-pages
 import SolProjectManagement from "./pages/solutions/SolProjectManagement";
@@ -56,6 +59,7 @@ import Agency from "./pages/solutions/Agency";
 import TemplateProjectManagement from "./pages/solutions/TemplateProjectManagement";
 import TemplateCRM from "./pages/solutions/TemplateCRM";
 import TemplateMarketing from "./pages/solutions/TemplateMarketing";
+
 
 // Resources sub-pages
 import Blog from "./pages/resources/Blog";
@@ -78,6 +82,9 @@ function App() {
           <Route path="/resources" element={<Resources />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/privacy" element={<Privacy />} />
+          <Route path="/privacy-policy" element={<Privacy />} />
+          <Route path="/terms-of-service" element={<TermsOfService />} />
+          <Route path="/disclaimer" element={<Disclaimer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/start" element={<StartWorkspace />} />
           <Route path="/book-demo" element={<BookDemo />} />
@@ -105,6 +112,7 @@ function App() {
           <Route path="/features/automations" element={<Automations />} />
           <Route path="/features/time-tracking" element={<FeaturesTimeTracking />} />
           <Route path="/features/integrations" element={<Integrations />} />
+          <Route path="/features/demo" element={<WatchDemo />} />
 
           {/* Solutions sub-pages — Teams */}
           

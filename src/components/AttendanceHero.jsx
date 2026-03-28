@@ -3,21 +3,14 @@ import { motion } from "framer-motion";
 import { Check, Clock, Activity, FileText, Download } from "lucide-react";
 
 export default function AttendanceHero() {
-  const tags = [
-    "Auto check-in",
-    "Real-time logs",
-    "Timesheets",
-    "Audit-ready exports",
-  ];
-
   return (
-    <section className="relative w-full overflow-hidden bg-white pt-24 pb-20">
+    <section className="relative w-full overflow-hidden bg-white pt-8 sm:pt-10 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
       <div className="absolute top-0 right-0 -z-10 h-[600px] w-[600px] translate-x-1/4 -translate-y-1/2 rounded-full bg-purple-100/60 blur-[120px]" />
       <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] -translate-x-1/4 translate-y-1/2 rounded-full bg-fuchsia-100/40 blur-[100px]" />
 
-      <div className="mx-auto max-w-7xl px-6 md:px-16">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          <div>
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 md:px-16">
+        <div className="grid items-center gap-8 sm:gap-10 lg:gap-14 lg:grid-cols-2">
+          <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -25,18 +18,18 @@ export default function AttendanceHero() {
               className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-100 px-4 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700 shadow-sm"
             >
               <Activity size={14} className="animate-pulse" />
-              Management <span className="opacity-40">/</span> Monitoring
+              Management <span className="opacity-40">/</span> Attendance
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="mt-6 text-5xl font-black tracking-tight leading-[1.05] text-slate-900 md:text-6xl lg:text-7xl"
+              className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
             >
               Attendance{" "}
               <span className="mt-2 block">
-                tracked.{" "}
+                tracked.<br />{" "}
                 <motion.span
                   className="bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -51,7 +44,7 @@ export default function AttendanceHero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-              className="mt-8 max-w-xl text-lg font-medium leading-relaxed text-slate-600 md:text-xl"
+              className="mt-4 sm:mt-5 text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed max-w-xl mx-auto lg:mx-0"
             >
               Presence tracked. Records kept. No follow-ups required. Attendance
               logs itself in real time so your data is always clean, compliant,
@@ -62,19 +55,17 @@ export default function AttendanceHero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.3 }}
-              className="mt-10 grid max-w-lg grid-cols-1 gap-4 sm:grid-cols-2"
+              className="mt-4 sm:mt-5 grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md"
             >
-              {tags.map((tag) => (
+              {["Auto check-in", "Real-time logs", "Timesheets", "Audit-ready exports"].map((tag) => (
                 <div
                   key={tag}
-                  className="group flex items-center gap-3 rounded-2xl border border-slate-100 bg-white p-3 shadow-sm transition-all hover:border-purple-200 hover:shadow-md"
+                  className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300"
                 >
-                  <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-purple-100 transition-transform group-hover:scale-110">
-                    <Check size={14} className="stroke-[4] text-[#7e22ce]" />
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Check className="w-2.5 h-2.5 text-emerald-600 stroke-[4]" />
                   </div>
-                  <span className="text-[11px] font-black uppercase tracking-wider text-slate-600">
-                    {tag}
-                  </span>
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] text-slate-600 truncate">{tag}</span>
                 </div>
               ))}
             </motion.div>
@@ -84,10 +75,8 @@ export default function AttendanceHero() {
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative"
+            className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0"
           >
-            <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/10 to-transparent blur-3xl opacity-60" />
-
             <div className="relative z-10 overflow-hidden rounded-[3rem] border border-purple-900/30 bg-slate-950 p-4 shadow-2xl shadow-purple-900/20">
               <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-purple-600/15 blur-[60px]" />
               <div className="pointer-events-none absolute bottom-0 left-0 h-64 w-64 rounded-full bg-fuchsia-600/15 blur-[60px]" />
@@ -145,7 +134,7 @@ export default function AttendanceHero() {
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <button type="button" className="btn-primary flex-1 px-6 py-4">
+                  <button type="button" className="btn-primary flex-1 px-6 py-4 !border-0 !ring-0 !outline-none">
                     <FileText size={16} className="text-white" />
                     <span className="text-[11px] font-black uppercase tracking-wider text-white">
                       Export Audit Log

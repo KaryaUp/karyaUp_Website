@@ -4,27 +4,27 @@ import { motion } from "framer-motion";
 
 export default function TeamInfoSection() {
   return (
-    <section className="w-full py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-50">
-      
-      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        
+    <section className="w-full py-8 sm:py-10 lg:py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-50">
+
+      <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-8 lg:gap-10 items-center">
+
         {/* LEFT CONTENT */}
-        <div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1]">
-            Your Team.{" "}
+        <div className="text-center md:text-left flex flex-col items-center md:items-start">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]">
+            Your Team.{" "}Organized.<br />
             <span className="text-gradient">
-              Organized. Scalable.
+              Scalable.
             </span>
           </h2>
 
-          <p className="mt-5 text-lg sm:text-xl font-bold text-slate-800/90 leading-relaxed">
+          <p className="mt-5 text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
             Manage roles, control access, and keep everyone aligned — all from one
             unified workspace designed for growing teams.
           </p>
 
           {/* FEATURES */}
-          <div className="mt-10 space-y-6">
-            
+          <div className="mt-10 space-y-6 w-full max-w-sm sm:max-w-md mx-auto md:mx-0 text-left">
+
             <div className="flex items-start gap-4">
               <Users className="text-[#7e22ce]" size={26} />
               <div>
@@ -67,7 +67,7 @@ export default function TeamInfoSection() {
 
           </div>
 
-          
+
         </div>
 
         {/* RIGHT SIDE (UI MOCK / CARD STYLE) */}
@@ -81,14 +81,14 @@ export default function TeamInfoSection() {
           <div className="absolute -inset-4 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 rounded-[3rem] blur-2xl -z-10" />
 
           <div className="bg-white/80 backdrop-blur-2xl border border-slate-200/60 rounded-[2.5rem] p-8 shadow-2xl shadow-indigo-900/10">
-            
+
             <h4 className="font-black text-slate-900 text-xl mb-6 flex items-center gap-3">
               <div className="w-2 h-6 bg-purple-600 rounded-full" />
               Team Overview
             </h4>
 
             <div className="space-y-4">
-              
+
               {["Priya Mehta", "Arjun Shah", "Sara Nair"].map((name, i) => {
                 const roles = ["Admin", "Manager", "Member"];
                 const role = roles[i];
@@ -110,8 +110,8 @@ export default function TeamInfoSection() {
                     </div>
 
                     <div className="flex items-center gap-2">
-                       <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                       <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Active</span>
+                      <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                      <span className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">Active</span>
                     </div>
                   </div>
                 );

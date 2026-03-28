@@ -4,10 +4,54 @@ import { Bell, Shield, BellOff, Zap, CheckCircle2, ArrowRight } from "lucide-rea
 import { FeatureCard, CTABanner } from "../../components/SubPageLayout";
 import FeatureCTA from "../../components/FeatureCTA";
 import notificationImg from "../../assets/Notification.png";
+import { Helmet } from "react-helmet-async";
 
 export default function Notifications() {
   return (
-    <div className="min-h-screen bg-white pt-20 pb-0 text-slate-900">
+    <>
+       <Helmet>
+        {/* Title (Chrome Tab) */}
+        <title>Real-Time Notifications & Alerts | Karyaup</title>
+
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content="Stay updated with real-time notifications in Karyaup. Get instant alerts for tasks, messages, mentions, and project updates to never miss important activity."
+        />
+
+        {/* Keywords */}
+        <meta
+          name="keywords"
+          content="real-time notifications, task alerts, team updates, activity tracking, project notifications, Karyaup"
+        />
+
+        {/* Author */}
+        <meta name="author" content="Karyaup" />
+
+        {/* Open Graph (Essential Only) */}
+        <meta
+          property="og:title"
+          content="Real-Time Notifications & Alerts | Karyaup"
+        />
+        <meta
+          property="og:description"
+          content="Receive instant alerts for tasks, messages, and team activity in one place."
+        />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://karyaup.com/features/notifications"
+        />
+        <meta property="og:site_name" content="Karyaup" />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://karyaup.com/features/notifications"
+        />
+      </Helmet>
+
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       {/* Hero Section */}
       <section className="relative mb-12 overflow-hidden">
         {/* Ambient Background Glows */}
@@ -17,7 +61,7 @@ export default function Notifications() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-[1.3fr_2fr] gap-12 items-center">
             {/* Left Content - Compact High Density */}
-            <div className="text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+            <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -36,7 +80,7 @@ export default function Notifications() {
                   stiffness: 100,
                   delay: 0.1
                 }}
-                className="mt-3.5 text-4xl sm:text-5xl lg:text-5.5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-3"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06] mb-3"
               >
                 Stay connected with Smart
                 <span className="block mt-1">
@@ -95,18 +139,14 @@ export default function Notifications() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-12 bg-gradient-to-tr from-purple-600/15 via-fuchsia-500/8 to-transparent blur-3xl opacity-50" />
-              
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white group transition-all duration-500 hover:border-purple-300/30">
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white group transition-all duration-500 hover:border-purple-300/30">
                  <img 
                    src={notificationImg} 
                    alt="KaryaUp Notifications Interface" 
-                   className="w-full h-[320px] sm:h-[380px] lg:h-[450px] object-cover object-left shadow-sm transition-transform duration-700 group-hover:scale-[1.01]"
+                   className="w-full h-[220px] sm:h-[300px] md:h-[380px] lg:h-[460px] xl:h-[500px] object-cover object-left shadow-sm transition-transform duration-700 group-hover:scale-[1.01]"
                  />
-                 {/* Dashboard-style fade mask */}
-                 <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-64 bg-gradient-to-r from-transparent via-white/70 to-white" />
               </div>
             </motion.div>
           </div>
@@ -117,7 +157,6 @@ export default function Notifications() {
       <FeatureCTA
         title={<>Silence the noise. <br /> Focus on what matters.</>}
         description="With our smart inbox, filter your feed to show only what requires your direct attention. "
-        buttonText="Explore Smart Filters"
         image={notificationImg}
         imageAlt="Smart Notification Filtering"
         containerClassName="mt-20 mb-12"
@@ -127,6 +166,7 @@ export default function Notifications() {
    
 
      
-    </div>
+      </div>
+      </>
   );
 }

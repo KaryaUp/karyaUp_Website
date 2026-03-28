@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Rocket, Users, Cpu, TrendingUp, UserCircle2 } from 'lucide-react';
 
@@ -60,61 +60,232 @@ const teams = [
   },
 ];
 
+const CARD_ADVANCE_DELAY = 700; // ms between card changes (fast scroll still waits this)
+
 const TeamsSection = () => {
   const [active, setActive] = useState(0);
+
+  // ── refs (no stale closures) ──
+  const sectionRef     = useRef(null);
+  const rightPanelRef  = useRef(null);
+  const activeRef      = useRef(0);
+  const isInsideRef    = useRef(false); // true = section is in viewport
+  const completedRef   = useRef(false); // true = all cards have been shown going down
+  const lastAdvance    = useRef(0);     // timestamp of last card change
+  const wheelBuffer    = useRef(0);     // accumulated deltaY for fast-scroll
+  const bufferTimer    = useRef(null);  // resets buffer after idle
+
+  useEffect(() => { activeRef.current = active; }, [active]);
+
+  // ── scroll the window to pin the section top exactly at viewport top ──
+  const snapSectionToTop = useCallback(() => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    if (Math.abs(rect.top) > 2) {
+      window.scrollBy({ top: rect.top, behavior: 'smooth' });
+    }
+  }, []);
+
+  useEffect(() => {
+    // ── IntersectionObserver: detect enter / leave ──
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isInsideRef.current = entry.isIntersecting && entry.intersectionRatio >= 0.5;
+
+        if (isInsideRef.current) {
+          // Reset completion state when entering from top
+          const rect = sectionRef.current?.getBoundingClientRect();
+          if (rect && rect.top >= 0) {
+            // entering from above → start from first card
+            completedRef.current = false;
+            activeRef.current = 0;
+            setActive(0);
+          }
+          snapSectionToTop();
+        }
+      },
+      { threshold: [0.8] }
+    );
+
+    if (rightPanelRef.current) observer.observe(rightPanelRef.current);
+
+    // ── Wheel handler ──
+    const onWheel = (e) => {
+      if (!isInsideRef.current) return;
+
+      const now = Date.now();
+      const idx = activeRef.current;
+      const goingDown = e.deltaY > 0;
+      const goingUp   = e.deltaY < 0;
+
+      // Accumulate wheel delta to detect fast scrolling intent
+      clearTimeout(bufferTimer.current);
+      wheelBuffer.current += e.deltaY;
+      bufferTimer.current = setTimeout(() => { wheelBuffer.current = 0; }, 150);
+
+      // ── Scrolling DOWN ──
+      if (goingDown) {
+        if (idx < teams.length - 1) {
+          // Still have cards left — always block and advance
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (now - lastAdvance.current < CARD_ADVANCE_DELAY) return; // throttle
+          lastAdvance.current = now;
+          wheelBuffer.current = 0;
+
+          const next = Math.min(teams.length - 1, idx + 1);
+          activeRef.current = next;
+          setActive(next);
+          snapSectionToTop();
+          return;
+        } else {
+          // On last card — mark complete and allow scroll out
+          completedRef.current = true;
+          // let native scroll happen
+        }
+      }
+
+      // ── Scrolling UP ──
+      if (goingUp) {
+        if (idx > 0) {
+          // Still have cards going back — block and reverse
+          e.preventDefault();
+          e.stopPropagation();
+
+          if (now - lastAdvance.current < CARD_ADVANCE_DELAY) return;
+          lastAdvance.current = now;
+          wheelBuffer.current = 0;
+
+          const prev = Math.max(0, idx - 1);
+          activeRef.current = prev;
+          setActive(prev);
+          snapSectionToTop();
+          return;
+        }
+        // On first card scrolling up — let native scroll happen (go to prev section)
+      }
+    };
+
+    // ── Key handler (arrow keys / page down) ──
+    const onKeyDown = (e) => {
+      if (!isInsideRef.current) return;
+      const idx = activeRef.current;
+
+      if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+        if (idx < teams.length - 1) {
+          e.preventDefault();
+          const next = idx + 1;
+          activeRef.current = next;
+          setActive(next);
+        }
+      }
+      if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+        if (idx > 0) {
+          e.preventDefault();
+          const prev = idx - 1;
+          activeRef.current = prev;
+          setActive(prev);
+        }
+      }
+    };
+
+    // ── Touch support ──
+    let touchStartY = 0;
+    let touchLocked = false;
+    const onTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY;
+      touchLocked = false;
+    };
+    const onTouchMove = (e) => {
+      if (!isInsideRef.current) return;
+      const diff = touchStartY - e.touches[0].clientY;
+      const idx  = activeRef.current;
+
+      if (!touchLocked && Math.abs(diff) > 40) {
+        touchLocked = true;
+        if (diff > 0 && idx < teams.length - 1) {
+          e.preventDefault();
+          const next = idx + 1;
+          activeRef.current = next;
+          setActive(next);
+          touchStartY = e.touches[0].clientY;
+        } else if (diff < 0 && idx > 0) {
+          e.preventDefault();
+          const prev = idx - 1;
+          activeRef.current = prev;
+          setActive(prev);
+          touchStartY = e.touches[0].clientY;
+        }
+      } else if (touchLocked) {
+        e.preventDefault();
+      }
+    };
+
+    // Use capture phase so we intercept before anything else
+    window.addEventListener('wheel',      onWheel,    { passive: false, capture: true });
+    window.addEventListener('keydown',    onKeyDown,  { capture: true });
+    window.addEventListener('touchstart', onTouchStart, { passive: true });
+    window.addEventListener('touchmove',  onTouchMove,  { passive: false, capture: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('wheel',      onWheel,    { capture: true });
+      window.removeEventListener('keydown',    onKeyDown,  { capture: true });
+      window.removeEventListener('touchstart', onTouchStart);
+      window.removeEventListener('touchmove',  onTouchMove, { capture: true });
+      clearTimeout(bufferTimer.current);
+    };
+  }, [snapSectionToTop]);
+
   const team = teams[active];
   const Icon = team.icon;
 
   return (
-    <section className="py-10 sm:py-12 bg-white relative overflow-hidden">
+    <section
+      ref={sectionRef}
+      className="py-10 sm:py-12 bg-white relative overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-12 text-center flex flex-col items-center"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-6 uppercase tracking-widest">
+        <div className="mb-10 text-center flex flex-col items-center">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-4 uppercase tracking-widest">
             <Users size={13} /> Who it's for
           </span>
           <h2 className="text-3xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight max-w-3xl mx-auto">
             Built for teams that{' '}
-            <motion.span 
+            <motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
+              animate={{ backgroundPosition: ['0% center', '-200% center'] }}
+              transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
             >
               move fast
             </motion.span>
           </h2>
-        </motion.div>
+        </div>
+
+      
 
         {/* Two-column layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
-          {/* LEFT: mobile selector grid */}
+          {/* Mobile: icon row */}
           <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 lg:hidden">
             {teams.map((t, i) => {
               const TIcon = t.icon;
               const isActive = active === i;
-
               return (
                 <button
                   key={t.label}
-                  onClick={() => setActive(i)}
+                  onClick={() => { activeRef.current = i; setActive(i); }}
                   className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border transition-all ${
-                    isActive
-                      ? `${t.bg} border-purple-200 shadow-sm`
-                      : 'border-slate-200 bg-white'
+                    isActive ? `${t.bg} border-purple-200 shadow-sm` : 'border-slate-200 bg-white'
                   }`}
                 >
-                  <div
-                    className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
-                      isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
-                    }`}
-                  >
+                  <div className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
+                    isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
+                  }`}>
                     <TIcon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
                   </div>
                 </button>
@@ -122,7 +293,7 @@ const TeamsSection = () => {
             })}
           </div>
 
-          {/* LEFT: stacked selectable rows */}
+          {/* LEFT: stacked rows — desktop */}
           <div className="hidden lg:col-span-4 lg:flex lg:flex-col lg:divide-y lg:divide-slate-100">
             {teams.map((t, i) => {
               const TIcon = t.icon;
@@ -130,77 +301,75 @@ const TeamsSection = () => {
               return (
                 <motion.button
                   key={t.label}
-                  onClick={() => setActive(i)}
-                  whileHover={{ x: 6 }}
+                  onClick={() => { activeRef.current = i; setActive(i); }}
+                  whileHover={{ x: 4 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   className="flex items-center gap-5 py-5 text-left group w-full"
                 >
-                  {/* Active indicator line */}
                   <motion.div
                     animate={{ height: isActive ? '48px' : '24px', opacity: isActive ? 1 : 0.2 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 28 }}
                     className={`w-1 rounded-full bg-gradient-to-b ${t.gradient} flex-shrink-0`}
                   />
-
-                  {/* Circular icon */}
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'}`}
+                  <motion.div
+                    animate={{ scale: isActive ? 1.1 : 1 }}
+                    transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
+                      isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
+                    }`}
                   >
                     <TIcon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
-                  </div>
-
+                  </motion.div>
                   <div>
-                    <p className={`text-base font-black transition-colors duration-200 ${isActive ? 'text-slate-900' : 'text-slate-400 group-hover:text-slate-700'}`}>
+                    <motion.p
+                      animate={{ color: isActive ? '#0f172a' : '#94a3b8' }}
+                      className="text-base font-black"
+                    >
                       {t.label}
-                    </p>
-                    {isActive && (
-                      <motion.p
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        className="text-xs text-slate-400 font-medium mt-0.5"
-                      >
-                        {t.result}
-                      </motion.p>
-                    )}
+                    </motion.p>
+                    <AnimatePresence>
+                      {isActive && (
+                        <motion.p
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.25 }}
+                          className="text-xs text-slate-400 font-medium mt-0.5 overflow-hidden"
+                        >
+                          {t.result}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </motion.button>
               );
             })}
           </div>
 
-          {/* RIGHT: 3D detail panel */}
-          <div className="lg:col-span-8" style={{ perspective: '1000px' }}>
+          {/* RIGHT: detail panel */}
+          <div className="lg:col-span-8" ref={rightPanelRef}>
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
-                initial={{ opacity: 0, x: 32 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -24 }}
-                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className={`relative overflow-hidden rounded-3xl border border-slate-100 p-6 sm:p-10 lg:p-12 ${team.bg}`}
               >
-                {/* Icon display */}
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16"
-                  style={{ transform: 'translateZ(20px)' }}
-                >
-                  <Icon size={28} style={{ color: team.accentColor || '#7e22ce' }} className={`bg-clip-text text-transparent bg-gradient-to-br ${team.gradient}`} />
+                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16">
+                  <Icon size={28} style={{ color: '#7e22ce' }} />
                 </div>
-
-                {/* Content */}
-                <div style={{ transform: 'translateZ(10px)' }}>
+                <div>
                   <span className={`text-xs font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
                     {team.label}
                   </span>
-
                   <h3 className="mt-2 mb-4 text-xl font-black leading-snug text-slate-900 sm:text-3xl">
                     {team.headline}
                   </h3>
-
                   <p className="mb-7 text-sm font-medium italic text-slate-500 sm:mb-10 sm:text-base">
                     "{team.result}"
                   </p>
-
-                  {/* Visual Statistic */}
                   <div className="flex flex-col gap-1">
                     <div className="flex items-baseline gap-2">
                       <span className={`text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r sm:text-4xl ${team.textGrad}`}>
@@ -216,10 +385,14 @@ const TeamsSection = () => {
                     </p>
                   </div>
                 </div>
+
+                {/* Card counter */}
+                <div className="absolute bottom-5 right-6 text-xs font-bold text-slate-300 tracking-widest">
+                  {active + 1} / {teams.length}
+                </div>
               </motion.div>
             </AnimatePresence>
           </div>
-
         </div>
       </div>
     </section>

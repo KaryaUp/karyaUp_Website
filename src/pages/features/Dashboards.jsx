@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Activity, Zap, BarChart3, PieChart, TrendingUp, LayoutDashboard, Share2, MousePointer2, Crown, Rocket, Target, BarChart4 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 // Assets
 import logo from "../../assets/logo.png";
@@ -13,7 +14,43 @@ import FeatureCTA from "../../components/FeatureCTA";
 
 export default function Dashboards() {
   return (
-    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20">
+    <>
+        <Helmet>
+        {/* Title (Chrome Tab) */}
+        <title>Smart Business Dashboards | Karyaup Features</title>
+
+        {/* Meta Description */}
+        <meta
+          name="description"
+          content="Build custom dashboards with real-time metrics in Karyaup. Track business performance, project progress, sales growth, and team productivity from a single platform."
+        />
+
+        {/* Keywords */}
+        <meta
+          name="keywords"
+          content="business dashboard software, custom dashboards, real-time analytics, project tracking dashboard, team performance tools, Karyaup"
+        />
+
+        {/* Author */}
+        <meta name="author" content="Karyaup" />
+
+        {/* Open Graph (only essential) */}
+        <meta property="og:title" content="Smart Business Dashboards | Karyaup" />
+        <meta
+          property="og:description"
+          content="Monitor sales, projects, and team performance with powerful real-time dashboards."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/dashboards" />
+        <meta property="og:site_name" content="Karyaup" />
+
+        {/* Canonical URL */}
+        <link
+          rel="canonical"
+          href="https://karyaup.com/features/dashboards"
+        />
+      </Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       {/* Hero Section */}
       <section className="relative pt-4 sm:pt-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -95,16 +132,14 @@ export default function Dashboards() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-24 xl:-mr-40"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
                 <img
                   src={dashboardImg2}
                   alt="KaryaUp Dashboard"
-                  className="w-full h-[240px] sm:h-[380px] lg:h-[450px] object-cover object-left"
+                  className="w-full h-[220px] sm:h-[300px] md:h-[380px] lg:h-[460px] xl:h-[500px] object-cover object-left"
                 />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
               </div>
             </motion.div>
           </div>
@@ -230,6 +265,7 @@ export default function Dashboards() {
         imageAlt="KaryaUp Dashboard Interface"
         containerClassName="mt-12 sm:mt-16 lg:mt-24"
       />
-    </div>
+      </div>
+      </>
   );
 }

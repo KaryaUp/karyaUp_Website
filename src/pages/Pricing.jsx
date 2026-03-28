@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import NumberFlow from "@number-flow/react";
 import microsoftTeamsLogo from "../assets/MicrosoftTeam.png";
+import { Helmet } from "react-helmet-async";
 
 const authUrl = "https://karyaup.com/auth";
 
@@ -203,6 +204,42 @@ export default function Pricing() {
   const savings = currentTotal - karyaUpPrice;
 
   return (
+    <>
+      <Helmet>
+  <title>Pricing Plans & Cost | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Explore Karyaup pricing plans designed for teams of all sizes. Choose the right plan to manage tasks, projects, and workflows with powerful features."
+  />
+
+  <meta
+    name="keywords"
+    content="pricing plans, SaaS pricing, project management pricing, team software cost, Karyaup pricing, free plan"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Pricing Plans & Cost | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Flexible pricing plans for teams to manage projects, tasks, and workflows."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/pricing"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/pricing"
+  />
+</Helmet>
     <div className="min-h-screen bg-white font-sans selection:bg-purple-100 italic-none relative overflow-visible">
 
       <div className="relative z-10">
@@ -281,9 +318,6 @@ export default function Pricing() {
                   key={plan.name}
                   initial={{ opacity: 0, y: 40 }}
                   animate={{ opacity: 1, y: 0 }}
-                  whileHover={{ 
-                    backgroundColor: plan.popular ? undefined : "rgba(241, 245, 249, 0.9)", 
-                  }}
                   transition={{ 
                     layout: { duration: 0.3 },
                     type: "spring",
@@ -292,7 +326,7 @@ export default function Pricing() {
                     mass: 0.8
                   }}
                   style={{ backgroundColor: plan.popular ? undefined : theme.surface }}
-                  className={`group relative cursor-pointer rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 border transition-all duration-500 flex flex-col hover:border-slate-200 shadow-[0_25px_50px_-12px_rgba(59,42,90,0.2)] hover:shadow-[0_50px_100px_-20px_rgba(59,42,90,0.35)] will-change-transform ${
+                  className={`group relative rounded-[2rem] sm:rounded-[2.5rem] p-6 sm:p-8 lg:p-10 border transition-all duration-500 flex flex-col shadow-[0_25px_50px_-12px_rgba(59,42,90,0.2)] will-change-transform ${
                     plan.popular 
                       ? 'bg-[radial-gradient(circle_at_70%_10%,#4c1d95_0%,#2a1244_35%,#14081f_100%)] border-white/20' 
                       : 'border-white'
@@ -300,7 +334,7 @@ export default function Pricing() {
                 >
                   <motion.div
                     className={`absolute inset-0 rounded-[2rem] sm:rounded-[2.5rem] pointer-events-none border-2 border-transparent transition-colors duration-500 ${
-                      plan.popular ? 'group-hover:border-white/30' : 'group-hover:border-purple-200/50'
+                      plan.popular ? 'border-transparent' : 'border-transparent'
                     }`}
                   />
                   {plan.popular && (
@@ -346,14 +380,17 @@ export default function Pricing() {
 
                     <a
                       href={plan.name === "Enterprise" ? "/contact-us" : authUrl}
-                      className={`w-full py-3 sm:py-4 rounded-full font-black transition-all flex items-center justify-center gap-2 text-sm sm:text-base ${
-                        plan.popular 
-                          ? 'bg-white text-[#7e22ce] hover:bg-slate-50 shadow-xl shadow-purple-900/30 active:scale-95' 
-                          : 'btn-primary'
-                      }`}
+                      className="group relative z-10 flex h-[3.4em] w-full items-center justify-center overflow-hidden rounded-[30em] font-bold text-[14px] sm:text-[15px] transition-all duration-300 active:scale-95"
+                      style={{
+                        boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)"
+                      }}
                     >
-                      {plan.buttonText}
-                      <ArrowRight size={16} />
+                      <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                      <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full group-active:w-full" />
+                      <span className="relative z-10 flex items-center justify-center gap-2 text-white transition-colors duration-300 group-hover:text-slate-800 group-active:text-slate-800">
+                        {plan.buttonText}
+                        <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 group-active:translate-x-1" />
+                      </span>
                     </a>
                   </div>
                 </motion.div>
@@ -405,9 +442,16 @@ export default function Pricing() {
                               </div>
                               <a
                                 href={plan.name === "Enterprise" ? "/contact-us" : authUrl}
-                                className="mt-1 sm:mt-2 btn-primary rounded-full px-3 sm:px-6 py-1.5 sm:py-2 text-[10px] sm:text-xs font-black transition-all"
+                                className="group relative mt-1 sm:mt-2 flex h-[2.7em] sm:h-[3em] items-center justify-center overflow-hidden rounded-[30em] bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 px-3 sm:px-6 text-[10px] sm:text-xs font-black transition-all duration-300 active:scale-95"
+                                style={{
+                                  boxShadow: "0 12px 28px rgba(126, 34, 206, 0.18)"
+                                }}
                               >
-                                {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                                <div className="absolute left-0 top-0 z-0 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full group-active:w-full" />
+                                <span className="relative z-10 flex items-center justify-center gap-1.5 text-white transition-colors duration-300 group-hover:text-slate-800 group-active:text-slate-800">
+                                  {plan.name === 'Enterprise' ? 'Contact Sales' : 'Get Started'}
+                                  <ArrowRight size={12} className="transition-transform group-hover:translate-x-0.5 group-active:translate-x-0.5" />
+                                </span>
                               </a>
                             </div>
                           </th>
@@ -573,8 +617,19 @@ export default function Pricing() {
                   </div>
                 </div>
 
-                <a href={authUrl} className="w-full btn-primary rounded-full py-3 sm:py-3.5 font-black text-sm shadow-md shadow-purple-900/10 flex items-center justify-center">
-                  Start Saving Today
+                <a
+                  href={authUrl}
+                  className="group relative z-10 flex h-[3.4em] w-full items-center justify-center overflow-hidden rounded-[30em] font-bold text-[14px] sm:text-[15px] transition-all duration-300 active:scale-95"
+                  style={{
+                    boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)"
+                  }}
+                >
+                  <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                  <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full group-active:w-full" />
+                  <span className="relative z-10 flex items-center justify-center gap-2 text-white transition-colors duration-300 group-hover:text-slate-800 group-active:text-slate-800">
+                    Start Saving Today
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 group-active:translate-x-1" />
+                  </span>
                 </a>
               </div>
             </div>
@@ -669,8 +724,7 @@ export default function Pricing() {
         {/* ── Premium CTA ── */}
         <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6 lg:px-8 relative">
           <motion.div 
-            whileHover={{ y: -10 }}
-            className="max-w-6xl mx-auto rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-[3.25rem] p-8 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden text-center shadow-[0_40px_100px_-24px_rgba(126,34,206,0.25)] border border-white/10 group"
+            className="max-w-6xl mx-auto rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-[3.25rem] p-8 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden text-center shadow-[0_40px_100px_-24px_rgba(126,34,206,0.25)] border border-white/10"
           >
             {/* Mesh Gradient Background */}
             <div className="absolute inset-0 bg-[#7e22ce]" />
@@ -724,8 +778,19 @@ export default function Pricing() {
                 everything you need is just one click away.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-                <a href={authUrl} className="px-6 sm:px-7 py-3 sm:py-3.5 bg-white text-[#7e22ce] rounded-[1.5rem] font-black text-sm sm:text-base hover:scale-105 active:scale-95 transition-all shadow-xl hover:shadow-2xl">
-                  Get Started for Free
+                <a
+                  href={authUrl}
+                  className="group relative z-10 flex h-[3.4em] w-full sm:w-auto min-w-[14em] items-center justify-center overflow-hidden rounded-[30em] font-bold text-[14px] sm:text-[15px] transition-all duration-300 active:scale-95"
+                  style={{
+                    boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)"
+                  }}
+                >
+                  <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                  <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full group-active:w-full" />
+                  <span className="relative z-10 flex items-center justify-center gap-2 text-white transition-colors duration-300 group-hover:text-slate-800 group-active:text-slate-800">
+                    Get Started for Free
+                    <ArrowRight size={16} className="transition-transform group-hover:translate-x-1 group-active:translate-x-1" />
+                  </span>
                 </a>
                 <Link to="/contact-us" className="px-6 sm:px-7 py-3 sm:py-3.5 bg-white/10 backdrop-blur-md text-white rounded-[1.5rem] font-black text-sm sm:text-base hover:bg-white/20 transition-all border border-white/20">
                   Contact Sales
@@ -736,6 +801,7 @@ export default function Pricing() {
         </section>
 
       </div>
-    </div>
+      </div>
+      </>
   );
 }

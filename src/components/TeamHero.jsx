@@ -13,7 +13,7 @@ const TeamCapacityPreview = () => {
     <div className="relative border border-white/10 rounded-[2.5rem] shadow-2xl bg-[#0f172a] overflow-hidden p-6 sm:p-8">
       {/* Dark purple gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-purple-900/20 via-slate-900/60 to-indigo-900/20 pointer-events-none" />
-      
+
       {/* Decorative glow blobs */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-64 h-64 bg-fuchsia-600/5 rounded-full blur-[80px] pointer-events-none" />
@@ -98,15 +98,13 @@ const TeamCapacityPreview = () => {
 };
 
 export default function TeamHero() {
-  const tagsList = ["Roles & permissions", "Workload visibility", "Department hierarchy", "Member profiles"];
-
   return (
-    <section className="relative mb-12 lg:mb-16">
+    <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
           {/* Left Content */}
-          <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+          <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -120,7 +118,7 @@ export default function TeamHero() {
               initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-              className="mt-3 text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-[#0f172a] tracking-tight leading-[1.02]"
+              className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
             >
               Structure that{" "}
               <span className="block">
@@ -139,7 +137,7 @@ export default function TeamHero() {
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="mt-4 sm:mt-6 space-y-3"
+              className="mt-4 sm:mt-6 space-y-3 w-full"
             >
               {[
                 "Define roles, distribute ownership, and get complete visibility into how your team's capacity is being used.",
@@ -149,7 +147,7 @@ export default function TeamHero() {
                   <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                     <Check size={10} className="text-[#7e22ce] stroke-[4]" />
                   </div>
-                  <p className="text-base sm:text-lg lg:text-xl text-slate-500 font-medium leading-[1.6]">
+                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
                     {text}
                   </p>
                 </div>
@@ -158,17 +156,20 @@ export default function TeamHero() {
 
             {/* Tags Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-              className="mt-6 grid grid-cols-2 gap-3 max-w-lg mx-auto lg:mx-0"
+              className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md"
             >
-              {tagsList.map((tag) => (
-                <div key={tag} className="group flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-purple-200 transition-all duration-300">
-                  <div className="w-5 h-5 rounded-md bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                    <Check size={10} className="text-[#7e22ce] stroke-[4]" />
+              {["Roles & permissions", "Workload visibility", "Department hierarchy", "Member profiles"].map((tag) => (
+                <div
+                  key={tag}
+                  className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300"
+                >
+                  <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <Check className="w-2.5 h-2.5 text-emerald-600 stroke-[4]" />
                   </div>
-                  <span className="text-[10px] sm:text-[11px] font-black uppercase tracking-[0.1em] text-slate-900 truncate">{tag}</span>
+                  <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] text-slate-600 truncate">{tag}</span>
                 </div>
               ))}
             </motion.div>

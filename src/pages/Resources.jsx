@@ -116,7 +116,7 @@ const sections = {
 const allResources = [
   { label: "Blog", to: "/resources/blog", icon: "📝" },
   { label: "Documentation", to: "/resources/docs", icon: "📄" },
-  { label: "Demo", to: "/resources/demo", icon: "🖥️" },
+  { label: "Book Demo", to: "/book-demo", icon: "📅" },
   { label: "Video Tutorials", to: "/resources/tutorials", icon: "▶️" },
 ];
 

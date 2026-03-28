@@ -1,329 +1,279 @@
-import React, { useMemo, useState } from "react";
-import SubPageLayout, { CTABanner } from "../../components/SubPageLayout";
+                                                  import { useRef, useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import dashboardImage from "../../assets/dashboard2.png";
+import planImage from "../../assets/Gantt.png";
+import karyaUpLogo from "../../assets/Logo(2).png";
+import FeatureCTA from "../../components/FeatureCTA";
+
+/* ═══════════════════════════════════════════════
+   ICONS
+═══════════════════════════════════════════════ */
+const CheckIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13"><polyline points="3,9 7,13 13,5" /></svg>
+);
+const XIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="13" height="13"><line x1="4" y1="4" x2="12" y2="12" /><line x1="12" y1="4" x2="4" y2="12" /></svg>
+);
+const ListIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" width="11" height="11">
+    <line x1="5" y1="4" x2="13" y2="4" /><line x1="5" y1="8" x2="13" y2="8" /><line x1="5" y1="12" x2="13" y2="12" />
+    <circle cx="2.5" cy="4" r="1" fill="currentColor" stroke="none" />
+    <circle cx="2.5" cy="8" r="1" fill="currentColor" stroke="none" />
+    <circle cx="2.5" cy="12" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════
+   LIGHT 3D GLASS SHIELD COMPONENT
+═══════════════════════════════════════════════ */
+const LightShield3D = () => (
+  <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-56 h-64 md:w-64 md:h-72 drop-shadow-[0_25px_50px_rgba(0,0,0,0.15)]">
+    <defs>
+      <linearGradient id="glassBorderGradient" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F472B6" stopOpacity="0.4" />
+        <stop offset="0.5" stopColor="white" stopOpacity="0.2" />
+        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
+      </linearGradient>
+      <linearGradient id="glassFrostGradient" x1="100" y1="20" x2="100" y2="200" gradientUnits="userSpaceOnUse">
+        <stop stopColor="white" stopOpacity="0.4" />
+        <stop offset="1" stopColor="white" stopOpacity="0.1" />
+      </linearGradient>
+    </defs>
+    {/* Outer Prismatic Rim */}
+    <path 
+      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z" 
+      fill="white" 
+      fillOpacity="0.05" 
+      stroke="url(#glassBorderGradient)" 
+      strokeOpacity="0.5" 
+      strokeWidth="2" 
+    />
+    {/* Inner Frosted Surface */}
+    <path 
+      d="M100 20 L174 48 L174 108 C174 150 140 183 100 200 C60 183 26 150 26 108 L26 48 Z" 
+      fill="url(#glassFrostGradient)" 
+      stroke="white" 
+      strokeOpacity="0.1" 
+    />
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════
+   GLASSMORPHISM CARD
+═══════════════════════════════════════════════ */
+function Card({ data, type }) {
+  const isRed = type === "red";
+  return (
+    <div className="relative group overflow-hidden rounded-xl">
+      <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 shrink-0 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300">
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${
+          isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
+        }`}>
+          {isRed ? <XIcon /> : <CheckIcon />}
+        </div>
+        <div className="flex-1 min-w-0 text-left">
+          <div className="text-[13px] font-bold text-slate-900 truncate">{data.title}</div>
+          <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
+            <span>{data.time}</span>
+            <span className="w-1 h-1 rounded-full bg-slate-300" />
+            <span className="flex items-center gap-1"><ListIcon /> {data.tag}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════
+   INTERNAL HELPERS
+═══════════════════════════════════════════════ */
+function ScrollTrack({ cards, direction }) {
+  const trackRef = useRef(null);
+  const posRef = useRef(direction === "up" ? -50 : 0);
+  const doubled = useMemo(() => [...cards, ...cards], [cards]);
+
+  useEffect(() => {
+    const speed = 0.045;
+    const animate = () => {
+      if (direction === "down") {
+        posRef.current -= speed;
+        if (posRef.current <= -50) posRef.current = 0;
+      } else {
+        posRef.current += speed;
+        if (posRef.current >= 0) posRef.current = -50;
+      }
+      if (trackRef.current) trackRef.current.style.transform = `translateY(${posRef.current}%)`;
+      requestAnimationFrame(animate);
+    };
+    const raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [direction]);
+
+  return (
+    <div className="h-[280px] overflow-hidden relative">
+      <div className="relative h-full" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+        <div ref={trackRef} className="flex flex-col gap-3 py-2 will-change-transform">
+          {doubled.map((card, i) => <Card key={i} data={card} type={direction === "down" ? "red" : "green"} />)}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScrollingDataBg({ isHovered }) {
+  const text = "1=2-LwuS0AkLC6Vvj|hq5tCReRo6%bcvnvjddjru4ndjenck4ndkvk4kdkvs57g57rh]fu8474ghfh44yfdjee3wwkxncfuregdy74hdncnrs3loxmen4jdjcfvmnvsdjfsw8sdjidw8didwd8cd0edjcdc9dv{fgH$#6(XiK^!8W3jLlZ2th%q2IYMb<5*P4AhV8oIMq7@Pw47Wf#40-zX@qj(2b5KgK840SXQfFTq6ce3R#k$8wujFFHU8t9%FUDBg>ej|ABYK6)3i^fzSh(0*X4BYRNOea)nsVUCYnV}MHe|+uCHdW&P$zL|+ssBNgZGMY<}]eYYV]T7j]B*4%&=GLmabFcv|]F9Z$/pRvN}O!3MY8k@FT";
+  const repeated = Array(20).fill(text).join(' ');
+
+  return (
+    <div className="absolute inset-0 overflow-hidden opacity-[0.08] pointer-events-none px-4">
+      <div className={`text-[10px] leading-relaxed text-slate-900 break-all transition-all duration-700 ${isHovered ? 'animate-[vScroll_12s_linear_infinite]' : 'animate-[vScroll_45s_linear_infinite]'}`}>
+        <p>{repeated}</p>
+        <p>{repeated}</p>
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectManagement() {
-  const capabilitySections = useMemo(
-    () => [
-      {
-        title: "Tasks, subtasks, and dependencies",
-        text: "Break large projects into clear, manageable work. KaryaUp links every subtask and dependency so teams know what must happen first and what can move in parallel.",
-        image:
-          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-      },
-      {
-        title: "Priorities, deadlines, and statuses",
-        text: "Set priority levels, assign owners, and track due dates from one place. Everyone sees what is urgent, what is pending, and what is already completed.",
-        image:
-          "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=1200&q=80",
-      },
-      {
-        title: "Boards, lists, and timeline views",
-        text: "Switch between board, list, and timeline views instantly. Teams work in their preferred format while leadership still gets one aligned source of truth.",
-        image:
-          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-      },
-      {
-        title: "Real-time progress tracking",
-        text: "Track execution in real time with live task updates and completion trends. Managers can instantly identify blockers and keep delivery on schedule.",
-        image:
-          "https://images.unsplash.com/photo-1551281044-8b62f4463c1c?auto=format&fit=crop&w=1200&q=80",
-      },
-      {
-        title: "Workflow standardization",
-        text: "Create repeatable workflows for every team so project execution stays consistent. Standard steps reduce errors and improve delivery speed across departments.",
-        image:
-          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-      },
-    ],
-    []
-  );
-  const [activeCapability, setActiveCapability] = useState(capabilitySections[0].title);
-  const selectedSection = capabilitySections.find((item) => item.title === activeCapability) || capabilitySections[0];
-  const workflowShowcase = [
-    {
-      title: "Forms to streamline project requests",
-      text: "Capture incoming work, change requests, and feedback, then automatically route them to the right team and workflow.",
-      image:
-        "https://images.unsplash.com/photo-1553028826-f4804a6dba3b?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Templates speed setup and standardization",
-      text: "Deploy standardized workflows for any project type, from agile sprints to waterfall plans, without starting from scratch.",
-      image:
-        "https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Whiteboards bring project plans to life",
-      text: "Map project flows, capture requirements, and instantly convert ideas into assignable tasks for faster execution.",
-      image:
-        "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=1200&q=80",
-    },
+  const [isShieldHovered, setIsShieldHovered] = useState(false);
+
+  const redCards = [
+    { title: "Projects scattered across multiple tools", time: "8:06:41 PM", tag: "Bug Fixes" },
+    { title: "Critical info hidden in siloed systems", time: "8:12:45 PM", tag: "New task" },
+    { title: "Manual updates strain capacity", time: "7:55:10 PM", tag: "Data Sync" },
+    { title: "Missed deadlines cause bottlenecks", time: "7:40:03 PM", tag: "Security" },
+    { title: "Rate limit exceeded", time: "7:20:50 PM", tag: "API" },
   ];
-  const manageProjectSection = [
-    {
-      title: "Plan milestones with confidence",
-      text: "Create structured milestones with owners, deadlines, and clear dependencies so teams know what needs to happen next.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Track delivery in real time",
-      text: "Monitor progress continuously and spot blockers early with status, priority, and workload visibility in one place.",
-      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
-    },
-  ];
-  const executionSections = [
-    {
-      title: "Execution cockpit",
-      text: "A single control center for priorities, blockers, dependencies, and delivery pace across all teams.",
-      image: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Deadline confidence layer",
-      text: "Use real-time progress and timeline signals to prevent deadline surprises and improve on-time delivery.",
-      image: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1200&q=80",
-    },
-    {
-      title: "Standard workflow engine",
-      text: "Roll out consistent workflows for every project type while preserving team flexibility for execution.",
-      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80",
-    },
+
+  const greenCards = [
+    { title: "All projects, docs, and chat in one platform", time: "8:05:28 PM", tag: "Data Sync" },
+    { title: "Instantly find anything across all tools", time: "8:04:15 PM", tag: "Weekly Stats" },
+    { title: "Automated reporting & resource management", time: "7:58:00 PM", tag: "Production" },
+    { title: "Backup finished", time: "7:45:22 PM", tag: "Storage" },
+    { title: "AI-powered workflows for tasks & timelines", time: "7:30:11 PM", tag: "Users" },
+    { title: "Cache cleared successfully", time: "7:18:40 PM", tag: "Performance" },
   ];
 
   return (
-    <SubPageLayout
-     
-    >
-     
-      <section className="relative left-1/2 right-1/2 mb-14 w-screen -translate-x-1/2 overflow-hidden bg-white py-10 sm:py-20">
-        <div className="absolute -top-20 left-8 h-64 w-64 animate-pulse rounded-full bg-pink-100 blur-3xl" />
-        
-          
-        <div className="absolute -bottom-20 right-6 h-72 w-72 animate-pulse rounded-full bg-purple-100 blur-3xl" />
-        <div className="mx-auto grid max-w-6xl items-center gap-6 px-3 sm:px-8 lg:grid-cols-2 lg:px-10">
-          <div className="space-y-6">
-            <p className="inline-flex rounded-full border border-pink-200 bg-pink-50 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-pink-700">
-              Execute Every Project With Structure and Speed
+    <div className="bg-white font-sans overflow-x-hidden">
+      <style dangerouslySetInnerHTML={{ __html: `
+        @keyframes vScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+        @keyframes shine { from { left: -100%; } to { left: 100%; } }
+      `}} />
+
+      {/* Hero Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+              The world's most powerful & flexible
+              <motion.span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]" animate={{ backgroundPosition: ["0% center", "-200% center"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
+                Project Management Software
+              </motion.span>
+            </motion.h1>
+            <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0">
+              Manage your projects, docs, and chat in one place all powered by AI. KaryaUp adapts to any project, eliminates busywork, and keeps everything organized.
             </p>
+          </div>
+          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+            <img src={dashboardImage} alt="Dashboard" className="w-full h-auto" />
+          </motion.div>
+        </div>
+      </section>
 
-            <h2 className="text-3xl font-extrabold leading-tight text-slate-900 sm:text-4xl">
-              KaryaUp transforms how teams plan and execute work by bringing structure into every project.
-            </h2>
+      {/* Security Grid Section */}
+      <section className="py-16 bg-white px-2 md:px-4">
+        <div className="text-center max-w-7xl mx-auto">
+        <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6">
+              Built for Security,
+              <motion.span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]" animate={{ backgroundPosition: ["0% center", "-200% center"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
+              Transparency & Intelligence
+              </motion.span>
+            </motion.h1>
 
-            <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
-              From high-level planning to daily execution, everything stays aligned ensuring nothing slips through the cracks.
-              Projects move faster because everyone knows what matters.
-            </p>
+          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl">
+            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[600px]">
+              
+              {/* LEFT: OLD WAY */}
+              <div className="p-8 border-r border-slate-200 flex flex-col justify-center bg-white/50">
+                <h3 className="text-center text-3xl font-black mb-2 text-slate-900">Old Way</h3>
+                <p className="text-sm text-center text-slate-500 mb-8">Manual updates and scattered tools cause friction.</p>
+                <ScrollTrack cards={redCards} direction="down" />
+              </div>
 
-            <p className="text-sm font-semibold text-slate-800">Key capabilities</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {capabilitySections.map((item, index) => (
-                <button
-                  type="button"
-                  key={item.title}
-                  onClick={() => setActiveCapability(item.title)}
-                  className={`rounded-xl border px-3 py-3 text-left text-sm font-semibold shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md ${
-                    activeCapability === item.title
-                      ? "border-transparent bg-gradient-to-r from-pink-500 to-purple-600 text-white"
-                      : "border-slate-200 bg-white text-slate-700 hover:border-pink-300"
-                  }`}
-                  style={{ animation: `fadeInUp 600ms ease ${index * 90}ms both` }}
-                >
-                  <div className="flex items-center gap-3">
-                    <img
-                      src={item.image}
-                      alt={`${item.title} preview`}
-                      className="h-10 w-14 rounded-md border border-white/40 object-cover"
-                      loading="lazy"
+              {/* MIDDLE: THE SHIELD (Updated to Light Glass) */}
+              <div 
+                className="relative flex flex-col items-center justify-center py-16 px-8 group overflow-hidden bg-slate-50"
+                onMouseEnter={() => setIsShieldHovered(true)}
+                onMouseLeave={() => setIsShieldHovered(false)}
+              >
+                <div className="relative z-40 text-center mb-8">
+                  <h3 className="text-3xl font-black text-slate-900">Security you can Trust</h3>
+                  <p className="text-sm text-slate-500 mt-2">More secure than using AI directly.</p>
+                </div>
+
+                <ScrollingDataBg isHovered={isShieldHovered} />
+
+                <div className="relative z-80 flex items-center justify-center transition-all duration-500 group-hover:scale-105">
+                  <div className="backdrop-blur-xl">
+                    <LightShield3D />
+                  </div>
+                  
+                  {/* Logo Centered & Scaled Up */}
+                  <div className="absolute inset-0 flex items-center justify-center pb-6 z-10 pointer-events-none">
+                    <img 
+                      src={karyaUpLogo} 
+                      alt="Logo" 
+                      className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-[0_0_20px_rgba(168,85,247,0.3)]" 
                     />
-                    <span>{item.title}</span>
                   </div>
-                </button>
-              ))}
-            </div>
 
-            <div key={selectedSection.title} className="grid gap-4 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:grid-cols-2" style={{ animation: "fadeInUp 350ms ease both" }}>
-              <div className="space-y-3">
-                <p className="text-sm font-bold text-slate-900">{selectedSection.title}</p>
-                <p className="text-sm leading-relaxed text-slate-600">{selectedSection.text}</p>
-              </div>
-              <div className="overflow-hidden rounded-xl border border-slate-200">
-                <img src={selectedSection.image} alt={`KaryaUp ${selectedSection.title}`} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
-              </div>
-            </div>
-
-            <div className="flex items-center gap-4">
-              <span className="rounded-xl bg-emerald-100 px-4 py-2 text-sm font-semibold text-emerald-700">
-                Teams complete projects up to 35% faster
-              </span>
-            </div>
-
-            <button className="btn-primary px-6 py-3 text-sm font-bold">
-              Start managing projects with clarity
-            </button>
-          </div>
-
-          <div className="relative mx-auto w-full max-w-xl">
-            <div className="absolute -inset-1 rounded-[28px] bg-gradient-to-r from-pink-200 via-purple-200 to-fuchsia-200 blur-lg" />
-            <div className="relative rounded-[28px] border border-slate-200 bg-white p-6 shadow-2xl" style={{ animation: "floatCard 4s ease-in-out infinite" }}>
-              <div className="mb-4 flex items-center justify-between">
-                <p className="text-sm font-semibold text-slate-800">KaryaUp Project Timeline</p>
-                <span className="rounded-lg bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-700">On Track</span>
-              </div>
-
-              <div className="space-y-3">
-                <div className="rounded-xl bg-slate-50 p-3">
-                  <div className="mb-2 flex justify-between text-xs text-slate-600">
-                    <span>Planning Sprint</span>
-                    <span>90%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-slate-200">
-                    <div className="h-2 w-[90%] rounded-full bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-500" />
-                  </div>
-                </div>
-
-                <div className="rounded-xl bg-slate-50 p-3">
-                  <div className="mb-2 flex justify-between text-xs text-slate-600">
-                    <span>Dependency Setup</span>
-                    <span>72%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-slate-200">
-                    <div className="h-2 w-[72%] rounded-full bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-500" />
-                  </div>
-                </div>
-
-                <div className="rounded-xl bg-slate-50 p-3">
-                  <div className="mb-2 flex justify-between text-xs text-slate-600">
-                    <span>Delivery Readiness</span>
-                    <span>64%</span>
-                  </div>
-                  <div className="h-2 rounded-full bg-slate-200">
-                    <div className="h-2 w-[64%] rounded-full bg-gradient-to-r from-pink-500 to-purple-600 transition-all duration-500" />
+                  {/* Reflection Sweep */}
+                  <div className="absolute inset-0 overflow-hidden rounded-full pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700">
+                    <div className="absolute top-0 -left-full w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12 animate-[shine_4s_infinite]" />
                   </div>
                 </div>
               </div>
+
+              {/* RIGHT: KARYAUP WAY */}
+              <div className="p-8 border-l border-slate-200 flex flex-col justify-center bg-white/50">
+                <h3 className="text-center text-3xl font-black mb-2 text-slate-900">The KaryaUp Way</h3>
+                <p className="text-sm text-center text-slate-500 mb-8">Advanced execution loops for smarter growth.</p>
+                <ScrollTrack cards={greenCards} direction="up" />
+              </div>
+
             </div>
           </div>
         </div>
       </section>
 
-      <section className="relative left-1/2 right-1/2 mb-12 w-screen -translate-x-1/2 bg-white py-2">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
-          <div className="mb-5 rounded-3xl border border-slate-200 bg-white p-5 text-white sm:p-6">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-black">Manage The Project</p>
-            <h3 className="mt-2 text-3xl font-semi-bold leading-tight sm:text-4xl text-black">Keep planning and execution fully connected</h3>
-            <p className="mt-2 max-w-3xl text-sm text-black sm:text-base">
-              Use structured task planning, deadlines, and live tracking to move projects from kickoff to completion without losing context.
+      {/* Why Choose Section */}
+      <section className="py-20 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+          <div className="order-2 lg:order-1 rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
+            <img src={planImage} alt="Planning" className="w-full h-auto" />
+          </div>
+          <div className="order-1 lg:order-2">
+            <h2 className="text-4xl md:text-5xl font-black mb-6">Why Choose <span className="text-purple-600">KaryaUp?</span></h2>
+            <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+              KaryaUp isn't just another project management tool. It's a productivity ecosystem designed to empower teams with clarity and speed.
             </p>
-          </div>
-
-          <div className="grid gap-5 md:grid-cols-2">
-            {manageProjectSection.map((item, index) => (
-              <article
-                key={item.title}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                style={{ animation: `fadeInUp 650ms ease ${index * 100}ms both` }}
-              >
-                <div className="p-5">
-                  <h4 className="mb-2 text-xl font-bold text-slate-900">{item.title}</h4>
-                  <p className="text-sm leading-relaxed text-slate-600">{item.text}</p>
-                </div>
-                <div className="h-48 overflow-hidden border-t border-slate-200 bg-slate-50">
-                  <img
-                    src={item.image}
-                    alt={`KaryaUp ${item.title}`}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              </article>
-            ))}
+            <ul className="space-y-4 text-slate-700 font-medium">
+              <li className="flex items-center gap-3"><CheckIcon /> AI-powered automation for repetitive tasks</li>
+              <li className="flex items-center gap-3"><CheckIcon /> Seamless integration with your favorite apps</li>
+              <li className="flex items-center gap-3"><CheckIcon /> Real-time collaboration across teams</li>
+              <li className="flex items-center gap-3"><CheckIcon /> Secure, scalable, and built for growth</li>
+            </ul>
           </div>
         </div>
       </section>
 
-      <section className="relative left-1/2 right-1/2 mb-14 w-screen -translate-x-1/2 bg-white py-2">
-        <div className="mx-auto max-w-6xl px-5 sm:px-8 lg:px-12">
-          <div className="mb-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-pink-600">Project Management Plus</p>
-            <h3 className="mt-2 text-2xl font-extrabold text-slate-900 sm:text-3xl">More control for high-velocity teams</h3>
-            <p className="mt-2 max-w-3xl text-sm text-slate-600 sm:text-base">
-              Additional execution-focused sections for planning quality, timeline confidence, and standardized delivery.
-            </p>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            {executionSections.map((item, index) => (
-              <article
-                key={item.title}
-                className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                style={{ animation: `fadeInUp 650ms ease ${index * 100}ms both` }}
-              >
-                <div className="p-4">
-                  <h4 className="mb-2 text-lg font-bold text-slate-900">{item.title}</h4>
-                  <p className="text-sm leading-relaxed text-slate-600">{item.text}</p>
-                </div>
-                <div className="h-44 overflow-hidden border-t border-slate-200 bg-slate-50">
-                  <img
-                    src={item.image}
-                    alt={`KaryaUp ${item.title}`}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="relative left-1/2 right-1/2 mb-14 w-screen -translate-x-1/2 bg-white py-2">
-        <div className="mx-auto grid max-w-6xl gap-6 px-5 sm:px-8 lg:grid-cols-3 lg:px-12">
-          {workflowShowcase.map((item, index) => (
-            <article
-              key={item.title}
-              className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-              style={{ animation: `fadeInUp 650ms ease ${index * 100}ms both` }}
-            >
-              <div className="p-6">
-                <h3 className="mb-3 text-[31px] font-semi-bold leading-tight tracking-tight text-slate-900">{item.title}</h3>
-                <p className="text-sm leading-relaxed text-slate-600">{item.text}</p>
-              </div>
-              <div className="h-64 w-full overflow-hidden border-t border-slate-200 bg-slate-50">
-                <img src={item.image} alt={`KaryaUp ${item.title}`} className="h-full w-full object-cover transition-transform duration-500 hover:scale-105" loading="lazy" />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      <CTABanner
-        bg="bg-white border border-slate-200 shadow-sm"
-        titleColor="text-slate-700"
-        btnColor="bg-gradient-to-r from-pink-500 to-purple-600"
-        title="Ready to manage projects better?"
-        desc="Bring your team, deadlines, and execution into one clear workspace with KaryaUp."
+      <FeatureCTA
+        title="Tasks that connect to everything you do"
+        description="Work smarter with tasks that can live in your whiteboards, chat, calendar — anywhere you work"
+        image={dashboardImage}
+        containerClassName="my-20"
       />
-
-      <style>{`
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(14px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        @keyframes floatCard {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-6px);
-          }
-        }
-      `}</style>
-    </SubPageLayout>
+    </div>   
   );
 }

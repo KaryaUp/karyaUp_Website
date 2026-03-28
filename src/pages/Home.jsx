@@ -13,13 +13,35 @@ import Integrations from "../components/Integrations";
 import Management from "../components/Management";
 import DataImport from "../components/DataImport";
 import FinalCTA from "../components/FinalCTA";
+import { Helmet } from "react-helmet-async";
 
 export default function Home() {
   return (
+    <>
+       <Helmet>
+        <title>Karyaup – AI Workspace and Task Management Plateform</title>
+
+        <meta
+          name="description"
+          content="Karyaup helps teams manage projects, tasks, and workflows efficiently."
+        />
+
+        <meta
+          name="keywords"
+          content="project management, SaaS, team collaboration"
+        />
+
+        <meta name="author" content="Karyaup" />
+
+        {/* Open Graph (for social sharing) */}
+        <meta property="og:title" content="Karyaup – Smart Work Management" />
+        <meta property="og:description" content="Manage your team efficiently" />
+       </Helmet>
     <div className="w-full max-w-full overflow-x-hidden">
       <Hero />
-      <div className="[&>section]:!pt-8 [&>section]:!pb-8 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12">
-        <TrustedBy />
+     
+      <TrustedBy />
+       <div className="[&>section]:!pt-8 [&>section]:!pb-8 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12">
         <ScatteredWork />
         {/* <FeatureShowcase /> */}
         <AllInOne />
@@ -33,6 +55,7 @@ export default function Home() {
         <Management />
         <FinalCTA />
       </div>
-    </div>
+      </div>
+      </>
   );
 }

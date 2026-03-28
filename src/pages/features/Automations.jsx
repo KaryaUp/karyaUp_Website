@@ -4,6 +4,7 @@ import { Check, Settings, Play, Pause, Edit3, CalendarDays, CheckCircle2, X } fr
 import FeatureCTA from "../../components/FeatureCTA";
 import autoImg from "../../assets/New_Task.png";
 import AutomationImg from "../../assets/Automation.png";
+import { Helmet } from "react-helmet-async";
 
 const automationFeatures = [
   {
@@ -59,19 +60,55 @@ export default function Automations() {
   });
 
   return (
-    <div className="min-h-screen bg-white pt-20 pb-0 text-slate-900">
+    <>
+      <Helmet>
+  <title>Workflow Automation & Smart Actions | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Automate repetitive tasks with Karyaup workflow automation. Create smart rules, trigger actions, and streamline your business processes effortlessly."
+  />
+
+  <meta
+    name="keywords"
+    content="workflow automation, task automation, business automation tools, process automation, productivity automation, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Workflow Automation & Smart Actions | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Streamline your workflows with powerful automation and smart triggers."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/features/automation"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/features/automation"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       
       {/* Hero Section */}
-      <section className="relative mb-8 overflow-hidden min-h-[calc(100vh-80px)] flex items-center">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-6 sm:pb-16 lg:pb-20 flex items-center">
         {/* Ambient Web Glows */}
         <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-[120px] -z-10 animate-pulse" />
         <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-fuchsia-100/30 rounded-full blur-[100px] -z-10" />
 
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-0">
-          <div className="grid lg:grid-cols-2 gap-16 lg:gap-12 items-center">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-0">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-12 items-center">
             
             {/* Left Content */}
-            <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0">
+            <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -85,7 +122,7 @@ export default function Automations() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="text-5xl sm:text-[56px] lg:text-[64px] font-black text-[#0f172a] tracking-tight leading-[1.02]"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-[#0f172a] tracking-tight leading-[1.06]"
               >
                 Put repetitive<br/>
                 tasks on<br className="hidden sm:block"/>
@@ -104,7 +141,7 @@ export default function Automations() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-8 space-y-4 max-w-[90%] mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-4 max-w-lg w-full mx-auto lg:mx-0"
               >
                 {[
                   "Eliminate manual data entry and routine busywork.",
@@ -114,7 +151,7 @@ export default function Automations() {
                     <div className="mt-1 w-5 h-5 rounded-full bg-[#f3e8ff] flex flex-col items-center justify-center flex-shrink-0">
                       <Check className="w-3 h-3 text-[#9333ea] stroke-[3.5]" />
                     </div>
-                    <p className="text-[17px] text-[#475569] font-medium leading-[1.5]">
+                    <p className="text-sm sm:text-base lg:text-lg text-[#475569] font-medium leading-relaxed">
                       {text}
                     </p>
                   </div>
@@ -125,14 +162,14 @@ export default function Automations() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-3 lg:max-w-md mx-auto lg:mx-0"
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-x-4 sm:gap-y-3 max-w-xs sm:max-w-md w-full mx-auto lg:mx-0"
               >
                 {["Triggers", "Actions", "Conditions", "Schedules"].map((tag) => (
-                  <div key={tag} className="flex items-center gap-3.5 px-4 py-[11px] border border-[#e2e8f0] rounded-xl bg-white shadow-sm">
-                    <div className="w-[18px] h-[18px] rounded-[5px] bg-[#dcfce7] flex flex-col items-center justify-center flex-shrink-0">
-                      <Check className="w-3 h-3 text-[#16a34a] stroke-[4]" />
+                  <div key={tag} className="flex items-center gap-2 sm:gap-3.5 px-3 py-2 sm:px-4 sm:py-[11px] border border-[#e2e8f0] rounded-xl bg-white shadow-sm">
+                    <div className="w-4 h-4 sm:w-[18px] sm:h-[18px] rounded-[5px] bg-[#dcfce7] flex flex-col items-center justify-center flex-shrink-0">
+                      <Check className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#16a34a] stroke-[4]" />
                     </div>
-                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#334155]">{tag}</span>
+                    <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-[0.1em] sm:tracking-widest text-[#334155] truncate">{tag}</span>
                   </div>
                 ))}
               </motion.div>
@@ -143,16 +180,14 @@ export default function Automations() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-32 xl:-mr-48 mt-10 lg:mt-0"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24 mt-10 lg:mt-0"
             >
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#7e22ce]/10 via-fuchsia-500/5 to-transparent blur-3xl opacity-80 translate-x-4 translate-y-4" />
-              <div className="relative overflow-hidden rounded-2xl">
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
                 <img
                   src={AutomationImg}
                   alt="KaryaUp automation rule builder"
-                  className="w-full h-auto min-h-[360px] sm:min-h-[440px] object-cover object-left drop-shadow-2xl rounded-2xl"
+                  className="w-full h-[150px] sm:h-[300px] md:h-[380px] lg:h-[460px] xl:h-[500px] object-cover object-[44%_28%] sm:object-left"
                 />
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-40 sm:w-56 lg:w-72 bg-gradient-to-r from-transparent via-white/90 to-white" />
               </div>
             </motion.div>
 
@@ -161,9 +196,9 @@ export default function Automations() {
       </section>
 
       {/* Features Bento Section */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+      <section className="pt-6 pb-12 sm:py-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
         {/* Section Tag */}
-        <div className="flex flex-col items-center text-center mb-12">
+        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
           <span className="inline-flex items-center px-3 py-1.5 rounded-full bg-[#f3e8ff] text-[#9333ea] text-[11px] font-black uppercase tracking-[0.15em] mb-4">
             What you can do
           </span>
@@ -296,9 +331,11 @@ export default function Automations() {
         imageAlt="Automated Task System"
         containerClassName="mt-12 mb-12 lg:mb-20"
         paddingClassName="p-3 lg:p-4"
-        imageClassName="w-[60%] translate-x-18 lg:translate-x-40"
+        imageClassName="w-[60%] mx-auto sm:translate-x-18 lg:translate-x-40"
+        imageOuterClassName="relative w-full max-w-[260px] sm:max-w-[400px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
         titleClassName="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[1.1] mb-3 tracking-tight drop-shadow-lg"
       />
-    </div>
+      </div>
+      </>
   );
 }

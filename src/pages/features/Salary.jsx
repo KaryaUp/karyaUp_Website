@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import FeatureCTA from "../../components/FeatureCTA";
 import featureSalary from "../../assets/salary.jpeg";
+import { Helmet } from "react-helmet-async";
 
 const salaryTags = [
   "Auto calculations",
@@ -65,14 +66,50 @@ const profitInsights = [
 ];
 export default function Salary() {
   return (
-    <div className="min-h-screen bg-white pt-24 pb-20">
-      <section className="relative overflow-hidden">
+    <>
+      <Helmet>
+  <title>Leave Management System | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Manage employee leave requests بسهولة with Karyaup. Track approvals, leave balances, and holidays with an efficient leave management system."
+  />
+
+  <meta
+    name="keywords"
+    content="leave management system, employee leave tracking, leave approval workflow, HR management, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Leave Management System | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Simplify leave requests, approvals, and tracking for your team."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/features/leave"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/features/leave"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
         <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
         <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -105,7 +142,7 @@ export default function Salary() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-6 space-y-4 max-w-2xl mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-4 max-w-2xl w-full mx-auto lg:mx-0"
               >
                 <div className="flex items-start gap-3.5 text-left">
                   <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
@@ -123,7 +160,7 @@ export default function Salary() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mt-8 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md mx-auto lg:mx-0"
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-x-4 gap-y-3 max-w-md w-full mx-auto lg:mx-0"
               >
                 {salaryTags.map((tag) => (
                   <div
@@ -145,10 +182,8 @@ export default function Salary() {
               initial={{ opacity: 0, x: 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-10"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-
               <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl bg-white">
                 <div className="border-b border-slate-100 bg-slate-50/80 px-6 py-4 flex items-center justify-between">
                   <div>
@@ -500,13 +535,13 @@ export default function Salary() {
                   </div>
                 </div>
 
-                <div className="grid gap-4">
+                <div className="grid gap-3 sm:gap-4">
                   {profitSummary.map((item) => (
-                    <div key={item.label} className="rounded-[1.6rem] border border-slate-200 bg-white p-5">
+                    <div key={item.label} className="rounded-[1.35rem] border border-slate-200 bg-white p-4 sm:rounded-[1.6rem] sm:p-5">
                       <div className="text-[11px] font-black uppercase tracking-[0.18em] text-slate-400">
                         {item.label}
                       </div>
-                      <div className={`mt-3 text-[1.55rem] sm:text-[1.8rem] leading-none font-black tracking-tight text-slate-900 ${item.tone || ""}`}>
+                      <div className={`mt-2.5 text-[0.98rem] sm:mt-3 sm:text-[1.15rem] lg:text-[1.3rem] xl:text-[1.4rem] leading-none font-black tracking-tight text-slate-900 ${item.tone || ""}`}>
                         <NumberFlow
                           value={item.amount}
                           prefix="₹"
@@ -553,7 +588,7 @@ export default function Salary() {
         imageOuterClassName="relative w-[92%] lg:w-[82%] translate-x-0 lg:translate-x-2"
       />
 
-    </div>
+      </div>
+      </>
   );
 }
-

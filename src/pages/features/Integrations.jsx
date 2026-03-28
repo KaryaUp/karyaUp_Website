@@ -5,6 +5,7 @@ import logo from "../../assets/logo.png";
 import microsoftTeamsLogo from "../../assets/MicrosoftTeam.png";
 import FeatureCTA from "../../components/FeatureCTA";
 import dashboardImage from "../../assets/dashboard.jpeg";
+import { Helmet } from "react-helmet-async";
 
 const integrations = [
   {
@@ -80,14 +81,50 @@ const integrationDetails = [
 
 export default function Integrations() {
   return (
-    <div className="min-h-screen bg-white pt-24 pb-16">
-      <section className="relative overflow-hidden">
+    <>
+      <Helmet>
+  <title>App Integrations & Connected Workspace | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Connect your favorite tools with Karyaup. Integrate Google Calendar, Drive, Gmail, Meet, Slack, and Microsoft Teams to keep your workflow unified and efficient."
+  />
+
+  <meta
+    name="keywords"
+    content="app integrations, workflow integrations, Google Calendar integration, Slack integration, Microsoft Teams integration, productivity tools, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="App Integrations & Connected Workspace | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Bring all your tools into one place and keep meetings, files, and communication connected."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/integrations"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/integrations"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
         <div className="absolute top-0 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-100/70 blur-[130px]" />
         <div className="absolute right-0 top-20 -z-10 h-[300px] w-[300px] rounded-full bg-cyan-100/70 blur-[120px]" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-6">
-            <div className="text-center lg:text-left">
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -101,7 +138,7 @@ export default function Integrations() {
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-5 text-4xl font-black tracking-tight text-slate-900 sm:text-5xl lg:text-6xl leading-[1.04]"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.06]"
               >
                 Integrations that work inside
                 <span className="block">
@@ -122,7 +159,7 @@ export default function Integrations() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.24 }}
-                className="mt-6 space-y-3 max-w-[28rem] mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-3 max-w-lg w-full mx-auto lg:mx-0"
               >
                 {[
                   "Files, meetings, and updates stay connected",
@@ -132,7 +169,7 @@ export default function Integrations() {
                     <div className="mt-1 flex h-5 w-5 items-center justify-center rounded-full border border-purple-200 bg-purple-100">
                       <Check className="h-2.5 w-2.5 stroke-[4] text-[#7e22ce]" />
                     </div>
-                    <p className="font-medium leading-relaxed text-slate-600">{item}</p>
+                    <p className="text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-slate-600">{item}</p>
                   </div>
                 ))}
               </motion.div>
@@ -146,7 +183,7 @@ export default function Integrations() {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
               className="relative w-full max-w-[660px] mx-auto lg:mx-0 lg:justify-self-end"
             >
-              <div className="relative min-h-[500px] w-full overflow-hidden rounded-[2.35rem] border border-slate-900/80 bg-[#0b0b16] p-4 shadow-[0_40px_100px_-40px_rgba(15,23,42,0.8)]">
+              <div className="relative min-h-[420px] sm:min-h-[500px] w-full overflow-hidden rounded-[2.1rem] sm:rounded-[2.35rem] border border-slate-900/80 bg-[#0b0b16] p-3 sm:p-4 shadow-[0_40px_100px_-40px_rgba(15,23,42,0.8)]">
                 <motion.div
                   animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
                   transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
@@ -161,7 +198,33 @@ export default function Integrations() {
                   </svg>
                 </div>
 
-                <svg className="pointer-events-none absolute inset-0 h-full w-full" viewBox="0 0 640 560" fill="none">
+                <svg className="pointer-events-none absolute inset-0 h-full w-full sm:hidden" viewBox="0 0 320 420" fill="none">
+                  <defs>
+                    <linearGradient id="integrationLineMobile" x1="52" y1="110" x2="268" y2="320" gradientUnits="userSpaceOnUse">
+                      <stop stopColor="rgba(216,180,254,0.95)" />
+                      <stop offset="1" stopColor="rgba(96,165,250,0.95)" />
+                    </linearGradient>
+                    <filter id="integrationGlowMobile">
+                      <feGaussianBlur stdDeviation="3" result="blur" />
+                      <feMerge>
+                        <feMergeNode in="blur" />
+                        <feMergeNode in="SourceGraphic" />
+                      </feMerge>
+                    </filter>
+                  </defs>
+
+                  <g filter="url(#integrationGlowMobile)" opacity="0.95">
+                    <path d="M78 84V118H132V182" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M242 84V118H188V182" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M52 210H132" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M268 210H188" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M70 336H78V302H132V238" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M250 336H242V302H188V238" stroke="url(#integrationLineMobile)" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </g>
+
+                </svg>
+
+                <svg className="pointer-events-none absolute inset-0 hidden h-full w-full sm:block" viewBox="0 0 640 560" fill="none">
                   <defs>
                     <linearGradient id="integrationLineA" x1="78" y1="90" x2="562" y2="470" gradientUnits="userSpaceOnUse">
                       <stop stopColor="rgba(216,180,254,0.95)" />
@@ -208,21 +271,21 @@ export default function Integrations() {
                   ))}
                 </svg>
 
-                <div className="absolute left-1/2 top-1/2 z-20 w-[196px] -translate-x-1/2 -translate-y-1/2">
+                <div className="absolute left-1/2 top-1/2 z-20 w-[56px] sm:w-[196px] -translate-x-1/2 -translate-y-1/2">
                   <motion.div
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                     transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                    className="rounded-[1.8rem] bg-gradient-to-r from-[#8b5cf6] via-[#ec4899] to-[#60a5fa] bg-[length:220%_220%] p-[1.5px] shadow-[0_0_85px_rgba(168,85,247,0.5)]"
+                    className="rounded-[1.1rem] sm:rounded-[1.8rem] bg-transparent sm:bg-gradient-to-r sm:from-[#8b5cf6] sm:via-[#ec4899] sm:to-[#60a5fa] sm:bg-[length:220%_220%] p-0 sm:p-[1.5px] shadow-none sm:shadow-[0_0_85px_rgba(168,85,247,0.5)]"
                   >
-                    <div className="rounded-[calc(1.8rem-1.5px)] border border-white/10 bg-[#171428]/95 px-5 py-6 text-center">
-                      <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-[0_0_35px_rgba(168,85,247,0.25)]">
-                        <img src={logo} alt="KaryaUp" className="h-10 w-10 object-contain" />
+                    <div className="rounded-[calc(1.1rem-1.5px)] sm:rounded-[calc(1.8rem-1.5px)] border-0 sm:border sm:border-white/10 bg-transparent sm:bg-[#171428]/95 px-0 sm:px-5 py-0 sm:py-6 text-center">
+                      <div className="mx-auto flex h-14 w-14 sm:h-14 sm:w-14 items-center justify-center rounded-2xl bg-white shadow-[0_0_35px_rgba(168,85,247,0.25)]">
+                        <img src={logo} alt="KaryaUp" className="h-8 w-8 sm:h-10 sm:w-10 object-contain" />
                       </div>
-                      <div className="mt-4 text-[10px] font-black uppercase tracking-[0.22em] text-purple-300">
+                      <div className="mt-3 sm:mt-4 hidden sm:block text-[8px] sm:text-[10px] font-black uppercase tracking-[0.18em] sm:tracking-[0.22em] text-purple-300">
                         Integration hub
                       </div>
-                      <div className="mt-2 text-[1.45rem] font-black leading-none tracking-tight text-white">KaryaUp</div>
-                      <p className="mt-2 text-[11px] font-medium leading-relaxed text-slate-300">One connected workspace</p>
+                      <div className="mt-2 hidden sm:block text-[1.05rem] sm:text-[1.45rem] font-black leading-none tracking-tight text-white">KaryaUp</div>
+                      <p className="mt-1.5 sm:mt-2 hidden sm:block text-[9px] sm:text-[11px] font-medium leading-relaxed text-slate-300">One connected workspace</p>
                     </div>
                   </motion.div>
                 </div>
@@ -233,18 +296,18 @@ export default function Integrations() {
                     initial={{ opacity: 0, scale: 0.92, y: 18 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     transition={{ duration: 0.55, delay: 0.12 * index, ease: [0.22, 1, 0.36, 1] }}
-                    className={`absolute z-10 w-[170px] sm:w-[190px] rounded-[1.45rem] border border-white/10 bg-white/5 p-[1.5px] backdrop-blur-xl shadow-[0_0_32px_rgba(76,29,149,0.16)] ${item.position}`}
+                    className={`absolute z-10 w-[72px] sm:w-[170px] lg:w-[190px] rounded-[1.1rem] sm:rounded-[1.45rem] border border-white/10 bg-white/5 p-[1.5px] backdrop-blur-xl shadow-[0_0_32px_rgba(76,29,149,0.16)] ${item.position}`}
                   >
                     <motion.div
                       animate={{ boxShadow: ["0 0 0 rgba(0,0,0,0)", "0 0 22px rgba(168,85,247,0.14)", "0 0 0 rgba(0,0,0,0)"] }}
                       transition={{ duration: 3.2 + index * 0.2, repeat: Infinity, ease: "easeInOut" }}
-                      className="rounded-[calc(1.45rem-1.5px)] border border-white/8 bg-[#131526]/95 px-4 py-4"
+                      className="rounded-[calc(1.1rem-1.5px)] sm:rounded-[calc(1.45rem-1.5px)] border border-white/8 bg-[#131526]/95 px-2.5 py-2.5 sm:px-4 sm:py-4"
                     >
-                      <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white shadow-[0_10px_20px_-14px_rgba(255,255,255,0.4)]">
-                          <img src={item.logo} alt={item.name} className="h-7 w-7 object-contain" />
+                      <div className="flex items-center justify-center sm:justify-start gap-0 sm:gap-3">
+                        <div className="flex h-11 w-11 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-white shadow-[0_10px_20px_-14px_rgba(255,255,255,0.4)]">
+                          <img src={item.logo} alt={item.name} className="h-6 w-6 sm:h-7 sm:w-7 object-contain" />
                         </div>
-                        <div className="min-w-0">
+                        <div className="min-w-0 hidden sm:block">
                           <div className="text-sm font-black text-white">{item.name}</div>
                           <div className="mt-1 text-xs font-medium leading-relaxed text-slate-400">
                             {item.short}
@@ -260,9 +323,9 @@ export default function Integrations() {
         </div>
       </section>
 
-      <section className="pt-12">
+      <section className="pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+          <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8 lg:mb-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -277,7 +340,7 @@ export default function Integrations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight mb-6 tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.06] mb-4 sm:mb-6 tracking-tight"
             >
               Works with your <br />
               <motion.span
@@ -294,13 +357,13 @@ export default function Integrations() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="text-lg sm:text-xl text-slate-500 font-medium"
+              className="text-sm sm:text-base lg:text-lg text-slate-500 font-medium"
             >
               No need to rebuild your workflow. Connect instantly:
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-10 lg:gap-x-12 gap-y-8 sm:gap-y-10 lg:gap-y-12">
             {integrationDetails.map((item, index) => (
               <motion.div
                 key={item.name}
@@ -308,9 +371,9 @@ export default function Integrations() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * index }}
-                className="flex items-start gap-6 group cursor-default"
+                className="flex items-start gap-4 sm:gap-5 lg:gap-6 group cursor-default"
               >
-                <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center">
+                <div className="flex-shrink-0 w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center">
                   <motion.img
                     src={item.logo}
                     alt={item.name}
@@ -319,10 +382,10 @@ export default function Integrations() {
                   />
                 </div>
                 <div>
-                  <h3 className="text-lg font-black text-slate-900 mb-2 transition-colors duration-300 group-hover:text-purple-600">
+                  <h3 className="text-base sm:text-lg font-black text-slate-900 mb-1 sm:mb-2 transition-colors duration-300 group-hover:text-purple-600">
                     {item.name}
                   </h3>
-                  <p className="text-slate-500 text-sm font-medium leading-relaxed">
+                  <p className="text-slate-500 text-sm sm:text-base font-medium leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
@@ -338,10 +401,11 @@ export default function Integrations() {
         buttonText="Explore integrations"
         image={dashboardImage}
         imageAlt="KaryaUp integrations dashboard"
-        containerClassName="mt-24 mb-0"
-        imageClassName="w-full max-w-[700px]"
-        imageOuterClassName="relative w-[98%] lg:w-[88%] translate-x-0 lg:translate-x-3"
+        containerClassName="mt-8 sm:mt-10 lg:mt-12 mb-0"
+        imageClassName="w-full max-w-[760px]"
+        imageOuterClassName="relative w-[108%] sm:w-[102%] lg:w-[88%] mx-auto translate-x-0 lg:translate-x-3"
       />
-    </div>
+      </div>
+      </>
   );
 }

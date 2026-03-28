@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 import {
   Menu, X, ArrowRight, ChevronDown,
   CheckSquare, Kanban, Users, Clock, BarChart2, LayoutDashboard, CircleDollarSign,
@@ -66,7 +66,6 @@ const featuresMegaSections = [
     heading: "TIME",
     items: [
       { label: "Calendar", to: "/features/calendar", icon: Calendar, iconColor: "text-pink-600" },
-      { label: "Scheduling", to: "/features/scheduling", icon: Clock, iconColor: "text-orange-600" },
       { label: "Automations", to: "/features/automations", icon: Zap, iconColor: "text-violet-600" },
     ],
   },
@@ -104,7 +103,7 @@ const solutionsMegaSections = {
 const resourcesMegaSections = [
   { label: "Blog", to: "/resources/blog", icon: FileText, iconColor: "text-indigo-600", description: "Read the latest news, articles, and tips." },
   { label: "Documentation", to: "/resources/docs", icon: FileCode, iconColor: "text-blue-600", description: "Detailed guides on how to use every feature." },
-  { label: "Demo", to: "/resources/demo", icon: MonitorPlay, iconColor: "text-rose-600", description: "Watch a quick overview of the platform." },
+  { label: "Book Demo", to: "/book-demo", icon: Calendar, iconColor: "text-rose-600", description: "Book a live walkthrough tailored to your team." },
   { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconColor: "text-purple-600", description: "Step-by-step video guides and walkthroughs." },
 ];
 
@@ -199,6 +198,7 @@ const StartWorkspaceButton = ({ href, onClick, size = "sm" }) => {
 };
 
 const Navbar = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isPlatformOpen, setIsPlatformOpen] = useState(false);
@@ -302,18 +302,20 @@ const Navbar = () => {
     }, 500);
   };
 
+  const isHomePage = location.pathname === "/";
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
+  const isHomeOverlayNav = isOverlayNav && isHomePage;
   const linkBase =
-    `text-base font-semibold transition-all ${isOverlayNav ? "text-slate-700 hover:text-primary md:text-white md:hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
+    `text-base font-semibold transition-all ${isHomeOverlayNav ? "text-slate-700 hover:text-primary md:text-white md:hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
   const linkActive = "text-primary";
 
   return (
     <nav
       className={`fixed w-full z-50 transition-all duration-300 py-3 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
-        ? "bg-white md:shadow-md border-gray-100"
+        ? "bg-white md:shadow-md border-b border-gray-100"
         : isScrolled
-          ? "bg-white md:bg-white/70 md:backdrop-blur-md md:shadow-sm"
-          : "bg-slate-950/18 backdrop-blur-sm"
+          ? "bg-white md:bg-white/70 md:backdrop-blur-md md:shadow-sm md:border-b md:border-slate-200/70"
+          : "bg-transparent border-b border-transparent shadow-none backdrop-blur-0"
         }`}
     >
       <div className="max-w-full mx-auto px-4 lg:px-4">
@@ -328,7 +330,7 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
-                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isOverlayNav ? "md:brightness-0 md:invert" : ""}`}
+                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isHomeOverlayNav ? "md:brightness-0 md:invert" : ""}`}
                 />
               </Link>
 
@@ -615,9 +617,9 @@ const Navbar = () => {
             <a
               href={authUrl}
               onClick={closeAllMenus}
-              className={`group flex items-center gap-2 font-semibold transition-all ${isOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
+              className={`group flex items-center gap-2 font-semibold transition-all ${isHomeOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
             >
-              <LogIn size={16} className={`${isOverlayNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
+              <LogIn size={16} className={`${isHomeOverlayNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
               <span className="text-[14px]">Log in</span>
             </a>
             <StartWorkspaceButton href={authUrl} onClick={closeAllMenus} />
@@ -626,7 +628,7 @@ const Navbar = () => {
           <div className="ml-auto md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${isOverlayNav ? "text-gray-600 hover:bg-gray-100 md:text-white md:hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
+              className={`p-2 rounded-lg transition-colors ${isHomeOverlayNav ? "text-gray-600 hover:bg-gray-100 md:text-white md:hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>

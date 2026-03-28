@@ -13,6 +13,7 @@ import {
 import AttendanceHero from "../../components/AttendanceHero";
 import FeatureCTA from "../../components/FeatureCTA";
 import attendanceImg from "../../assets/Attendance.png";
+import { Helmet } from "react-helmet-async";
 
 const scanSteps = [
   "Face scan verifies identity before every punch",
@@ -29,7 +30,43 @@ const attendanceRows = [
 
 export default function Attendance() {
   return (
-    <div className="min-h-screen bg-white">
+    <>
+      <Helmet>
+  <title>Employee Attendance Tracking | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Track employee attendance in real-time with Karyaup. Monitor working hours, check-ins, and productivity with a smart attendance management system."
+  />
+
+  <meta
+    name="keywords"
+    content="attendance management system, employee tracking, work hours tracking, attendance software, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Employee Attendance Tracking | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Monitor attendance, work hours, and employee activity in one place."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/features/attendance"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/features/attendance"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       <AttendanceHero />
 
       <section className="relative overflow-hidden pb-8">
@@ -48,7 +85,7 @@ export default function Attendance() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  className="relative z-10"
+                  className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left"
                 >
                   <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
                     <ScanFace className="h-3.5 w-3.5" />
@@ -68,7 +105,7 @@ export default function Attendance() {
                     cleaner records for payroll.
                   </p>
 
-                  <div className="mt-8 space-y-3.5">
+                  <div className="mt-8 space-y-3.5 w-full max-w-xl mx-auto">
                     {scanSteps.map((item, index) => (
                       <motion.div
                         key={item}
@@ -76,7 +113,7 @@ export default function Attendance() {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true, amount: 0.35 }}
                         transition={{ duration: 0.45, delay: index * 0.08 }}
-                        className="flex items-start gap-3"
+                        className="flex items-start justify-center gap-3 text-left lg:justify-start"
                       >
                         <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-purple-500/15 text-purple-300">
                           <Check className="h-3.5 w-3.5" />
@@ -86,7 +123,7 @@ export default function Attendance() {
                     ))}
                   </div>
 
-                  <div className="mt-10 flex max-w-md items-center gap-4 rounded-[2rem] border border-purple-900/40 bg-slate-900/70 p-5 shadow-lg shadow-purple-950/20">
+                  <div className="mt-10 flex max-w-md flex-col items-center gap-4 rounded-[2rem] border border-purple-900/40 bg-slate-900/70 p-5 text-center shadow-lg shadow-purple-950/20 mx-auto sm:flex-row sm:text-left lg:mx-0">
                     <div className="relative flex h-28 w-24 shrink-0 items-center justify-center rounded-[1.5rem] border border-purple-500/25 bg-black/50">
                       <motion.div
                         animate={{ scale: [0.96, 1.04, 0.96], opacity: [0.35, 0.75, 0.35] }}
@@ -104,7 +141,7 @@ export default function Attendance() {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-emerald-400">
+                      <div className="flex items-center justify-center gap-2 text-[11px] font-black uppercase tracking-[0.18em] text-emerald-400 sm:justify-start">
                         <ShieldCheck className="h-3.5 w-3.5" />
                         Identity Verified
                       </div>
@@ -114,7 +151,7 @@ export default function Attendance() {
                       <div className="mt-1 text-sm font-medium text-slate-400">
                         Front camera match passed. Timestamp synced to attendance.
                       </div>
-                      <div className="mt-4 flex items-center gap-2">
+                      <div className="mt-4 flex items-center justify-center gap-2 sm:justify-start">
                         <span className="rounded-full border border-purple-500/20 bg-purple-500/10 px-2.5 py-1 text-[10px] font-black uppercase tracking-[0.16em] text-purple-200">
                           09:02 AM
                         </span>
@@ -133,13 +170,14 @@ export default function Attendance() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex flex-col items-center text-center lg:items-start lg:text-left"
                 >
                   <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
                     <Users className="h-3.5 w-3.5" />
                     Boss Dashboard
                   </div>
 
-                  <div className="mt-5 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+                  <div className="mt-5 flex flex-col gap-4 items-center text-center sm:flex-row sm:items-end sm:justify-between sm:text-left w-full">
                     <div>
                       <h3 className="text-3xl font-black tracking-tight text-white sm:text-4xl">
                         All employee attendance in one export-ready view.
@@ -252,6 +290,7 @@ export default function Attendance() {
         imageClassName="w-full max-w-[940px]"
         imageOuterClassName="relative w-[108%] lg:w-full translate-x-2 lg:translate-x-8"
       />
-    </div>
+      </div>
+      </>
   );
 }

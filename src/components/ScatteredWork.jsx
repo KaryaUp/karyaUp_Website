@@ -59,7 +59,7 @@ export default function ScatteredWork() {
           {/* THE PROBLEM SIDE */}
           <div className="w-full lg:w-1/2 p-8 lg:p-12 bg-white border-b lg:border-b-0 lg:border-r border-slate-100">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center text-red-500 border border-red-100">
+              <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500 border border-purple-100">
                 <AlertCircle size={20} />
               </div>
               <span className="text-xs font-black uppercase tracking-widest text-slate-400">The Problem</span>
@@ -67,7 +67,7 @@ export default function ScatteredWork() {
 
             <h3 className="text-3xl font-black text-slate-800 tracking-tight leading-none mb-4">
               Work is scattered across <br />
-              <span className="text-red-500">too many tools.</span>
+              <span className="text-purple-500">too many tools.</span>
             </h3>
 
             <p className="text-slate-500 font-bold text-sm mb-6">
@@ -83,23 +83,23 @@ export default function ScatteredWork() {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-center gap-4 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm text-slate-700 font-bold text-sm"
                 >
-                  <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  <div className="w-1.5 h-1.5 rounded-full bg-purple-400" />
                   {item}
                 </motion.div>
               ))}
             </div>
 
             {/* Negative Result Box */}
-            <div className="p-7 bg-red-50/50 rounded-3xl border border-red-100">
-              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-400 mb-4">Daily Friction</p>
+            <div className="p-7 bg-purple-50/50 rounded-3xl border border-purple-100">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-purple-400 mb-4">Daily Friction</p>
               <ul className="space-y-3">
                 {[
                   "30% time lost in context switching",
                   "Fragmented data & missed deadlines",
                   "Zero visibility into real performance"
                 ].map((text, i) => (
-                  <li key={i} className="flex items-center gap-3 text-sm font-black text-red-700">
-                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-red-500 shadow-sm border border-red-100">
+                  <li key={i} className="flex items-center gap-3 text-sm font-black text-purple-700">
+                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-purple-500 shadow-sm border border-purple-100">
                       <span className="text-[10px] scale-150">×</span>
                     </div>
                     {text}

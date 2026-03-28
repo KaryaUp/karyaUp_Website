@@ -7,6 +7,7 @@ import calenderImg from "../../assets/Calender.png";
 import scheduleMeetingImg from "../../assets/Schedule_meeting (1).png";
 import createTaskImg from "../../assets/New_Task.png";
 import schedulePostImg from "../../assets/Schedule_Story.png";
+import { Helmet } from "react-helmet-async";
 
 const calendarFeaturesTabs = [
   {
@@ -42,17 +43,53 @@ export default function CalendarPage() {
   const [activeTabIdx, setActiveTabIdx] = useState(0);
   const activeTab = calendarFeaturesTabs[activeTabIdx];
   return (
-    <div className="min-h-screen bg-white pt-20 pb-0 text-slate-900">
+    <>
+      <Helmet>
+  <title>Team Calendar & Scheduling | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination."
+  />
+
+  <meta
+    name="keywords"
+    content="team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Team Calendar & Scheduling | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Organize tasks, events, and deadlines with a powerful team calendar."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/features/calendar"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/features/calendar"
+  />
+</Helmet>
+    <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       {/* Hero Section */}
-      <section className="relative mb-12 overflow-hidden">
+      <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
         {/* Ambient Background Glows */}
-        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-[120px] -z-10 animate-pulse" />
-        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-100/30 rounded-full blur-[100px] -z-10" />
+        <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[120px] -z-10 animate-pulse" />
+        <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-600/10 rounded-full blur-[100px] -z-10" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-[1.2fr_2fr] gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
             {/* Left Content */}
-            <div className="text-center lg:text-left max-w-lg mx-auto lg:mx-0">
+            <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -66,9 +103,9 @@ export default function CalendarPage() {
                 initial={{ opacity: 0, y: 40, x: -10 }}
                 animate={{ opacity: 1, y: 0, x: 0 }}
                 transition={{ type: "spring", damping: 25, stiffness: 100, delay: 0.1 }}
-                className="mt-3.5 text-4xl sm:text-5xl lg:text-5.5xl font-black text-slate-900 tracking-tight leading-[1.05] mb-3"
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06] mb-3"
               >
-                Master your Time with a
+                Master your  <br/>Time with a
                 <span className="block mt-1">
                   {" "}
                   <span className="text-gradient inline-block">
@@ -81,15 +118,15 @@ export default function CalendarPage() {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-4 space-y-3.5 max-w-lg mx-auto lg:mx-0"
+                className="mt-5 sm:mt-6 space-y-4 max-w-2xl w-full mx-auto lg:mx-0"
               >
                 {[
                   "A single calendar that brings together tasks, events, meetings, and deadlines in one beautiful view.",
                   "Plan seamlessly across teams, projects, and multiple timezones."
                 ].map((text, idx) => (
-                  <div key={idx} className="flex items-start gap-3.5 text-left lg:justify-start group">
-                    <div className="mt-0.5 w-5.5 h-5.5 rounded-full bg-purple-100 border border-purple-200/60 flex items-center justify-center flex-shrink-0 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-purple-200/40">
-                      <CheckCircle2 className="w-3.2 h-3.2 text-purple-600 stroke-[3.5]" />
+                  <div key={idx} className="flex items-start gap-3.5 text-left group">
+                    <div className="mt-0.5 w-5.5 h-5.5 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 shadow-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-purple-500/20">
+                      <CheckCircle2 className="w-3.2 h-3.2 text-purple-400 stroke-[3.5]" />
                     </div>
                     <p className="text-base text-slate-600 font-medium leading-relaxed group-hover:text-slate-900 transition-colors duration-300">
                       {text}
@@ -102,18 +139,18 @@ export default function CalendarPage() {
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
-                className="mt-5 grid grid-cols-2 gap-x-4 gap-y-2.5 max-w-md mx-auto lg:mx-0"
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-x-4 gap-y-2.5 max-w-md w-full mx-auto lg:mx-0"
               >
                 {[
                   { label: "Google Sync", icon: Calendar },
                   { label: "Smart Scheduling", icon: Clock },
                   { label: "Multi-Timezone", icon: Globe }
                 ].map((tag) => (
-                  <div key={tag.label} className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-slate-50 border border-slate-200 shadow-sm hover:border-purple-200 hover:bg-purple-50 transition-all duration-300">
-                    <div className="w-4.5 h-4.5 rounded-md bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                      <tag.icon className="w-2.8 h-2.8 text-purple-600 stroke-[3]" />
+                  <div key={tag.label} className="group flex items-center gap-2.5 px-3 py-2 rounded-xl bg-white border border-slate-200 shadow-sm hover:border-purple-300 hover:bg-purple-50 transition-all duration-300">
+                    <div className="w-4.5 h-4.5 rounded-md bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <tag.icon className="w-2.8 h-2.8 text-purple-400 stroke-[3]" />
                     </div>
-                    <span className="text-[9.5px] font-black uppercase tracking-[0.1em] text-slate-600 truncate group-hover:text-purple-700">{tag.label}</span>
+                    <span className="text-[9.5px] font-black uppercase tracking-[0.1em] text-slate-500 truncate group-hover:text-purple-700">{tag.label}</span>
                   </div>
                 ))}
               </motion.div>
@@ -121,13 +158,13 @@ export default function CalendarPage() {
 
             {/* Right Hero Image - Without SVGs */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40 mt-10 lg:mt-0"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24 mt-10 lg:mt-0"
             >
               <div className="relative">
-                <div className="overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white group transition-all duration-500 hover:border-purple-300/30">
+                <div className="overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white group transition-all duration-500 hover:border-purple-300/30">
                   <img
                     src={calenderImg}
                     alt="KaryaUp Calendar Interface"
@@ -141,8 +178,7 @@ export default function CalendarPage() {
       </section>
 
       {/* Interactive Tabs Section (TeamSolutions Style) */}
-      <section className="py-8 sm:py-12 bg-white relative overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
+      <section className="pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-12 bg-white relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
 
           {/* Section Heading */}
@@ -150,9 +186,9 @@ export default function CalendarPage() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-10"
+            className="text-center mb-8 sm:mb-10"
           >
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight tracking-tight mb-4">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.06] tracking-tight mb-4">
               Everything happens in<br />
               <span className="text-gradient inline-block">
                 one calendar
@@ -195,7 +231,7 @@ export default function CalendarPage() {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
 
                 {/* Left Side Content */}
-                <div className="relative z-10 lg:pr-6">
+                <div className="relative z-10 lg:pr-6 flex flex-col items-center text-center lg:items-start lg:text-left">
                   <h3 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-[1.1] mb-6">
                     {activeTab.title}
                     <br />
@@ -208,9 +244,9 @@ export default function CalendarPage() {
                     {activeTab.description}
                   </p>
 
-                  <ul className="space-y-4 mb-4">
+                  <ul className="space-y-4 mb-4 w-full max-w-md">
                     {activeTab.bullets.map((bullet, i) => (
-                      <li key={i} className="flex items-start gap-4 text-slate-600 text-base font-bold bg-purple-50/50 p-5 rounded-2xl border border-purple-100/30">
+                      <li key={i} className="flex items-start gap-4 text-left text-slate-600 text-base font-bold bg-purple-50/50 p-5 rounded-2xl border border-purple-100/30">
                         <CheckCircle2 size={24} className="text-purple-600 mt-0 flex-shrink-0" />
                         <span className="mt-0.5">{bullet}</span>
                       </li>
@@ -248,10 +284,14 @@ export default function CalendarPage() {
         buttonText="Start Scheduling"
         image={calenderImg}
         imageAlt="Calendar Workspace"
-        containerClassName="mt-16 mb-16"
+        containerClassName="mt-10 sm:mt-16 mb-10 sm:mb-16"
+        paddingClassName="p-3 pt-5 sm:p-4 lg:p-8"
+        imageClassName="w-full max-w-[760px] mx-auto"
+        imageOuterClassName="relative flex w-full max-w-[300px] items-center justify-center mx-auto -translate-x-2 sm:w-[102%] sm:max-w-none sm:translate-x-0 lg:w-[88%] lg:translate-x-3"
       />
 
      
-    </div>
+      </div>
+      </>
   );
 }

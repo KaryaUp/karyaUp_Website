@@ -15,6 +15,7 @@ import Blog5 from "../../assets/Blog5.png";
 import Blog6 from "../../assets/Blog6.png";
 
 import BlogHero from "../../assets/Blog_Hero.png";
+import { Helmet } from "react-helmet-async";
 
 const EASING = [0.2, 0.8, 0.2, 1];
 
@@ -162,6 +163,7 @@ const articles = [
 
 const PostRow = ({ article, onClick }) => {
   return (
+
     <motion.div
       layout
       initial={{ opacity: 0, y: 20 }}
@@ -428,6 +430,42 @@ export default function Blog() {
   }
 
   return (
+    <>
+      <Helmet>
+  <title>Blog & Insights | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Explore the Karyaup blog for insights on productivity, project management, team collaboration, and workflow optimization. Learn how to work smarter."
+  />
+
+  <meta
+    name="keywords"
+    content="project management blog, productivity tips, team collaboration insights, workflow optimization, SaaS blog, Karyaup blog"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Blog & Insights | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Read articles on productivity, team management, and smarter workflows."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/resources/blog"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/resources/blog"
+  />
+</Helmet>
     <div className="min-h-screen bg-white font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
       <section className="relative min-h-screen pt-24 sm:pt-28 lg:pt-2 pb-2 lg:pb-2 overflow-hidden flex items-center">
         <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
@@ -641,6 +679,7 @@ export default function Blog() {
       </section>
 
     
-    </div>
+      </div>
+      </>
   );
 }

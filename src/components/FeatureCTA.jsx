@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 import logo from '../assets/logo.png';
 
 const authUrl = "https://www.karyaup.com/auth";
@@ -12,16 +13,16 @@ export default function FeatureCTA({
   imageAlt = "KaryaUp Showcase",
   imageClassName = "w-full",
   containerClassName = "mt-24 mb-10",
-  paddingClassName = "p-3 lg:p-8",
-  titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.1] mb-3 tracking-tight drop-shadow-lg",
-  imageOuterClassName = "relative w-full max-w-[320px] sm:max-w-[520px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
+  paddingClassName = "p-1.5 sm:p-3 lg:p-4",
+  titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.08] mb-2 tracking-tight drop-shadow-lg",
+  imageOuterClassName = "relative w-full max-w-[260px] sm:max-w-[400px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
 }) {
   const handleAuthRedirect = () => {
     window.location.href = authUrl;
   };
 
   return (
-    <section className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 group ${containerClassName}`}>
+    <section className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${containerClassName}`}>
       <div className={`relative rounded-[2.5rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch border border-white/5 ${paddingClassName}`}>
         {/* Ambient Background Gradients for Depth */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(168,85,247,0.4),transparent_50%)] pointer-events-none" />
@@ -29,12 +30,12 @@ export default function FeatureCTA({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.1),transparent_40%)] pointer-events-none" />
         
         {/* Left Content Area */}
-        <div className="flex-[0.5] xl:flex-[0.6] z-20 text-center lg:text-left flex flex-col items-center lg:items-start justify-center pt-6 lg:pt-10 pb-4 lg:pb-8 px-4 lg:pl-10 lg:pr-0">
+        <div className="flex-[0.5] xl:flex-[0.6] z-20 text-center lg:text-left flex flex-col items-center lg:items-start justify-center pt-3 lg:pt-5 pb-0 lg:pb-3 px-4 lg:pl-10 lg:pr-0">
           <motion.div 
              initial={{ opacity: 0, x: -20 }}
              whileInView={{ opacity: 1, x: 0 }}
              viewport={{ once: true }}
-             className="relative h-11 mb-6 self-center lg:self-start flex items-center gap-3"
+             className="relative h-11 mb-4 self-center lg:self-start flex items-center gap-3"
           >
             {/* Dual-layer Logo: Colorful Icon + White Text */}
             <div className="relative h-full flex items-center">
@@ -64,23 +65,31 @@ export default function FeatureCTA({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-slate-400 text-sm font-medium mb-6 max-w-xs mx-auto lg:mx-0 leading-relaxed"
+            className="text-slate-400 text-sm font-medium mb-4 max-w-xs mx-auto lg:mx-0 leading-relaxed"
           >
             {description}
           </motion.p>
           <motion.button
             type="button"
             onClick={handleAuthRedirect}
-            whileHover={{ scale: 1.05, boxShadow: "0 0 30px rgba(255,255,255,0.2)" }}
+            whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
-            className="bg-white text-black px-8 sm:px-10 py-4 rounded-[1.25rem] font-black text-base hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden self-center lg:self-start cursor-pointer"
+            className="group relative z-10 flex h-[3.5em] w-full max-w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300 self-center lg:self-start cursor-pointer"
+            style={{
+              boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)"
+            }}
           >
-            <span className="relative z-10">{buttonText}</span>
+            <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+            <div className="absolute left-0 top-0 -z-10 h-full w-0 rounded-[30em] bg-white transition-all duration-500 ease-in-out group-hover:w-full" />
+            <span className="relative z-10 flex items-center justify-center gap-3 text-white transition-colors duration-300 group-hover:text-slate-800">
+              {buttonText}
+              <ArrowRight size={18} className="transition-transform group-hover:translate-x-1.5" />
+            </span>
           </motion.button>
         </div>
 
         {/* Right Content Area: Interface Showcase with Glows */}
-        <div className="flex-[1.5] xl:flex-[1.4] relative mt-10 lg:mt-0 flex items-center justify-center lg:justify-end p-4 lg:p-6 lg:pr-10">
+        <div className="flex-[1.5] xl:flex-[1.4] relative mt-2 lg:mt-0 flex items-center justify-center lg:justify-end p-2 lg:p-4 lg:pr-10">
            <motion.div 
              initial={{ opacity: 0, x: 80, scale: 0.95 }}
              whileInView={{ opacity: 1, x: 0, scale: 1 }}

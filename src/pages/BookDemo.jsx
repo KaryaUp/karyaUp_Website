@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { Briefcase, CalendarCheck2, MoveRight, PhoneCall, Send } from "lucide-react";
+import { Helmet } from "react-helmet-async";
 
 const initialForm = {
   first_name: "",
@@ -79,18 +80,54 @@ export default function BookDemo() {
   };
 
   return (
-    <section className="min-h-screen bg-[linear-gradient(180deg,#fafbff_0%,#f3f5fb_100%)] pt-20 pb-10 sm:pt-24 sm:pb-14">
+    <>
+      <Helmet>
+  <title>Book a Demo | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Book a demo with Karyaup to see how our platform helps teams manage projects, tasks, and workflows efficiently. Schedule your personalized demo today."
+  />
+
+  <meta
+    name="keywords"
+    content="book demo, schedule demo, SaaS demo booking, request demo, project management demo, Karyaup demo"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Book a Demo | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Schedule a personalized demo and explore how Karyaup can improve your workflow."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/book-demo"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/book-demo"
+  />
+</Helmet>
+    <section className="min-h-screen bg-[linear-gradient(180deg,#fafbff_0%,#f3f5fb_100%)] pt-20 sm:pt-24 lg:pt-32 pb-8 sm:pb-10 lg:pb-12 text-slate-900">
       <div className="mx-auto grid max-w-5xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_0.88fr] lg:px-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.45, ease: "easeOut" }}
-          className="flex flex-col justify-center lg:pr-4"
+          className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-4"
         >
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-purple-200 bg-purple-100 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700">
+          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-purple-200 bg-purple-100 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700 mx-auto lg:mx-0">
             Demo Request
           </div>
-          <h1 className="mt-4 text-3xl font-black leading-[0.98] tracking-tight text-slate-900 sm:text-4xl lg:text-[3.25rem]">
+          <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]">
             Book a demo <br />built for your
             <motion.span
               className="block text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -100,11 +137,11 @@ export default function BookDemo() {
               workflow
             </motion.span>
           </h1>
-          <p className="mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-500 sm:text-base">
+          <p className="mt-3 max-w-lg text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-slate-500">
             Get a free 1:1 demo and consultation tailored to your business to ensure your team's success.
           </p>
 
-          <div className="mt-6 space-y-3">
+          <div className="mt-6 space-y-3 w-full max-w-md">
             <InfoCard
               icon={<CalendarCheck2 className="h-5 w-5 text-purple-700" />}
               title="Personalized walkthrough"
@@ -197,13 +234,14 @@ export default function BookDemo() {
           </form>
         </motion.div>
       </div>
-    </section>
+      </section>
+      </>
   );
 }
 
 function InfoCard({ icon, title, text }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-slate-200/70 bg-white/70 p-3.5 shadow-sm">
+    <div className="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-3 rounded-2xl border border-slate-200/70 bg-white/70 p-3.5 shadow-sm">
       <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-purple-100">
         {icon}
       </div>

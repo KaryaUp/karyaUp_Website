@@ -1,5 +1,6 @@
 import React from "react";
 import SubPageLayout from "../../components/SubPageLayout";
+import { Helmet } from "react-helmet-async";
 
 const videos = [
   { emoji: "▶️", title: "KaryaUp in 5 Minutes", duration: "5:12", level: "Beginner", levelColor: "bg-emerald-100 text-emerald-700", desc: "The fastest way to understand what KaryaUp is and why your team will love it." },
@@ -12,6 +13,42 @@ const videos = [
 
 export default function VideoTutorials() {
   return (
+    <>
+      <Helmet>
+  <title>Video Tutorials & Guides | Karyaup</title>
+
+  <meta
+    name="description"
+    content="Watch Karyaup video tutorials to learn how to manage tasks, projects, dashboards, and workflows. Step-by-step guides to help your team work smarter."
+  />
+
+  <meta
+    name="keywords"
+    content="video tutorials, how-to guides, SaaS tutorials, project management tutorials, workflow training, Karyaup tutorials"
+  />
+
+  <meta name="author" content="Karyaup" />
+
+  <meta
+    property="og:title"
+    content="Video Tutorials & Guides | Karyaup"
+  />
+  <meta
+    property="og:description"
+    content="Learn Karyaup with step-by-step video tutorials and guides."
+  />
+  <meta property="og:type" content="website" />
+  <meta
+    property="og:url"
+    content="https://karyaup.com/video-tutorials"
+  />
+  <meta property="og:site_name" content="Karyaup" />
+
+  <link
+    rel="canonical"
+    href="https://karyaup.com/video-tutorials"
+  />
+</Helmet>
     <SubPageLayout badge="Resources" badgeColor="bg-purple-100 text-purple-700" title="Video Tutorials" subtitle="Step-by-step video tutorials to help every team member get up to speed with KaryaUp fast.">
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {videos.map((v) => (
@@ -28,6 +65,7 @@ export default function VideoTutorials() {
           </div>
         ))}
       </div>
-    </SubPageLayout>
+      </SubPageLayout>
+   </>   
   );
 }
