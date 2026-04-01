@@ -137,17 +137,17 @@ const TeamSolutions = () => {
     const active = teams[activeIdx];
 
     return (
-        <section className=" pb-6 sm:pb-8 lg:pb-10 bg-[white]">
+        <section className="pb-8 sm:pb-10 bg-[white]">
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Heading */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-center mb-8"
+                    className="text-center mb-6 sm:mb-8"
                 >
-                    <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[0.95] tracking-tight mb-4">
-                        Built For Teams That<br/> 
+                    <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[0.95] tracking-tight mb-3">
+                        Built For Teams That<br />
                         <motion.span
                             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                             animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -156,7 +156,7 @@ const TeamSolutions = () => {
                             Move Fast
                         </motion.span>
                     </h2>
-                    <p className="text-gray-500 text-lg sm:text-xl font-medium">
+                    <p className="text-gray-500 text-base sm:text-xl font-medium">
                         Your key workflows, powered by KaryaUp Agents.
                     </p>
                 </motion.div>
@@ -187,31 +187,31 @@ const TeamSolutions = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.35 }}
-                        className="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-10 shadow-sm border border-gray-100"
+                        className="bg-white rounded-2xl sm:rounded-3xl p-3.5 sm:p-6 md:p-10 shadow-sm border border-gray-100"
                     >
                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 items-start">
                             {/* Left side */}
-                            <div className="relative overflow-hidden lg:pr-10">
-                                <div className="relative z-10">
-                                    <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-6">
+                            <div className="relative overflow-hidden lg:pr-10 flex flex-col items-center lg:items-start text-center lg:text-left">
+                                <div className="relative z-10 w-full flex flex-col items-center lg:items-start">
+                                    <h3 className="text-2xl sm:text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-4 sm:mb-5">
                                         {active.title}
                                         <br />
                                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 italic">{active.titleHighlight}</span>
                                     </h3>
-                                    
-                                    <p className="text-gray-500 text-lg leading-relaxed mb-8 max-w-md font-medium">
+
+                                    <p className="text-gray-500 text-base sm:text-lg leading-relaxed mb-4 sm:mb-6 max-w-md font-medium">
                                         {active.description}
                                     </p>
 
                                     {/* Replaces Indicators */}
-                                    <div className="mb-10">
-                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-4 px-1">
+                                    <div className="mb-6 sm:mb-8 w-full flex flex-col items-center lg:items-start">
+                                        <p className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400 mb-3 px-1">
                                             Replaces
                                         </p>
-                                        <div className="flex flex-wrap gap-3">
+                                        <div className="flex flex-wrap justify-center lg:justify-start gap-2.5">
                                             {active.replaces?.map((tool) => (
-                                                <div 
-                                                    key={tool} 
+                                                <div
+                                                    key={tool}
                                                     className="px-4 py-2 rounded-xl bg-gray-50 border border-gray-100 text-gray-500 text-xs font-bold hover:border-[#7e22ce]/30 hover:text-[#7e22ce] transition-all cursor-default"
                                                 >
                                                     {tool}
@@ -224,10 +224,10 @@ const TeamSolutions = () => {
                                     </div>
 
                                     {/* Bullet list */}
-                                    <ul className="space-y-4">
+                                    <ul className="space-y-3 w-full">
                                         {active.bullets.map((b) => (
-                                            <li key={b} className="flex items-start gap-3 text-gray-600 text-base font-bold bg-purple-50/50 p-4 rounded-2xl border border-purple-100/30">
-                                                <CheckCircle2 size={20} className="text-[#7e22ce] mt-0.5 flex-shrink-0" />
+                                            <li key={b} className="flex items-start gap-3 text-gray-600 text-sm sm:text-base font-bold bg-purple-50/50 p-2.5 sm:p-4 rounded-2xl border border-purple-100/30 text-left">
+                                                <CheckCircle2 size={18} className="text-[#7e22ce] mt-0.5 flex-shrink-0" />
                                                 {b}
                                             </li>
                                         ))}
@@ -243,7 +243,7 @@ const TeamSolutions = () => {
                                         initial={{ opacity: 0, x: 30 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: i * 0.1, duration: 0.35 }}
-                                        className="flex items-center gap-4 bg-gray-50 hover:bg-gray-100/80 rounded-2xl px-5 py-4 transition-colors cursor-default border border-gray-100"
+                                        className="flex items-center gap-4 bg-gray-50 hover:bg-gray-100/80 rounded-2xl px-5 py-3 sm:py-4 transition-colors cursor-default border border-gray-100"
                                     >
                                         <AgentAvatar color={agent.color} />
                                         <span className="text-sm font-bold text-gray-700">{agent.name}</span>

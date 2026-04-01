@@ -1,18 +1,23 @@
-                                                                                                          import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
-import dashboardImage from "../../assets/dashboard2.png";
-import planImage from "../../assets/Gantt.png";
-import karyaUpLogo from "../../assets/Logo(2).png";
+import { Check } from "lucide-react";
+import dashboardImage from "../../assets/dashboard2.webp";
+import planImage from "../../assets/Gantt.webp";
+import karyaUpLogo from "../../assets/logo-svg.svg";
 import FeatureCTA from "../../components/FeatureCTA";
 
 /* ═══════════════════════════════════════════════
    ICONS
 ═══════════════════════════════════════════════ */
 const CheckIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13"><polyline points="3,9 7,13 13,5" /></svg>
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
+    <polyline points="3,9 7,13 13,5" />
+  </svg>
 );
 const XIcon = () => (
-  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="13" height="13"><line x1="4" y1="4" x2="12" y2="12" /><line x1="12" y1="4" x2="4" y2="12" /></svg>
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="13" height="13">
+    <line x1="4" y1="4" x2="12" y2="12" /><line x1="12" y1="4" x2="4" y2="12" />
+  </svg>
 );
 const ListIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" width="11" height="11">
@@ -24,7 +29,7 @@ const ListIcon = () => (
 );
 
 /* ═══════════════════════════════════════════════
-   LIGHT 3D GLASS SHIELD (With Scanning Effect)
+   LIGHT 3D GLASS SHIELD
 ═══════════════════════════════════════════════ */
 const LightShield3D = () => (
   <svg viewBox="0 0 200 220" fill="none" className="w-full h-full drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
@@ -34,49 +39,31 @@ const LightShield3D = () => (
         <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
         <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
       </linearGradient>
-      <radialGradient id="glassShine" cx="100" cy="100" r="100" gradientUnits="userSpaceOnUse">
-        <stop stopColor="white" stopOpacity="0.5" />
-        <stop offset="1" stopColor="white" stopOpacity="0" />
-      </radialGradient>
-      {/* Laser Scan Gradient */}
-      <linearGradient id="scanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="transparent" />
-        <stop offset="50%" stopColor="#A855F7" stopOpacity="0.6" />
-        <stop offset="100%" stopColor="transparent" />
-      </linearGradient>
     </defs>
-    <path 
-      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z" 
-      fill="white" 
-      fillOpacity="0.03" 
-      stroke="url(#glassBorderGradient)" 
-      strokeOpacity="0.6" 
-      strokeWidth="2" 
+    <path
+      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z"
+      fill="white"
+      fillOpacity="0.03"
+      stroke="url(#glassBorderGradient)"
+      strokeOpacity="0.6"
+      strokeWidth="2"
     />
-    {/* Animated Scan Line */}
-   
   </svg>
 );
 
 /* ═══════════════════════════════════════════════
-   COMPONENTS
+   SUB-COMPONENTS
 ═══════════════════════════════════════════════ */
 function Card({ data, type, index }) {
   const isRed = type === "red";
   return (
-    <motion.div 
+    <motion.div
       initial={{ y: 0 }}
       animate={{ y: [0, -8, 0] }}
-      transition={{
-        duration: 4,
-        repeat: Infinity,
-        delay: index * 0.4,
-        ease: "easeInOut"
-      }}
-      whileHover={{ scale: 1.02, transition: { duration: 0.2 } }}
-      className="relative group rounded-xl"
+      transition={{ duration: 4, repeat: Infinity, delay: index * 0.4, ease: "easeInOut" }}
+      className="relative group rounded-xl w-full"
     >
-      <div className={`backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 shrink-0 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50 group-hover:shadow-purple-200/50`}>
+      <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50">
         <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${
           isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
         }`}>
@@ -85,9 +72,9 @@ function Card({ data, type, index }) {
         <div className="flex-1 min-w-0 text-left">
           <div className="text-[13px] font-bold text-slate-900 truncate">{data.title}</div>
           <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
-            <span>{data.time}</span>
+            <span>{data.tag}</span>
             <span className="w-1 h-1 rounded-full bg-slate-300" />
-            <span className="flex items-center gap-1"><ListIcon /> {data.tag}</span>
+            <span className="flex items-center gap-1"><ListIcon /> Active</span>
           </div>
         </div>
       </div>
@@ -97,7 +84,7 @@ function Card({ data, type, index }) {
 
 function ScrollTrack({ cards, direction }) {
   const trackRef = useRef(null);
-  const posRef = useRef(direction === "up" ? -50 : 0);
+  const posRef = useRef(direction === "up" ? -25 : 0);
   const doubled = useMemo(() => [...cards, ...cards], [cards]);
 
   useEffect(() => {
@@ -105,10 +92,10 @@ function ScrollTrack({ cards, direction }) {
     const animate = () => {
       if (direction === "down") {
         posRef.current -= speed;
-        if (posRef.current <= -50) posRef.current = 0;
+        if (posRef.current <= -25) posRef.current = 0;
       } else {
         posRef.current += speed;
-        if (posRef.current >= 0) posRef.current = -50;
+        if (posRef.current >= 0) posRef.current = -25;
       }
       if (trackRef.current) trackRef.current.style.transform = `translateY(${posRef.current}%)`;
       requestAnimationFrame(animate);
@@ -118,8 +105,11 @@ function ScrollTrack({ cards, direction }) {
   }, [direction]);
 
   return (
-    <div className="h-[300px] overflow-hidden relative">
-      <div className="relative h-full" style={{ maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' }}>
+    <div className="h-[220px] overflow-hidden relative">
+      <div className="relative h-full" style={{ 
+        maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)', 
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)' 
+      }}>
         <div ref={trackRef} className="flex flex-col gap-4 py-4 will-change-transform">
           {doubled.map((card, i) => (
             <Card key={i} data={card} type={direction === "down" ? "red" : "green"} index={i % cards.length} />
@@ -130,132 +120,239 @@ function ScrollTrack({ cards, direction }) {
   );
 }
 
-function ScrollingDataBg({ isHovered }) {
-  const text = "1=2-LwuS0AkLC6Vvj|hq5tCReRo6%bcvnvjddjru4ndjenck4ndkvk4kdkvs57g57rh]fu8474ghfh44yfdjee3wwkxncfuregdy74hdncnrs3loxmen4jdjcfvmnvsdjfsw8sdjidw8didwd8cd0edjcdc9dv{fgH$#6(XiK^!8W3jLlZ2th%q2IYMb<5*P4AhV8oIMq7@Pw47Wf#40-zX@qj(2b5KgK840SXQfFTq6ce3R#k$8wujFFHU8t9%FUDBg>ej|ABYK6)3i^fzSh(0*X4BYRNOea)nsVUCYnV}MHe|+uCHdW&P$zL|+ssBNgZGMY<}]eYYV]T7j]B*4%&=GLmabFcv|]F9Z$/pRvN}O!3MY8k@FT";
-  const repeated = Array(15).fill(text).join(' ');
+function ScrollingDataBg({ isShieldHovered }) {
+  const infinitePatternRow = "KaryaUp ".repeat(25);
+  const patternRows = Array(14).fill(infinitePatternRow);
 
   return (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none px-4 transition-all duration-700 ${isHovered ? 'opacity-80' : 'opacity-[0.07]'}`}>
-      <div className={`text-[10px] leading-relaxed text-slate-900 break-all ${isHovered ? 'animate-[vScroll_8s_linear_infinite]' : 'animate-[vScroll_45s_linear_infinite]'}`}>
-        <p>{repeated}</p>
-        <p>{repeated}</p>
-      </div>
+    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-3 overflow-hidden ${
+      isShieldHovered ? "opacity-40" : "opacity-[0.08]"
+    }`}>
+      {patternRows.map((pattern, i) => (
+        <motion.div
+          key={i}
+          initial={{ x: i % 2 === 0 ? 0 : -100 }}
+          animate={{ x: i % 2 === 0 ? -100 : 0 }}
+          transition={{ duration: isShieldHovered ? 8 : 25, repeat: Infinity, ease: "linear" }}
+          className="whitespace-nowrap text-purple-700 font-normal text-sm md:text-base select-none"
+        >
+          {pattern} {pattern}
+        </motion.div>
+      ))}
     </div>
   );
 }
 
+/* ═══════════════════════════════════════════════
+   MAIN PAGE COMPONENT
+═══════════════════════════════════════════════ */
 export default function ProjectManagement() {
   const [isShieldHovered, setIsShieldHovered] = useState(false);
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
 
   const redCards = [
-    { title: "Projects scattered across multiple tools", time: "8:06:41 PM", tag: "Bug Fixes" },
-    { title: "Critical info hidden in siloed systems", time: "8:12:45 PM", tag: "New task" },
-    { title: "Manual updates strain capacity", time: "7:55:10 PM", tag: "Data Sync" },
-    { title: "Missed deadlines cause bottlenecks", time: "7:40:03 PM", tag: "Security" },
-    { title: "Rate limit exceeded", time: "7:20:50 PM", tag: "API" },
+    { title: "Projects scattered across tools", tag: "Inefficiency" },
+    { title: "Critical info hidden in silos", tag: "Visibility" },
+    { title: "Manual updates strain capacity", tag: "Labor" },
+    { title: "Missed deadlines & bottlenecks", tag: "Risk" },
+    { title: "Unclear resource allocation", tag: "Planning" },
   ];
 
   const greenCards = [
-    { title: "All projects, docs, and chat in one platform", time: "8:05:28 PM", tag: "Data Sync" },
-    { title: "Instantly find anything across all tools", time: "8:04:15 PM", tag: "Weekly Stats" },
-    { title: "Automated reporting & resource management", time: "7:58:00 PM", tag: "Production" },
-    { title: "Backup finished", time: "7:45:22 PM", tag: "Storage" },
-    { title: "AI-powered workflows for tasks & timelines", time: "7:30:11 PM", tag: "Users" },
-    { title: "Cache cleared successfully", time: "7:18:40 PM", tag: "Performance" },
+    { title: "Unified platform hub", tag: "Efficiency" },
+    { title: "Instant global search", tag: "Visibility" },
+    { title: "Automated report generation", tag: "Labor" },
+    { title: "AI-powered timeline tracking", tag: "Growth" },
+    { title: "Real-time resource analytics", tag: "Scale" },
   ];
 
   return (
-    <div className="bg-white font-sans overflow-x-hidden">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes vScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-      `}} />
-
+    <div className="min-h-screen bg-white font-sans overflow-x-hidden pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       {/* Hero Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6">
-              The world's most powerful & flexible
-              <motion.span className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]" animate={{ backgroundPosition: ["0% center", "-200% center"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
-                Project Management Software
-              </motion.span>
-            </motion.h1>
-            <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0">
-              Manage your projects, docs, and chat in one place all powered by AI. KaryaUp adapts to any project, eliminates busywork, and keeps everything organized.
-            </p>
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 min-h-[calc(100vh-120px)] flex items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
+
+            {/* Left */}
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] sm:text-xs font-black uppercase tracking-widest"
+              >
+                Platform <span className="opacity-60">/</span> Project Management
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+              >
+                The World's Most Powerful Project
+                <span className="block">
+                  {" "}
+                  <motion.span
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                     Management
+                  </motion.span>
+                </span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
+              >
+                {[
+                  "Adapt to any workflow—KaryaUp molds to how your team works.",
+                  "Eliminate busywork and keep everything organized with enterprise-grade AI execution."
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md"
+              >
+                {["Gantt Charts", "Dashboards", "AI Agents", "Automations"].map((tag) => (
+                  <div key={tag} className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Check className="w-2.5 h-2.5 text-emerald-600 stroke-[4]" />
+                    </div>
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] text-slate-600 truncate">{tag}</span>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
+
+            {/* Right – Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24 lg:-translate-y-8 xl:-translate-y-12"
+            >
+              <div className="relative overflow-hidden shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp project management dashboard"
+                  className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+                />
+              </div>
+            </motion.div>
           </div>
-          <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
-            <img src={dashboardImage} alt="Dashboard" className="w-full h-auto" />
-          </motion.div>
         </div>
       </section>
 
-      {/* Security Grid Section */}
-      <section className="py-10 bg-white px-2">
-        <div className="max-w-7xl mx-auto">
-          <motion.h1 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4">
+      {/* Comparison Section */}
+      <section className={`${sectionSpacing} bg-white px-4 md:px-6`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.h2 
+            initial={{ opacity: 0, y: 40 }} 
+            whileInView={{ opacity: 1, y: 0 }} 
+            viewport={{ once: true }} 
+            className="text-center text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
+          >
             Project Management <br />
-            <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]" animate={{ backgroundPosition: ["0% center", "-200% center"] }} transition={{ duration: 4, repeat: Infinity, ease: "linear" }}>
+            <motion.span 
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]" 
+              animate={{ backgroundPosition: ["0% center", "-200% center"] }} 
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            >
               is broken, we fixed it
             </motion.span>
-          </motion.h1>
+          </motion.h2>
 
-          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl mt-12 overflow-hidden">
-            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[500px]">
-              
+          <div className="p-[2px] rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
+            <div className="bg-slate-50 rounded-[1.4rem] md:rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+
               {/* LEFT: OLD WAY */}
-              <div className="p-6 border-r border-slate-200 flex flex-col justify-center bg-white/50">
-                <h3 className="text-center text-2xl font-black mb-2 text-slate-900">Old Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-8">Manual updates and scattered tools cause friction.</p>
+              <div className="p-4 md:p-3 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-1">
+                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">Old Way</h3>
+                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Manual updates and scattered tools.</p>
                 <ScrollTrack cards={redCards} direction="down" />
               </div>
 
-              {/* MIDDLE: INTERACTIVE 3D LOGO & SHIELD */}
-              <div 
-                className="relative flex flex-col items-center justify-center py-16 px-8 group overflow-hidden bg-white/40"
+              {/* MIDDLE: 3D SHIELD & TEXT (MOVED UP) */}
+              <div
+                className="relative flex flex-col items-center justify-start py-10 md:py-12 px-4 group overflow-hidden bg-white/40 min-h-[450px] order-2"
                 onMouseEnter={() => setIsShieldHovered(true)}
                 onMouseLeave={() => setIsShieldHovered(false)}
               >
-                <div className="relative z-40 text-center mb-10">
-                  <h3 className="text-2xl font-black text-slate-900">Security you can Trust</h3>
-                  <p className="text-sm text-slate-500 mt-2">More secure than using AI directly.</p>
+                <ScrollingDataBg isShieldHovered={isShieldHovered} />
+
+                {/* TEXT CONTAINER - Now at the top of the middle col */}
+                <div className="relative z-40 text-center mb-10 pointer-events-none">
+                  <h3 className={`text-xl md:text-2xl font-black transition-colors duration-500 ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
+                    Security You Can Trust
+                  </h3>
+                  <p className={`text-[10px] mt-2 font-bold uppercase tracking-widest transition-colors duration-500 ${isShieldHovered ? "text-fuchsia-500" : "text-slate-500"}`}>
+                    More secure than using AI directly.
+                  </p>
                 </div>
 
-                <ScrollingDataBg isHovered={isShieldHovered} />
-
-                <div className="relative flex items-center justify-center w-64 h-72 md:w-80 md:h-80">
-                  <div className="absolute inset-0 z-10">
+                {/* LOGO CONTAINER */}
+                <div className="relative flex items-center justify-center w-full max-w-[200px] md:max-w-[240px] aspect-square" style={{ perspective: "1200px" }}>
+                  <div className="absolute inset-0 z-10 opacity-80 scale-110">
                     <LightShield3D />
                   </div>
-                  
-                  <div className="relative z-30" style={{ perspective: "1000px" }}>
+
+                  <div className="relative z-30" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
                       animate={{ 
-                        rotateY: 360,
-                        y: [0, -10, 0]
+                        rotateY: [0, 360], 
+                        y: [0, -10, 0],
+                        scale: isShieldHovered ? 1.1 : 1 
                       }}
                       transition={{
-                        rotateY: { duration: 8, repeat: Infinity, ease: "linear" },
-                        y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                        rotateY: { duration: 10, repeat: Infinity, ease: "linear" },
+                        y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                        scale: { duration: 0.4 }
                       }}
-                      className="w-40 h-40 md:w-48 md:h-48"
+                      className="w-32 h-32 md:w-44 md:h-44 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      <img src={karyaUpLogo} alt="Logo" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
+                      <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
+                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
+                      </div>
+                      
+                      <div className="absolute inset-0" style={{ 
+                        backfaceVisibility: 'hidden', 
+                        WebkitBackfaceVisibility: 'hidden',
+                        transform: 'rotateY(180deg) translateZ(1px)' 
+                      }}>
+                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" />
+                      </div>
                     </motion.div>
                   </div>
                 </div>
 
-                <motion.div 
-                  animate={{ scale: isShieldHovered ? 1.2 : 1, opacity: isShieldHovered ? 0.6 : 0.3 }}
-                  className="absolute -bottom-10 w-64 h-64 bg-purple-300 rounded-full blur-[80px] pointer-events-none" 
+                <motion.div
+                  animate={{ scale: isShieldHovered ? 1.4 : 1, opacity: isShieldHovered ? 0.4 : 0.15 }}
+                  className="absolute -bottom-40 w-64 h-64 bg-purple-400 rounded-full blur-[100px] pointer-events-none"
                 />
               </div>
 
               {/* RIGHT: KARYAUP WAY */}
-              <div className="p-6 border-l border-slate-200 flex flex-col justify-center bg-white/50">
-                <h3 className="text-center text-2xl font-black mb-2 text-slate-900">The KaryaUp Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-8">Advanced execution loops for smarter growth.</p>
+              <div className="p-4 md:p-6 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-3">
+                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">The KaryaUp Way</h3>
+                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Advanced execution loops for growth.</p>
                 <ScrollTrack cards={greenCards} direction="up" />
               </div>
 
@@ -264,25 +361,31 @@ export default function ProjectManagement() {
         </div>
       </section>
 
-      {/* Why Choose Section */}
-      <section className="py-20 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
-          <motion.div initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100">
-            <img src={planImage} alt="Planning" className="w-full h-auto" />
+      {/* Feature Highlight Section */}
+      <section className={`${sectionSpacing} px-6`}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-12 md:gap-16 items-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -50 }} 
+            whileInView={{ opacity: 1, x: 0 }} 
+            viewport={{ once: true }} 
+            className="rounded-3xl overflow-hidden shadow-2xl border border-gray-100 bg-white p-2"
+          >
+            <img src={planImage} alt="Gantt Chart Planning" className="w-full h-auto rounded-2xl" />
           </motion.div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-black mb-6 text-slate-900">
-              Why Choose <span className="text-purple-600">KaryaUp?</span>
+            <h2 className="text-3xl md:text-5xl font-black mb-6 text-slate-900 leading-tight">
+              Why Project Leaders <br /><span className="text-purple-600">Choose KaryaUp</span>
             </h2>
-            <ul className="space-y-4 text-slate-700 font-medium">
+            <ul className="space-y-4 md:space-y-6 text-slate-700 font-bold">
               {[
-                "AI-powered automation for repetitive tasks",
-                "Seamless integration with favorite apps",
-                "Real-time collaboration across teams",
-                "Secure, scalable, and built for growth"
+                "Consolidated data source for all departments",
+                "Automated status reports with one click",
+                "Dynamic Gantt charts that adjust in real-time",
+                "Secure collaboration across client boundaries"
               ].map((item, i) => (
-                <li key={i} className="flex items-center gap-3">
-                  <span className="text-green-500"><CheckIcon /></span> {item}
+                <li key={i} className="flex items-start gap-4">
+                  <span className="text-green-500 mt-1 shrink-0"><CheckIcon /></span>
+                  <span className="text-base md:text-lg">{item}</span>
                 </li>
               ))}
             </ul>
@@ -292,10 +395,10 @@ export default function ProjectManagement() {
 
       <FeatureCTA
         title="Tasks that connect to everything you do"
-        description="Work smarter with tasks that can live in your whiteboards, chat, calendar — anywhere you work"
+        description="Work smarter with tasks that can live in your whiteboards, chat, and calendar — anywhere you work."
         image={dashboardImage}
-        containerClassName="my-20"
+        containerClassName="mb-12 md:mb-24"
       />
-    </div>   
+    </div>
   );
 }

@@ -1,6 +1,6 @@
-                                                                                                import { motion } from "framer-motion";
-import dashboardImage from "../../assets/dashboard1.jpeg";
-import planImage from "../../assets/Gantt.png";
+  import { motion } from "framer-motion";
+import dashboardImage from "../../assets/dashboard2.webp";
+import planImage from "../../assets/Gantt.webp";
 import FeatureCTA from "../../components/FeatureCTA";
 import { Link } from "react-router-dom";
 

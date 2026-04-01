@@ -1,6 +1,6 @@
-                                                                                                                     import { motion } from "framer-motion";
-import dashboardImage from "../../assets/dashboard2.png";
-import planImage from "../../assets/Gantt.png";
+import { motion } from "framer-motion";
+import dashboardImage from "../../assets/dashboard2.webp";
+import planImage from "../../assets/Gantt.webp";
 import { Link } from "react-router-dom";
 import FeatureCTA from "../../components/FeatureCTA";
 
@@ -10,9 +10,9 @@ export default function IT() {
       {/* ================= HERO SECTION ================= */}
       <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-20 lg:py-32 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          
+
           {/* LEFT CONTENT: Slides in from Left */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 80, delay: 0.1 }}
@@ -28,9 +28,9 @@ export default function IT() {
                 for IT PMO Teams
               </motion.span>
             </h1>
-            
+
             <p className="text-lg lg:text-xl text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Manage IT projects, service requests, and governance in one place—all connected by AI. 
+              Manage IT projects, service requests, and governance in one place—all connected by AI.
               KaryaUp streamlines workflows and compliance so IT operations run with speed and precision.
             </p>
 
@@ -81,9 +81,9 @@ export default function IT() {
               AI for Project Management
             </span>
           </motion.h2>
-          
+
           <p className="mx-auto text-lg text-slate-600 leading-relaxed max-w-2xl">
-            Meet the first AI that works across your entire project lifecycle. 
+            Meet the first AI that works across your entire project lifecycle.
             From drafting plans to capturing meetings,{" "}
             <span className="font-semibold text-slate-800">
               KaryaUp AI frees your team to focus on impact.
@@ -95,7 +95,7 @@ export default function IT() {
       {/* ================= SERVICE DESK AUTOMATION SECTION ================= */}
       <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-24 bg-slate-50/50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* TEXT CONTENT: Slides in from Left */}
           <motion.div
             initial={{ opacity: 0, x: -80 }}
@@ -108,10 +108,10 @@ export default function IT() {
               <span className="text-[#7e22ce]">Automation</span>
             </h2>
             <p className="text-xl text-slate-600 leading-relaxed mb-8 max-w-lg">
-              AI-powered ticket routing, auto-resolutions, and SLA tracking. 
+              AI-powered ticket routing, auto-resolutions, and SLA tracking.
               Reduce MTTR by <span className="text-slate-900 font-bold">60%</span>.
             </p>
-            
+
             <ul className="space-y-5">
               {[
                 "Auto-categorize & prioritize tickets",
@@ -137,9 +137,9 @@ export default function IT() {
             className="relative"
           >
             <div className="rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-slate-200 bg-white p-4">
-              <img 
-                src={planImage} 
-                alt="Service Desk Interface" 
+              <img
+                src={planImage}
+                alt="Service Desk Interface"
                 className="w-full h-auto rounded-2xl shadow-inner"
               />
             </div>

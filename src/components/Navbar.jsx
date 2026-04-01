@@ -371,7 +371,7 @@ const Navbar = () => {
                       <div className="absolute -top-1 w-2 h-2 bg-slate-900 border-t border-l border-slate-800 rotate-45 left-6" />
                       <p className="text-[13px] font-medium text-white leading-snug">
                         <span className="text-purple-400 font-bold tracking-tight block mb-0.5">KaryaUp</span>
-                        From Sanskrit word<span className="italic opacity-90">“कार्य”</span> <br /> meaning action or work.
+                        From Sanskrit word<br/> <span className="italic opacity-90">“कार्य   ”</span> meaning action <br /> or work.
                       </p>
                     </div>
                   </motion.div>

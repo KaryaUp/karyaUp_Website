@@ -17,11 +17,11 @@ const TrustedBy = () => {
         { name: 'Utopia', logo: Brand6 }
     ];
 
-    // Triple the array to ensure the screen is always full during animation
-    const marqueeBrands = [...brands, ...brands, ...brands];
+    // Double the array to ensure the screen is always full during animation
+    const marqueeBrands = [...brands, ...brands];
 
     return (
-        <section className="bg-white border-y border-black/[0.08] overflow-hidden w-full pt-6 py-2">
+        <section className="bg-white border-y border-black/[0.08] overflow-hidden w-full pt-6 pb-6 sm:pt-8 sm:pb-8">
             <div className="flex flex-col items-center">
                 
                 <p className="text-[10px] sm:text-xs font-bold text-slate-400 uppercase tracking-[0.25em] m-0 mb-6 leading-none">

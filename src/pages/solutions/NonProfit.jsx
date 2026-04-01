@@ -1,10 +1,19 @@
-Non-Profit                                                                                                                      import React from "react";
+import React, { useState, useEffect } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
-import dashboardImage from "../../assets/dashboard1.jpeg";
+import dashboardImage from "../../assets/dashboard2.webp";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function NonProfit() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const cards = [
     {
       title: "Forms & Surveys",
@@ -97,24 +106,24 @@ export default function NonProfit() {
           {cards.map((card, i) => (
             <motion.div
               key={i}
-              initial={{ 
-                opacity: 0, 
+              initial={{
+                opacity: 0,
                 y: 60,
                 // Cards 0 (Left) and 2 (Right) start at center (0)
-                x: i === 0 ? "105%" : i === 2 ? "-105%" : "0%",
+                x: isMobile ? 0 : (i === 0 ? "105%" : i === 2 ? "-105%" : "0%"),
                 scale: 0.8
               }}
-              whileInView={{ 
-                opacity: 1, 
-                y: 0, 
-                x: "0%", 
-                scale: 1 
+              whileInView={{
+                opacity: 1,
+                y: 0,
+                x: "0%",
+                scale: 1
               }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{
-                duration: 0.9,
-                ease: [0.16, 1, 0.3, 1], // Smooth elastic feel
-                delay: i === 1 ? 0.1 : 0.4, // Middle pops, then sides spread
+                duration: 0.8,
+                ease: [0.22, 1, 0.36, 1], // Faster, smoother premium ease
+                delay: i === 1 ? 0 : 0.2, // Middle pops first
               }}
               whileHover={{ y: -12, transition: { duration: 0.3 } }}
               className="bg-[#F8F9FA] rounded-[32px] p-8 group border border-transparent hover:border-slate-200 hover:shadow-2xl transition-all duration-500"

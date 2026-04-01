@@ -65,10 +65,7 @@ export default function TimeTracking() {
   ];
 
   return (
-    <SubPageLayout
-      
-      
-    >
+    <div className="min-h-screen bg-white font-sans overflow-x-hidden pt-32 sm:pt-40 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
       <section className="relative left-1/2 right-1/2 mb-12 w-screen -translate-x-1/2 overflow-hidden bg-white py-10 font-sans sm:py-16">
         <div className="absolute -top-24 left-8 h-64 w-64 rounded-full bg-pink-200/40 blur-3xl" />
        
@@ -197,6 +194,6 @@ export default function TimeTracking() {
           }
         }
       `}</style>
-    </SubPageLayout>
+    </div>
   );
 }

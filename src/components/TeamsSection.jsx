@@ -76,14 +76,14 @@ const TeamsSection = () => {
   const [active, setActive] = useState(0);
 
   // ── refs (no stale closures) ──
-  const sectionRef     = useRef(null);
-  const rightPanelRef  = useRef(null);
-  const activeRef      = useRef(0);
-  const isInsideRef    = useRef(false); // true = section is in viewport
-  const completedRef   = useRef(false); // true = all cards have been shown going down
-  const lastAdvance    = useRef(0);     // timestamp of last card change
-  const wheelBuffer    = useRef(0);     // accumulated deltaY for fast-scroll
-  const bufferTimer    = useRef(null);  // resets buffer after idle
+  const sectionRef = useRef(null);
+  const rightPanelRef = useRef(null);
+  const activeRef = useRef(0);
+  const isInsideRef = useRef(false); // true = section is in viewport
+  const completedRef = useRef(false); // true = all cards have been shown going down
+  const lastAdvance = useRef(0);     // timestamp of last card change
+  const wheelBuffer = useRef(0);     // accumulated deltaY for fast-scroll
+  const bufferTimer = useRef(null);  // resets buffer after idle
 
   useEffect(() => { activeRef.current = active; }, [active]);
 
@@ -126,7 +126,7 @@ const TeamsSection = () => {
       const now = Date.now();
       const idx = activeRef.current;
       const goingDown = e.deltaY > 0;
-      const goingUp   = e.deltaY < 0;
+      const goingUp = e.deltaY < 0;
 
       // Accumulate wheel delta to detect fast scrolling intent
       clearTimeout(bufferTimer.current);
@@ -210,7 +210,7 @@ const TeamsSection = () => {
     const onTouchMove = (e) => {
       if (!isInsideRef.current) return;
       const diff = touchStartY - e.touches[0].clientY;
-      const idx  = activeRef.current;
+      const idx = activeRef.current;
 
       if (!touchLocked && Math.abs(diff) > 40) {
         touchLocked = true;
@@ -233,17 +233,17 @@ const TeamsSection = () => {
     };
 
     // Use capture phase so we intercept before anything else
-    window.addEventListener('wheel',      onWheel,    { passive: false, capture: true });
-    window.addEventListener('keydown',    onKeyDown,  { capture: true });
+    window.addEventListener('wheel', onWheel, { passive: false, capture: true });
+    window.addEventListener('keydown', onKeyDown, { capture: true });
     window.addEventListener('touchstart', onTouchStart, { passive: true });
-    window.addEventListener('touchmove',  onTouchMove,  { passive: false, capture: true });
+    window.addEventListener('touchmove', onTouchMove, { passive: false, capture: true });
 
     return () => {
       observer.disconnect();
-      window.removeEventListener('wheel',      onWheel,    { capture: true });
-      window.removeEventListener('keydown',    onKeyDown,  { capture: true });
+      window.removeEventListener('wheel', onWheel, { capture: true });
+      window.removeEventListener('keydown', onKeyDown, { capture: true });
       window.removeEventListener('touchstart', onTouchStart);
-      window.removeEventListener('touchmove',  onTouchMove, { capture: true });
+      window.removeEventListener('touchmove', onTouchMove, { capture: true });
       clearTimeout(bufferTimer.current);
     };
   }, [snapSectionToTop]);
@@ -254,17 +254,17 @@ const TeamsSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="py-10 sm:py-12 bg-white relative overflow-hidden"
+      className="py-4 sm:py-12 bg-white relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Heading */}
-        <div className="mb-8 text-center flex flex-col items-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-4 uppercase tracking-widest">
-            <Users size={13} /> Who it's for
+        <div className="mb-4 sm:mb-8 text-center flex flex-col items-center">
+          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] sm:text-xs font-bold mb-3 uppercase tracking-widest">
+            <Users size={12} /> Who it's for
           </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] tracking-tight max-w-3xl mx-auto">
-            Built For Teams That{' '}<br/>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] tracking-tight max-w-3xl mx-auto">
+            Built For Teams That{' '}<br />
             <motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
               animate={{ backgroundPosition: ['0% center', '-200% center'] }}
@@ -275,13 +275,13 @@ const TeamsSection = () => {
           </h2>
         </div>
 
-      
+
 
         {/* Two-column layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
 
           {/* Mobile: icon row */}
-          <div className="flex items-center justify-between gap-2 overflow-x-auto pb-1 lg:hidden">
+          <div className="flex items-center justify-start sm:justify-center gap-2 overflow-x-auto pb-1.5 lg:hidden w-full scrollbar-hide">
             {teams.map((t, i) => {
               const TIcon = t.icon;
               const isActive = active === i;
@@ -289,14 +289,12 @@ const TeamsSection = () => {
                 <button
                   key={t.label}
                   onClick={() => { activeRef.current = i; setActive(i); }}
-                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border transition-all ${
-                    isActive ? `${t.bg} border-purple-200 shadow-sm` : 'border-slate-200 bg-white'
-                  }`}
+                  className={`flex h-10 w-10 sm:h-14 sm:w-14 shrink-0 items-center justify-center rounded-xl sm:rounded-2xl border transition-all ${isActive ? `${t.bg} border-purple-200 shadow-sm` : 'border-slate-200 bg-white'
+                    }`}
                 >
-                  <div className={`flex h-10 w-10 items-center justify-center rounded-full transition-all ${
-                    isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
-                  }`}>
-                    <TIcon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
+                  <div className={`flex h-7 w-7 sm:h-10 sm:w-10 items-center justify-center rounded-full transition-all ${isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
+                    }`}>
+                    <TIcon size={14} className={isActive ? 'text-white' : 'text-slate-400'} />
                   </div>
                 </button>
               );
@@ -324,9 +322,8 @@ const TeamsSection = () => {
                   <motion.div
                     animate={{ scale: isActive ? 1.1 : 1 }}
                     transition={{ type: 'spring', stiffness: 300, damping: 25 }}
-                    className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${
-                      isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-all duration-300 ${isActive ? `bg-gradient-to-br ${t.gradient}` : 'bg-slate-100'
+                      }`}
                   >
                     <TIcon size={18} className={isActive ? 'text-white' : 'text-slate-400'} />
                   </motion.div>
@@ -365,19 +362,19 @@ const TeamsSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-                className={`relative overflow-hidden rounded-3xl border border-slate-100 p-6 sm:p-10 lg:p-12 ${team.bg}`}
+                className={`relative overflow-hidden rounded-3xl border border-slate-100 p-4.5 sm:p-10 lg:p-12 ${team.bg}`}
               >
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16">
-                  <Icon size={28} style={{ color: '#7e22ce' }} />
+                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16">
+                  <Icon size={20} style={{ color: '#7e22ce' }} />
                 </div>
                 <div>
-                  <span className={`text-xs font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
+                  <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
                     {team.label}
                   </span>
-                  <h3 className="mt-2 mb-4 text-xl font-black leading-snug text-slate-900 sm:text-3xl">
+                  <h3 className="mt-1 mb-2 text-xl font-black leading-snug text-slate-900 sm:text-3xl">
                     {team.headline}
                   </h3>
-                  <p className="mb-5 text-sm font-medium italic text-slate-500 sm:text-base">
+                  <p className="mb-3 text-sm font-medium italic text-slate-500 sm:text-base">
                     "{team.result}"
                   </p>
                   <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_240px] lg:items-start">
@@ -386,17 +383,17 @@ const TeamsSection = () => {
                         {team.summary}
                       </p>
 
-                      <div className="mt-5 flex flex-col gap-1 rounded-2xl border border-white/70 bg-white/70 p-4 shadow-sm backdrop-blur-sm sm:max-w-[240px]">
-                        <div className="flex items-baseline gap-2">
+                      <div className="mt-3 flex flex-col items-center lg:items-start gap-1 rounded-2xl border border-white/70 bg-white/70 p-3 shadow-sm backdrop-blur-sm w-full sm:max-w-[240px]">
+                        <div className="flex items-baseline justify-center lg:justify-start gap-2">
                           <span className={`text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r sm:text-4xl ${team.textGrad}`}>
                             {team.stat.split(',')[0]}
                           </span>
-                          <span className="text-slate-400 text-sm font-bold uppercase tracking-wider">
+                          <span className="text-slate-400 text-[11px] sm:text-sm font-bold uppercase tracking-wider">
                             {team.stat.includes(',') ? team.stat.split(',')[1] : ''}
                           </span>
                         </div>
-                        <div className="h-1 w-12 rounded-full bg-gradient-to-r from-slate-200 to-transparent" />
-                        <p className="mt-2 text-sm font-medium text-slate-400">
+                        <div className="h-1 w-12 rounded-full bg-gradient-to-r from-slate-200 to-transparent block lg:hidden" />
+                        <p className="mt-1 text-sm font-medium text-slate-400">
                           {team.statSub}
                         </p>
                       </div>
@@ -406,7 +403,7 @@ const TeamsSection = () => {
                       {team.bullets.map((item) => (
                         <div
                           key={item}
-                          className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-3 text-sm font-bold text-slate-600 shadow-sm backdrop-blur-sm"
+                          className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-600 shadow-sm backdrop-blur-sm text-left"
                         >
                           <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-[#7e22ce]" />
                           <span>{item}</span>

@@ -1,20 +1,130 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Check, Sparkles, Activity, Zap, BarChart3, PieChart, TrendingUp, LayoutDashboard, Share2, MousePointer2, Crown, Rocket, Target, BarChart4 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { ReactLenis } from "lenis/react";
+import { cn } from "../../lib/utils";
 
 // Assets
 import logo from "../../assets/logo.png";
 import dashboardImg1 from "../../assets/dashboard2.webp";
-import dashboardImg2 from "../../assets/dashboard.webp";
+import dashboardImg2 from "../../assets/dashboard2.webp";
 import featureProjects from '../../assets/projects.webp';
 import featureWork from '../../assets/work_analysis.webp';
 import featureChart from '../../assets/chart.webp';
 import FeatureCTA from "../../components/FeatureCTA";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Dashboards() {
+  const container = useRef(null);
+  const sectionRefs = useRef([]);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  const dashboardSections = [
+    {
+      header: "Boss Dashboard",
+      title: "Leadership Insights",
+      desc: "Gain high-level visibility into core metrics. Monitor profitability, team allocation, and company health to steer your business with confidence.",
+      image: dashboardImg2,
+      tag: "Executive View",
+    },
+    {
+      header: "PM Dashboard",
+      title: "Project Orchestration",
+      desc: "Manage complexity with ease. Track sprint velocity, bottleneck trends, and resource distribution to ensure seamless delivery on every project.",
+      image: featureProjects,
+      tag: "Portfolio Tracking",
+    },
+    {
+      header: "Employee Dashboard",
+      title: "Personal Performance",
+      desc: "Optimize your daily flow. Visualize personal goals, time logs, and task efficiency to drive individual growth and focus.",
+      image: featureWork,
+      tag: "Productivity Engine",
+    },
+    {
+      header: "Sales Dashboard",
+      title: "Growth Momentum",
+      desc: "Accelerate your pipeline. Monitor conversion rates, revenue forecasts, and sales velocity to keep your team consistently over-performing.",
+      image: featureChart,
+      tag: "Revenue Pulse",
+    }
+  ];
+
+  useGSAP(() => {
+    const sections = sectionRefs.current;
+    const totalSections = sections.length;
+
+    if (!sections[0]) return;
+
+    // Set initial states
+    gsap.set(sections[0], { y: "0%", scale: 1, rotation: 0, opacity: 1 });
+    for (let i = 1; i < totalSections; i++) {
+      if (!sections[i]) continue;
+      gsap.set(sections[i], { y: "100%", scale: 1, rotation: 0, opacity: 1 });
+    }
+
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".sticky-sections-container",
+        start: "center center",
+        end: `+=${window.innerHeight * (totalSections - 1) * 1.5}`,
+        pin: true,
+        scrub: 1,
+        pinSpacing: true,
+      },
+    });
+
+    for (let i = 0; i < totalSections - 1; i++) {
+      const currentSection = sections[i];
+      const nextSection = sections[i + 1];
+      
+      if (!currentSection || !nextSection) continue;
+
+      const position = i * 1.5;
+
+      scrollTimeline.to(
+        currentSection,
+        {
+          scale: 0.92,
+          opacity: 0,
+          y: "-20%",
+          duration: 1.5,
+          ease: "power2.inOut",
+        },
+        position
+      );
+
+      scrollTimeline.to(
+        nextSection,
+        {
+          y: "0%",
+          duration: 1.5,
+          ease: "power2.inOut",
+        },
+        position
+      );
+    }
+
+    return () => {
+      scrollTimeline.kill();
+      ScrollTrigger.getAll().forEach((t) => t.kill());
+    };
+  }, { scope: container });
+
   return (
-    <>
+    <ReactLenis root>
         <Helmet>
         {/* Title (Chrome Tab) */}
         <title>Smart Business Dashboards | Karyaup Features</title>
@@ -129,7 +239,7 @@ export default function Dashboards() {
 
             {/* Right Hero Image */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
               className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
@@ -147,10 +257,10 @@ export default function Dashboards() {
       </section>
 
       {/* Role-Based Dashboards Section */}
-      <section className="bg-white mt-12 sm:mt-16 lg:mt-24">
+      <section ref={container} className="bg-white mt-12 sm:mt-16 lg:mt-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 text-center">
           <motion.div
-            initial={{ opacity: 0, x: -30 }} // match home page entry
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: "easeOut" }}
@@ -174,83 +284,44 @@ export default function Dashboards() {
           </motion.div>
         </div>
 
-        <div className="max-w-7xl mx-auto">
-          {[
-            {
-              header: "Boss Dashboard",
-              title: "Leadership Insights",
-              desc: "Gain high-level visibility into core metrics. Monitor profitability, team allocation, and company health to steer your business with confidence.",
-              image: dashboardImg2,
-              tag: "Executive View",
-              align: "left"
-            },
-            {
-              header: "PM Dashboard",
-              title: "Project Orchestration",
-              desc: "Manage complexity with ease. Track sprint velocity, bottleneck trends, and resource distribution to ensure seamless delivery on every project.",
-              image: featureProjects,
-              tag: "Portfolio Tracking",
-              align: "right"
-            },
-            {
-              header: "Employee Dashboard",
-              title: "Personal Performance",
-              desc: "Optimize your daily flow. Visualize personal goals, time logs, and task efficiency to drive individual growth and focus.",
-              image: featureWork,
-              tag: "Productivity Engine",
-              align: "left"
-            },
-            {
-              header: "Sales Dashboard",
-              title: "Growth Momentum",
-              desc: "Accelerate your pipeline. Monitor conversion rates, revenue forecasts, and sales velocity to keep your team consistently over-performing.",
-              image: featureChart,
-              tag: "Revenue Pulse",
-              align: "right"
-            }
-          ].map((item, i) => (
-            <div key={i} className={`grid lg:grid-cols-2 divide-x-0 lg:divide-x lg:divide-black/10 border-t border-black/10 first:border-t-0`}>
+        <div className="sticky-sections-container relative h-[85vh] sm:h-[80vh] lg:h-[75vh] max-w-6xl mx-auto rounded-xl sm:rounded-3xl overflow-hidden border border-slate-200/60 shadow-2xl mb-12 sm:mb-24">
+          {dashboardSections.map((item, i) => (
+            <div 
+              key={i} 
+              ref={(el) => (sectionRefs.current[i] = el)}
+              className="absolute inset-0 w-full h-full bg-white flex flex-col lg:flex-row items-center border-b border-black/5"
+            >
               {/* Content Side */}
-              <div className={`flex flex-col justify-center items-center lg:items-start text-center lg:text-left p-6 sm:p-10 lg:p-20 bg-white ${item.align === "right" ? "lg:order-2" : ""}`}>
-                <motion.div
-                  initial={{ opacity: 0, x: item.align === "left" ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  <div className="flex items-center justify-center lg:justify-start gap-3 mb-3 sm:mb-4">
-                    <div className="w-1.5 h-6 bg-[#7e22ce] rounded-full" />
-                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce]">
-                      {item.header}
-                    </span>
-                  </div>
-                  <h3 className="text-2xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-4 sm:mb-8">
-                    {item.title}
-                  </h3>
-                  <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-5 sm:mb-8">
-                    {item.desc}
-                  </p>
-                  <div className="inline-flex px-3.5 py-1.5 rounded-full bg-purple-50 border border-purple-200 text-[10px] font-black text-purple-700 uppercase tracking-widest">
-                    {item.tag}
-                  </div>
-                </motion.div>
+              <div className="flex-[0.45] lg:flex-1 flex flex-col justify-center items-center lg:items-start text-center lg:text-left p-4 sm:p-8 lg:p-12 w-full">
+                <div className="flex items-center justify-center lg:justify-start gap-3 mb-4">
+                  <div className="w-1.5 h-6 bg-[#7e22ce] rounded-full" />
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce]">
+                    {item.header}
+                  </span>
+                </div>
+                <h3 className="text-xl sm:text-4xl lg:text-5xl font-black text-slate-900 tracking-tighter leading-tight mb-4 sm:mb-6">
+                  {item.title}
+                </h3>
+                <p className="text-[12px] sm:text-lg text-slate-600 font-medium leading-relaxed max-w-lg mb-4 sm:mb-8 line-clamp-3 lg:line-clamp-none">
+                  {item.desc}
+                </p>
+                <div className="inline-flex px-4 py-2 rounded-full bg-purple-50 border border-purple-200 text-[11px] font-black text-purple-700 uppercase tracking-widest">
+                  {item.tag}
+                </div>
               </div>
 
-              {/* Image Side - Larger and Centered */}
-              <div className={`p-4 sm:p-8 lg:p-12 bg-slate-50/40 flex items-center justify-center overflow-hidden h-[280px] sm:h-[420px] lg:h-[500px] ${item.align === "right" ? "lg:order-1" : ""}`}>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-                  className="w-full h-full flex items-center justify-center"
-                >
-                  <img 
+              {/* Image Side */}
+              <div className="flex-[0.55] lg:flex-1 p-4 sm:p-6 lg:p-10 bg-slate-50/40 flex items-center justify-center w-full overflow-hidden">
+                <div className="w-full h-full flex items-center justify-center relative">
+                   {/* Decorative background element */}
+                   <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/50 to-transparent blur-3xl rounded-full" />
+                   
+                   <img 
                     src={item.image} 
                     alt={item.title}
-                    className="max-h-full w-full object-contain rounded-xl shadow-2xl shadow-slate-900/20 hover:scale-[1.02] transition-all duration-700 ease-out"
+                    className="relative max-h-full w-full object-contain rounded-2xl shadow-2xl shadow-slate-900/30 ring-1 ring-black/5"
                   />
-                </motion.div>
+                </div>
               </div>
             </div>
           ))}
@@ -266,6 +337,6 @@ export default function Dashboards() {
         containerClassName="mt-12 sm:mt-16 lg:mt-24"
       />
       </div>
-      </>
+      </ReactLenis>
   );
 }

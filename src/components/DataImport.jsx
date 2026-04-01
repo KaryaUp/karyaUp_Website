@@ -21,24 +21,25 @@ const DataImport = () => {
   };
 
   return (
-    <section className="py-4 sm:py-6 lg:py-8 bg-white overflow-x-hidden overflow-y-hidden relative">
+    <section className="py-3 sm:py-6 lg:py-8 bg-white overflow-x-hidden overflow-y-hidden relative">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
           {/* Left: Content */}
-          <div className="w-full flex-[0.45] text-center lg:text-left">
+          <div className="w-full flex-[0.45] text-center lg:text-left flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, ease: "easeOut" }}
+              className="w-full flex flex-col items-center lg:items-start"
             >
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 mb-4 sm:mb-6 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-50 border border-slate-100 mb-3 sm:mb-6 shadow-sm">
                 <Zap className="w-3.5 h-3.5 text-[#7e22ce]" />
                 <span className="text-[10px] font-bold text-[#7e22ce] uppercase tracking-wider">
                   Zero Friction Sync
                 </span>
               </div>
-              <h2 className="mx-auto max-w-[12ch] text-3xl sm:max-w-[12ch] sm:text-4xl md:max-w-none md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1] mb-4 sm:mb-8 lg:mx-0">
+              <h2 className="mx-auto max-w-[12ch] text-3xl sm:max-w-[12ch] sm:text-4xl md:max-w-none md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1] mb-3 sm:mb-8 lg:mx-0">
                 Seamless Import
                 <br />
                 From Your
@@ -53,7 +54,7 @@ const DataImport = () => {
                   Existing Tools
                 </motion.span>
               </h2>
-              <p className="text-base sm:text-xl font-medium text-slate-500 mb-4 sm:mb-8 leading-relaxed max-w-[30rem] mx-auto lg:mx-0">
+              <p className="text-base sm:text-xl font-medium text-slate-500 mb-4 sm:mb-8 leading-relaxed max-w-[28rem] mx-auto lg:mx-0">
                 Move your entire workflow from ClickUp and Jira into Karyaup in
                 one click. No data loss, just pure productivity.
               </p>
@@ -171,7 +172,7 @@ const DataImport = () => {
                               KaryaUp  right-center (~x=255, y=150)
                             Paths curve from each logo → hub center
                         ══════════════════════════════════ */}
-            <div className="block sm:hidden relative w-full max-w-[320px] mx-auto h-[280px]">
+            <div className="block sm:hidden relative w-full max-w-[320px] mx-auto h-[240px]">
               {/* Glow behind KaryaUp */}
               <motion.div
                 animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.18, 0.08] }}
@@ -181,7 +182,7 @@ const DataImport = () => {
                   ease: "easeInOut",
                 }}
                 className="absolute rounded-full bg-slate-100 blur-[50px] -z-10"
-                style={{ width: 120, height: 120, top: 82, right: 12 }}
+                style={{ width: 100, height: 100, top: 62, right: 12 }}
               />
 
               {/* KaryaUp logo — right center */}
@@ -190,7 +191,7 @@ const DataImport = () => {
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute flex items-center justify-center"
-                style={{ width: 96, height: 96, top: 96, right: 12 }}
+                style={{ width: 84, height: 84, top: 76, right: 12 }}
               >
                 <img
                   src={KaryaUpLogo}
@@ -208,7 +209,7 @@ const DataImport = () => {
                   ease: "easeInOut",
                 }}
                 className="absolute"
-                style={{ left: 10, top: 28 }}
+                style={{ left: 10, top: 12 }}
               >
                 <img
                   src={ClickUpLogo}
@@ -227,7 +228,7 @@ const DataImport = () => {
                   delay: 1,
                 }}
                 className="absolute"
-                style={{ left: 10, bottom: 28 }}
+                style={{ left: 10, bottom: 12 }}
               >
                 <img
                   src={JiraLogo}
@@ -255,7 +256,7 @@ const DataImport = () => {
                     className="absolute top-0 left-0 w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#7e22ce] -translate-x-1/2 -translate-y-1/2"
                     style={{
                       offsetPath:
-                        "path('M42 60 C112 60, 148 144, 204 144 L232 144')",
+                        "path('M42 44 C112 44, 148 118, 204 118 L232 118')",
                       offsetRotate: "0deg",
                     }}
                     custom={i}
@@ -273,7 +274,7 @@ const DataImport = () => {
                     className="absolute top-0 left-0 w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#ec4899] -translate-x-1/2 -translate-y-1/2"
                     style={{
                       offsetPath:
-                        "path('M42 220 C112 220, 148 144, 204 144 L232 144')",
+                        "path('M42 196 C112 196, 148 118, 204 118 L232 118')",
                       offsetRotate: "0deg",
                     }}
                     custom={i + 0.6}

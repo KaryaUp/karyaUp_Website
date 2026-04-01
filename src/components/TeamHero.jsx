@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Check, Mail, MoreVertical, ChevronDown, Search, UserPlus } from 'lucide-react';
 
@@ -115,6 +115,15 @@ const DarkRoleManagementPreview = () => {
 }
 
 export default function TeamHero() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -194,7 +203,7 @@ export default function TeamHero() {
 
           {/* Right Side Preview */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9, x: 20 }}
+            initial={{ opacity: 0, scale: 0.9, x: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative"

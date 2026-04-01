@@ -1,4 +1,4 @@
-                       import { motion } from "framer-motion";
+import { motion } from "framer-motion";
 import dashboardImage from "../../assets/dashboard2.png";
 import planImage from "../../assets/Gantt.png";
 import { Link } from "react-router-dom";
@@ -11,7 +11,7 @@ export default function ProductDevelopment() {
       {/* ================= HERO SECTION ================= */}
       <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -60,7 +60,7 @@ export default function ProductDevelopment() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-3 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
@@ -70,25 +70,25 @@ export default function ProductDevelopment() {
                 <img src={planImage} alt="Gantt Planning" className="w-full h-auto" />
               </div>
             </motion.div>
-            
 
-            <motion.div 
-            initial={{ opacity: 0, x: -100 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ type: "spring", damping: 20, stiffness: 80, delay: 0.1 }}
-            className="text-center lg:text-left"
-          >
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-sm">
-            Visualize your<br />
-              <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              >
-                Marketing ROI
-              </motion.span>
-            </h1>
-          
+
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ type: "spring", damping: 20, stiffness: 80, delay: 0.1 }}
+              className="text-center lg:text-left"
+            >
+              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-sm">
+                Visualize your<br />
+                <motion.span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  Marketing ROI
+                </motion.span>
+              </h1>
+
               <p className="text-xl text-slate-600 mb-8">
                 Stop guessing which campaigns work. Align your budget with performance data using our built-in marketing analytics.
               </p>
@@ -100,7 +100,7 @@ export default function ProductDevelopment() {
                   </li>
                 ))}
               </ul>
-           </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -109,7 +109,7 @@ export default function ProductDevelopment() {
       <section className="w-full py-20 px-6 bg-white">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-center text-4xl lg:text-6xl font-black mb-16">
-            Marketing management <br/>
+            Marketing management <br />
             <span className="text-[#7e22ce]">is broken, we fixed it</span>
           </h2>
 

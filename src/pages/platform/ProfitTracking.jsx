@@ -1,12 +1,12 @@
-                                                                                                                                                         import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import dashboardImage from "../../assets/dashboard2.png";
-import planImage from "../../assets/Gantt.png";
-import karyaupLogo from "../../assets/Logo(2).png"; 
+import { Check } from "lucide-react";
+import dashboardImage from "../../assets/dashboard2.webp";
+import karyaupLogo from "../../assets/3D-Logo.webp";
 import FeatureCTA from "../../components/FeatureCTA";
 
 /* ═══════════════════════════════════════════════
-   ICONS & HELPERS
+    ICONS & HELPERS
 ═══════════════════════════════════════════════ */
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13"><polyline points="3,9 7,13 13,5" /></svg>
@@ -24,16 +24,15 @@ const ListIcon = () => (
 );
 
 /* ═══════════════════════════════════════════════
-   COMPONENTS
+    COMPONENTS
 ═══════════════════════════════════════════════ */
 function Card({ data, type }) {
   const isRed = type === "red";
   return (
     <div className="relative group overflow-hidden rounded-xl w-full">
       <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 shadow-[0_8px_32px_0_rgba(0,0,0,0.05)]">
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${
-          isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
-        }`}>
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
+          }`}>
           {isRed ? <XIcon /> : <CheckIcon />}
         </div>
         <div className="flex-1 min-w-0 text-left">
@@ -51,7 +50,7 @@ function Card({ data, type }) {
 
 function ScrollTrack({ cards, direction }) {
   const trackRef = useRef(null);
-  const posRef = useRef(direction === "up" ? -50 : 0);
+  const posRef = useRef(direction === "up" ? -20 : 0);
   const doubled = useMemo(() => [...cards, ...cards], [cards]);
 
   useEffect(() => {
@@ -59,10 +58,10 @@ function ScrollTrack({ cards, direction }) {
     const animate = () => {
       if (direction === "down") {
         posRef.current -= speed;
-        if (posRef.current <= -25) posRef.current = 0;
+        if (posRef.current <= -20) posRef.current = 0;
       } else {
         posRef.current += speed;
-        if (posRef.current >= 0) posRef.current = -50;
+        if (posRef.current >= 0) posRef.current = -20;
       }
       if (trackRef.current) trackRef.current.style.transform = `translateY(${posRef.current}%)`;
       requestAnimationFrame(animate);
@@ -82,32 +81,40 @@ function ScrollTrack({ cards, direction }) {
   );
 }
 
-function ScrollingDataBg({ isHovered }) {
-  const text = "1=2-LwuS0AkLC6Vvj|hq5tCReRo6%bcvnvjddjru4ndjenck4ndkvk4kdkvs57g57rh]fu8474ghfh44yfdjee3wwkxncfuregdy74hdncnrs3loxmen4jdjcfvmnvsdjfsw8sdjidw8didwd8cd0edjcdc9dv{fgH$#6(XiK^!8W3jLlZ2th%q2IYMb<5*P4AhV8oIMq7@Pw47Wf#40-zX@qj(2b5KgK840SXQfFTq6ce3R#k$8wujFFHU8t9%FUDBg>ej|ABYK6)3i^fzSh(0*X4BYRNOea)nsVUCYnV}MHe|+uCHdW&P$zL|+ssBNgZGMY<}]eYYV]T7j]B*4%&=GLmabFcv|]F9Z$/pRvN}O!3MY8k@FT";
-  const repeated = Array(15).fill(text).join(' ');
+function WatermarkBg({ isHovered }) {
+  const brandRow = "karyaup ".repeat(25);
+  const rows = Array(15).fill(brandRow);
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none px-4">
-      <div 
-        className={`text-[10px] leading-relaxed break-all transition-all duration-700 
-        ${isHovered 
-            ? 'text-slate-900 font-semibold opacity-40 animate-[vScroll_10s_linear_infinite]' 
-            : 'text-slate-400 font-normal opacity-[0.07] animate-[vScroll_45s_linear_infinite]'}`}
-      >
-        <p>{repeated}</p>
-        <p>{repeated}</p>
+    <div className="absolute inset-0 overflow-hidden pointer-events-none flex flex-col justify-center select-none z-10">
+      <div className={`transition-all duration-700 ease-in-out ${isHovered ? 'opacity-20' : 'opacity-[0.05]'}`}>
+        {rows.map((row, i) => (
+          <motion.div
+            key={i}
+            className="text-[18px] font-black text-slate-400 whitespace-nowrap leading-tight tracking-widest lowercase py-1"
+            animate={{ x: [0, -300] }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "linear",
+              delay: i * 0.1
+            }}
+          >
+            {row}
+          </motion.div>
+        ))}
       </div>
     </div>
   );
 }
 
 const LightShield3D = () => (
-  <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-56 h-64 md:w-64 md:h-72 drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
+  <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-52 h-60 md:w-56 md:h-64 drop-shadow-[0_15px_30px_rgba(0,0,0,0.08)]">
     <defs>
       <linearGradient id="glassBorderGradient" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F472B6" stopOpacity="0.4" />
+        <stop stopColor="#94a3b8" stopOpacity="0.4" />
         <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
-        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
+        <stop offset="1" stopColor="#64748b" stopOpacity="0.4" />
       </linearGradient>
       <radialGradient id="glassShine" cx="100" cy="100" r="100" gradientUnits="userSpaceOnUse">
         <stop stopColor="white" stopOpacity="0.5" />
@@ -139,148 +146,217 @@ const FAQItem = ({ question, answer }) => {
 };
 
 /* ═══════════════════════════════════════════════
-   MAIN PAGE EXPORT
+    MAIN PAGE EXPORT
 ═══════════════════════════════════════════════ */
-export default function BossDashboard() {
+export default function ProfitTracking() {
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
   const redCards = [
-    { title: "Projects scattered across multiple tools", time: "8:06:41 PM", tag: "Bug Fixes" },
-    { title: "Critical info hidden in siloed systems", time: "8:12:45 PM", tag: "New task" },
-    { title: "Manual updates strain capacity", time: "7:55:10 PM", tag: "Data Sync" },
-    { title: "Missed deadlines cause bottlenecks", time: "7:40:03 PM", tag: "Security" },
-    { title: "Rate limit exceeded", time: "7:20:50 PM", tag: "API" },
+    { title: "Manual spreadsheet updates", tag: "Finance" },
+    { title: "Delayed profit visibility", tag: "Risk" },
+    { title: "Inaccurate expense tracking", tag: "Accounting" },
+    { title: "Missed revenue bottlenecks", tag: "Security" },
+    { title: "Siloed financial reports", tag: "Data" },
   ];
 
   const greenCards = [
-    { title: "All projects, docs, and chat in one platform", time: "8:05:28 PM", tag: "Data Sync" },
-    { title: "Instantly find anything across all tools", time: "8:04:15 PM", tag: "Weekly Stats" },
-    { title: "Automated reporting & resource management", time: "7:58:00 PM", tag: "Production" },
-    { title: "Backup finished", time: "7:45:22 PM", tag: "Storage" },
-    { title: "AI-powered workflows for tasks & timelines", time: "7:30:11 PM", tag: "Users" },
-    { title: "Cache cleared successfully", time: "7:18:40 PM", tag: "Performance" },
+    { title: "Real-time P&L dashboard", tag: "Profit" },
+    { title: "Automated expense allocation", tag: "Sync" },
+    { title: "Unified financial data hub", tag: "Growth" },
+    { title: "Secure encryption for billing", tag: "Storage" },
+    { title: "AI-powered margin alerts", tag: "Users" },
+    { title: "Instant resource analytics", tag: "Performance" },
   ];
 
   return (
-    <div className="bg-white font-sans overflow-x-hidden">
-      <style dangerouslySetInnerHTML={{ __html: `
-        @keyframes vScroll { from { transform: translateY(0); } to { transform: translateY(-50%); } }
-        @keyframes shine { from { left: -100%; } to { left: 100%; } }
-      `}} />
+    <div className="min-h-screen bg-white font-sans overflow-x-hidden pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      {/* Hero Section */}
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 py-12 sm:py-16 lg:py-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
 
-      {/* Hero Section stays unchanged... */}
-      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-20 md:py-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="text-center lg:text-left">
-              <motion.h1
-                initial={{ opacity: 0, y: 40, x: -10 }}
-                animate={{ opacity: 1, y: 0, x: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 100, delay: 0.1 }}
-                className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
+            {/* Left */}
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] sm:text-xs font-black uppercase tracking-widest"
               >
-                Total Control. Complete visibility.
-                <br />
-                <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  Smarter Decisions.
-                </motion.span>
-              </motion.h1>
-            </div>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl">
-              KaryaUp's Boss Dashboard gives you a real-time overview of your entire business—from team performance and project progress to time tracking and productivity insights.
-            </p>
-          </div>
+                Platform <span className="opacity-60">/</span> Profit Tracking
+              </motion.div>
 
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
-              <img src={dashboardImage} alt="Boss Dashboard" className="w-full h-full object-cover" />
+              <motion.h1
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+              >
+                Control Your Margins.
+                <span className="block">
+                  {" "}
+                  <motion.span
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                    Master Your Growth
+                  </motion.span>
+                </span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
+              >
+                {[
+                  "Stop leaking revenue with automated, real-time profitability views.",
+                  "See your team's project expenses and margins at a glance—no more spreadsheet chaos."
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.28 }}
+                className="mt-6 sm:mt-8 grid grid-cols-2 gap-2 sm:gap-3 w-full max-w-xs sm:max-w-md"
+              >
+                {["P&L Dashboard", "Expense Tracking", "Margin Alerts", "Revenue Reports"].map((tag) => (
+                  <div key={tag} className="group flex items-center gap-2 sm:gap-3 px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl bg-slate-50/50 border border-slate-200/60 shadow-sm hover:border-emerald-200 hover:bg-emerald-50/50 transition-all duration-300">
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 rounded-md bg-emerald-100 border border-emerald-200 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <Check className="w-2.5 h-2.5 text-emerald-600 stroke-[4]" />
+                    </div>
+                    <span className="text-[9px] sm:text-[10px] font-black uppercase tracking-[0.1em] text-slate-600 truncate">{tag}</span>
+                  </div>
+                ))}
+              </motion.div>
             </div>
-          </motion.div>
+
+            {/* Right – Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24 lg:-translate-y-8 xl:-translate-y-12"
+            >
+              <div className="relative overflow-hidden shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp profit tracking dashboard"
+                  className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+                />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
       {/* COMPARISON SECTION */}
-      <section className="py-10 bg-white px-2 md:px-4">
+      <section className="py-8 bg-white px-4 md:px-3">
         <div className="max-w-7xl mx-auto">
           <motion.h1
-                initial={{ opacity: 0, y: 40, x: -10 }}
-                whileInView={{ opacity: 1, y: 0, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ type: "spring", damping: 25, stiffness: 100 }}
-                className="text-center text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-12 drop-shadow-sm"
-              >
-                 Project Management<br />
-                <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                   is broken, we fixed it
-                </motion.span>
-              </motion.h1>
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="text-center text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4"
+          >
+            Profit Tracking
+            <br />
+            <motion.span
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            >
+              Is Broken, We Fixed It
+            </motion.span>
+          </motion.h1>
 
-          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl">
-            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[450px]">
-              
+          <div className="p-[1px] rounded-[2.5rem] bg-gradient-to-br from-pink-300 via-purple-400 to-indigo-400 shadow-2xl">
+            <div className="bg-white rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3 min-h-[420px]">
+
               {/* LEFT: OLD WAY */}
-              <div className="p-10 pt-14 border-r border-slate-200 flex flex-col justify-start bg-white/50 relative z-10">
-                <h3 className="text-center text-3xl font-black mb-2 text-slate-900">Old Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-8">Manual updates and scattered tools cause friction.</p>
+              <div className="p-8 border-r border-slate-100 flex flex-col justify-start bg-slate-50/30 relative z-20">
+                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">Old Way</h3>
+                <p className="text-[12px] text-center text-slate-500 mb-6 font-medium">Manual updates cause friction.</p>
                 <ScrollTrack cards={redCards} direction="down" />
               </div>
 
-              {/* MIDDLE: PERFECT INTERACTIVE 3D ROTATION */}
-              <div 
-                className="relative flex flex-col items-center justify-start py-16 px-8 group overflow-hidden bg-white/50"
+              {/* MIDDLE: INTERACTIVE CENTER */}
+              <div
+                className="relative flex flex-col items-center justify-start py-8 px-6 group overflow-hidden bg-slate-100/40"
                 onMouseEnter={() => setIsShieldHovered(true)}
                 onMouseLeave={() => setIsShieldHovered(false)}
               >
-                <div className="relative z-40 text-center mb-6">
-                  <h3 className="text-2xl font-black text-slate-900">Security you can Trust</h3>
-                  <p className="text-sm text-slate-500 mt-2">More secure than AI alone.</p>
+                {/* Moving Watermark Background */}
+                <WatermarkBg isHovered={isShieldHovered} />
+
+                {/* Header Text */}
+                <div className="relative z-40 text-center mb-4">
+                  <motion.h3
+                    animate={{ color: isShieldHovered ? "#d946ef" : "#0f172a" }}
+                    className="text-lg font-extrabold transition-colors duration-500"
+                  >
+                    Security you can Trust
+                  </motion.h3>
+                  <motion.p
+                    animate={{ color: isShieldHovered ? "#8b5cf6" : "#64748b" }}
+                    className="text-[10px] font-bold mt-0.5 uppercase tracking-wider transition-colors duration-500"
+                  >
+                    More secure than AI alone.
+                  </motion.p>
                 </div>
 
-                {/* Animated BG text logic remains, but with semi-bold effect on hover */}
-                <ScrollingDataBg isHovered={isShieldHovered} />
+                {/* COMPACT SHARED CONTAINER */}
+                <div className="relative z-20 flex items-center justify-center w-full h-64" style={{ perspective: "1000px" }}>
 
-                {/* --- Shield & Rotating Logo Container --- */}
-                <div className="relative z-20 flex items-center justify-center mt-2 w-full h-72" style={{ perspective: "1200px" }}>
-                  
-                  {/* Floating Shield Layer */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-80">
-                    <LightShield3D />
+                  {/* Shield Layer */}
+                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none transition-transform duration-500 group-hover:scale-105">
+                    <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-50 h-59 drop-shadow-[0_10px_20px_rgba(0,0,0,0.05)]">
+                      <defs>
+                        <linearGradient id="glassBorder" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
+                          <stop stopColor="#94a3b8" stopOpacity="0.4" />
+                          <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
+                          <stop offset="1" stopColor="#64748b" stopOpacity="0.4" />
+                        </linearGradient>
+                      </defs>
+                      <path d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z" fill="white" fillOpacity="0.02" stroke="url(#glassBorder)" strokeOpacity="0.5" strokeWidth="1.5" />
+                    </svg>
                   </div>
-                  
-                  {/* 3D ROTATING LOGO - perfectamente centered in shield */}
-                  <div className="absolute inset-0 flex items-center justify-center pb-6 z-30 pointer-events-none" style={{ perspective: "1000px" }}>
-                    <motion.img 
-                      src={karyaupLogo} 
-                      alt="Logo" 
-                      animate={{ rotateY: 360, scale: isShieldHovered ? 1.1 : 1 }} 
-                      transition={{ 
-                        rotateY: { duration: 8, ease: "linear", repeat: Infinity },
+
+                  {/* Logo Layer */}
+                  <div className="absolute inset-0 flex items-center justify-center z-30 pointer-events-none">
+                    <motion.img
+                      src={karyaupLogo}
+                      alt="Logo"
+                      animate={{
+                        rotateY: 360,
+                        scale: isShieldHovered ? 1.15 : 1.05,
+                        filter: isShieldHovered ? "drop-shadow(0 0 25px rgba(217, 70, 239, 0.4))" : "none"
+                      }}
+                      transition={{
+                        rotateY: { duration: 12, ease: "linear", repeat: Infinity },
                         scale: { duration: 0.4 }
-                      }} 
-                      className="w-32 h-32 md:w-40 md:h-40 object-contain drop-shadow-[0_15px_35px_rgba(168,85,247,0.6)]" 
-                      style={{ transformStyle: "preserve-3d" }} 
+                      }}
+                      className="w-60 h-60 object-contain pb-8"
                     />
                   </div>
-
-                  {/* Inner Glow Anchor */}
-                  <div className="absolute w-32 h-32 bg-fuchsia-500/10 rounded-full blur-3xl animate-pulse" />
                 </div>
-                
-                <div className="absolute -bottom-10 w-48 h-48 bg-purple-200/40 rounded-full blur-3xl pointer-events-none" />
               </div>
 
               {/* RIGHT: KARYAUP WAY */}
-              <div className="p-10 pt-14 border-l border-slate-200 flex flex-col justify-start bg-white/50 relative z-10">
-                <h3 className="text-center text-3xl font-black mb-2 text-slate-900">The KaryaUp Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-8">Advanced execution loops for smarter growth.</p>
+              <div className="p-8 border-l border-slate-100 flex flex-col justify-start bg-slate-50/30 relative z-20">
+                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">The KaryaUp Way</h3>
+                <p className="text-[12px] text-center text-slate-500 mb-6 font-medium">Advanced execution loops for growth.</p>
                 <ScrollTrack cards={greenCards} direction="up" />
               </div>
 
@@ -289,24 +365,23 @@ export default function BossDashboard() {
         </div>
       </section>
 
-      {/* FAQ Section code remains same... */}
+      {/* FAQ SECTION */}
       <section className="py-24 bg-slate-50/50">
         <div className="max-w-3xl mx-auto px-6">
           <h2 className="text-3xl font-black text-slate-900 mb-12 text-center">Frequently Asked Questions</h2>
           <div className="space-y-2">
-            <FAQItem question="How secure is my data?" answer="We use enterprise-grade AES-256 encryption. Your data is isolated and never used to train public AI models." />
-            <FAQItem question="Can I integrate my existing tools?" answer="Yes! KaryaUp integrates with 50+ tools like Slack, Google Drive, and Jira out of the box." />
-            <FAQItem question="Is there a mobile app?" answer="Absolutely. Our dashboard is fully responsive and available as a native app for iOS and Android." />
+            <FAQItem question="How secure is my data?" answer="We use enterprise-grade AES-256 encryption. Your financial data is isolated and never used to train public AI models." />
+            <FAQItem question="Can I track per-project profitability?" answer="Yes! KaryaUp breaks down margins for every task, project, and team member in real-time." />
+            <FAQItem question="Does it integrate with my accounting software?" answer="Absolutely. KaryaUp syncs with 50+ tools including QuickBooks, Xero, and Slack." />
           </div>
         </div>
       </section>
 
-      {/* Feature CTA code remains same... */}
-      <FeatureCTA 
-        title="Tasks that connect to everything you do" 
-        description="Work smarter with tasks that can live in your whiteboards, chat, calendar — anywhere you work" 
-        image={dashboardImage} 
-        containerClassName="mt-10 mb-20" 
+      <FeatureCTA
+        title="Revenue that connects to your workflow"
+        description="Stop jumping between apps. See your profits right where you manage your tasks and teams."
+        image={dashboardImage}
+        containerClassName="mt-10 mb-20"
       />
     </div>
   );

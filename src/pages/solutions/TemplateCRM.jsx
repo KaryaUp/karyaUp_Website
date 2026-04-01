@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import FeatureCTA from "../../components/FeatureCTA";
-import dashboardImage from "../../assets/dashboard2.png";
+import dashboardImage from "../../assets/dashboard2.webp";
 import { 
   Search, 
   LayoutGrid, 

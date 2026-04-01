@@ -1,15 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import logo from '../assets/logo.png';
 
 const authUrl = "https://www.karyaup.com/auth";
 
-export default function FeatureCTA({ 
-  title, 
-  description, 
-  buttonText = "Get started. It's FREE", 
-  image, 
+export default function FeatureCTA({
+  title,
+  description,
+  buttonText = "Get started. It's FREE",
+  image,
   imageAlt = "KaryaUp Showcase",
   imageClassName = "w-full",
   containerClassName = "mt-24 mb-10",
@@ -17,6 +17,15 @@ export default function FeatureCTA({
   titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.08] mb-2 tracking-tight drop-shadow-lg",
   imageOuterClassName = "relative w-full max-w-[260px] sm:max-w-[400px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
 }) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const handleAuthRedirect = () => {
     window.location.href = authUrl;
   };
@@ -28,22 +37,22 @@ export default function FeatureCTA({
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_100%_0%,rgba(168,85,247,0.4),transparent_50%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(236,72,153,0.1),transparent_40%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.1),transparent_40%)] pointer-events-none" />
-        
+
         {/* Left Content Area */}
         <div className="flex-[0.5] xl:flex-[0.6] z-20 text-center lg:text-left flex flex-col items-center lg:items-start justify-center pt-3 lg:pt-5 pb-0 lg:pb-3 px-4 lg:pl-10 lg:pr-0">
-          <motion.div 
-             initial={{ opacity: 0, x: -20 }}
-             whileInView={{ opacity: 1, x: 0 }}
-             viewport={{ once: true }}
-             className="relative h-11 mb-4 self-center lg:self-start flex items-center gap-3"
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative h-11 mb-4 self-center lg:self-start flex items-center gap-3"
           >
             {/* Dual-layer Logo: Colorful Icon + White Text */}
             <div className="relative h-full flex items-center">
               {/* White Base (Text and Icon) */}
-              <img 
-                src={logo} 
-                alt="KaryaUp" 
-                className="h-full w-auto filter brightness-0 invert opacity-100" 
+              <img
+                src={logo}
+                alt="KaryaUp"
+                className="h-full w-auto filter brightness-0 invert opacity-100"
               />
               {/* Colorful Overlay (Icon only) */}
               <div className="absolute inset-0 pointer-events-none" style={{ clipPath: 'inset(0 75% 0 0)' }}>
@@ -51,7 +60,7 @@ export default function FeatureCTA({
               </div>
             </div>
           </motion.div>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -60,7 +69,7 @@ export default function FeatureCTA({
           >
             {title}
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -90,29 +99,29 @@ export default function FeatureCTA({
 
         {/* Right Content Area: Interface Showcase with Glows */}
         <div className="flex-[1.5] xl:flex-[1.4] relative mt-2 lg:mt-0 flex items-center justify-center lg:justify-end p-2 lg:p-4 lg:pr-10">
-           <motion.div 
-             initial={{ opacity: 0, x: 80, scale: 0.95 }}
-             whileInView={{ opacity: 1, x: 0, scale: 1 }}
-             viewport={{ once: true }}
-             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-             className={imageOuterClassName}
-           >
-             {/* Light spot overlay on image left side */}
-             <div className="absolute top-1/4 -left-10 w-64 h-64 bg-white/10 blur-[80px] rounded-full z-30 pointer-events-none" />
+          <motion.div
+            initial={{ opacity: 0, x: isMobile ? 0 : 80, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+            className={imageOuterClassName}
+          >
+            {/* Light spot overlay on image left side */}
+            <div className="absolute top-1/4 -left-10 w-64 h-64 bg-white/10 blur-[80px] rounded-full z-30 pointer-events-none" />
 
-             {/* Accent Gradient Glow around/behind image */}
-             <div className="absolute top-1/2 left-0 w-full h-full bg-purple-600/50 blur-[150px] rounded-full opacity-70 pointer-events-none" />
-             <div className="absolute -top-20 -right-20 w-80 h-80 bg-fuchsia-500/30 blur-[100px] rounded-full opacity-60 pointer-events-none" />
-             
-             {/* Image Wrapper with Gradient Border */}
-             <div className={`relative p-[1.5px] rounded-[1.1rem] bg-gradient-to-br from-purple-500 via-fuchsia-500 to-[#7e22ce] ${imageClassName}`}>
-               <img 
-                 src={image} 
-                 alt={imageAlt} 
-                 className="relative w-full h-auto object-contain rounded-[1.1rem] border border-white/10 hover:border-white/20 transition-all duration-500 z-10"
-               />
-             </div>
-           </motion.div>
+            {/* Accent Gradient Glow around/behind image */}
+            <div className="absolute top-1/2 left-0 w-full h-full bg-purple-600/50 blur-[150px] rounded-full opacity-70 pointer-events-none" />
+            <div className="absolute -top-20 -right-20 w-80 h-80 bg-fuchsia-500/30 blur-[100px] rounded-full opacity-60 pointer-events-none" />
+
+            {/* Image Wrapper with Gradient Border */}
+            <div className={`relative p-[1.5px] rounded-[1.1rem] bg-gradient-to-br from-purple-500 via-fuchsia-500 to-[#7e22ce] ${imageClassName}`}>
+              <img
+                src={image}
+                alt={imageAlt}
+                className="relative w-full h-auto object-contain rounded-[1.1rem] border border-white/10 hover:border-white/20 transition-all duration-500 z-10"
+              />
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

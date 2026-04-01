@@ -12,16 +12,16 @@ const Management = () => {
     ];
 
     return (
-        <section className="py-12 sm:py-16 lg:py-20 bg-white overflow-hidden relative">
+        <section className="py-6 sm:py-16 lg:py-20 bg-white overflow-hidden relative">
             <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
                 <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-24">
                     {/* Text and Features Side (40% Width) - Condensed */}
                     <div className="lg:flex-[0.4] w-full text-center lg:text-left flex flex-col items-center lg:items-start">
-                        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 border border-purple-100 text-purple-600 text-xs font-bold mb-4 uppercase tracking-widest shadow-sm">
-                            <Sparkles size={13} />
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 border border-purple-100 text-purple-600 text-[10px] sm:text-xs font-bold mb-3 uppercase tracking-widest shadow-sm">
+                            <Sparkles size={11} />
                             Operations Layer
                         </div>
-                        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-4">
+                        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-2 sm:mb-3">
                             More Than <br />
                             <motion.span
                                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
@@ -31,18 +31,18 @@ const Management = () => {
                                 Just Tasks.
                             </motion.span>
                         </h2>
-                        <p className="text-lg sm:text-xl font-medium text-slate-500 mb-6 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
+                        <p className="text-base sm:text-xl font-medium text-slate-500 mb-4 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                             KaryaUp handles the essentials of your business operations. From salary to attendance, everything is seamlessly integrated into your elite workflow.
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-7 w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-7 w-full">
                             {items.map((item, idx) => (
-                                <div key={idx} className="flex items-start justify-center lg:justify-start gap-5 group text-left">
-                                    <div className="p-3.5 bg-purple-50 rounded-2xl text-[#7e22ce] border border-purple-100 group-hover:scale-110 transition-transform">
+                                <div key={idx} className="flex items-start justify-center lg:justify-start gap-4 sm:gap-5 group text-left">
+                                    <div className="p-2.5 bg-purple-50 rounded-2xl text-[#7e22ce] border border-purple-100 group-hover:scale-110 transition-transform flex-shrink-0">
                                         {React.cloneElement(item.icon, { className: "w-5 h-5" })}
                                     </div>
                                     <div>
-                                        <h4 className="font-black text-slate-800 text-lg mb-0.5 tracking-tight">{item.title}</h4>
-                                        <p className="text-sm font-bold text-slate-400 leading-tight">{item.desc}</p>
+                                        <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-tight">{item.title}</h4>
+                                        <p className="text-xs sm:text-sm font-bold text-slate-400 leading-tight">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}
@@ -61,10 +61,8 @@ const Management = () => {
                             <img
                                 src={TeamImg}
                                 alt="KaryaUp Management Dashboard"
-                                className="w-full h-[280px] sm:h-[320px] lg:h-[360px] object-cover object-left"
+                                className="w-full h-[220px] sm:h-[320px] lg:h-[360px] object-cover object-left"
                             />
-                            {/* Ultra-smooth, ultra-wide right-side fade (Deep Vanishing look) */}
-                            <div className="pointer-events-none absolute inset-y-0 right-0 w-[45%] lg:w-[50%] bg-gradient-to-r from-transparent via-white/50 to-white" />
                         </div>
                     </motion.div>
                 </div>

@@ -1,5 +1,5 @@
-                                                                                                                         import { motion } from "framer-motion";
-import dashboardImage from "../../assets/dashboard2.png";
+import { motion } from "framer-motion";
+import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.png";
 import { Link } from "react-router-dom";
 import FeatureCTA from "../../components/FeatureCTA";
@@ -12,7 +12,7 @@ export default function HR() {
       <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-20 lg:py-32">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           {/* LEFT CONTENT: Slides in from Left */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ type: "spring", damping: 20, stiffness: 80, delay: 0.1 }}
@@ -28,7 +28,7 @@ export default function HR() {
                 Modern Teams
               </motion.span>
             </h1>
-            
+
             <p className="text-lg lg:text-xl text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
               HR is chaotic—spreadsheets, emails, endless meetings. KaryaUp unifies hiring, onboarding, performance, and analytics in one platform.
             </p>
@@ -99,16 +99,16 @@ export default function HR() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              
+
               // HOVER INTERACTION
-              whileHover={{ 
-                y: -12, 
-                transition: { duration: 0.3, ease: "easeOut" } 
+              whileHover={{
+                y: -12,
+                transition: { duration: 0.3, ease: "easeOut" }
               }}
               className={`group relative bg-white rounded-3xl p-8 border border-slate-100 shadow-sm transition-all duration-300 hover:shadow-2xl hover:border-slate-200 ${card.glow}`}
             >
               {/* Dynamic Icon Square */}
-              <motion.div 
+              <motion.div
                 whileHover={{ scale: 1.1, rotate: 5 }}
                 className={`w-12 h-12 rounded-xl mb-6 ${card.icon} flex items-center justify-center shadow-lg shadow-inherit`}
               />

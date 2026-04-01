@@ -1,277 +1,228 @@
-import React from "react";
-import FinalCTA from "../../components/FinalCTA";
+    import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { CheckCircle2, XCircle, GraduationCap, BookOpen, School, Target } from "lucide-react";
+import dashboardImage from "../../assets/dashboard2.webp";
+import FeatureCTA from "../../components/FeatureCTA";
+import PageHero from "../../components/PageHero";
+import karyaupLogo from "../../assets/logo-svg.svg";
+
+const LightShield3D = () => (
+  <svg viewBox="0 0 200 220" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-56 h-64 md:w-64 md:h-72 drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
+    <defs>
+      <linearGradient id="shieldGrad" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F472B6" stopOpacity="0.4" />
+        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
+      </linearGradient>
+    </defs>
+    <path d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z" fill="white" fillOpacity="0.05" stroke="url(#shieldGrad)" strokeOpacity="0.8" strokeWidth="2" />
+  </svg>
+);
 
 export default function Education() {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Background pattern rows
+  const infiniteText = "KaryaUp ".repeat(20);
+  const rows = Array(12).fill(infiniteText);
+
+  const oldWayItems = [
+    'Scattered physical notebooks', 'Fragmented lesson planning', 'Manual grading & slow feedback',
+    'Lost assignments in emails', 'Rigid, one-size-fits-all teaching', 'Difficulty tracking progress', 'Siloed administrative data'
+  ];
+
+  const newWayItems = [
+    'One digital hub for all courses', 'AI-powered lesson templates', 'Instant feedback loops',
+    'Interactive digital whiteboards', 'Personalized learning paths', 'Real-time student analytics', 'Automated admin workflows'
+  ];
+
   return (
-    <div className="bg-white font-sans min-h-screen pt-28">
-      {/* Hero Section */}
-      <section className="py-10 px-4 sm:px-6 lg:px-12 max-w-[90rem] mx-auto flex flex-col lg:flex-row items-center gap-16">
-        {/* Left Column */}
-        <div className="flex-1 lg:pr-5 w-full max-w-2xl mx-auto lg:mx-0">
-          <h1 className="text-5xl lg:text-[4.0rem] font-extrabold text-[#333333] leading-[1.05] mb-6 tracking-tight">
-            Simplify education<br />management
-          </h1>
-          <p className="text-[1.35rem] text-gray-500 mb-10 max-w-xl leading-relaxed">
-            Manage academic and administrative resources in one place with
-            KaryaUp's time-saving work tools.
-          </p>
+    <div className="bg-white font-sans overflow-x-hidden">
+      
+      {/* ================= HERO SECTION ================= */}
+      <PageHero
+        pillText="Solutions / Education"
+        titleBlack="Simplify"
+        titleGradient="Education Management"
+        descriptionList={[
+          "Manage academic and administrative resources in one place with KaryaUp's time-saving work tools.",
+          "From admissions to graduation, keep every step connected."
+        ]}
+        tags={["Admissions", "Learning", "Administration", "Outcomes"]}
+        imageSrc={dashboardImage}
+        imageAlt="Education Dashboard"
+      />
 
-          <div className="flex flex-wrap items-center gap-6 mb-10">
-            <button className="bg-[#2A2B2E] text-white font-bold text-lg px-8 py-4 rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.15)] hover:bg-black hover:scale-105 transition-all flex items-center gap-2">
-              Get started <span className="text-xl">→</span>
-            </button>
-            <div className="text-[15px] text-[#7B68EE] font-medium leading-tight">
-              Free Forever.<br />
-              No credit card.
-            </div>
-          </div>
+      {/* ================= REIMAGINED COMPARISON SECTION (MOVED UP) ================= */}
+      <section className="py-6 px-2 bg-white overflow-hidden"> 
+        <div className="max-w-7xl mx-auto">
 
-          <div className="flex items-center gap-3 text-sm text-gray-500 font-medium">
-            <div className="flex text-[#FFD100]">
-              {[...Array(5)].map((_, i) => (
-                <svg key={i} className="w-[18px] h-[18px] fill-current" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span>25,000+ reviews from</span>
-            <div className="flex gap-1 items-center">
-              {/* Fake logos styled from image */}
-              <div className="w-5 h-5 bg-[#FF492C] text-white flex items-center justify-center font-bold text-[10px] rounded-sm">G2</div>
-              <div className="w-5 h-5 bg-[#00B289] text-white flex items-center justify-center font-bold text-[10px] rounded-sm">C</div>
-              <div className="w-5 h-5 bg-[#FF9A00] text-white flex items-center justify-center font-bold text-[10px] rounded-sm">G</div>
-              <div className="w-5 h-5 bg-[#E24329] text-white flex items-center justify-center font-bold text-[10px] rounded-full">P</div>
-            </div>
-          </div>
-        </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-6"
+          >
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4">
+              Project Management<br />
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                is broken, we fixed it
+              </motion.span>
+            </h1>
+          </motion.div>
 
-        {/* Right Column: Chat UI Mockup */}
-        <div className="flex-[1.2] w-full mt-10 lg:mt-0">
-          <div className="flex bg-white rounded-xl shadow-[0_20px_50px_-5px_rgba(0,0,0,0.1),_0_0_15px_1px_rgba(0,0,0,0.02)] border border-[#EDEDED] overflow-hidden text-sm h-[500px]">
-            
-            {/* Sidebar */}
-            <div className="w-[200px] border-r border-[#EEEEEE] flex flex-col pt-5">
-              <div className="flex items-center gap-2 px-5 mb-6">
-                <svg width="24" height="24" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M50 85L15 50L50 15V35L30 50L50 65V85Z" fill="#7B61FF" />
-                  <path d="M50 85L85 50L50 15V35L70 50L50 65V85Z" fill="#FF007F" />
-                </svg>
-                <div className="font-bold text-[16px] text-[#333]">KaryaUp</div>
-              </div>
+          <div className="p-[2px] rounded-[3rem] bg-gradient-to-br from-purple-400 via-fuchsia-400 to-indigo-500 shadow-2xl">
+            {/* Added items-start and reduced min-h to shift text upward */}
+            <div className="bg-slate-50 rounded-[2.9rem] overflow-hidden flex flex-col md:flex-row items-start justify-between min-h-[400px] relative">
 
-              <div className="px-3 space-y-1 mb-6 text-[#797F87] font-medium text-[13px]">
-                <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" /></svg>
-                  Home
-                </div>
-                <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" /></svg>
-                  Notifications
-                </div>
-                <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>
-                  Goals
+              {/* 1. LEFT SIDE: Old Way */}
+              <div className="w-full md:w-[35%] p-5 pt-10 z-10 bg-white/40 border-r border-slate-200">
+                <h3 className="text-2xl font-black text-slate-900 mb-1 text-center">The Old Way</h3>
+                <p className="text-[10px] text-slate-500 mb-6 text-center uppercase tracking-widest font-bold">Manual updates cause friction.</p>
+                <div className="h-64 overflow-hidden relative">
+                  <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-slate-50 via-transparent to-slate-50 opacity-80" />
+                  <motion.div
+                    animate={{ y: ["0%", "-50%"] }}
+                    transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+                    className="flex flex-col gap-3"
+                  >
+                    {[...oldWayItems, ...oldWayItems].map((item, i) => (
+                      <div key={i} className="p-3 bg-white/60 backdrop-blur-md rounded-xl border border-red-100 flex items-center gap-3 shadow-sm">
+                        <XCircle className="text-red-500 shrink-0" size={16} />
+                        <span className="text-slate-700 font-bold text-[12px]">{item}</span>
+                      </div>
+                    ))}
+                  </motion.div>
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto">
-                <div className="px-5 py-2 text-[12px] font-bold text-[#333] flex justify-between items-center group cursor-pointer">
-                  Spaces
-                  <svg className="w-3 h-3 text-gray-400 group-hover:text-gray-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
-                </div>
-                <div className="px-3 space-y-1 text-[#4A4E54] font-[500] text-[13px] mb-4">
-                  <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                    <div className="w-4 h-4 grid grid-cols-2 gap-[2px]"><div className="bg-gray-400 rounded-[2px]" /><div className="bg-gray-400 rounded-[2px]" /><div className="bg-gray-400 rounded-[2px]" /><div className="bg-gray-400 rounded-[2px]" /></div>
-                    Everything
-                  </div>
-                  <div className="flex items-center gap-3 px-2 py-[2px] mt-2 mb-1"></div>
-                  <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                    <div className="w-5 h-5 bg-[#7B68EE] text-white rounded-[4px] flex items-center justify-center text-[10px] font-bold">D</div>
-                    Design 210
-                  </div>
-                  <div className="flex items-center gap-3 px-2 py-1.5 hover:bg-gray-50 rounded-lg cursor-pointer">
-                    <div className="w-5 h-5 bg-[#FFC700] text-white rounded-[4px] flex items-center justify-center text-[10px] font-bold">M</div>
-                    Marketing 102
-                  </div>
-                  <div className="flex items-center gap-3 px-2 py-1.5 bg-[#FFF0F6] text-[#333] rounded-lg cursor-pointer">
-                    <div className="w-5 h-5 bg-[#FF80B5] text-white rounded-[4px] flex items-center justify-center text-[10px] font-bold">H</div>
-                    <span className="font-bold">History 201</span>
-                  </div>
+              {/* 2. MIDDLE SIDE: Shield + Dynamic Text Color */}
+              <div
+                className="w-full md:w-[30%] flex flex-col items-center relative py-10 px-4 overflow-hidden self-stretch"
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={() => setIsHovered(false)}
+              >
+                {/* Background Text - Layered Behind */}
+                <div className={`absolute inset-0 z-0 pointer-events-none transition-opacity duration-700 flex flex-col justify-center ${isHovered ? "opacity-20" : "opacity-0"}`}>
+                  {rows.map((row, i) => (
+                    <motion.div
+                      key={i}
+                      animate={{ x: i % 2 === 0 ? [-100, 0] : [0, -100] }}
+                      transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                      className="whitespace-nowrap text-purple-400 font-semibold text-lg py-1 select-none"
+                    >
+                      {row}
+                    </motion.div>
+                  ))}
                 </div>
 
-                <div className="border-t border-[#EEEEEE]">
-                  <div className="px-5 py-3 text-[12px] text-[#333] flex justify-between items-center group cursor-pointer hover:bg-gray-50">
-                    Dashboards
-                    <svg className="w-3 h-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
-                  </div>
-                </div>
-                <div className="border-t border-[#EEEEEE]">
-                  <div className="px-5 py-3 text-[12px] text-[#333] flex justify-between items-center group cursor-pointer hover:bg-gray-50">
-                    Docs
-                    <svg className="w-3 h-3 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M9 18l6-6-6-6" /></svg>
-                  </div>
-                </div>
-              </div>
-            </div>
+                {/* Shield Content - Layered in Front */}
+                <div className="relative z-10 flex flex-col items-center w-full text-center">
+                  <h3 className={`text-xl md:text-2xl font-black mb-1 transition-colors duration-500 ${isHovered ? "text-fuchsia-500" : "text-slate-900"}`}>
+                    Security you can Trust
+                  </h3>
+                  <p className={`text-[11px] mb-4 font-medium transition-colors duration-500 ${isHovered ? "text-purple-500" : "text-slate-500"}`}>
+                    More secure than using AI directly.
+                  </p>
 
-            {/* Main Area */}
-            <div className="flex-1 flex flex-col justify-between">
-              <div>
-                {/* Top Header */}
-                <div className="flex items-center px-6 py-4 border-b border-[#EEEEEE] gap-6 text-[#797F87] font-semibold text-[13px] bg-white">
-                  <div className="flex items-center gap-2 text-[#333] font-bold text-[15px]">
-                    <div className="w-5 h-5 bg-[#FFF0F6] text-[#FF80B5] rounded flex items-center justify-center">
-                      <svg className="w-3 h-3" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                  <div className="relative flex items-center justify-center w-full h-56" style={{ perspective: "1000px" }}>
+                    <div className="absolute inset-0 flex items-center justify-center opacity-80 scale-90">
+                      <LightShield3D />
                     </div>
-                    HIST 201
-                  </div>
-                  <div className="flex items-center gap-1.5 text-[#5A6CF3] cursor-pointer">
-                    <span className="text-[17px] font-normal leading-none mb-0.5">#</span> Chat
-                  </div>
-                  <div className="flex items-center gap-1.5 hover:text-gray-900 cursor-pointer">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="7" height="18" rx="1" /><rect x="14" y="3" width="7" height="18" rx="1" /></svg>
-                    Board
-                  </div>
-                  <div className="flex items-center gap-1.5 hover:text-gray-900 cursor-pointer">
-                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="3" width="8" height="8" rx="1" /><rect x="13" y="3" width="8" height="8" rx="1" /><rect x="3" y="13" width="8" height="8" rx="1" /><rect x="13" y="13" width="8" height="8" rx="1" /></svg>
-                    Box
-                  </div>
-                  <div className="flex items-center gap-1.5 hover:text-gray-900 cursor-pointer ml-auto">
-                    <span className="text-[16px] leading-none mb-0.5 font-normal">+</span> Add view
+                    <motion.img
+                      src={karyaupLogo}
+                      alt="KaryaUp Logo"
+                      animate={{ rotateY: 360, scale: isHovered ? 1.05 : 0.9 }}
+                      transition={{ rotateY: { duration: 8, ease: "linear", repeat: Infinity }, scale: { duration: 0.4 } }}
+                      className="w-32 h-32 md:w-40 md:h-40 object-contain z-30 drop-shadow-[0_15px_35px_rgba(168,85,247,0.4)]"
+                      style={{ transformStyle: "preserve-3d" }}
+                    />
+                    <div className={`absolute w-32 h-32 bg-fuchsia-500/20 rounded-full blur-3xl transition-opacity duration-500 ${isHovered ? "opacity-100" : "opacity-0"}`} />
                   </div>
                 </div>
-
-                {/* Chat Title bar */}
-                <div className="flex items-center justify-between px-6 py-5">
-                  <h2 className="text-[22px] font-normal text-[#333]">Chat</h2>
-                  <div className="flex items-center gap-2 text-[13px] text-gray-500 cursor-pointer hover:bg-gray-50 px-3 py-1.5 rounded-md">
-                    All
-                    <svg className="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M6 9l6 6 6-6" /></svg>
-                  </div>
-                </div>
-
-                {/* Chat Messages */}
-                <div className="px-6 space-y-7">
-                  {/* Msg 1 */}
-                  <div className="flex gap-4 group">
-                    <img src="https://i.pravatar.cc/100?img=9" className="w-8 h-8 rounded-full mt-1" alt="Courtney" />
-                    <div>
-                      <div className="flex items-baseline gap-2 mb-1.5">
-                        <span className="font-bold text-[#333] text-[14px]">Courtney</span>
-                        <span className="text-[#A6ABB2] text-[11px]">on Mar 15 2021 at 1:47 pm</span>
-                      </div>
-                      <div className="text-[#363A45] text-[14px] leading-relaxed">
-                        <span className="text-[#5A6CF3] cursor-pointer hover:underline">@Julie</span> Hey! Just checking if you're still available to w<br />
-                        project toay?
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Msg 2 */}
-                  <div className="flex gap-4 group">
-                    <img src="https://i.pravatar.cc/100?img=5" className="w-8 h-8 rounded-full mt-1" alt="Julie" />
-                    <div>
-                      <div className="flex items-baseline gap-2 mb-1.5">
-                        <span className="font-bold text-[#333] text-[14px]">Julie</span>
-                        <span className="text-[#A6ABB2] text-[11px]">on Mar 15 2021 at 1:49 pm</span>
-                      </div>
-                      <div className="text-[#363A45] text-[14px] leading-relaxed">
-                        <span className="text-[#5A6CF3] cursor-pointer hover:underline">@Courtney</span> Yep! I will be there by 4 pm. I also asked i<br />
-                        could bring her notes!
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Msg 3 */}
-                  <div className="flex gap-4 group">
-                    <img src="https://i.pravatar.cc/100?img=9" className="w-8 h-8 rounded-full mt-1" alt="Courtney" />
-                    <div>
-                      <div className="flex items-baseline gap-2 mb-1.5">
-                        <span className="font-bold text-[#333] text-[14px]">Courtney</span>
-                        <span className="text-[#A6ABB2] text-[11px]">on Mar 15 2021 at 1:47 pm</span>
-                      </div>
-                      <div className="text-[#363A45] text-[14px] leading-relaxed">
-                        Fab! Killing it <span className="text-[#5A6CF3] cursor-pointer hover:underline">@Marci</span> 🙂
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
               </div>
 
-              {/* Type Area mock */}
-              <div className="px-6 pb-6 pt-4 bg-white z-10 w-full relative">
-                <div className="h-12 bg-white border outline-none border-gray-200 rounded-lg w-full shadow-[0_2px_10px_rgba(0,0,0,0.03)]"></div>
+              {/* 3. RIGHT SIDE: KaryaUp Way */}
+              <div className="w-full md:w-[35%] p-8 pt-10 z-10 bg-white/40 border-l border-slate-200">
+                <h3 className="text-2xl font-black text-slate-900 mb-1 text-center">The KaryaUp Way</h3>
+                <p className="text-[10px] text-slate-500 mb-6 text-center uppercase tracking-widest font-bold">Advanced execution loops for growth.</p>
+                <div className="h-64 overflow-hidden relative">
+                  <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-b from-slate-50 via-transparent to-slate-50 opacity-80" />
+                  <motion.div
+                    animate={{ y: ["-50%", "0%"] }}
+                    transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+                    className="flex flex-col gap-3"
+                  >
+                    {[...newWayItems, ...newWayItems].map((item, i) => (
+                      <div key={i} className="p-3 bg-white/80 backdrop-blur-md rounded-xl border border-purple-200 flex items-center gap-3 shadow-sm">
+                        <CheckCircle2 className="text-green-500 shrink-0" size={16} />
+                        <span className="text-purple-900 font-bold text-[12px]">{item}</span>
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
               </div>
-
             </div>
           </div>
         </div>
       </section>
 
-      {/* Management Section */}
-      <section className="py-24 px-4 sm:px-6 lg:px-12 max-w-[90rem] mx-auto text-center">
-        <div className="mb-20 max-w-4xl mx-auto flex flex-col items-center">
-          <div className="text-[#7B68EE] font-extrabold text-[12px] sm:text-[14px] tracking-[0.1em] uppercase mb-4">
-            MANAGEMENT
-          </div>
-          <h2 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-[#333333] leading-[1.1] mb-6 tracking-tight">
-            The all-in-one course <br className="hidden sm:block" /> management solution
-          </h2>
-          <p className="text-[1.10rem] sm:text-[1.3rem] text-gray-500 leading-relaxed max-w-4xl mx-auto px-4 mt-2">
-            Replace or supplement your student information system with KaryaUp's simple yet effective work management solutions. Organize coursework, track student information, streamline admin work, and more—all in one place.
-          </p>
+      {/* ================= EDUCATION LIFECYCLE ================= */}
+      <section className="w-full py-24 px-6 lg:px-20 bg-gradient-to-b from-white to-gray-50">
+        <div className="max-w-7xl mx-auto text-center mb-16">
+          <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
+          >
+            Streamline the <br />
+            <motion.span
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce]"
+              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            >
+              Education Lifecycle
+            </motion.span>
+          </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-          {/* Card 1 */}
-          <div className="bg-[#F8F9FA] rounded-[24px] p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-            <div className="mb-8 w-full h-[200px] lg:h-[220px] bg-white rounded-xl shadow-[0_5px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&w=800&q=80" 
-                alt="Forms & Surveys" 
-                className="w-full h-full object-cover object-top" 
-              />
-            </div>
-            <h3 className="text-[1.4rem] lg:text-[1.60rem] font-bold text-[#333333] tracking-tight mb-3">Forms & Surveys</h3>
-            <p className="text-[1.0rem] text-[#656F7D] leading-relaxed font-[400]">
-              Create customizable forms for admissions requests, coursework submissions, supplies, and more. Organize forms as tasks and link them to your administrative systems to streamline your request intake process.
-            </p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-[#F8F9FA] rounded-[24px] p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-            <div className="mb-8 w-full h-[200px] lg:h-[220px] bg-white rounded-xl shadow-[0_5px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&w=800&q=80" 
-                alt="Spreadsheets" 
-                className="w-full h-full object-cover object-left-top" 
-              />
-            </div>
-            <h3 className="text-[1.4rem] lg:text-[1.60rem] font-bold text-[#333333] tracking-tight mb-3">Spreadsheets</h3>
-            <p className="text-[1.0rem] text-[#656F7D] leading-relaxed font-[400]">
-              Track large datasets, from course lists to student enrollment, by creating a database directly in KaryaUp. Add Custom Fields to track details, and link tasks together to connect related work.
-            </p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-[#F8F9FA] rounded-[24px] p-8 flex flex-col group transition-transform duration-300 hover:-translate-y-1">
-            <div className="mb-8 w-full h-[200px] lg:h-[220px] bg-white rounded-xl shadow-[0_5px_20px_rgba(0,0,0,0.06)] border border-gray-100 overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&w=800&q=80" 
-                alt="Reporting" 
-                className="w-full h-full object-cover object-left-top" 
-              />
-            </div>
-            <h3 className="text-[1.4rem] lg:text-[1.60rem] font-bold text-[#333333] tracking-tight mb-3">Reporting</h3>
-            <p className="text-[1.0rem] text-[#656F7D] leading-relaxed font-[400]">
-              Create high-level overviews to visualize classroom capacity, student performance, inventories, and more. Add charts, docs, and timesheets to bring related resources into one place.
-            </p>
-          </div>
+        <div className="grid md:grid-cols-4 gap-10 text-center">
+          {[
+            { title: "Admissions", desc: "Simplify applications and intake with automated workflows.", icon: <BookOpen className="mx-auto text-purple-600" size={32} /> },
+            { title: "Learning", desc: "Centralize coursework, assignments, and collaboration.", icon: <GraduationCap className="mx-auto text-purple-600" size={32} /> },
+            { title: "Administration", desc: "Manage schedules, resources, and compliance with ease.", icon: <School className="mx-auto text-purple-600" size={32} /> },
+            { title: "Outcomes", desc: "Track performance, visualize progress, and celebrate success.", icon: <Target className="mx-auto text-purple-600" size={32} /> },
+          ].map((step, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: i * 0.2 }}
+              className="bg-white rounded-2xl shadow-lg p-8 border hover:shadow-xl transition group"
+            >
+              <div className="mb-4 group-hover:scale-110 transition-transform">{step.icon}</div>
+              <h3 className="text-xl font-semibold text-slate-900 mb-2">{step.title}</h3>
+              <p className="text-gray-600 text-sm">{step.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
-      <FinalCTA />
+      {/* ================= FINAL CTA ================= */}
+      <FeatureCTA
+        title="Tasks that connect to everything you do"
+        description="Work Smarter with tasks that can live in your whiteboards, chat, calendar - anywhere you work"
+        image={dashboardImage}
+        imageAlt="KaryaUp dashboard"
+        containerClassName="mt-10 mb-20"
+        paddingClassName="p-3 lg:p-4 lg:py-6"
+        imageClassName="w-full max-w-[940px]"
+        imageOuterClassName="relative w-full flex justify-center translate-y-8"
+      />
     </div>
   );
 }

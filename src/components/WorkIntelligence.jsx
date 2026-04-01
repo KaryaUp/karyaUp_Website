@@ -14,7 +14,7 @@ const TiltCard = ({ children, className }) => {
   const handleMouseMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;   // -1 … 1
-    const y = ((e.clientY - rect.top)  / rect.height) * 2 - 1;
+    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
     rawX.set(x);
     rawY.set(y);
   };
@@ -64,25 +64,25 @@ const WorkIntelligence = () => {
 
   return (
     /* outer: full-width bg so the page doesn't break; inner: constrained card */
-    <section className="pt-4 sm:pt-6 pb-6 sm:pb-10 bg-white relative">
+    <section className="py-1.5 sm:py-6 sm:pb-10 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── The constrained, rounded section ── */}
-        <div className="bg-slate-950 rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-6 sm:px-12 py-10 sm:py-14">
+        <div className="bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-5 sm:px-12 py-6 sm:py-14">
 
           {/* Glow blobs */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600/15 rounded-full blur-[80px] pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-72 h-72 bg-fuchsia-600/15 rounded-full blur-[80px] pointer-events-none" />
 
           {/* Heading */}
-          <div className="text-center max-w-2xl mx-auto mb-8 relative z-10">
+          <div className="text-center max-w-2xl mx-auto mb-5 sm:mb-7 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold mb-4 uppercase tracking-widest"
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-[10px] sm:text-xs font-bold mb-3 uppercase tracking-widest"
             >
-              <BrainCircuit size={13} />
+              <BrainCircuit size={12} />
               Work Intelligence
             </motion.div>
 
@@ -91,9 +91,9 @@ const WorkIntelligence = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-white leading-[0.95] mb-4 tracking-tight"
+              className="text-3xl sm:text-5xl lg:text-6xl font-black text-white leading-[0.95] mb-3 tracking-tight"
             >
-              <motion.span 
+              <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
@@ -107,7 +107,7 @@ const WorkIntelligence = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.15 }}
-              className="text-lg text-slate-400 font-medium leading-relaxed"
+              className="text-base sm:text-lg text-slate-400 font-medium leading-relaxed"
             >
               Most tools store data.{' '}
               <span className="text-white font-bold">KaryaUp turns it into decisions.</span>
@@ -127,8 +127,8 @@ const WorkIntelligence = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.1 }}
               >
-                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500/30 p-7 rounded-2xl cursor-default h-full transition-colors duration-300">
-                  <div className="w-12 h-12 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 mb-5">
+                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500/30 p-4.5 sm:p-7 rounded-2xl cursor-default h-full transition-colors duration-300">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 mb-4 sm:mb-5">
                     {card.icon}
                   </div>
                   <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
@@ -143,37 +143,37 @@ const WorkIntelligence = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative z-10 bg-purple-900/20 border border-purple-500/20 rounded-2xl sm:rounded-full p-4 sm:p-5 overflow-hidden"
+            className="relative z-10 bg-purple-900/20 border border-purple-500/20 rounded-2xl sm:rounded-full p-3 sm:p-5 overflow-hidden w-full lg:w-auto"
           >
             {/* The flow path line */}
             <div className="hidden sm:block absolute top-1/2 left-[5%] right-[5%] h-px bg-white/10 -translate-y-1/2 pointer-events-none z-0" />
             <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 text-sm font-bold text-white relative z-10 max-w-5xl mx-auto px-6">
-              
+
               {/* Box 1: Raw Activity */}
-              <div className="flex items-center gap-2 bg-slate-900 px-8 py-4 rounded-full border border-slate-700 hover:border-purple-500/50 transition-all duration-300">
+              <div className="flex items-center justify-center gap-2 bg-slate-900 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full border border-slate-700 hover:border-purple-500/50 transition-all duration-300 w-full sm:w-auto">
                 <Database size={18} className="text-purple-400" />
                 <span>Raw Activity</span>
               </div>
 
               {/* Gap 1: Arrow 1 */}
-              <div className="flex sm:hidden items-center justify-center h-10 -my-1 relative">
+              <div className="flex sm:hidden items-center justify-center h-8 -my-1 relative">
                 <div className="absolute top-[-6px] bottom-[-6px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-purple-400/70 to-fuchsia-400/20" />
                 <motion.div
                   animate={{ y: [0, 8, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   className="relative text-white"
                 >
-                  <ArrowRight size={20} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                  <ArrowRight size={18} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
                 <motion.div
                   initial={{ left: "-12px", opacity: 0 }}
-                  animate={{ 
+                  animate={{
                     left: ["0%", "100%"],
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ 
+                  transition={{
                     duration: 1.5,
                     repeat: Infinity,
                     ease: "easeInOut",
@@ -186,30 +186,30 @@ const WorkIntelligence = () => {
               </div>
 
               {/* Box 2: Clear Insight */}
-              <div className="flex items-center gap-2 bg-purple-900/40 px-8 py-4 rounded-full border border-purple-500/40 backdrop-blur-md hover:border-purple-500/60 transition-all duration-300">
+              <div className="flex items-center justify-center gap-2 bg-purple-900/40 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full border border-purple-500/40 backdrop-blur-md hover:border-purple-500/60 transition-all duration-300 w-full sm:w-auto">
                 <BrainCircuit size={18} className="text-fuchsia-300" />
                 <span>Clear Insight</span>
               </div>
 
               {/* Gap 2: Arrow 2 */}
-              <div className="flex sm:hidden items-center justify-center h-10 -my-1 relative">
+              <div className="flex sm:hidden items-center justify-center h-8 -my-1 relative">
                 <div className="absolute top-[-6px] bottom-[-6px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-fuchsia-400/70 to-white/20" />
                 <motion.div
                   animate={{ y: [0, 8, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, delay: 0.35, repeat: Infinity, ease: "easeInOut" }}
                   className="relative text-white"
                 >
-                  <ArrowRight size={20} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                  <ArrowRight size={18} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
                 <motion.div
                   initial={{ left: "-12px", opacity: 0 }}
-                  animate={{ 
+                  animate={{
                     left: ["0%", "100%"],
                     opacity: [0, 1, 0],
                   }}
-                  transition={{ 
+                  transition={{
                     duration: 1.5,
                     delay: 1.5,
                     repeat: Infinity,
@@ -223,7 +223,7 @@ const WorkIntelligence = () => {
               </div>
 
               {/* Box 3: Faster Decisions */}
-              <div className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-fuchsia-600 border border-white/10 px-8 py-4 rounded-full shadow-[0_0_20px_rgba(217,70,239,0.35)] transition-all duration-300">
+              <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-fuchsia-600 border border-white/10 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full shadow-[0_0_20px_rgba(217,70,239,0.35)] transition-all duration-300 w-full sm:w-auto">
                 <Rocket size={18} className="text-white" />
                 <span>Faster Decisions</span>
               </div>

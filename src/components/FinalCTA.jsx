@@ -26,7 +26,7 @@ const FinalCTA = () => {
   }, []);
 
   return (
-    <section className="pt-0 pb-0 sm:pt-0 sm:pb-0 bg-white relative overflow-hidden font-sans">
+    <section className="py-1.5 sm:py-0 bg-white relative overflow-hidden font-sans">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* The Centric Hub (Glass Card) */}
@@ -34,7 +34,7 @@ const FinalCTA = () => {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-6 sm:mt-10 lg:mt-12 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.65)_100%)] backdrop-blur-3xl border border-slate-200/60 rounded-[3rem] px-6 py-6 sm:px-9 sm:py-8 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
+          className="mt-4 sm:mt-10 lg:mt-12 bg-[linear-gradient(180deg,rgba(255,255,255,0.9)_0%,rgba(255,255,255,0.65)_100%)] backdrop-blur-3xl border border-slate-200/60 rounded-[2rem] sm:rounded-[3rem] px-3.5 py-4.5 sm:px-9 sm:py-8 shadow-[0_32px_120px_-20px_rgba(30,41,59,0.08)] relative overflow-hidden"
         >
           <div className="absolute inset-0 pointer-events-none opacity-30">
             <svg className="h-full w-full" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -63,37 +63,37 @@ const FinalCTA = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[11px] font-black uppercase tracking-[0.2em] mb-3 shadow-sm"
+              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] mb-3 shadow-sm"
             >
-              <ShieldCheck size={14} className="text-[#7e22ce]" />
-              The execution standard for elite teams
+              <ShieldCheck size={13} className="text-[#7e22ce]" />
+              Elite execution standard
             </motion.div>
 
             {/* Testimonial Marquee (Infinite Scroll) - Seamless Loop */}
-            <div className="mb-4 overflow-hidden relative w-full h-10 sm:h-12 flex items-center">
+            <div className="mb-2 sm:mb-3 overflow-hidden relative w-full h-8 sm:h-12 flex items-center">
               <motion.div
                 animate={{ x: ["0%", "-50%"] }}
                 transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                className="flex items-center gap-12 sm:gap-20 whitespace-nowrap"
+                className="flex items-center gap-8 sm:gap-20 whitespace-nowrap"
               >
                 {[...testimonials, ...testimonials].map((t, i) => (
-                  <div key={i} className="flex items-center gap-4">
+                  <div key={i} className="flex items-center gap-3 sm:gap-4">
                     <div className="flex gap-0.5">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={10} className="text-amber-400" fill="currentColor" />
+                        <Star key={i} size={8} className="text-amber-400 sm:w-[10px] sm:h-[10px]" fill="currentColor" />
                       ))}
                     </div>
-                    <span className="text-slate-400 font-bold text-sm tracking-tight italic">"{t}"</span>
+                    <span className="text-slate-400 font-bold text-xs sm:text-sm tracking-tight italic">"{t}"</span>
                   </div>
                 ))}
               </motion.div>
               {/* Fade overlays */}
-              <div className="absolute inset-y-0 left-0 w-12 sm:w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-12 sm:w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
+              <div className="absolute inset-y-0 left-0 w-8 sm:w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
+              <div className="absolute inset-y-0 right-0 w-8 sm:w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
             </div>
 
             {/* Main Value Prop */}
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-3">
+            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-2 sm:mb-3">
               Run Your Entire <br />
               <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
@@ -104,15 +104,15 @@ const FinalCTA = () => {
               </motion.span>
             </h2>
 
-            <p className="text-lg sm:text-xl text-slate-500 font-medium max-w-2xl mx-auto mb-5 leading-relaxed">
-              Stop switching tools. Start moving work forward. <br />
+            <p className="text-base sm:text-xl text-slate-500 font-medium max-w-xl mx-auto mb-4 sm:mb-5 leading-relaxed">
+              Stop switching tools. Start moving move. <br />
               <span className="text-slate-900 font-black">
-                Execution speed increased by up to <span className="text-[#7e22ce]">{speed.toFixed(1)}x</span>.
+                Execution speed <span className="text-[#7e22ce] sm:inline">{speed.toFixed(1)}x faster</span>.
               </span>
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <Link
                 to="https://www.karyaup.com/auth"
                 onMouseEnter={() => setIsHoveringCTA(true)}
@@ -136,7 +136,7 @@ const FinalCTA = () => {
               >
                 <Link
                   to="/book-demo"
-                  className="inline-flex w-full sm:w-auto items-center justify-center px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all hover:bg-slate-100"
+                  className="inline-flex w-[12em] sm:w-auto items-center justify-center px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all hover:bg-slate-100"
                 >
                   Book a Demo
                 </Link>
@@ -144,15 +144,15 @@ const FinalCTA = () => {
             </div>
 
             {/* Bottom Proof - Enhanced Visibility */}
-            <div className="mt-6 flex flex-wrap justify-center items-center gap-x-10 gap-y-4 opacity-80">
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                <Globe size={18} className="text-purple-600" /> 10,000+ Global Teams
+            <div className="mt-6 flex flex-col sm:flex-row flex-wrap justify-center items-center gap-x-10 gap-y-3 opacity-90">
+              <div className="flex items-center gap-2 text-[13px] sm:text-sm font-bold text-slate-700">
+                <Globe size={16} className="text-purple-600" /> 10,000+ Global Teams
               </div>
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                <ShieldCheck size={18} className="text-emerald-500" /> Enterprise-ready Security
+              <div className="flex items-center gap-2 text-[13px] sm:text-sm font-bold text-slate-700">
+                <ShieldCheck size={16} className="text-emerald-500" /> Enterprise Security
               </div>
-              <div className="flex items-center gap-2 text-sm font-bold text-slate-700">
-                <Heart size={18} className="text-rose-500" /> Trusted by 500k+ users
+              <div className="flex items-center gap-2 text-[13px] sm:text-sm font-bold text-slate-700">
+                <Heart size={16} className="text-rose-500" /> Trusted by 500k+
               </div>
             </div>
 

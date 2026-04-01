@@ -83,10 +83,10 @@ const FeatureRow = ({ feature, index }) => {
       className="w-full"
     >
       <div
-        className="relative overflow-hidden bg-white border border-slate-100 rounded-2xl px-5 sm:px-8 py-4 sm:py-5"
+        className="relative overflow-hidden bg-white border border-slate-100 rounded-2xl px-5 sm:px-8 py-2.5 sm:py-5"
         style={{ boxShadow: '0 4px 20px -8px rgba(2,6,23,0.12)' }}
       >
-        <div className="relative flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-6 text-center sm:text-left items-center sm:items-start">
 
           {/* Icon */}
           <div
@@ -102,7 +102,7 @@ const FeatureRow = ({ feature, index }) => {
 
           {/* Text */}
           <div className="flex-1 min-w-0">
-            <div className="flex items-center gap-2 mb-0.5">
+            <div className="flex items-center justify-center sm:justify-start gap-2 mb-0.5">
               <span className="text-[10px] font-black uppercase tracking-[0.2em]" style={{ color: feature.accent }}>
                 {feature.tag}
               </span>
@@ -116,9 +116,9 @@ const FeatureRow = ({ feature, index }) => {
           </div>
 
           {/* Stat (avoid "button" look) */}
-          <div className="flex-shrink-0">
+          <div className="flex-shrink-0 w-full sm:w-auto">
             <div
-              className="text-right"
+              className="text-center sm:text-right"
               style={{
                 borderColor: `${feature.accent}30`,
               }}
@@ -126,7 +126,7 @@ const FeatureRow = ({ feature, index }) => {
               <div className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                 Metric
               </div>
-              <div className="flex items-baseline justify-end gap-2">
+              <div className="flex items-baseline justify-center sm:justify-end gap-2">
                 <span className="text-xl sm:text-2xl font-black leading-none" style={{ color: feature.accent }}>
                   {feature.stat}
                 </span>
@@ -144,22 +144,22 @@ const FeatureRow = ({ feature, index }) => {
 };
 
 const FeatureOverview = () => (
-  <section className="pt-10 sm:pt-14 pb-14 sm:pb-20 bg-white relative">
+  <section className="py-6 sm:py-14 sm:pb-20 bg-white relative">
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Heading */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-center max-w-2xl mx-auto mb-8"
+        className="text-center max-w-2xl mx-auto mb-5 sm:mb-8"
       >
-        <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-bold mb-4 uppercase tracking-widest">
-          <TrendingUp size={13} /> Product Features
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] sm:text-xs font-bold mb-3 uppercase tracking-widest">
+          <TrendingUp size={12} /> Product Features
         </span>
 
-        <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] tracking-tight mb-4">
+        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] tracking-tight mb-3">
           See Everything.{' '}
-          <motion.span 
+          <motion.span
             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
             animate={{ backgroundPosition: ["0% center", "-200% center"] }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
@@ -167,13 +167,13 @@ const FeatureOverview = () => (
             Instantly.
           </motion.span>
         </h2>
-        <p className="text-slate-500 text-lg font-medium">
+        <p className="text-slate-500 text-base sm:text-lg font-medium">
           One platform. Every view — always current.
         </p>
       </motion.div>
 
       {/* Full-width rows */}
-      <div className="space-y-6 sm:space-y-8 max-w-5xl mx-auto">
+      <div className="space-y-3 sm:space-y-8 max-w-5xl mx-auto">
         {features.map((f, i) => (
           <FeatureRow key={f.tag} feature={f} index={i} />
         ))}

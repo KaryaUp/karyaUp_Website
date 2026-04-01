@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 // ── Data ───────────────────────────────────────────────────────────────────────
 const INTRO_SENTENCES = [
-  ["Plan", "The", "Karya."],
-  ["Move", "The", "Karya."],
-  ["Complete", "The", "Karya."],
+  "Plan The Karya.",
+  "Move The Karya.",
+  "Complete The Karya.",
 ];
 
 // Summary: alternating words and dots
@@ -16,23 +16,20 @@ const SUMMARY_ITEMS = [
   { type: "dot" },
   { type: "word", text: "Move", gradient: false },
   { type: "dot" },
-  { type: "word", text: "Complete", gradient: false },
-  { type: "dot" },
-
+  { type: "word", text: "Complete", gradient: false }
 ];
 
 // Main headline words: line1 then line2
-const MAIN_LINE1 = ["The", "Platform", "To", "Run", "Your"];
-const MAIN_LINE2 = ["Entire", "Company"];
-const MAIN_ALL = [...MAIN_LINE1, ...MAIN_LINE2];
+const MAIN_LINE1 = "The Platform To Run Your";
+const MAIN_LINE2 = "Entire Company";
 
 // ── Timing (ms) ────────────────────────────────────────────────────────────────
-const WORD_DELAY = 170;   // intro: ms per word
-const SENTENCE_HOLD = 550;   // intro: hold after full sentence
-const SENTENCE_GAP = 180;   // intro: gap between sentences
-const SUMMARY_ITEM_DELAY = 130;   // summary: ms per item (word or dot)
-const SUMMARY_HOLD = 1200;  // summary: hold after all items shown
-const MAIN_WORD_DELAY = 140;   // main: ms per word
+const INTRO_CHAR_DELAY = 45;   // intro: ms per char
+const SENTENCE_HOLD = 750;   // intro: hold after full sentence
+const SENTENCE_GAP = 250;   // intro: gap between sentences
+const SUMMARY_ITEM_DELAY = 140;   // summary: ms per item
+const SUMMARY_HOLD = 1500;  // summary: hold after all items shown (Increased for emphasis)
+const MAIN_CHAR_DELAY = 35;   // main: ms per char
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
 // Phases: "intro" → "summary" → "summaryExit" → "main"
@@ -43,13 +40,13 @@ function useIntroSequence() {
   const [summaryVisible, setSummaryVisible] = useState(0);
   const [mainVisible, setMainVisible] = useState(0);
 
-  // ── Intro: reveal words one by one, cycle sentences ──
+  // ── Intro: reveal char by char, cycle sentences ──
   useEffect(() => {
     if (phase !== "intro") return;
-    const sentence = INTRO_SENTENCES[sentenceIdx];
+    const sentenceLen = INTRO_SENTENCES[sentenceIdx].length;
 
-    if (introVisible < sentence.length) {
-      const t = setTimeout(() => setIntroVisible((v) => v + 1), WORD_DELAY);
+    if (introVisible < sentenceLen) {
+      const t = setTimeout(() => setIntroVisible((v) => v + 1), INTRO_CHAR_DELAY);
       return () => clearTimeout(t);
     }
     // sentence complete → hold → next sentence or go to summary
@@ -81,11 +78,12 @@ function useIntroSequence() {
     return () => clearTimeout(t);
   }, [phase, summaryVisible]);
 
-  // ── Main: reveal headline words one by one ──
+  // ── Main: reveal headline chars one by one ──
   useEffect(() => {
     if (phase !== "main") return;
-    if (mainVisible < MAIN_ALL.length) {
-      const t = setTimeout(() => setMainVisible((v) => v + 1), MAIN_WORD_DELAY);
+    const totalMainChars = MAIN_LINE1.length + 1 + MAIN_LINE2.length;
+    if (mainVisible < totalMainChars) {
+      const t = setTimeout(() => setMainVisible((v) => v + 1), MAIN_CHAR_DELAY);
       return () => clearTimeout(t);
     }
   }, [phase, mainVisible]);
@@ -104,10 +102,12 @@ const Hero = () => {
     >
       {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
+        <link rel="preload" as="image" href="/Hero_BG.webp" />
         <img
-          src="/Hero_BG.png"
+          src="/Hero_BG.webp"
           alt=""
           aria-hidden="true"
+          loading="eager"
           className="absolute inset-0 h-full w-full scale-105 object-cover blur-[6px]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.2)_0%,rgba(15,23,42,0.12)_34%,rgba(15,23,42,0.22)_100%)]" />
@@ -130,26 +130,56 @@ const Hero = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0, y: -12, scale: 0.97 }}
                     transition={{ duration: 0.38, ease: "easeIn" }}
-                    className="flex items-center justify-center gap-3 flex-wrap"
+                    className="flex items-center justify-center gap-2 sm:gap-3 lg:gap-4 flex-wrap"
                   >
-                    {INTRO_SENTENCES[sentenceIdx].map((word, i) => (
-                      <motion.span
-                        key={`${sentenceIdx}-${i}`}
-                        initial={{ opacity: 0, y: 18 }}
-                        animate={i < introVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }}
-                        transition={{ duration: 0.26, ease: "easeOut" }}
-                        className={`inline-block py-1 text-[2.6rem] sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] ${word.endsWith(".")
-                          ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]"
-                          : "text-white"
-                          }`}
-                      >
-                        {word}
-                      </motion.span>
-                    ))}
+                    {INTRO_SENTENCES[sentenceIdx].split(" ").map((word, wIdx, arr) => {
+                      const isGradient = word.endsWith(".");
+                      const wordStartIdx = arr.slice(0, wIdx).join(" ").length + (wIdx > 0 ? 1 : 0);
+
+                      if (isGradient) {
+                        return (
+                          <span
+                            key={`g-${wIdx}`}
+                            className="inline-block py-1 text-[2.6rem] sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] whitespace-nowrap"
+                          >
+                            <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]">
+                              {word.split("").map((char, cIdx) => (
+                                <motion.span
+                                  key={cIdx}
+                                  initial={{ opacity: 0 }}
+                                  animate={(wordStartIdx + cIdx) < introVisible ? { opacity: 1 } : { opacity: 0 }}
+                                  transition={{ duration: 0.15, ease: "easeOut" }}
+                                >
+                                  {char}
+                                </motion.span>
+                              ))}
+                            </motion.span>
+                          </span>
+                        );
+                      } else {
+                        return (
+                          <span
+                            key={`w-${wIdx}`}
+                            className="inline-block py-1 text-[2.6rem] sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white whitespace-nowrap"
+                          >
+                            {word.split("").map((char, cIdx) => (
+                              <motion.span
+                                key={cIdx}
+                                initial={{ opacity: 0 }}
+                                animate={(wordStartIdx + cIdx) < introVisible ? { opacity: 1 } : { opacity: 0 }}
+                                transition={{ duration: 0.15, ease: "easeOut" }}
+                              >
+                                {char}
+                              </motion.span>
+                            ))}
+                          </span>
+                        );
+                      }
+                    })}
                   </motion.div>
                 )}
 
-                {/* ──── PHASE: summary  Plan · Move / Complete · Karya ──── */}
+                {/* ──── PHASE: summary  Plan · Move · Complete ──── */}
                 {(phase === "summary" || phase === "summaryExit") && (
                   <motion.div
                     key="summary"
@@ -157,24 +187,40 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12, scale: 0.97 }}
                     transition={{ duration: 0.38, ease: "easeOut" }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-y-2 sm:gap-y-0"
+                    className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 lg:gap-x-6 gap-y-2 w-full max-w-4xl mx-auto"
                   >
-                    {/* ── Row 1: Plan · Move ── */}
-                    <div className="flex items-center justify-center">
-                      <motion.span initial={{ opacity: 0, y: 16 }} animate={0 < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} transition={{ duration: 0.26 }} className="inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white">Plan</motion.span>
-                      <motion.span initial={{ opacity: 0, scale: 0.3 }} animate={1 < summaryVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.3 }} transition={{ duration: 0.2 }} className="inline-flex items-center justify-center mx-2 sm:mx-3 lg:mx-4" aria-hidden="true"><span className="block rounded-full bg-white" style={{ width: "clamp(7px,1vw,13px)", height: "clamp(7px,1vw,13px)", transform: "translateY(4px)", boxShadow: "0 0 8px 1px rgba(255,255,255,0.45)" }} /></motion.span>
-                      <motion.span initial={{ opacity: 0, y: 16 }} animate={2 < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} transition={{ duration: 0.26 }} className="inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white">Move</motion.span>
-                    </div>
-
-                    {/* ── Middle dot — desktop only ── */}
-                    <motion.span initial={{ opacity: 0, scale: 0.3 }} animate={3 < summaryVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.3 }} transition={{ duration: 0.2 }} className="hidden sm:inline-flex items-center justify-center mx-2 sm:mx-3 lg:mx-4" aria-hidden="true"><span className="block rounded-full bg-white" style={{ width: "clamp(7px,1vw,13px)", height: "clamp(7px,1vw,13px)", transform: "translateY(4px)", boxShadow: "0 0 8px 1px rgba(255,255,255,0.45)" }} /></motion.span>
-
-                    {/* ── Row 2: Complete · Karya ── */}
-                    <div className="flex items-center justify-center">
-                      <motion.span initial={{ opacity: 0, y: 16 }} animate={4 < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} transition={{ duration: 0.26 }} className="inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white">Complete</motion.span>
-                      <motion.span initial={{ opacity: 0, scale: 0.3 }} animate={5 < summaryVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.3 }} transition={{ duration: 0.2 }} className="inline-flex items-center justify-center mx-2 sm:mx-3 lg:mx-4" aria-hidden="true"><span className="block rounded-full bg-white" style={{ width: "clamp(7px,1vw,13px)", height: "clamp(7px,1vw,13px)", transform: "translateY(4px)", boxShadow: "0 0 8px 1px rgba(255,255,255,0.45)" }} /></motion.span>
-                      <motion.span initial={{ opacity: 0, y: 16 }} animate={6 < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }} transition={{ duration: 0.26 }} className="inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]">Karya</motion.span>
-                    </div>
+                    {SUMMARY_ITEMS.map((item, i) => (
+                      <React.Fragment key={i}>
+                        {item.type === "word" ? (
+                          <motion.span
+                            initial={{ opacity: 0, y: 16 }}
+                            animate={i < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
+                            transition={{ duration: 0.26 }}
+                            className="inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white"
+                          >
+                            {item.text}
+                          </motion.span>
+                        ) : (
+                          <motion.span
+                            initial={{ opacity: 0, scale: 0.3 }}
+                            animate={i < summaryVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.3 }}
+                            transition={{ duration: 0.2 }}
+                            className="inline-flex items-center justify-center"
+                            aria-hidden="true"
+                          >
+                            <span 
+                              className="block rounded-full bg-white" 
+                              style={{ 
+                                width: "clamp(8px,1.2vw,14px)", 
+                                height: "clamp(8px,1.2vw,14px)", 
+                                transform: "translateY(4px)", 
+                                boxShadow: "0 0 10px 2px rgba(255,255,255,0.5)" 
+                              }} 
+                            />
+                          </motion.span>
+                        )}
+                      </React.Fragment>
+                    ))}
                   </motion.div>
                 )}
 
@@ -188,40 +234,57 @@ const Hero = () => {
                     className="flex flex-col items-center gap-0 pb-3"
                   >
                     {/* Line 1 */}
-                    <div className="flex items-center justify-center flex-wrap gap-x-4">
-                      {MAIN_LINE1.map((word, i) => (
-                        <motion.span
-                          key={`l1-${word}`}
-                          initial={{ opacity: 0, y: 22 }}
-                          animate={i < mainVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
-                          transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                          className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black text-white tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)]"
-                        >
-                          {word}
-                        </motion.span>
-                      ))}
+                    <div className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+                      {MAIN_LINE1.split(" ").map((word, wIdx, arr) => {
+                        const wordStartIdx = arr.slice(0, wIdx).join(" ").length + (wIdx > 0 ? 1 : 0);
+                        return (
+                          <span
+                            key={`l1-${wIdx}`}
+                            className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] text-white whitespace-nowrap"
+                          >
+                            {word.split("").map((char, cIdx) => (
+                              <motion.span
+                                key={cIdx}
+                                initial={{ opacity: 0 }}
+                                animate={(wordStartIdx + cIdx) < mainVisible ? { opacity: 1 } : { opacity: 0 }}
+                                transition={{ duration: 0.15, ease: "easeOut" }}
+                              >
+                                {char}
+                              </motion.span>
+                            ))}
+                          </span>
+                        );
+                      })}
                     </div>
 
                     {/* Line 2 – gradient */}
-                    <div className="flex items-center justify-center flex-wrap gap-x-4">
-                      {MAIN_LINE2.map((word, i) => {
-                        const globalIdx = MAIN_LINE1.length + i;
+                    <div className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+                      {MAIN_LINE2.split(" ").map((word, wIdx, arr) => {
+                        const startOffset = MAIN_LINE1.length + 1;
+                        const wordStartIdx = startOffset + arr.slice(0, wIdx).join(" ").length + (wIdx > 0 ? 1 : 0);
+                        
                         return (
-                          <motion.span
-                            key={`l2-${word}`}
-                            initial={{ opacity: 0, y: 22 }}
-                            animate={globalIdx < mainVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 }}
-                            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                            className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)]"
+                          <span
+                            key={`l2-${wIdx}`}
+                            className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] whitespace-nowrap"
                           >
                             <motion.span
                               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                             >
-                              {word}
+                              {word.split("").map((char, cIdx) => (
+                                <motion.span
+                                  key={cIdx}
+                                  initial={{ opacity: 0 }}
+                                  animate={(wordStartIdx + cIdx) < mainVisible ? { opacity: 1 } : { opacity: 0 }}
+                                  transition={{ duration: 0.15, ease: "easeOut" }}
+                                >
+                                  {char}
+                                </motion.span>
+                              ))}
                             </motion.span>
-                          </motion.span>
+                          </span>
                         );
                       })}
                     </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Bell, Shield, BellOff, Zap, CheckCircle2, ArrowRight } from "lucide-react";
 import { FeatureCard, CTABanner } from "../../components/SubPageLayout";
@@ -7,6 +7,15 @@ import notificationImg from "../../assets/Notification.png";
 import { Helmet } from "react-helmet-async";
 
 export default function Notifications() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   return (
     <>
        <Helmet>
@@ -136,7 +145,7 @@ export default function Notifications() {
 
             {/* Right Hero Image - Dashboard Style Showcasing */}
             <motion.div
-              initial={{ opacity: 0, x: 60 }}
+              initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
               className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
