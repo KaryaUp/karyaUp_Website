@@ -494,10 +494,16 @@ export default function Blog() {
 
         <meta name="author" content="Karyaup" />
 
-        <meta
-          property="og:title"
-          content="Blog & Insights | Karyaup"
-        />
+        {/* Preload critical images for faster LCP and rendering */}
+        <link rel="preload" as="image" href={BlogHero} />
+        <link rel="preload" as="image" href={Blog2} />
+        <link rel="preload" as="image" href={Blog3} />
+        <link rel="preload" as="image" href={Blog4} />
+        <link rel="preload" as="image" href={Blog5} />
+        <link rel="preload" as="image" href={Blog6} />
+        <link rel="preload" as="image" href={article1} />
+
+        <meta property="og:title" content="Blog & Insights | Karyaup" />
         <meta
           property="og:description"
           content="Read articles on productivity, team management, and smarter workflows."
