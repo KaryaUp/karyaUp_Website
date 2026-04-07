@@ -167,7 +167,7 @@ export default function Gantt() {
         />
       </Helmet>
 
-      <div className="min-h-screen bg-white pt-14 sm:pt-16 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
         <section className="relative pt-4 sm:pt-6 pb-8 sm:pb-10 lg:pb-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -255,11 +255,7 @@ export default function Gantt() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="flex flex-col items-center"
             >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs sm:text-sm font-black uppercase tracking-widest shadow-sm">
-                <Sparkles className="w-3.5 h-4 sm:w-4 sm:h-4 text-[#7e22ce]" />
-                <span className="opacity-60">/</span>
-                <span>Universal Planning Control</span>
-              </div>
+             
               <h2 className="mt-4 text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-black text-slate-900 tracking-tighter leading-tight">
                 Powerful Timeline For <br />
                 <motion.span

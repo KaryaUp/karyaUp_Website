@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kai | Autonomous AI Agent</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles2.css">
+    <link rel="stylesheet" href="css/styles3.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/premium.css">
+    <link rel="stylesheet" href="css/mobile.css">
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script>
+</head>
+
+<body class="loading">
+
+    <!-- ═══ PAGE LOADER ═══ -->
+    <div id="page-loader">
+        <!-- Split-exit panels -->
+        <div class="loader-panel top"></div>
+        <div class="loader-panel bottom"></div>
+        <!-- Scanline texture -->
+        <div class="loader-scanlines"></div>
+        <!-- Glitch flash -->
+        <div class="loader-glitch"></div>
+        <!-- Content -->
+        <div class="loader-content">
+            <!-- Corner brackets -->
+            <div class="loader-corner tl"></div>
+            <div class="loader-corner tr"></div>
+            <div class="loader-corner bl"></div>
+            <div class="loader-corner br"></div>
+            <!-- Brand -->
+            <div class="loader-brand">KAI <span class="loader-dot"></span></div>
+            <!-- Status -->
+            <div class="loader-status">Initializing neural core…</div>
+            <!-- Giant counter -->
+            <div class="loader-counter">
+                <span class="loader-counter-val">00</span>
+                <div class="loader-counter-fill" aria-hidden="true">00</div>
+            </div>
+            <!-- Progress bar -->
+            <div class="loader-bar-wrap">
+                <div class="loader-bar-track">
+                    <div class="loader-bar-fill"></div>
+                    <div class="loader-bar-glow"></div>
+                </div>
+                <div class="loader-percent-label">00%</div>
+            </div>
+            <!-- Tagline -->
+            <div class="loader-tagline">Autonomous AI &nbsp;&mdash;&nbsp; Kai v3.0</div>
+        </div>
+    </div>
+
+    <!-- Global Dynamic Backgrounds -->
+    <div class="global-backgrounds">
+        <div class="bg-layer bg-layer-1 active"></div> <!-- Dark Gradient -->
+        <div class="bg-layer bg-layer-2"></div> <!-- Neural Network Pattern -->
+        <div class="bg-layer bg-layer-3"></div> <!-- Glowing Particle Field -->
+        <div class="bg-layer bg-layer-4"></div> <!-- Bright Gradient Waves -->
+    </div>
+
+    <!-- Enhanced Custom Cursor -->
+    <div class="custom-cursor">
+        <div class="cursor-dot"></div>
+        <div class="cursor-ring"></div>
+        <span class="cursor-text"></span>
+    </div>
+    <div id="cursor-particles"></div>
+
+    <section class="hero-section">
+        <div class="sticky-wrapper">
+            <!-- Pinned Canvas for Scroll Sequence -->
+            <div class="canvas-container">
+                <canvas id="hero-canvas"></canvas>
+                <div class="canvas-overlay"></div>
+            </div>
+
+            <!-- Pinned UI Content Staging -->
+            <div class="ui-container">
+                <!-- Stage 1 -->
+                <div class="stage stage-1">
+                    <h1 class="headline split-text">Meet Kai</h1>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="stage stage-2">
+                    <p class="subtext">Your autonomous AI agent that thinks,<br>plans, and executes tasks for you.</p>
+                    <p class="supporting-text">Work faster, think bigger, and automate everything with Kai.</p>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="stage stage-3">
+                    <div class="floating-ui-container">
+                        <div class="floating-card c-1 tilt-effect">
+                            <div class="icon">🔮</div>
+                            <span class="bh">Analyzing Data...</span>
+                        </div>
+                        <div class="floating-card c-2 tilt-effect">
+                            <div class="icon">⚡</div>
+                            <span class="bh">Execution Complete</span>
+                        </div>
+                        <div class="floating-card c-3 tilt-effect">
+                            <div class="icon">🧠</div>
+                            <span class="bh">Learning Pattern</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stage 4 -->
+                <div class="stage stage-4">
+                    <div class="cta-wrapper magnetic-wrap">
+                        <button class="cta-btn magnetic-element">
+                            <span class="btn-text">Start Using Kai</span>
+                            <div class="ripple-container"></div>
+                        </button>
+                        <div class="btn-glow"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Feature Cards Section -->
+    <section class="features-section dark-theme">
+        <div class="features-container">
+            <h2 class="section-title split-text">What Kai Can Do</h2>
+            <div class="feature-grid">
+                <div class="feature-card tilt-effect">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">🧠</div>
+                    <h3>Think</h3>
+                    <p>Advanced neural processing to comprehend complex tasks and unstructured data in seconds.</p>
+                </div>
+                <div class="feature-card tilt-effect">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">📐</div>
+                    <h3>Plan</h3>
+                    <p>Breaks down grand visions into step-by-step actionable roadmaps automatically.</p>
+                </div>
+                <div class="feature-card tilt-effect">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">⚡</div>
+                    <h3>Execute</h3>
+                    <p>Performs actions across integrations with flawless precision and zero oversight.</p>
+                </div>
+                <div class="feature-card tilt-effect">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">⚙️</div>
+                    <h3>Automate</h3>
+                    <p>Creates self-sustaining workflows that run 24/7 without human intervention.</p>
+                </div>
+                <div class="feature-card tilt-effect">
+                    <div class="card-glow"></div>
+                    <div class="card-icon">📈</div>
+                    <h3>Learn</h3>
+                    <p>Continuously adapts to your preferences, improving its output quality every day.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kai Integrations Ecosystem (Interactive Nodes) -->
+    <section class="integrations-section dark-theme">
+        <div class="integrations-container">
+            <div class="section-label">Ecosystem</div>
+            <h2 class="section-title split-text-scroll text-center">Seamlessly Connected</h2>
+            <p class="section-subtitle text-center">Drag, explore, and watch Kai orchestrate the entire ecosystem.</p>
+
+            <div class="ecosystem-view">
+                <!-- Center Core -->
+                <div class="eco-core magnetic-wrap">
+                    <div class="core-glow"></div>
+                    <div class="core-logo magnetic-element">Kai</div>
+                </div>
+
+                <!-- Floating Nodes -->
+                <div class="node n-slack magnetic-wrap">
+                    <div class="magnetic-element">Slack</div>
+                </div>
+                <div class="node n-github magnetic-wrap">
+                    <div class="magnetic-element">Hub</div>
+                </div>
+                <div class="node n-stripe magnetic-wrap">
+                    <div class="magnetic-element">Stripe</div>
+                </div>
+                <div class="node n-notion magnetic-wrap">
+                    <div class="magnetic-element">Notion</div>
+                </div>
+                <div class="node n-mail magnetic-wrap">
+                    <div class="magnetic-element">GWS</div>
+                </div>
+                <div class="node n-figma magnetic-wrap">
+                    <div class="magnetic-element">Figma</div>
+                </div>
+
+                <!-- Connection Lines Canvas -->
+                <canvas id="eco-canvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kai Technology Section -->
+    <section class="tech-section dark-theme">
+        <div class="tech-bg"></div>
+        <div class="tech-container">
+            <div class="tech-text split-text-scroll">
+                <div class="section-label">Under the Hood</div>
+                <h2 class="section-title text-left">Proprietary Agentic Technology</h2>
+                <p>Built from the ground up for extreme performance and autonomy. Kai utilizes advanced neural parsing
+                    to understand your workflows, creating real-time execution graphs that operate independently of
+                    human input.</p>
+                <div class="tech-list">
+                    <div class="tech-item"><span class="highlight-dot"></span> Under 10ms Latency</div>
+                    <div class="tech-item"><span class="highlight-dot"></span> Dynamic Protocol Adjustments</div>
+                    <div class="tech-item"><span class="highlight-dot"></span> Real-time execution graphs</div>
+                </div>
+            </div>
+
+            <div class="tech-dashboard">
+                <div class="dash-glow"></div>
+                <div class="dash-header">
+                    <div class="dash-dots"><span></span><span></span><span></span></div>
+                    <div class="dash-title">Kai Agent Matrix</div>
+                </div>
+
+                <div class="dash-body">
+                    <!-- Graph widget -->
+                    <div class="dash-widget w-large">
+                        <div class="widget-head">Network Thruput</div>
+                        <svg class="line-graph" viewBox="0 0 300 100" preserveAspectRatio="none">
+                            <path class="graph-line" d="M0 80 Q 30 20, 60 70 T 120 40 T 180 80 T 240 30 T 300 50"
+                                fill="none" stroke="var(--accent-1)" stroke-width="3" />
+                            <path class="graph-fill"
+                                d="M0 80 Q 30 20, 60 70 T 120 40 T 180 80 T 240 30 T 300 50 L 300 100 L 0 100 Z"
+                                fill="url(#graphGrad)" />
+                            <defs>
+                                <linearGradient id="graphGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="var(--accent-1)" stop-opacity="0.3" />
+                                    <stop offset="100%" stop-color="var(--bg-color)" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+
+                    <!-- Small stat widgets -->
+                    <div class="dash-widget w-small">
+                        <div class="widget-head">Active Nodes</div>
+                        <div class="widget-value counter" data-target="14023">0</div>
+                    </div>
+
+                    <div class="dash-widget w-small">
+                        <div class="widget-head">Uptime</div>
+                        <div class="widget-value">99.9<span class="small-text">%</span></div>
+                        <div class="pulse-indicator"></div>
+                    </div>
+                </div>
+
+                <!-- Floating elements over dashboard -->
+                <div class="float-node fn-1"></div>
+                <div class="float-node fn-2"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- System Intelligence Metrics Section -->
+    <section class="metrics-section dark-theme">
+        <div class="section-label" style="margin: 0 auto 8px; display:table">Performance</div>
+        <h2 class="section-title split-text-scroll text-center">System Intelligence Metrics</h2>
+        <div class="metrics-grid">
+
+            <!-- Metric Card 1 -->
+            <div class="metric-card tilt-effect">
+                <svg class="circle-chart" viewBox="0 0 100 100">
+                    <circle class="bg" cx="50" cy="50" r="40" />
+                    <circle class="progress p-1" cx="50" cy="50" r="40" stroke="var(--accent-1)" />
+                </svg>
+                <div class="metric-content">
+                    <div class="metric-number"><span class="counter" data-target="99">0</span>%</div>
+                    <div class="metric-label">Agent Accuracy</div>
+                </div>
+                <div class="card-glow-border"></div>
+            </div>
+
+            <!-- Metric Card 2 -->
+            <div class="metric-card tilt-effect">
+                <svg class="circle-chart" viewBox="0 0 100 100">
+                    <circle class="bg" cx="50" cy="50" r="40" />
+                    <circle class="progress p-2" cx="50" cy="50" r="40" stroke="var(--accent-2)" />
+                </svg>
+                <div class="metric-content">
+                    <div class="metric-number"><span class="counter" data-target="400">0</span>x</div>
+                    <div class="metric-label">Learning Rate</div>
+                </div>
+                <div class="card-glow-border"></div>
+            </div>
+
+            <!-- Metric Card 3 -->
+            <div class="metric-card tilt-effect">
+                <div class="bar-chart-container">
+                    <div class="bar-label">Coverage <span class="counter" data-target="87">0</span>%</div>
+                    <div class="bar-bg">
+                        <div class="bar-fill bf-1" style="background: var(--accent-3);"></div>
+                    </div>
+                </div>
+                <div class="metric-label mt-auto">Automation Coverage</div>
+                <div class="card-glow-border"></div>
+            </div>
+
+            <!-- Metric Card 4 -->
+            <div class="metric-card tilt-effect">
+                <div class="metric-content text-center">
+                    <div class="metric-number"><span class="counter" data-target="0.3">0</span>s</div>
+                    <div class="metric-label">Task Completion</div>
+                </div>
+                <!-- Animated data blocks -->
+                <div class="data-blocks">
+                    <div class="db db-1"></div>
+                    <div class="db db-2"></div>
+                    <div class="db db-3"></div>
+                </div>
+                <div class="card-glow-border"></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Agent Security Section -->
+    <section class="security-section">
+        <div class="cyber-grid-bg"></div>
+        <div class="security-container">
+            <!-- Left: Digital Face -->
+            <div class="sec-visual">
+                <div class="digital-face">
+                    <!-- Abstract representation using borders and pseudo elements via CSS -->
+                    <div class="face-ring r1"></div>
+                    <div class="face-ring r2"></div>
+                    <div class="scan-line"></div>
+                </div>
+            </div>
+
+            <!-- Right: Feature List -->
+            <div class="sec-list">
+                <div class="section-label">Protection</div>
+                <h2 class="section-title text-left split-text-scroll">Agentic User Security</h2>
+
+                <div class="sec-item stagger-up">
+                    <div class="sec-icon pulse-soft">🔒</div>
+                    <div class="sec-content">
+                        <h3>Encrypted Tasks</h3>
+                        <p>Military-grade AES-256 encryption on all task payloads.</p>
+                    </div>
+                </div>
+
+                <div class="sec-item stagger-up">
+                    <div class="sec-icon">🛡️</div>
+                    <div class="sec-content">
+                        <h3>Private AI Execution</h3>
+                        <p>Zero-knowledge execution environments. We don't see your data.</p>
+                    </div>
+                </div>
+
+                <div class="sec-item stagger-up">
+                    <div class="sec-icon">📡</div>
+                    <div class="sec-content">
+                        <h3>Secure Data Channels</h3>
+                        <p>End-to-end encrypted tunnels for all API transactions.</p>
+                    </div>
+                </div>
+
+                <div class="sec-item stagger-up">
+                    <div class="sec-icon">👁️</div>
+                    <div class="sec-content">
+                        <h3>Autonomous Risk Detection</h3>
+                        <p>Real-time threat modeling preempts execution vulnerabilities.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Optimization Section -->
+    <section class="cost-section">
+        <div class="cost-container">
+            <div class="cost-text">
+                <h2 class="section-title text-left split-text-scroll">When we optimize,<br>you save.</h2>
+                <p>Kai drives efficiency to the absolute maximum, drastically cutting overhead vs traditional software
+                    operations.</p>
+            </div>
+
+            <div class="calc-wrapper">
+                <div class="calculator-card magnetic-wrap floating-card-anim">
+                    <div class="magnetic-element calc-inner">
+                        <div class="calc-glow"></div>
+                        <div class="calc-label">Cost per automation</div>
+                        <div class="calc-price">$<span class="cost-counter" data-target="0.001">0.000</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Explore Kai Capabilities (Horizontal Scroll) -->
+    <section class="horizontal-scroll-section dark-theme">
+        <div class="h-scroll-container">
+            <h2 class="section-title split-text-scroll">Explore Kai’s Capabilities</h2>
+            <div class="h-track">
+                <!-- Cards -->
+                <div class="h-card tilt-effect magnetic-wrap" data-cursor="Explore">
+                    <div class="card-glow"></div>
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Res1" alt="Research" class="card-avatar">
+                    <h3>Research Agent</h3>
+                    <p>Deep data scraping and synthesis across billion-parameter datasets.</p>
+                </div>
+                <div class="h-card tilt-effect magnetic-wrap" data-cursor="Explore">
+                    <div class="card-glow"></div>
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Des2" alt="Design" class="card-avatar">
+                    <h3>Design Agent</h3>
+                    <p>Generates pixel-perfect UI/UX assets and spatial compositions.</p>
+                </div>
+                <div class="h-card tilt-effect magnetic-wrap" data-cursor="Explore">
+                    <div class="card-glow"></div>
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Auto3" alt="Automation" class="card-avatar">
+                    <h3>Automation Agent</h3>
+                    <p>Links infinite API ecosystems without a single line of human code.</p>
+                </div>
+                <div class="h-card tilt-effect magnetic-wrap" data-cursor="Explore">
+                    <div class="card-glow"></div>
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Code4" alt="Code" class="card-avatar">
+                    <h3>Code Agent</h3>
+                    <p>Writes, tests, and deploys production-ready architecture instantly.</p>
+                </div>
+                <div class="h-card tilt-effect magnetic-wrap" data-cursor="Explore">
+                    <div class="card-glow"></div>
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=Strat5" alt="Strategy" class="card-avatar">
+                    <h3>Strategy Agent</h3>
+                    <p>Analyzes market trends to formulate unbeatable growth trajectories.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How Kai Thinks (Neural Network Visualization) -->
+    <section class="neural-network-section dark-theme">
+        <h2 class="section-title text-center split-text-scroll">How Kai Thinks</h2>
+        <div class="nn-container">
+            <canvas id="nn-canvas"></canvas>
+            <div class="nn-nodes">
+                <div class="nn-node n1" data-cursor="Learning Engine">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen">
+                            <img src="images/node_learning_engine.png" alt="Learning Engine UI">
+                        </div>
+                        <div class="nn-popup-label">
+                            <span class="nn-popup-dot"></span>Learning Engine
+                        </div>
+                        <p class="nn-popup-desc">Neural training loops adapting in real-time to new data patterns.</p>
+                    </div>
+                </div>
+                <div class="nn-node n2" data-cursor="Autonomous Planning">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen">
+                            <img src="images/node_autonomous_planning.png" alt="Autonomous Planning UI">
+                        </div>
+                        <div class="nn-popup-label">
+                            <span class="nn-popup-dot" style="background:var(--accent-1)"></span>Autonomous Planning
+                        </div>
+                        <p class="nn-popup-desc">Generates multi-step task trees and execution roadmaps autonomously.</p>
+                    </div>
+                </div>
+                <div class="nn-node n3" data-cursor="Real-time Decision Making">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen">
+                            <img src="images/node_decision_making.png" alt="Decision Making UI">
+                        </div>
+                        <div class="nn-popup-label">
+                            <span class="nn-popup-dot" style="background:#ff6b35"></span>Decision Making
+                        </div>
+                        <p class="nn-popup-desc">Probability-weighted decisions processed in under 10ms.</p>
+                    </div>
+                </div>
+                <div class="nn-node n4" data-cursor="Context Memory">
+                    <div class="nn-popup popup-left">
+                        <div class="nn-popup-screen">
+                            <img src="images/node_context_memory.png" alt="Context Memory UI">
+                        </div>
+                        <div class="nn-popup-label">
+                            <span class="nn-popup-dot"></span>Context Memory
+                        </div>
+                        <p class="nn-popup-desc">128K token persistent memory with intelligent recall & indexing.</p>
+                    </div>
+                </div>
+                <div class="nn-node n5" data-cursor="Logic Validation">
+                    <div class="nn-popup popup-left">
+                        <div class="nn-popup-screen"><img src="images/node_logic_validation.png" alt="Logic Validation UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#00ff88"></span>Logic Validation</div>
+                        <p class="nn-popup-desc">Catches rule violations and self-corrects before execution.</p>
+                    </div>
+                </div>
+                <div class="nn-node n6" data-cursor="Data Synthesis">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen"><img src="images/node_data_synthesis.png" alt="Data Synthesis UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff00cc"></span>Data Synthesis</div>
+                        <p class="nn-popup-desc">Fuses 3.2TB of multi-modal data streams into unified intelligence.</p>
+                    </div>
+                </div>
+                <div class="nn-node n7" data-cursor="Threat Analysis">
+                    <div class="nn-popup popup-left">
+                        <div class="nn-popup-screen"><img src="images/node_threat_analysis.png" alt="Threat Analysis UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff2255"></span>Threat Analysis</div>
+                        <p class="nn-popup-desc">Real-time threat radar with zero-day vulnerability detection.</p>
+                    </div>
+                </div>
+                <div class="nn-node n8" data-cursor="Pattern Recognition">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen"><img src="images/node_pattern_recognition.png" alt="Pattern Recognition UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#9b59b6"></span>Pattern Recognition</div>
+                        <p class="nn-popup-desc">98% accuracy waveform and anomaly detection at scale.</p>
+                    </div>
+                </div>
+                <div class="nn-node n9" data-cursor="API Orchestration">
+                    <div class="nn-popup popup-left">
+                        <div class="nn-popup-screen"><img src="images/node_api_orchestration.png" alt="API Orchestration UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot"></span>API Orchestration</div>
+                        <p class="nn-popup-desc">12 live API integrations with sub-millisecond dynamic routing.</p>
+                    </div>
+                </div>
+                <div class="nn-node n10" data-cursor="Workflow Engine">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen"><img src="images/node_workflow_engine.png" alt="Workflow Engine UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#c6ff00"></span>Workflow Engine</div>
+                        <p class="nn-popup-desc">847 concurrent pipelines: Input → Parse → Execute → Output.</p>
+                    </div>
+                </div>
+                <div class="nn-node n11" data-cursor="Output Generator">
+                    <div class="nn-popup popup-left">
+                        <div class="nn-popup-screen"><img src="images/node_output_generator.png" alt="Output Generator UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot"></span>Output Generator</div>
+                        <p class="nn-popup-desc">Produces JSON, Markdown, HTML outputs in 0.2 seconds flat.</p>
+                    </div>
+                </div>
+                <div class="nn-node n12" data-cursor="Self-Correction">
+                    <div class="nn-popup popup-right">
+                        <div class="nn-popup-screen"><img src="images/node_self_correction.png" alt="Self-Correction UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#00ff88"></span>Self-Correction</div>
+                        <p class="nn-popup-desc">99.7% confidence loop: detects errors, auto-fixes instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Try Kai Live -->
+    <section class="live-demo-section dark-theme">
+        <h2 class="section-title text-center split-text-scroll">Try Kai Live</h2>
+        <div class="demo-ui magnetic-wrap" data-cursor="Demo">
+            <div class="chat-header">
+                <div class="chat-dots"><span></span><span></span><span></span></div>
+                <div class="chat-title">Kai Agent Interface</div>
+            </div>
+            <div class="chat-body">
+                <div class="chat-msg msg-user">Plan my product launch.</div>
+                <div class="chat-msg msg-kai msg-typing" id="typing-indicator" style="display: none;">
+                    <span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Infinite Capability Marquee -->
+    <section class="marquee-section dark-theme">
+        <div class="marquee-mask">
+            <div class="marquee-track" data-cursor="Drag">
+                <div class="marquee-item">Automation</div>
+                <div class="marquee-item">Planning</div>
+                <div class="marquee-item">Research</div>
+                <div class="marquee-item">Strategy</div>
+                <div class="marquee-item">Execution</div>
+                <div class="marquee-item">Optimization</div>
+                <div class="marquee-item">Analytics</div>
+                <!-- Duplicate for infinite effect -->
+                <div class="marquee-item">Automation</div>
+                <div class="marquee-item">Planning</div>
+                <div class="marquee-item">Research</div>
+                <div class="marquee-item">Strategy</div>
+                <div class="marquee-item">Execution</div>
+                <div class="marquee-item">Optimization</div>
+                <div class="marquee-item">Analytics</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating AI Agents -->
+    <section class="floating-agents-section dark-theme">
+        <h2 class="section-title text-center split-text-scroll">Meet the Kai Agents</h2>
+        <div class="agents-universe">
+            <div class="agent-avatar av-1 magnetic-wrap" data-cursor="Research"><img
+                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai1" alt="Kai Research"></div>
+            <div class="agent-avatar av-2 magnetic-wrap" data-cursor="Builder"><img
+                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai2" alt="Kai Builder"></div>
+            <div class="agent-avatar av-3 magnetic-wrap" data-cursor="Analyst"><img
+                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai3" alt="Kai Analyst"></div>
+            <div class="agent-avatar av-4 magnetic-wrap" data-cursor="Strategist"><img
+                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai4" alt="Kai Strategist"></div>
+            <div class="agent-avatar av-5 magnetic-wrap" data-cursor="Automation"><img
+                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai5" alt="Kai Automation"></div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="gradient-bg-anim"></div>
+
+        <!-- Floating Avatars -->
+        <div class="avatar-layer">
+            <div class="avatar a1"></div>
+            <div class="avatar a2"></div>
+            <div class="avatar a3"></div>
+            <div class="avatar a4"></div>
+            <div class="avatar a5"></div>
+        </div>
+
+        <div class="cta-content">
+            <div class="section-label" style="margin: 0 auto 24px">Get Started</div>
+            <h2 class="mega-title split-text-scroll">Build Your Future With Kai</h2>
+            <p class="cta-subtitle">Autonomous AI agents designed to think, plan, and execute.</p>
+
+            <div class="cta-wrapper magnetic-wrap mt-40">
+                <button class="cta-btn magnetic-element">
+                    <span class="btn-text">Start Using Kai</span>
+                    <div class="ripple-container"></div>
+                </button>
+                <div class="btn-glow"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-logo">KAI.</div>
+            <div class="footer-links">
+                <a href="#" class="hover-underline">Platform</a>
+                <a href="#" class="hover-underline">Agents</a>
+                <a href="#" class="hover-underline">Security</a>
+                <a href="#" class="hover-underline">Company</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="hover-icon">𝕏</a>
+                <a href="#" class="hover-icon">in</a>
+                <a href="#" class="hover-icon">GH</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 Kai Automation Inc. All rights reserved.</span>
+            <span>Design Inspired by Future</span>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/main2.js"></script>
+    <script src="js/main3.js"></script>
+    <script src="js/main4.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

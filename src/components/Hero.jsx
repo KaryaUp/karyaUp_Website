@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const INTRO_SENTENCES = [
   "Plan The Karya.",
   "Move The Karya.",
-  "Complate The Karya.",
+  "Complete The Karya.",
 ];
 
 // Summary: alternating words and dots
@@ -16,7 +16,7 @@ const SUMMARY_ITEMS = [
   { type: "dot" },
   { type: "word", text: "Move", gradient: false },
   { type: "dot" },
-  { type: "word", text: "Karya", gradient: true }
+  { type: "word", text: "Complete", gradient: false }
 ];
 
 // Main headline words: line1 then line2
@@ -98,7 +98,7 @@ const Hero = () => {
   return (
     <section
       id="hero-section"
-      className="relative overflow-hidden bg-white min-h-screen pt-[3.5rem] pb-8 sm:pt-20 sm:pb-14 lg:pt-12 lg:pb-16 flex items-start justify-center"
+      className="relative overflow-hidden bg-white min-h-screen pt-[6rem] pb-8 sm:pt-28 sm:pb-14 lg:pt-20 lg:pb-16 flex items-start justify-center"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -107,7 +107,10 @@ const Hero = () => {
           src="/Hero_BG.webp"
           alt=""
           aria-hidden="true"
-          loading="lazy"
+          loading="eager"
+          width="1920"
+          height="1080"
+          fetchpriority="high"
           className="absolute inset-0 h-full w-full scale-105 object-cover blur-[6px]"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,23,42,0.2)_0%,rgba(15,23,42,0.12)_34%,rgba(15,23,42,0.22)_100%)]" />
@@ -208,14 +211,14 @@ const Hero = () => {
                             className="inline-flex items-center justify-center"
                             aria-hidden="true"
                           >
-                            <span 
-                              className="block rounded-full bg-white" 
-                              style={{ 
-                                width: "clamp(8px,1.2vw,14px)", 
-                                height: "clamp(8px,1.2vw,14px)", 
-                                transform: "translateY(4px)", 
-                                boxShadow: "0 0 10px 2px rgba(255,255,255,0.5)" 
-                              }} 
+                            <span
+                              className="block rounded-full bg-white"
+                              style={{
+                                width: "clamp(8px,1.2vw,14px)",
+                                height: "clamp(8px,1.2vw,14px)",
+                                transform: "translateY(4px)",
+                                boxShadow: "0 0 10px 2px rgba(255,255,255,0.5)"
+                              }}
                             />
                           </motion.span>
                         )}
@@ -262,7 +265,7 @@ const Hero = () => {
                       {MAIN_LINE2.split(" ").map((word, wIdx, arr) => {
                         const startOffset = MAIN_LINE1.length + 1;
                         const wordStartIdx = startOffset + arr.slice(0, wIdx).join(" ").length + (wIdx > 0 ? 1 : 0);
-                        
+
                         return (
                           <span
                             key={`l2-${wIdx}`}

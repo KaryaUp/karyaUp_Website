@@ -16,7 +16,7 @@ import {
 } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
-import karyaUpLogo from "../../assets/karyaup-logo.mp4";
+import karyaUpLogo from "../../assets/logo-svg.svg";
 import FeatureCTA from "../../components/FeatureCTA";
 import { Helmet } from "react-helmet-async";
 
@@ -157,6 +157,19 @@ function ScrollTrack({ cards, direction }) {
 
   return (
     <div className="h-[220px] overflow-hidden relative">
+      <Helmet>
+        <title>Boss Dashboard | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="boss-dashboard, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="Boss Dashboard | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/boss-dashboard" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/boss-dashboard" />
+      </Helmet>
+
       <div className="relative h-full" style={{
         maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
         WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
@@ -414,27 +427,65 @@ export default function BossDashboard() {
     { label: "Project Priority", value: "High", icon: <Activity size={20} />, color: "text-pink-600", bg: "bg-pink-50" },
   ];
 
+  // const aiFeatures = [
+  //   { icon: <Sparkles className="w-5 h-5 text-purple-500" />, title: "Predictive Margins", desc: "AI forecasts future profitability based on current sprint velocity." },
+  //   { icon: <BrainCircuit className="w-5 h-5 text-fuchsia-500" />, title: "Smart Allocation", desc: "Automatically maps expenses to specific projects using NLP." },
+  //   { icon: <Search className="w-5 h-5 text-indigo-500" />, title: "Contextual Query", desc: "Ask 'Which project is over budget?' and get instant visual data." },
+  //   { icon: <Zap className="w-5 h-5 text-amber-500" />, title: "Automated Standups", desc: "AI summarizes daily progress vs budget utilization for the team." }
+  // ];
+
+  const getColorClasses = (color) => {
+    const colorMap = {
+      purple: "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
+      fuchsia: "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white",
+      emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
+      orange: "bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white",
+      blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-100 group-hover:text-white",
+      indigo: "bg-indigo-100 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white",
+      pink: "bg-pink-100 text-pink-600 group-hover:bg-pink-600 group-hover:text-white"
+    };
+    return colorMap[color] || "bg-slate-100 text-slate-600 group-hover:bg-slate-600 group-hover:text-white";
+  };
+  const aiFeatures = [
+    { 
+      icon: <Sparkles className="w-5 h-5" />, 
+      title: "Predictive Margins", 
+      desc: "AI forecasts future profitability based on current sprint velocity.",
+      color: "purple" 
+    },
+    { 
+      icon: <BrainCircuit className="w-5 h-5" />, 
+      title: "Smart Allocation", 
+      desc: "Automatically maps expenses to specific projects using NLP.",
+      color: "fuchsia" 
+    },
+    { 
+      icon: <Search className="w-5 h-5" />, 
+      title: "Contextual Query", 
+      desc: "Ask 'Which project is over budget?' and get instant visual data.",
+      color: "blue" 
+    },
+    { 
+      icon: <Zap className="w-5 h-5" />, 
+      title: "Automated Standups", 
+      desc: "AI summarizes daily progress vs budget utilization for the team.",
+      color: "orange" 
+    }
+  ];
+
   return (
     <div className="bg-white font-sans overflow-x-hidden">
-      <Helmet>
-        <title>KaryaUp | Boss Dashboard</title>
-      </Helmet>
       {/* Hero Section */}
       <section className="py-26 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-10"
-            >
-              DASHBOARD — CONTROL YOUR BUSINESS
-            </motion.div>
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+              PLATFORM/BOSSDASHBOARD
+            </span>
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06] mb-6"
+              className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6"
             >
               Control your Business in
               <motion.span
@@ -445,7 +496,7 @@ export default function BossDashboard() {
                 One Powerful View.
               </motion.span>
             </motion.h1>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+            <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium">
               KaryaUp adapts to any workflow, eliminates busywork, and keeps everything organized with enterprise-grade AI execution.
             </p>
             <FeatureStack
@@ -458,12 +509,22 @@ export default function BossDashboard() {
             />
           </div>
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="rounded-2xl shadow-2xl border border-slate-200 overflow-hidden"
-          >
-            <img src={dashboardImage} alt="Dashboard" className="w-full h-auto" />
-          </motion.div>
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative lg:-mr-24 xl:-mr-40"
+            >
+              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp task management"
+                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                />
+                {/* Right-side invisible/fade effect like reference */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+              </div>
+            </motion.div>
         </div>
       </section>
 
@@ -536,7 +597,7 @@ export default function BossDashboard() {
                       style={{ transformStyle: "preserve-3d" }}
                     >
                       <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
+                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain" style={{ filter: isShieldHovered ? "drop-shadow(0 20px 50px rgba(168,85,247,0.8)) hue-rotate(220deg) brightness(1.5) contrast(1.2)" : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))", transition: "filter 0.5s ease" }} />
                       </div>
 
                       <div className="absolute inset-0" style={{
@@ -544,7 +605,7 @@ export default function BossDashboard() {
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg) translateZ(1px)'
                       }}>
-                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" />
+                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" style={{ filter: isShieldHovered ? "hue-rotate(220deg) brightness(1.5) contrast(1.2)" : "none", transition: "filter 0.5s ease" }} />
                       </div>
                     </motion.div>
                   </div>
@@ -568,68 +629,77 @@ export default function BossDashboard() {
         </div>
       </section>
 
-      {/* NEW SECTION: KARYAUP AI WORKSPACE TASK MANAGEMENT */}
-      <section className="py-10 px-6 bg-white relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-white rounded-[100%]" />
+      {/* NEW AI WORKSPACE SECTION */}
+      <section className="py-10 px-6 bg-white-50 relative overflow-hidden border-t border-slate-200">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
 
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
-
-          {/* LEFT: TEXT CONTENT */}
-          <div className="order-1 lg:order-1 text-center lg:text-left">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-purple-700 font-bold text-sm mb-6 shadow-sm border border-purple-100"
+            >
+              <Sparkles className="w-4 h-4" /> KaryaUp AI Workspace
+            </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6"
+              initial={{ opacity: 0, y: 40, x: -10 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 100, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
             >
-              KaryaUp AI Workspace
+              Task Management that<br />
               <motion.span
-                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               >
-                Task Management
+                Drives Profitability.
               </motion.span>
             </motion.h1>
 
-            <p className="text-lg text-slate-600 mb-6 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
-              Transform the way your team handles daily execution. Let AI prioritize your backlog, predict bottlenecks before they happen, and automate repetitive assignments.
-            </p>
-            <FeatureStack
-              items={[
-                { label: "Contextual Task Extraction", icon: BrainCircuit },
-                { label: "Dynamic Priority Scoring", icon: Zap },
-                { label: "Global Search", icon: Search },
-                { label: "Dependency Mapping", icon: ShieldCheck }
-              ]}
-            />
-            
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
+            >
+              Our AI doesn't just track your projects—it actively manages tasks to ensure every sprint operates at maximum margin. Delegate the busywork to the machine.
+            </motion.p>
           </div>
 
-          {/* RIGHT: IMAGE CONTENT WITH 3D TILT */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="order-2 lg:order-2 relative perspective-1000"
-          >
-            {/* Background glowing blob */}
-            <div className="absolute inset-0 bg-gray-50 rounded-[3rem] blur-2xl opacity-30 scale-90" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+  {aiFeatures.map((feature, i) => (
+    <TiltCard 
+      key={i} 
+      className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-all duration-300 group"
+    >
+      <div className="relative z-10 flex flex-col h-full">
+        {/* HEADER: Icon and Title */}
+        <div className="flex items-center gap-4 mb-6">
+          
+          {/* LOGO CONTAINER: This is where the background color changes on hover */}
+          <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 group-hover:shadow-lg ${getColorClasses(feature.color)}`}>
+            {/* Render the icon without fixed colors so it can inherit the group-hover:text-white */}
+            {feature.icon}
+          </div>
+          
+          <h3 className="text-xl font-black text-slate-900 leading-tight">
+            {feature.title}
+          </h3>
+        </div>
 
-            <TiltCard className="relative z-10 w-full h-full cursor-default">
-              <div className="rounded-[2rem] p-2 bg-gray-100 backdrop-blur-md border border-white/50 shadow-2xl">
-                <div className="rounded-3xl overflow-hidden relative border border-slate-100 bg-white shadow-inner">
-                  <img
-                    src={planImage}
-                    alt="AI Task Management View"
-                    className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-700"
-                  />
-
-                </div>
-              </div>
-            </TiltCard>
-          </motion.div>
-
+        {/* DESCRIPTION */}
+        <p className="text-slate-500 font-medium leading-relaxed text-sm">
+          {feature.desc}
+        </p>
+      </div>
+    </TiltCard>
+  ))}
+</div>
         </div>
       </section>
 

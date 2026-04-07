@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link2 } from 'lucide-react';
+import TeamsLogo from '../assets/Teams-logo.webp';
 
 const Integrations = () => {
     const integrations = [
@@ -31,7 +32,7 @@ const Integrations = () => {
         },
         { 
             name: 'Microsoft Teams', 
-            logo: 'https://statics.teams.cdn.live.net/evergreen-assets/icons/Teams_Logo_v2025_80x80.png',
+            logo: TeamsLogo,
             description: 'Collaborate with your team on Microsoft Teams and sync your project progress effortlessly.'
         }
     ];
@@ -91,8 +92,8 @@ const Integrations = () => {
                                 <motion.img 
                                     src={item.logo} 
                                     alt={item.name} 
-                                    whileHover={{ scale: 1.1, rotate: 5 }}
-                                    className="w-full h-full object-contain transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md"
+                                    whileHover={{ scale: item.name === 'Microsoft Teams' ? 1.4 : 1.1, rotate: 5 }}
+                                    className={`${item.name === 'Microsoft Teams' ? 'scale-[1.8]' : 'scale-100'} w-full h-full object-contain transition-all duration-300 drop-shadow-sm group-hover:drop-shadow-md`}
                                 />
                             </div>
                             <div>

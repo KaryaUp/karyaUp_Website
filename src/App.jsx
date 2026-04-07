@@ -47,6 +47,7 @@ const Automations = lazy(() => import("./pages/features/Automations"));
 const FeaturesTimeTracking = lazy(() => import("./pages/features/FeaturesTimeTracking"));
 const Integrations = lazy(() => import("./pages/features/Integrations"));
 const WatchDemo = lazy(() => import("./pages/features/Watch_Demo"));
+const AIAgents = lazy(() => import("./pages/features/AIAgents"));
 
 // Solutions
 const ProductDevelopment = lazy(() => import("./pages/solutions/ProductDevelopment"));
@@ -119,6 +120,7 @@ function App() {
             <Route path="/features/time-tracking" element={<FeaturesTimeTracking />} />
             <Route path="/features/integrations" element={<Integrations />} />
             <Route path="/features/demo" element={<WatchDemo />} />
+            <Route path="/features/ai-agents" element={<AIAgents />} />
 
             {/* Solutions */}
             <Route path="/solutions/product-development" element={<ProductDevelopment />} />

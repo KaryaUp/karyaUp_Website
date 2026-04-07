@@ -21,7 +21,7 @@ import {
   Briefcase,
 } from "lucide-react";
 import NumberFlow from "@number-flow/react";
-import microsoftTeamsLogo from "../assets/MicrosoftTeam.png";
+import microsoftTeamsLogo from "../assets/Teams-logo.webp";
 import { Helmet } from "react-helmet-async";
 
 const authUrl = "https://karyaup.com/auth";
@@ -738,7 +738,7 @@ export default function Pricing() {
                 className="fixed top-[68px] left-0 right-0 z-[100] bg-white/80 backdrop-blur-md shadow-md border-b border-slate-200"
                 style={{ boxShadow: "0 10px 25px -5px rgba(0,0,0,0.1), 0 4px 10px -5px rgba(0,0,0,0.04)" }}
               >
-                <div 
+                <div
                   ref={stickyTableScrollRef}
                   className="w-full overflow-x-auto scrollbar-hide"
                   style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -813,7 +813,7 @@ export default function Pricing() {
               >
                 <div className="w-full">
                   <div className="bg-white border-y border-slate-100 relative">
-                    <div 
+                    <div
                       ref={mainTableScrollRef}
                       onScroll={handleMainScroll}
                       className="relative overflow-x-auto"
@@ -1003,7 +1003,7 @@ export default function Pricing() {
                         <img
                           src={app.logo}
                           alt={app.name}
-                          className={`${app.id === "teams" ? "w-14 h-14 sm:w-20 sm:h-20 mix-blend-multiply" : "w-8 h-8 sm:w-10 sm:h-10"} object-contain`}
+                          className={`${app.id === "teams" ? "w-11 h-11 sm:w-14 sm:h-14 scale-125" : "w-8 h-8 sm:w-10 sm:h-10"} object-contain`}
                         />
                         {selectedApps.includes(app.id) && (
                           <motion.div

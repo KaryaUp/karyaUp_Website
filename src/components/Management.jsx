@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { CreditCard, Calendar, BarChart, Briefcase, Sparkles } from 'lucide-react';
-import TeamImg from "../assets/Team.webp";
+import TeamImg from "../assets/Team2.webp";
 
 const Management = () => {
     const items = [
@@ -34,13 +34,16 @@ const Management = () => {
                         <p className="text-base sm:text-xl font-medium text-slate-500 mb-4 sm:mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0">
                             KaryaUp handles the essentials of your business operations. From salary to attendance, everything is seamlessly integrated into your elite workflow.
                         </p>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-7 w-full">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-7 w-full">
                             {items.map((item, idx) => (
-                                <div key={idx} className="flex items-start justify-center lg:justify-start gap-4 sm:gap-5 group text-left">
+                                <div
+                                    key={idx}
+                                    className="flex flex-col items-center text-center gap-2 sm:flex-row sm:items-start sm:text-left sm:justify-start sm:gap-5 group"
+                                >
                                     <div className="p-2.5 bg-purple-50 rounded-2xl text-[#7e22ce] border border-purple-100 group-hover:scale-110 transition-transform flex-shrink-0">
                                         {React.cloneElement(item.icon, { className: "w-5 h-5" })}
                                     </div>
-                                    <div>
+                                    <div className="flex flex-col items-center sm:items-start">
                                         <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-tight">{item.title}</h4>
                                         <p className="text-xs sm:text-sm font-bold text-slate-400 leading-tight">{item.desc}</p>
                                     </div>
@@ -57,12 +60,17 @@ const Management = () => {
                         className="lg:flex-[0.6] relative w-full max-w-xl mx-auto lg:max-w-none lg:mx-0 lg:-mr-24 xl:-mr-40"
                     >
                         {/* Vanishing Card Container */}
-                        <div className="relative overflow-hidden border border-slate-200/80  bg-white shadow-2xl shadow-purple-900/5">
+                        <div className="relative overflow-hidden bg-white">
                             <img
                                 src={TeamImg}
                                 alt="KaryaUp Management Dashboard"
-                                className="w-full h-[220px] sm:h-[320px] lg:h-[360px] object-cover object-left"
+                                width="940"
+                                height="360"
+                                loading="lazy"
+                                className="block w-full h-auto object-contain object-left-top bg-white"
                             />
+                            <div className="pointer-events-none absolute inset-y-0 right-0 w-10 sm:w-14 bg-gradient-to-l from-white/75 via-white/25 to-transparent blur-[3px]" />
+                            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-8 sm:h-12 bg-gradient-to-t from-white/70 via-white/20 to-transparent blur-[4px]" />
                         </div>
                     </motion.div>
                 </div>

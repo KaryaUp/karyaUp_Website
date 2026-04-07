@@ -128,10 +128,10 @@ export default function TeamHero() {
   return (
     <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center justify-items-center lg:justify-items-stretch">
 
           {/* Left Content */}
-          <div className="text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
+          <div className="w-full text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start">
             <motion.div
               initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -163,13 +163,13 @@ export default function TeamHero() {
               initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="mt-4 sm:mt-6 space-y-3 w-full"
+              className="mt-4 sm:mt-6 space-y-3 w-full max-w-[28rem] mx-auto lg:max-w-none lg:mx-0"
             >
               {[
                 "Define roles, distribute ownership, and get complete visibility into how your team's capacity is being used.",
                 "Stay ahead of burnout and workload issues before they become a problem, not after."
               ].map((text, i) => (
-                <div key={i} className="flex items-start gap-4 text-left">
+                <div key={i} className="flex items-start gap-4 text-left justify-center lg:justify-start">
                   <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                     <Check size={10} className="text-[#7e22ce] stroke-[4]" />
                   </div>
@@ -188,7 +188,7 @@ export default function TeamHero() {
             initial={{ opacity: 0, scale: 0.9, x: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative"
+            className="relative w-full flex justify-center"
           >
             <DarkRoleManagementPreview />
           </motion.div>

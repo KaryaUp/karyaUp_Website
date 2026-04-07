@@ -1,14 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { 
-  FileText, 
-  UserCheck, 
-  CreditCard, 
-  ShieldAlert, 
-  Ban, 
-  XOctagon, 
-  Settings2, 
-  Scale, 
+import {
+  FileText,
+  UserCheck,
+  CreditCard,
+  ShieldAlert,
+  Ban,
+  XOctagon,
+  Settings2,
+  Scale,
   ArrowRight,
   ShieldCheck,
   Lock,

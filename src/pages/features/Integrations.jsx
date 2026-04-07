@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
-import logo from "../../assets/logo.png";
-import microsoftTeamsLogo from "../../assets/MicrosoftTeam.png";
+import logo from "../../assets/logo.webp";
+import microsoftTeamsLogo from "../../assets/Teams-logo.webp";
 import googleCalendarLogo from "../../assets/google-calendar.svg";
 import googleDriveLogo from "../../assets/google-drive.svg";
 import gmailLogo from "../../assets/gmail.svg";
@@ -187,7 +187,7 @@ export default function Integrations() {
           href="https://karyaup.com/integrations"
         />
       </Helmet>
-      <div className="min-h-screen bg-white pt-14 sm:pt-16 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
           <div className="absolute top-0 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-100/70 blur-[130px]" />
           <div className="absolute right-0 top-20 -z-10 h-[300px] w-[300px] rounded-full bg-cyan-100/70 blur-[120px]" />
@@ -377,8 +377,8 @@ export default function Integrations() {
                     >
                       <div className="rounded-[calc(1.1rem-1.5px)] sm:rounded-[calc(1.45rem-1.5px)] border border-white/8 bg-[#131526]/95 px-2.5 py-2.5 sm:px-4 sm:py-4 shadow-[0_10px_28px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out group-hover:border-white/20 group-hover:bg-[#17192c]/95 group-hover:shadow-[0_20px_42px_rgba(0,0,0,0.3)]">
                         <div className="flex items-center justify-center sm:justify-start gap-0 sm:gap-3">
-                          <div className="flex h-11 w-11 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-white shadow-[0_10px_20px_-14px_rgba(255,255,255,0.4)]">
-                            <img src={item.logo} alt={item.name} className="h-6 w-6 sm:h-7 sm:w-7 object-contain" />
+                          <div className={`flex h-11 w-11 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-white shadow-[0_10px_20px_-14px_rgba(255,255,255,0.4)] overflow-hidden`}>
+                            <img src={item.logo} alt={item.name} className={`${item.name === 'Teams' ? 'h-full w-full scale-[2.2]' : 'h-6 w-6 sm:h-7 sm:w-7'} object-contain`} />
                           </div>
                           <div className="min-w-0 hidden sm:block">
                             <div className="text-sm font-black text-white">{item.name}</div>
@@ -447,7 +447,7 @@ export default function Integrations() {
                       <img
                         src={item.logo}
                         alt={item.name}
-                        className={`${item.name === "Microsoft Teams" ? "w-7 h-7 sm:w-8 sm:h-8 mix-blend-multiply" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
+                        className={`${item.name === "Microsoft Teams" ? "w-10 h-10 sm:w-14 sm:h-14 scale-[2]" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
                         style={{ filter: item.color === 'white' ? 'none' : '' }}
                       />
                     </div>

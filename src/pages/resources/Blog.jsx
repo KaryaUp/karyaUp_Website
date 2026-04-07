@@ -549,7 +549,7 @@ export default function Blog() {
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                   >
-                     Blog.
+                    Blog.
                   </motion.span>
                 </motion.h1>
 

@@ -9,10 +9,10 @@ import {
 } from 'lucide-react';
 
 // Import available assets from ../assets/
-import featureProjects from '../assets/projects.webp';
-import featureTasks from '../assets/Task.webp';
-import featureCalendar from '../assets/calender.webp';
-import featureTeam from '../assets/Team.webp';
+import featureProjects from '../assets/project.webp';
+import featureTasks from '../assets/automation1.webp';
+import featureCalendar from '../assets/calender1.webp';
+import featureTeam from '../assets/Team1.webp';
 
 const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
     <div
@@ -32,18 +32,21 @@ const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
 );
 
 const FeatureCard = ({ title, icon: Icon, image, color }) => (
-    <div className="w-full sm:w-80 max-w-[150px] sm:max-w-none h-[100px] sm:h-[192px] bg-white border border-gray-100 flex flex-col relative overflow-hidden group/card shadow-sm hover:shadow-md transition-shadow duration-300">
-        <div className="absolute top-2 left-2 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 border border-gray-100 rounded-sm">
+    <div className="-m-[0.5px] sm:m-0 w-full sm:w-80 h-[138px] sm:h-[192px] bg-white sm:border sm:border-gray-100 flex flex-col relative overflow-hidden group/card shadow-none sm:shadow-sm hover:shadow-md transition-shadow duration-300 leading-none">
+        <div className="absolute top-2 left-2 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 sm:border sm:border-gray-100 rounded-sm">
             <div className="p-1 bg-gray-50 rounded-sm">
                 <Icon className="w-3 h-3" style={{ color }} strokeWidth={2} />
             </div>
             <h3 className="font-bold text-[9px] text-gray-900 tracking-tight uppercase">{title}</h3>
         </div>
-        <div className="w-full h-full overflow-hidden">
+        <div className="w-[calc(100%+2px)] h-[calc(100%+2px)] -mt-[1px] -ml-[1px] overflow-hidden bg-transparent">
             <img
                 src={image}
                 alt={title}
-                className="w-full h-full object-cover grayscale-[20%] group-hover/card:grayscale-0 group-hover/card:scale-105 transition-all duration-700 ease-out"
+                width="320"
+                height="192"
+                loading="lazy"
+                className="block w-full h-full object-cover scale-[1.05] sm:scale-100 grayscale-[20%] group-hover/card:grayscale-0 group-hover/card:scale-105 transition-all duration-700 ease-out"
             />
         </div>
     </div>
@@ -252,8 +255,8 @@ const AllInOne = () => {
                 </div>
 
                 {/* The Middle Image Cluster */}
-                <div className="absolute inset-0 flex items-center justify-center px-3 sm:px-0 pointer-events-none">
-                    <div className="grid w-full sm:w-auto max-w-[280px] sm:max-w-[360px] lg:max-w-none grid-cols-2 gap-0 border border-gray-100 bg-white pointer-events-auto mt-0 shadow-2xl">
+                <div className="absolute inset-0 flex items-center justify-center px-2 sm:px-0 pointer-events-none">
+                    <div className="grid isolate w-[336px] max-w-[calc(100vw-16px)] sm:w-auto sm:max-w-[360px] lg:max-w-none grid-cols-2 gap-0 bg-white pointer-events-auto mt-0 shadow-xl sm:shadow-2xl overflow-hidden">
                         <FeatureCard
                             title="Projects"
                             icon={FolderKanban}
@@ -261,13 +264,13 @@ const AllInOne = () => {
                             color="#7e22ce"
                         />
                         <FeatureCard
-                            title="Tasks"
+                            title="Automations"
                             icon={CheckSquare}
                             image={featureTasks}
                             color="#10b981"
                         />
                         <FeatureCard
-                            title="Calendar"
+                            title="AI ChatBot"
                             icon={CalendarDays}
                             image={featureCalendar}
                             color="#f59e0b"

@@ -1,9 +1,10 @@
-                                        import { useRef, useEffect, useMemo, useState } from "react";
+ import { Helmet } from "react-helmet-async";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { CheckCircle2, XCircle, GraduationCap, BookOpen, School, Target, ArrowRight, Check } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import FeatureCTA from "../../components/FeatureCTA";
-import karyaUpLogo from "../../assets/karyaup-logo.mp4";
+import karyaUpLogo from "../../assets/logo-svg.svg";
 
 const TiltCard = ({ children, className }) => {
   const ref = useRef(null);
@@ -152,6 +153,19 @@ function ScrollTrack({ cards, direction }) {
 
   return (
     <div className="h-[220px] overflow-hidden relative">
+      <Helmet>
+        <title>Education | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="education, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="Education | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/education" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/education" />
+      </Helmet>
+
       <div className="relative h-full" style={{
         maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
         WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
@@ -271,7 +285,7 @@ export default function Education() {
     <div className="bg-white font-sans overflow-x-hidden">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-10 lg:py-23">
+      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-10 lg:py-27">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
@@ -279,14 +293,9 @@ export default function Education() {
             transition={{ duration: 0.8 }}
             className="text-center lg:text-left"
           >
-            <motion.div
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-10"
-            >
-              EDUCATION — EMPOWERING LEARNING
-            </motion.div>
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+              SOLUTIONS/EDUCATION
+            </span>
             <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
               Simplify <br />
               <motion.span
@@ -304,15 +313,22 @@ export default function Education() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="relative"
-          >
-            <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
-              <img src={dashboardImage} alt="Dashboard" className="w-full h-full object-cover" />
-            </div>
-          </motion.div>
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative lg:-mr-24 xl:-mr-40"
+            >
+              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp task management"
+                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                />
+                {/* Right-side invisible/fade effect like reference */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+              </div>
+            </motion.div>
         </div>
       </section>
 

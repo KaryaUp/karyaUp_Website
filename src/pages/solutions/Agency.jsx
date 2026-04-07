@@ -1,10 +1,11 @@
+import { Helmet } from "react-helmet-async";
 import React, { useRef, useState, useEffect } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
-import dashboardImg from "../../assets/dashboard2.webp";
+import dashboardImage from "../../assets/dashboard2.webp";
 import { Link } from "react-router-dom";
-import { 
+import {
   useInView,
-  useScroll 
+  useScroll
 } from "framer-motion";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Video, Megaphone, Layers, Check, CheckCircle2, Zap, BarChart3, Users } from "lucide-react";
@@ -49,7 +50,7 @@ const TiltCard = ({ children, className }) => {
 };
 
 const WorkflowStep = ({ title, desc, icon: Icon, index }) => (
-  <motion.div 
+  <motion.div
     initial={{ opacity: 0, x: -20 }}
     whileInView={{ opacity: 1, x: 0 }}
     viewport={{ margin: "-100px" }}
@@ -94,6 +95,19 @@ const FeatureStack = ({ items = [] }) => {
 
   return (
     <div className="relative h-[80px] sm:h-[100px] w-full max-w-[280px] sm:max-w-[320px] mt-6 lg:mt-8 group overflow-visible">
+      <Helmet>
+        <title>Agency | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="agency, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="Agency | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/agency" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/agency" />
+      </Helmet>
+
       <AnimatePresence mode="popLayout">
         {[2, 1, 0].map((offset) => {
           const itemIndex = (index + offset) % items.length;
@@ -139,20 +153,23 @@ const FeatureStack = ({ items = [] }) => {
 };
 
 export default function Agency() {
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const features = [
+    { title: "Centralized Dashboards", desc: "Real-time visibility into every project. See margins, deadlines, and resource allocation in one unified view." },
+    { title: "Automated Reporting", desc: "Generate client-ready performance reports with a single click. AI summarizes wins and identifies bottlenecks." },
+    { title: "Real-time Collaboration", desc: "Integrated chat and whiteboarding means your team stays in sync without ever leaving the project context." }
+  ];
+
   return (
     <div className="bg-white font-sans min-h-screen pt-28 overflow-x-hidden">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="py-8 pt-4 px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 relative">
+      <section className="py-10 lg:py-10 pt-4 px-6 lg:px-8 max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16 relative">
         <div className="flex-1 text-center lg:text-left">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-10"
-          >
-            AGENCY — SCALE YOUR CREATIVITY
-          </motion.div>
+          <span className="inline-block pt-2 px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+            SOLUTIONS/AGENCY
+          </span>
           <motion.h1
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -170,11 +187,25 @@ export default function Agency() {
           <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
             Manage IT projects, service requests, and governance in one place all connected by AI. KaryaUp makes it easy to streamline workflows.
           </p>
-          <FeatureStack items={[ {label: "Video Editing", icon: Video}, {label: "Digital Marketing", icon: Megaphone}, {label: "Motion Graphic", icon: Layers} ]} />
+          <FeatureStack items={[{ label: "Video Editing", icon: Video }, { label: "Digital Marketing", icon: Megaphone }, { label: "Motion Graphic", icon: Layers }]} />
         </div>
-        <div className="flex-1 w-full">
-          <img src={dashboardImg} alt="Hero" className="w-full h-auto rounded-2xl shadow-2xl border border-slate-100" />
-        </div>
+        <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative lg:-mr-24 xl:-mr-40"
+            >
+              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp task management"
+                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                />
+                {/* Right-side invisible/fade effect like reference */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+              </div>
+            </motion.div>
       </section>
 
       {/* ================= AGENCY CAPABILITIES (With Hover Effects) ================= */}
@@ -227,88 +258,105 @@ export default function Agency() {
       </section>
 
       {/* ================= ELEVATE WORKFLOWS ================= */}
-      <section className="py-9 px-6 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-20">
+      <section className="py-10 px-6 bg-white relative overflow-hidden">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[300px] bg-white rounded-[100%]" />
 
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
-          >
-             Elevate Your<br />
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center relative z-10">
+          <div className="order-1 lg:order-1 text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative z-20"
             >
-              Agency Workflows
-            </motion.span>
-          </motion.h2>
-            <p className="text-slate-500 max-w-2xl mx-auto text-lg font-medium">
-              KaryaUp doesn't just track tasks—it streamlines the entire creative lifecycle with data-driven insights.
-            </p>
-          </div>
+              <span className="inline-block px-4 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+                Unified Task Workspace
+              </span>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-            {/* Left Side: Dynamic Feature Content */}
-            <div className="space-y-6">
-              <WorkflowStep 
-                index={0}
-                icon={BarChart3}
-                title="Centralized Dashboards"
-                desc="Real-time visibility into every project. See margins, deadlines, and resource allocation in one unified view."
-              />
-              <WorkflowStep 
-                index={1}
-                icon={Zap}
-                title="Automated Reporting"
-                desc="Generate client-ready performance reports with a single click. AI summarizes wins and identifies bottlenecks."
-              />
-              <WorkflowStep 
-                index={2}
-                icon={Users}
-                title="Real-time Collaboration"
-                desc="Integrated chat and whiteboarding means your team stays in sync without ever leaving the project context."
-              />
-
-            </div>
-
-            {/* Right Side: Sticky Visual Container */}
-            <div className="sticky top-29 flex items-center justify-center h-full">
-              <motion.div 
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-slate-50 bg-slate-100"
+              <motion.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6"
               >
-                <img 
-                  src={dashboardImg} 
-                  alt="Workflow Dashboard" 
-                  className="w-full h-auto transform hover:scale-105 transition-transform duration-700" 
-                />
-                
-                {/* Floating UI Elements for extra depth */}
-                <motion.div 
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity }}
-                  className="absolute top-10 -right-4 bg-white p-4 rounded-2xl shadow-xl border border-slate-100 hidden sm:block"
+                Elevate Your<br />
+                <motion.span
+                  className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-[10px] font-black uppercase text-slate-400">Live Syncing</span>
-                  </div>
-                </motion.div>
-              </motion.div>
-            </div>
+                  Agency Workflows.
+                </motion.span>
+              </motion.h1>
+
+              <p className="text-lg text-slate-600 mb-10 leading-relaxed font-medium max-w-xl">
+                KaryaUp doesn't just track tasks—it streamlines the entire creative lifecycle with data-driven insights.
+              </p>
+
+              <div className="space-y-4">
+                {features.map((item, i) => (
+                  <motion.div
+                    key={i}
+                    onMouseEnter={() => setActiveFeature(i)}
+                    className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border ${activeFeature === i
+                      ? "bg-white border-slate-200 shadow-2xl shadow-purple-500/10"
+                      : "bg-transparent border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                  >
+                    <div className="flex items-start gap-5">
+                      <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${activeFeature === i ? "bg-purple-600 text-white" : "bg-slate-100 text-slate-500"
+                        }`}>
+                        <Check size={24} strokeWidth={2.5} />
+                      </div>
+                      <div>
+                        <h3 className="text-xl font-bold text-slate-900 mb-2">{item.title}</h3>
+                        <AnimatePresence>
+                          {activeFeature === i && (
+                            <motion.p
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              className="text-slate-500 font-medium text-sm leading-relaxed mt-2"
+                            >
+                              {item.desc}
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
+            <motion.div
+              key={activeFeature}
+              initial={{ opacity: 0, x: 20, scale: 0.95 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ duration: 0.5, ease: "easeOut" }}
+              className="relative rounded-[2.5rem] p-2 bg-gradient-to-br from-purple-500/20 to-fuchsia-500/20 border border-white shadow-2xl"
+            >
+              <div className="absolute inset-0 bg-white/20 backdrop-blur-md rounded-[2.5rem]" />
+              <img
+                src={dashboardImage}
+                alt="Workspace Preview"
+                className="relative z-10 w-full h-auto rounded-[2rem] border border-white/50 shadow-sm"
+              />
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
       <FeatureCTA
         title="Tasks that connect to everything you do"
         description="Work Smarter with tasks that can live in your whiteboards, chat, calendar."
-        image={dashboardImg}
+        image={dashboardImage}
         imageAlt="KaryaUp dashboard"
         containerClassName="mt-20 mb-10"
       />

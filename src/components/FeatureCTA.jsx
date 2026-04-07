@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.webp';
 
 const authUrl = "https://www.karyaup.com/auth";
 
@@ -52,11 +52,14 @@ export default function FeatureCTA({
               <img
                 src={logo}
                 alt="KaryaUp"
+                width="160"
+                height="44"
+                loading="lazy"
                 className="h-full w-auto filter brightness-0 invert opacity-100"
               />
               {/* Colorful Overlay (Icon only) */}
               <div className="absolute inset-0 pointer-events-none" style={{ clipPath: 'inset(0 75% 0 0)' }}>
-                <img src={logo} alt="" className="h-full w-auto" />
+                <img src={logo} alt="" width="160" height="44" loading="lazy" className="h-full w-auto" />
               </div>
             </div>
           </motion.div>
@@ -118,6 +121,9 @@ export default function FeatureCTA({
               <img
                 src={image}
                 alt={imageAlt}
+                width="800"
+                height="500"
+                loading="lazy"
                 className="relative w-full h-auto object-contain rounded-[1.1rem] border border-white/10 hover:border-white/20 transition-all duration-500 z-10"
               />
             </div>

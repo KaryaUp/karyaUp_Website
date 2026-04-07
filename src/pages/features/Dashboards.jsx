@@ -10,7 +10,7 @@ import { cn } from "../../lib/utils";
 import FeatureStack from "../../components/FeatureStack";
 
 // Assets
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import dashboardImg1 from "../../assets/dashboard2.webp";
 import dashboardImg2 from "../../assets/dashboard2.webp";
 import featureProjects from '../../assets/projects.webp';
@@ -161,7 +161,7 @@ export default function Dashboards() {
           href="https://karyaup.com/features/dashboards"
         />
       </Helmet>
-      <div className="min-h-screen bg-white pt-14 sm:pt-16 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
+      <div className="min-h-screen bg-white pt-20 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
         <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

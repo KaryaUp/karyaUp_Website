@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 
 const footerColumns = [
   {
@@ -116,7 +116,7 @@ const Footer = () => {
     <footer className="border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
-          
+
           {/* LEFT: Branding & Socials */}
           <div className="flex flex-col items-center sm:items-start lg:w-1/3">
             <div className="mb-6 space-y-4 text-center sm:text-left">
@@ -124,11 +124,14 @@ const Footer = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
+                  width="160"
+                  height="56"
+                  loading="lazy"
                   className="h-12 w-auto sm:h-14"
                 />
               </a>
               <p className="text-[13px] font-medium leading-relaxed text-slate-500 max-w-xs">
-                
+
                 From Sanskrit <span className="italic opacity-90">"Karya"</span> meaning action or work. Empowering teams to ship faster.
               </p>
             </div>

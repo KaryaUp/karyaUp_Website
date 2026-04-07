@@ -7,7 +7,7 @@ import {
   AlignLeft, MessageSquare, Video, UserCheck, CalendarOff, Banknote, Calendar, Zap, Blocks, PlayCircle, Bell,
   FileText, FileCode, LogIn, Briefcase, Network, PieChart, Wallet
 } from "lucide-react";
-import logo from "../assets/logo.png";
+import logo from "../assets/logo.webp";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
 
 const authUrl = "https://www.karyaup.com/auth";
@@ -180,6 +180,9 @@ const StartWorkspaceButton = ({ href, onClick, size = "sm" }) => {
       <img
         src={KaryaUpBtn}
         alt="Start Workspace Button"
+        width="200"
+        height="48"
+        loading="eager"
         className={`${imgH} w-auto rounded-[999px] pointer-events-none relative z-10`}
       />
       <span
@@ -206,6 +209,7 @@ const Navbar = () => {
   const [isResourcesOpen, setIsResourcesOpen] = useState(false);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
   const [mobileOpenSection, setMobileOpenSection] = useState(null);
+  const [isIframeDark, setIsIframeDark] = useState(false);
   const platformTimerRef = useRef(null);
   const featuresTimerRef = useRef(null);
   const solutionsTimerRef = useRef(null);
@@ -262,6 +266,15 @@ const Navbar = () => {
       document.documentElement.style.overflow = "";
     };
   }, [isOpen, isPlatformOpen, isFeaturesOpen, isSolutionsOpen, isResourcesOpen]);
+
+  useEffect(() => {
+    const handleMessage = (e) => {
+      if (e.data === 'IFRAME_DARK') setIsIframeDark(true);
+      if (e.data === 'IFRAME_LIGHT') setIsIframeDark(false);
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   const megaMenuPanelClass =
     "absolute left-0 top-full w-full bg-white border-b border-slate-200 shadow-xl animate-slide-down origin-top max-h-[calc(100vh-88px)] overflow-y-auto overscroll-contain";
@@ -323,15 +336,16 @@ const Navbar = () => {
   };
 
   const isHomePage = location.pathname === "/";
+  const isDarkOverlayPage = location.pathname === "/features/ai-agents";
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
-  const isHomeOverlayNav = isOverlayNav && isHomePage;
+  const isOverlayLightNav = isOverlayNav && (isHomePage || (isDarkOverlayPage && isIframeDark));
   const linkBase =
-    `text-base font-semibold transition-all ${isHomeOverlayNav ? "text-slate-700 hover:text-primary md:text-white md:hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
+    `text-base font-semibold transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
   const linkActive = "text-primary";
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 py-3 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
+      className={`fixed w-full flex flex-col z-50 transition-all duration-300 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
         ? "bg-white md:shadow-md border-b border-gray-100"
         : isOpen
           ? "bg-white border-b border-slate-100"
@@ -340,7 +354,17 @@ const Navbar = () => {
             : "bg-transparent border-b border-transparent shadow-none backdrop-blur-0"
         }`}
     >
-      <div className="max-w-full mx-auto px-4 lg:px-4">
+      <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isScrolled || isIframeDark ? 'max-h-0 opacity-0' : 'max-h-[60px] opacity-100'}`}>
+      <Link 
+        to="/features/ai-agents" 
+        className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-b border-slate-100"
+      >
+        <span className="font-bold">Meet KAI Agent™</span> — Maximize human productivity with custom AI teammates 
+        <span className="ml-1 md:ml-1 text-inherit opacity-70 group-hover:opacity-100 inline-flex items-center"></span>
+      </Link>
+      </div>
+
+      <div className="max-w-full mx-auto px-4 lg:px-4 py-3 w-full">
         <div className="flex items-center">
           <div className="flex-none flex items-center">
             <div
@@ -352,7 +376,10 @@ const Navbar = () => {
                 <img
                   src={logo}
                   alt="KaryaUp Logo"
-                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isHomeOverlayNav ? "md:brightness-0 md:invert" : ""}`}
+                  width="160"
+                  height="44"
+                  loading="eager"
+                  className={`h-11 w-auto group-hover:scale-105 transition-transform duration-300 ${isOverlayLightNav ? "brightness-0 invert" : ""}`}
                 />
               </Link>
 
@@ -652,9 +679,9 @@ const Navbar = () => {
             <a
               href={authUrl}
               onClick={closeAllMenus}
-              className={`group flex items-center gap-2 font-semibold transition-all ${isHomeOverlayNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
+              className={`group flex items-center gap-2 font-semibold transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
             >
-              <LogIn size={16} className={`${isHomeOverlayNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
+              <LogIn size={16} className={`${isOverlayLightNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
               <span className="text-[14px]">Log in</span>
             </a>
             <StartWorkspaceButton href={authUrl} onClick={closeAllMenus} />
@@ -663,7 +690,7 @@ const Navbar = () => {
           <div className="ml-auto md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${isHomeOverlayNav ? "text-gray-600 hover:bg-gray-100 md:text-white md:hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
+              className={`p-2 rounded-lg transition-colors ${isOverlayLightNav ? "text-white hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -709,8 +736,8 @@ const Navbar = () => {
                       <div
                         data-lenis-prevent="true"
                         className={`rounded-xl bg-slate-50 border border-slate-100 overflow-hidden ${item.label === "Features" || item.label === "Solutions"
-                            ? "max-h-[320px] overflow-y-auto overscroll-contain"
-                            : ""
+                          ? "max-h-[320px] overflow-y-auto overscroll-contain"
+                          : ""
                           }`}
                       >
                         {(mobileMenuSections[item.label] || []).map((subItem) => (

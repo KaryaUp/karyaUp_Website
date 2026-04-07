@@ -141,6 +141,9 @@ const SuperAgents = () => {
                         src="https://images.ctfassets.net/w8fc6tgspyjz/7cC7zX7QJmkZ9PpLNgPjYh/e379dce8503c625a2038cea9a2b1b528/agent-new.png"
                         alt="KaryaUp Super Agent"
                         draggable={false}
+                        loading="lazy"
+                        width="680"
+                        height="680"
                         className="select-none w-auto"
                         style={{
                             height: 'clamp(400px, 60vh, 680px)',
@@ -218,6 +221,9 @@ const SuperAgents = () => {
                         src="https://images.ctfassets.net/w8fc6tgspyjz/4tkmMlrg0fe772c5392202f299a421953d6/super-agents-mask.png"
                         alt=""
                         draggable={false}
+                        loading="lazy"
+                        width="900"
+                        height="760"
                         className="select-none w-full h-full object-cover object-bottom"
                         style={{ maxWidth: '900px' }}
                     />

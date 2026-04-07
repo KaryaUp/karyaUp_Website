@@ -24,12 +24,12 @@ export default function PageHero({
   }, []);
 
   return (
-    <section className={`relative pt-0 lg:pt-2 overflow-hidden`}>
+    <section className={`relative pt-8 sm:pt-12 lg:pt-16 overflow-hidden`}>
       {/* Ambient Background Glows */}
       <div className="absolute top-0 right-0 -z-10 h-[600px] w-[600px] translate-x-1/4 -translate-y-1/2 rounded-full bg-purple-100/60 blur-[120px]" />
       <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] -translate-x-1/4 translate-y-1/2 rounded-full bg-fuchsia-100/40 blur-[100px]" />
 
-      <div className="mx-auto flex max-w-7xl items-center px-4 sm:px-6 lg:px-8 pt-4 pb-12 sm:pt-6 sm:pb-16 lg:pt-8 lg:pb-20">
+      <div className="mx-auto flex max-w-7xl items-center px-4 sm:px-6 lg:px-8 pt-12 pb-12 sm:pt-16 sm:pb-16 lg:pt-20 lg:pb-20">
         <div className="grid w-full items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-14">
 
           {/* Left Content */}

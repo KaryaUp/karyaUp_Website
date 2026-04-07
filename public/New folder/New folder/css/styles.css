@@ -1,0 +1,549 @@
+:root {
+    --bg-color: #050505;
+    --text-color: #ffffff;
+    --accent-1: #00ffcc;
+    /* Neon Cyan */
+    --accent-2: #bc13fe;
+    /* Neon Purple */
+    --accent-3: #ff0055;
+    /* Neon Pink */
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --font-head: 'Orbitron', sans-serif;
+    --font-body: "Instrument Sans", sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: transparent;
+    /* Changed to transparent so bg layers show */
+    color: var(--text-color);
+    overflow-x: hidden;
+    cursor: none;
+}
+
+/* =========================================
+   GLOBAL BACKGROUND LAYERS
+========================================= */
+.global-backgrounds {
+    position: fixed;
+    inset: 0;
+    z-index: -10;
+    pointer-events: none;
+}
+
+.bg-layer {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.bg-layer.active {
+    opacity: 1;
+}
+
+/* Layer 1: Dark Gradient */
+.bg-layer-1 {
+    background: radial-gradient(circle at top right, #110022 0%, #050505 100%);
+}
+
+/* Layer 2: Neural Network Pattern */
+.bg-layer-2 {
+    background-color: #000;
+    background-image:
+        radial-gradient(var(--accent-2) 1px, transparent 1px),
+        radial-gradient(var(--accent-2) 1px, transparent 1px);
+    background-size: 80px 80px;
+    background-position: 0 0, 40px 40px;
+    opacity: 0.1;
+}
+
+/* Layer 3: Glowing Particle Field */
+.bg-layer-3 {
+    background: radial-gradient(circle at center, #001122 0%, #000 100%);
+}
+
+.bg-layer-3::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(#fff 1px, transparent 1px);
+    background-size: 100px 100px;
+    opacity: 0.2;
+    animation: floatY 10s linear infinite;
+}
+
+/* Layer 4: Bright Gradient Waves */
+.bg-layer-4 {
+    background: linear-gradient(45deg, #1a0b2e 0%, #0f2027 50%, #203a43 100%);
+}
+
+/* =========================================
+   CUSTOM CURSOR
+========================================= */
+::selection {
+    background: var(--accent-2);
+    color: white;
+}
+
+/* Custom Cursor */
+.custom-cursor {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+}
+
+.cursor-dot {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: width 0.3s, height 0.3s, background-color 0.3s;
+}
+
+.cursor-ring {
+    position: absolute;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(0, 255, 204, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
+}
+
+.cursor-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-head);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #000;
+    opacity: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+
+/* Enhanced Hover States */
+.custom-cursor.hover .cursor-dot {
+    width: 0;
+    height: 0;
+}
+
+.custom-cursor.hover .cursor-ring {
+    width: 60px;
+    height: 60px;
+    background: rgba(0, 255, 204, 0.8);
+    border-color: transparent;
+    mix-blend-mode: exclusion;
+}
+
+.custom-cursor.hover.has-label .cursor-ring {
+    width: 80px;
+    height: 80px;
+    background: var(--accent-1);
+    mix-blend-mode: normal;
+}
+
+.custom-cursor.hover.has-label .cursor-text {
+    opacity: 1;
+}
+
+/* Particle Trailing Elements */
+#cursor-particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.c-particle {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    opacity: 1;
+    pointer-events: none;
+}
+
+/* Typography Split Text */
+.split-text {
+    display: inline-block;
+    perspective: 1000px;
+}
+
+.split-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px) scale(0.8) translateZ(-50px);
+    filter: blur(10px);
+    will-change: transform, opacity, filter;
+}
+
+/* Layout */
+.hero-section {
+    position: relative;
+    width: 100vw;
+    height: 400vh;
+    /* Gives space for timeline */
+    z-index: 10;
+}
+
+/* Pinned Wrapper */
+.sticky-wrapper {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#hero-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+}
+
+.canvas-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.ui-container {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    pointer-events: none;
+    /* Let clicks pass unless explicitly enabled */
+}
+
+.stage {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Initial States for Stages */
+.stage-1 .split-char {
+    opacity: 1;
+    transform: translateY(0) scale(1) translateZ(0);
+    filter: none;
+}
+
+.stage-2 .subtext,
+.stage-2 .supporting-text {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.stage-3 .floating-card {
+    opacity: 0;
+}
+
+.stage-4 .cta-wrapper {
+    opacity: 0;
+    transform: scale(0.8) translateY(30px);
+}
+
+.stage-4 {
+    pointer-events: auto;
+}
+
+/* Enable button clicks */
+
+
+/* Text Styling */
+.headline {
+    font-family: var(--font-head);
+    font-size: clamp(4rem, 10vw, 10rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #fff 0%, #aaa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    line-height: 1;
+}
+
+.subtext {
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    color: #ffffff;
+    max-width: 900px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    text-shadow:
+        0 0 40px rgba(0, 0, 0, 0.9),
+        0 2px 8px rgba(0, 0, 0, 1),
+        0 4px 30px rgba(0, 0, 0, 0.8);
+}
+
+.supporting-text {
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 600px;
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 1),
+        0 0 20px rgba(0, 0, 0, 0.8);
+    letter-spacing: 0.02em;
+}
+
+/* Floating UI Cards */
+.floating-ui-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    max-width: 1200px;
+}
+
+.floating-card {
+    position: absolute;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-radius: 16px;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    will-change: transform, opacity;
+}
+
+.floating-card .icon {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+}
+
+.c-1 {
+    top: 30%;
+    left: 15%;
+}
+
+.c-2 {
+    top: 60%;
+    right: 15%;
+}
+
+.c-3 {
+    bottom: 20%;
+    left: 25%;
+}
+
+span.bh {
+    color: black;
+}
+
+/* CTA Button Wrapper */
+.cta-wrapper {
+    position: relative;
+    padding: 40px;
+    cursor: none;
+    /* Let custom cursor handle it */
+}
+
+.btn-glow {
+    position: absolute;
+    inset: 15px;
+    background: transparent;
+    filter: blur(20px);
+    opacity: 0.3;
+    border-radius: 100px;
+    transition: opacity 0.3s, filter 0.3s, inset 0.3s;
+    z-index: -1;
+}
+
+.cta-wrapper:hover .btn-glow {
+    opacity: 1;
+    filter: blur(30px);
+}
+
+.cta-btn {
+    position: relative;
+    background: #000;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 24px 56px;
+    font-family: var(--font-head);
+    font-size: 1.5rem;
+    font-weight: 600;
+    border-radius: 100px;
+    overflow: hidden;
+    pointer-events: none;
+    /* Pointer events handled by wrapper */
+    z-index: 1;
+    transition: border-color 0.3s;
+}
+
+.cta-wrapper:hover .cta-btn {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
+.btn-text {
+    position: relative;
+    z-index: 2;
+}
+
+/* Ripple */
+.ripple-container {
+    position: absolute;
+    inset: 0;
+    border-radius: 100px;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(0);
+    animation: rippleAnim 0.6s cubic-bezier(0.1, 0, 0.3, 1) forwards;
+}
+
+@keyframes rippleAnim {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Transition Section */
+.transition-sweep {
+    height: 30vh;
+    width: 100vw;
+    background: linear-gradient(to bottom, transparent, var(--bg-color));
+    position: relative;
+    z-index: 20;
+    margin-top: -30vh;
+    /* Overlaps hero slightly */
+    pointer-events: none;
+}
+
+/* Features Section */
+.features-section {
+    position: relative;
+    background-color: var(--bg-color);
+    padding: 120px 20px;
+    z-index: 30;
+    /* Ensure visible over sweep and hero */
+}
+
+.features-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 6vw, 5rem);
+
+    margin-bottom: 80px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    position: relative;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 40px 30px;
+    transition: background 0.3s;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, var(--accent-1) 0%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+}
+
+.feature-card:hover .card-glow {
+    opacity: 0.15;
+}
+
+.feature-card:nth-child(2) .card-glow {
+    background: radial-gradient(circle at center, var(--accent-2) 0%, transparent 70%);
+}
+
+.feature-card:nth-child(3) .card-glow {
+    background: radial-gradient(circle at center, var(--accent-3) 0%, transparent 70%);
+}
+
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+}
+
+.feature-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.75rem;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.feature-card p {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    line-height: 1.6;
+    position: relative;
+    z-index: 1;
+}

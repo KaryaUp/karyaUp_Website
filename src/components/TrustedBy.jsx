@@ -40,10 +40,9 @@ const TrustedBy = () => {
                                 <img
                                     src={brand.logo}
                                     alt={brand.name}
-                                    /* LOGOS MADE LARGER:
-                                       Mobile: h-10 (was h-6)
-                                       Desktop: h-16 to h-20 (was h-12)
-                                    */
+                                    width="200"
+                                    height="80"
+                                    loading="lazy"
                                     className="h-10 sm:h-16 md:h-20 w-auto brightness-0 opacity-70 hover:opacity-100 transition-opacity duration-300 block object-contain"
                                 />
                             </div>

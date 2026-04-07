@@ -1,8 +1,9 @@
+import { Helmet } from "react-helmet-async";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Sparkles, BrainCircuit, Zap, Search, ShieldCheck, Check } from "lucide-react"; // Recommended to add these icons
+import { Sparkles, BrainCircuit, Zap, Search, ShieldCheck, Check } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
-import karyaupLogo from "../../assets/karyaup-logo.mp4";
+import karyaupLogo from "../../assets/logo-svg.svg";
 import FeatureCTA from "../../components/FeatureCTA";
 
 /* ═══════════════════════════════════════════════
@@ -36,7 +37,7 @@ const TiltCard = ({ children, className }) => {
 
   const handleMouseMove = (e) => {
     const rect = ref.current.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;   // -1 … 1
+    const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
     const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
     rawX.set(x);
     rawY.set(y);
@@ -52,12 +53,12 @@ const TiltCard = ({ children, className }) => {
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
+      style={{ rotateX, rotateY, transformStyle: "preserve-3d", transformPerspective: 1000 }}
       whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
       className={className}
     >
-      <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
+      <div style={{ transform: "translateZ(30px)" }} className="h-full flex flex-col">
         {children}
       </div>
     </motion.div>
@@ -74,8 +75,7 @@ function Card({ data, type, index }) {
       className="relative group rounded-xl w-full"
     >
       <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50">
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
-          }`}>
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"}`}>
           {isRed ? <XIcon /> : <CheckIcon />}
         </div>
         <div className="flex-1 min-w-0 text-left">
@@ -115,10 +115,13 @@ function ScrollTrack({ cards, direction }) {
 
   return (
     <div className="h-[220px] overflow-hidden relative">
-      <div className="relative h-full" style={{
-        maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
-        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
-      }}>
+      <div
+        className="relative h-full"
+        style={{
+          maskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+          WebkitMaskImage: "linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)",
+        }}
+      >
         <div ref={trackRef} className="flex flex-col gap-2 py-2 will-change-transform">
           {doubled.map((card, i) => (
             <Card key={i} data={card} type={direction === "down" ? "red" : "green"} index={i % cards.length} />
@@ -134,8 +137,7 @@ function WatermarkBg({ isHovered }) {
   const rows = Array(14).fill(infinitePatternRow);
 
   return (
-    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-3 overflow-hidden ${isHovered ? "opacity-40" : "opacity-[0.08]"
-      }`}>
+    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-3 overflow-hidden ${isHovered ? "opacity-40" : "opacity-[0.08]"}`}>
       {rows.map((pattern, i) => (
         <motion.div
           key={i}
@@ -176,7 +178,7 @@ const FeatureStack = ({ items = [] }) => {
     if (items.length === 0) return;
     const timer = setInterval(() => {
       setIndex((prev) => (prev + 1) % items.length);
-    }, 1500); // Snappy 1.5s interval
+    }, 1500);
     return () => clearInterval(timer);
   }, [items.length]);
 
@@ -189,7 +191,7 @@ const FeatureStack = ({ items = [] }) => {
           const itemIndex = (index + offset) % items.length;
           const item = items[itemIndex];
           const label = typeof item === "string" ? item : item.label;
-          const Icon = (typeof item === "object" && item.icon) ? item.icon : Check;
+          const Icon = typeof item === "object" && item.icon ? item.icon : Check;
 
           return (
             <motion.div
@@ -198,28 +200,17 @@ const FeatureStack = ({ items = [] }) => {
               animate={{
                 opacity: offset === 0 ? 1 : offset === 1 ? 0.4 : 0.15,
                 scale: 1 - offset * 0.04,
-                y: offset * 12, // Compact vertical stacking for better hero-screen visibility
+                y: offset * 12,
                 zIndex: 10 - offset,
               }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 1.05,
-                transition: { duration: 0.4, ease: "easeIn" }
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: offset * 0.02
-              }}
+              exit={{ opacity: 0, y: -20, scale: 1.05, transition: { duration: 0.4, ease: "easeIn" } }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: offset * 0.02 }}
               className="absolute top-0 left-0 w-full px-5 py-3 rounded-xl bg-slate-400/10 backdrop-blur-xl border border-black/30 shadow-sm flex items-center gap-3 transition-colors duration-300 hover:bg-slate-400/20"
             >
               <div className="w-5 h-5 rounded bg-black/5 border border-black/10 flex items-center justify-center flex-shrink-0">
                 <Icon className="w-3 h-3 text-black stroke-[3]" />
               </div>
-              <span className="text-[11px] sm:text-[13px] font-black uppercase tracking-widest text-black">
-                {label}
-              </span>
+              <span className="text-[11px] sm:text-[13px] font-black uppercase tracking-widest text-black">{label}</span>
             </motion.div>
           );
         })}
@@ -251,32 +242,54 @@ export default function ProfitTracking() {
     { title: "Instant resource analytics", tag: "Performance" },
   ];
 
+  const getColorClasses = (color) => {
+    const colorMap = {
+      purple: "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
+      fuchsia: "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white",
+      emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
+      orange: "bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white",
+      blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-100 group-hover:text-white",
+      indigo: "bg-indigo-100 text-indigo-600 group-hover:bg-indigo-600 group-hover:text-white",
+      pink: "bg-pink-100 text-pink-600 group-hover:bg-pink-600 group-hover:text-white",
+    };
+    return colorMap[color] || "bg-slate-100 text-slate-600 group-hover:bg-slate-600 group-hover:text-white";
+  };
+
   const aiFeatures = [
-    { icon: <Sparkles className="w-5 h-5 text-purple-500" />, title: "Predictive Margins", desc: "AI forecasts future profitability based on current sprint velocity." },
-    { icon: <BrainCircuit className="w-5 h-5 text-fuchsia-500" />, title: "Smart Allocation", desc: "Automatically maps expenses to specific projects using NLP." },
-    { icon: <Search className="w-5 h-5 text-indigo-500" />, title: "Contextual Query", desc: "Ask 'Which project is over budget?' and get instant visual data." },
-    { icon: <Zap className="w-5 h-5 text-amber-500" />, title: "Automated Standups", desc: "AI summarizes daily progress vs budget utilization for the team." }
+    { icon: <Sparkles className="w-5 h-5" />, title: "Predictive Margins", desc: "AI forecasts future profitability based on current sprint velocity.", color: "purple" },
+    { icon: <BrainCircuit className="w-5 h-5" />, title: "Smart Allocation", desc: "Automatically maps expenses to specific projects using NLP.", color: "fuchsia" },
+    { icon: <Search className="w-5 h-5" />, title: "Contextual Query", desc: "Ask 'Which project is over budget?' and get instant visual data.", color: "blue" },
+    { icon: <Zap className="w-5 h-5" />, title: "Automated Standups", desc: "AI summarizes daily progress vs budget utilization for the team.", color: "orange" },
   ];
 
   return (
     <div className="bg-white font-sans overflow-x-hidden">
-      {/* Hero Section */}
+      <Helmet>
+        <title>Profit Tracking | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="profit-tracking, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="Profit Tracking | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/profit-tracking" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/profit-tracking" />
+      </Helmet>
+
+      {/* ── Hero Section ── */}
       <section className="py-20 md:py-25">
         <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
+          {/* Left: Text */}
           <div>
             <div className="text-center lg:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-10"
-              >
-                PROFIT — TRACK EVERY PENNY
-              </motion.div>
+              <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+                PLATFORM / PROFIT TRACKING
+              </span>
               <motion.h1
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06] mb-6"
+                className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4"
               >
                 Control your Margins.
                 <br />
@@ -289,7 +302,7 @@ export default function ProfitTracking() {
                 </motion.span>
               </motion.h1>
             </div>
-            <p className="text-sm sm:text-base lg:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium leading-relaxed">
+            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl text-center lg:text-left">
               Stop leaking revenue. KaryaUp gives you an automated, real-time view of your team's profitability and project expenses.
             </p>
             <FeatureStack
@@ -297,20 +310,33 @@ export default function ProfitTracking() {
                 { label: "Predictive Margins", icon: Sparkles },
                 { label: "Smart Allocation", icon: BrainCircuit },
                 { label: "Contextual Query", icon: Search },
-                { label: "Automated Standups", icon: Zap }
+                { label: "Automated Standups", icon: Zap },
               ]}
             />
           </div>
 
-          <motion.div initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="relative">
-            <div className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200">
-              <img src={dashboardImage} alt="Profit Dashboard" className="w-full h-full object-cover" />
-            </div>
-          </motion.div>
+          {/* Right: Dashboard image wrapped in TiltCard */}
+          <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative lg:-mr-24 xl:-mr-40"
+            >
+              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+                <img
+                  src={dashboardImage}
+                  alt="KaryaUp task management"
+                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                />
+                {/* Right-side invisible/fade effect like reference */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+              </div>
+            </motion.div>
         </div>
       </section>
 
-      {/* COMPARISON SECTION */}
+      {/* ── Comparison Section ── */}
       <section className="py-3 bg-white px-2 md:px-3">
         <div className="max-w-7xl mx-auto">
           <motion.h1
@@ -332,14 +358,14 @@ export default function ProfitTracking() {
           <div className="p-[2px] rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden mb-20">
             <div className="bg-slate-50 rounded-[1.4rem] md:rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
 
-              {/* LEFT: OLD WAY */}
+              {/* LEFT: Old Way */}
               <div className="p-4 md:p-3 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-1 relative z-20">
                 <h3 className="text-center text-2xl font-black mb-1 text-slate-900">Old Way</h3>
                 <p className="text-sm text-center text-slate-500 mb-6 font-medium">Manual updates and scattered tools.</p>
                 <ScrollTrack cards={redCards} direction="down" />
               </div>
 
-              {/* MIDDLE: 3D SHIELD & TEXT */}
+              {/* MIDDLE: Shield */}
               <div
                 className="relative flex flex-col items-center justify-start py-10 md:py-12 px-4 group overflow-hidden bg-white/40 min-h-[450px] order-2"
                 onMouseEnter={() => setIsShieldHovered(true)}
@@ -360,32 +386,40 @@ export default function ProfitTracking() {
                   <div className="absolute inset-0 z-10 opacity-80 scale-110">
                     <LightShield3D />
                   </div>
-
                   <div className="relative z-30" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
-                      animate={{
-                        rotateY: [0, 360],
-                        y: [0, -10, 0],
-                        scale: isShieldHovered ? 1.1 : 1
-                      }}
+                      animate={{ rotateY: [0, 360], y: [0, -10, 0], scale: isShieldHovered ? 1.1 : 1 }}
                       transition={{
                         rotateY: { duration: 10, repeat: Infinity, ease: "linear" },
                         y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                        scale: { duration: 0.4 }
+                        scale: { duration: 0.4 },
                       }}
                       className="w-32 h-32 md:w-44 md:h-44 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img src={karyaupLogo} alt="Logo Front" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
+                      <div className="absolute inset-0" style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden" }}>
+                        <img
+                          src={karyaupLogo}
+                          alt="Logo Front"
+                          className="w-full h-full object-contain"
+                          style={{
+                            filter: isShieldHovered
+                              ? "drop-shadow(0 20px 50px rgba(168,85,247,0.8)) hue-rotate(220deg) brightness(1.5) contrast(1.2)"
+                              : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                            transition: "filter 0.5s ease",
+                          }}
+                        />
                       </div>
-
-                      <div className="absolute inset-0" style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg) translateZ(1px)'
-                      }}>
-                        <img src={karyaupLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" />
+                      <div
+                        className="absolute inset-0"
+                        style={{ backfaceVisibility: "hidden", WebkitBackfaceVisibility: "hidden", transform: "rotateY(180deg) translateZ(1px)" }}
+                      >
+                        <img
+                          src={karyaupLogo}
+                          alt="Logo Back"
+                          className="w-full h-full object-contain opacity-80"
+                          style={{ filter: isShieldHovered ? "hue-rotate(220deg) brightness(1.5) contrast(1.2)" : "none", transition: "filter 0.5s ease" }}
+                        />
                       </div>
                     </motion.div>
                   </div>
@@ -397,7 +431,7 @@ export default function ProfitTracking() {
                 />
               </div>
 
-              {/* RIGHT: KARYAUP WAY */}
+              {/* RIGHT: KaryaUp Way */}
               <div className="p-4 md:p-6 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-3 relative z-20">
                 <h3 className="text-center text-2xl font-black mb-1 text-slate-900">The KaryaUp Way</h3>
                 <p className="text-sm text-center text-slate-500 mb-6 font-medium">Advanced execution loops for growth.</p>
@@ -408,7 +442,7 @@ export default function ProfitTracking() {
         </div>
       </section>
 
-      {/* NEW AI WORKSPACE SECTION */}
+      {/* ── AI Workspace Section ── */}
       <section className="py-10 px-6 bg-white-50 relative overflow-hidden border-t border-slate-200">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
@@ -430,7 +464,8 @@ export default function ProfitTracking() {
               transition={{ type: "spring", damping: 25, stiffness: 100, delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
             >
-              Task Management that<br />
+              Task Management that
+              <br />
               <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -446,7 +481,9 @@ export default function ProfitTracking() {
               viewport={{ once: true }}
               className="text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
             >
-              Our AI doesn't just track your projects—it actively manages tasks to ensure every sprint operates at maximum margin. Delegate the busywork to the machine.
+              Our AI doesn't just track your projects—
+              <br />
+              it actively manages tasks to ensure every sprint operates at maximum margin. Delegate the busywork to the machine.
             </motion.p>
           </div>
 
@@ -454,27 +491,23 @@ export default function ProfitTracking() {
             {aiFeatures.map((feature, i) => (
               <TiltCard
                 key={i}
-                className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group flex flex-col"
+                className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-all duration-300 group"
               >
-                {/* HEADER: Icon and Title aligned side-by-side */}
-                <div className="flex items-center gap-4 mb-6">
-                  <div className="w-12 h-12 shrink-0 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover:scale-110 group-hover:bg-purple-50 group-hover:border-purple-100 transition-all duration-500">
-                    {feature.icon}
+                <div className="relative z-10 flex flex-col h-full">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 group-hover:shadow-lg ${getColorClasses(feature.color)}`}>
+                      {feature.icon}
+                    </div>
+                    <h3 className="text-xl font-black text-slate-900 leading-tight">{feature.title}</h3>
                   </div>
-                  <h3 className="text-xl font-black text-slate-900 leading-tight">
-                    {feature.title}
-                  </h3>
+                  <p className="text-slate-500 font-medium leading-relaxed text-sm">{feature.desc}</p>
                 </div>
-
-                {/* DESCRIPTION: Remains below */}
-                <p className="text-slate-500 font-medium leading-relaxed text-sm">
-                  {feature.desc}
-                </p>
               </TiltCard>
             ))}
           </div>
         </div>
       </section>
+
       <FeatureCTA
         title="Revenue that connects to your workflow"
         description="Stop jumping between apps. See your profits right where you manage your tasks and teams."

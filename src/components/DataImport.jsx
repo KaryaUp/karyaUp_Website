@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Zap, FileText, Database } from "lucide-react";
 import ClickUpLogo from "../assets/ClickUp.webp";
 import JiraLogo from "../assets/Jira.webp";
-import KaryaUpLogo from "../assets/logo.png";
+import KaryaUpLogo from "../assets/logo.webp";
 
 const DataImport = () => {
   const fileVariants = {
@@ -87,6 +87,9 @@ const DataImport = () => {
                   <img
                     src={KaryaUpLogo}
                     alt="Karyaup"
+                    width="192"
+                    height="192"
+                    loading="lazy"
                     className="w-full h-full object-contain"
                   />
                 </motion.div>
@@ -106,6 +109,9 @@ const DataImport = () => {
                   <img
                     src={ClickUpLogo}
                     alt="ClickUp"
+                    width="112"
+                    height="112"
+                    loading="lazy"
                     className="w-20 h-20 lg:w-28 lg:h-28 object-contain drop-shadow-2xl"
                   />
                 </motion.div>
@@ -122,6 +128,9 @@ const DataImport = () => {
                   <img
                     src={JiraLogo}
                     alt="Jira"
+                    width="112"
+                    height="112"
+                    loading="lazy"
                     className="w-20 h-20 lg:w-28 lg:h-28 object-contain drop-shadow-2xl"
                   />
                 </motion.div>
@@ -196,6 +205,9 @@ const DataImport = () => {
                 <img
                   src={KaryaUpLogo}
                   alt="Karyaup"
+                  width="84"
+                  height="84"
+                  loading="lazy"
                   className="w-full h-full object-contain"
                 />
               </motion.div>
@@ -214,6 +226,9 @@ const DataImport = () => {
                 <img
                   src={ClickUpLogo}
                   alt="ClickUp"
+                  width="64"
+                  height="64"
+                  loading="lazy"
                   className="w-16 h-16 object-contain drop-shadow-xl"
                 />
               </motion.div>
@@ -233,6 +248,9 @@ const DataImport = () => {
                 <img
                   src={JiraLogo}
                   alt="Jira"
+                  width="64"
+                  height="64"
+                  loading="lazy"
                   className="w-16 h-16 object-contain drop-shadow-xl"
                 />
               </motion.div>

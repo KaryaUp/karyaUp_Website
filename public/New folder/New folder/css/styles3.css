@@ -1,0 +1,513 @@
+/* =========================================
+   PHASE 4: ADVANCED INTERACTIVE SECTIONS
+========================================= */
+
+/* A. EXPLORE KAI CAPABILITIES (HORIZONTAL SCROLL) */
+.horizontal-scroll-section {
+    position: relative;
+    padding-top: 100px;
+    height: 100vh; /* Pinned area */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 25;
+}
+
+.h-scroll-container {
+    padding-left: 10vw;
+    width: 200vw; /* Width needed to scroll across */
+}
+
+.h-track {
+    display: flex;
+    gap: 80px;
+    margin-top: 80px;
+    width: max-content;
+    padding-right: 20vw; /* Ensures scroll distance works on ultra-wide viewports */
+}
+
+.h-card {
+    position: relative;
+    width: 420px;
+    height: 520px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s;
+}
+
+.h-card:hover {
+    transform: translateY(-20px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 255, 204, 0.2);
+}
+
+.h-card h3 {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    margin-bottom: 16px;
+    transform: translateZ(30px); /* 3D pop */
+}
+
+.h-card p {
+    color: #a0a0a0;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    transform: translateZ(20px);
+}
+
+.h-card .card-glow {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at top right, var(--accent-1) 0%, transparent 60%);
+    opacity: 0;
+    border-radius: 20px;
+    transition: opacity 0.5s;
+    z-index: -1;
+}
+
+.h-card:hover .card-glow {
+    opacity: 0.15;
+}
+
+.h-card img.card-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: auto; /* Pushes text down */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transform: translateZ(40px);
+    transition: transform 0.4s;
+}
+
+.h-card:hover img.card-avatar {
+    transform: translateZ(60px) scale(1.1) rotate(5deg);
+}
+
+
+/* B. HOW KAI THINKS (NEURAL NETWORK) */
+.neural-network-section {
+    position: relative;
+    padding: 120px 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 24;
+    /* overflow: hidden removed so popups are visible */
+}
+
+.nn-container {
+    position: relative;
+    width: 100%;
+    max-width: 1100px;
+    height: 700px;
+    margin-top: 40px;
+}
+
+#nn-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.nn-nodes {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.nn-node {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: var(--accent-2);
+    border-radius: 50%;
+    box-shadow: 0 0 20px var(--accent-2);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    overflow: visible;
+    z-index: 10;
+}
+
+.nn-node::after {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border: 1px solid var(--accent-2);
+    border-radius: 50%;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes ping {
+    75%, 100% { transform: scale(3); opacity: 0; }
+}
+
+.nn-node:hover {
+    transform: translate(-50%, -50%) scale(1.5);
+    box-shadow: 0 0 40px var(--accent-2);
+}
+
+/* Node placement — 12 nodes spread across the canvas */
+.nn-node.n1  { top: 15%; left: 25%; }
+.nn-node.n2  { top: 48%; left: 50%; width: 30px; height: 30px; background: var(--accent-1); box-shadow: 0 0 34px var(--accent-1); }
+.nn-node.n2::after { border-color: var(--accent-1); }
+.nn-node.n3  { top: 75%; left: 18%; }
+.nn-node.n4  { top: 22%; left: 72%; }
+.nn-node.n5  { top: 82%; left: 78%; }
+.nn-node.n6  { top: 8%;  left: 55%; }
+.nn-node.n7  { top: 60%; left: 38%; }
+.nn-node.n8  { top: 38%; left: 15%; }
+.nn-node.n9  { top: 90%; left: 50%; }
+.nn-node.n10 { top: 30%; left: 85%; }
+.nn-node.n11 { top: 68%; left: 65%; }
+.nn-node.n12 { top: 55%; left: 82%; }
+
+/* ─── NODE HOVER POPUP CARDS ─── */
+.nn-popup {
+    position: absolute;
+    top: 50%;
+    left: calc(100% + 22px);
+    transform: translateY(-50%) scale(0.88);
+    transform-origin: left center;
+    width: 280px;
+    background: rgba(10, 10, 20, 0.85);
+    border: 1px solid rgba(0, 255, 204, 0.25);
+    border-radius: 16px;
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.6),
+        0 0 30px rgba(0, 255, 204, 0.08),
+        inset 0 1px 0 rgba(255,255,255,0.06);
+    padding: 0;
+    pointer-events: none;
+    opacity: 0;
+    z-index: 100;
+    transition:
+        opacity 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+        transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.nn-popup.popup-left {
+    left: auto;
+    right: calc(100% + 22px);
+    transform-origin: right center;
+    transform: translateY(-50%) scale(0.88);
+}
+
+.nn-node:hover .nn-popup {
+    opacity: 1;
+    transform: translateY(-50%) scale(1);
+}
+
+/* Arrow connector */
+.nn-popup::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -7px;
+    transform: translateY(-50%);
+    width: 0; height: 0;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-right: 7px solid rgba(0, 255, 204, 0.3);
+}
+.nn-popup.popup-left::before {
+    left: auto;
+    right: -7px;
+    border-right: none;
+    border-left: 7px solid rgba(0, 255, 204, 0.3);
+}
+
+/* Screenshot image area */
+.nn-popup-screen {
+    width: 100%;
+    height: 156px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    position: relative;
+    background: #050508;
+}
+
+.nn-popup-screen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.nn-node:hover .nn-popup-screen img {
+    transform: scale(1.04);
+}
+
+/* Subtle gradient over image bottom */
+.nn-popup-screen::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, transparent, rgba(10,10,20,0.9));
+}
+
+/* Label row */
+.nn-popup-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 14px 4px;
+    font-family: var(--font-head);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.nn-popup-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--accent-2);
+    box-shadow: 0 0 6px currentColor;
+    flex-shrink: 0;
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+/* Description */
+.nn-popup-desc {
+    padding: 4px 14px 14px;
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.55;
+    margin: 0;
+}
+
+
+
+/* C. TRY KAI LIVE (CHAT DEMO) */
+.live-demo-section {
+    position: relative;
+    padding: 120px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 24;
+}
+
+.demo-ui {
+    width: 100%;
+    max-width: 600px;
+    background: rgba(10, 10, 15, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+    margin-top: 40px;
+    overflow: hidden;
+    transition: box-shadow 0.4s;
+}
+
+.demo-ui.active-glow {
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 50px rgba(0, 255, 204, 0.15);
+    border-color: rgba(0, 255, 204, 0.3);
+}
+
+.chat-header {
+    background: rgba(255,255,255,0.03);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.chat-dots { display: flex; gap: 6px; margin-right: 16px; }
+.chat-dots span { width: 10px; height: 10px; border-radius: 50%; background: #444; }
+
+.chat-title {
+    font-family: var(--font-head);
+    font-size: 0.9rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.chat-body {
+    padding: 30px 24px;
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.chat-msg {
+    max-width: 80%;
+    padding: 16px 20px;
+    border-radius: 16px;
+    font-size: 1.1rem;
+    line-height: 1.5;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.msg-user {
+    align-self: flex-end;
+    background: #222;
+    border-bottom-right-radius: 4px;
+}
+
+.msg-kai {
+    align-self: flex-start;
+    background: linear-gradient(135deg, rgba(0,255,204,0.1) 0%, rgba(0,255,204,0.02) 100%);
+    border: 1px solid rgba(0,255,204,0.2);
+    border-bottom-left-radius: 4px;
+}
+
+.msg-typing {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 16px;
+}
+
+.typing-dot {
+    width: 6px; height: 6px;
+    background: var(--accent-1);
+    border-radius: 50%;
+    animation: jump 1.5s infinite;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes jump {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+
+/* D. INFINITE CAPABILITY MARQUEE */
+.marquee-section {
+    padding: 60px 0;
+    background: var(--bg-color);
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    overflow: hidden;
+    position: relative;
+    z-index: 24;
+}
+
+.marquee-mask {
+    display: flex;
+    width: 200vw;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: scrollMarquee 30s linear infinite;
+}
+
+.marquee-track:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    font-family: var(--font-head);
+    font-size: 4rem;
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,255,255,0.3);
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 0 40px;
+    transition: color 0.3s;
+}
+
+.marquee-track:hover .marquee-item {
+    -webkit-text-stroke: 1px rgba(255,255,255,0.6);
+}
+
+@keyframes scrollMarquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } /* Scrolls precisely half since we duplicated content */
+}
+
+
+/* E. FLOATING AI AGENTS */
+.floating-agents-section {
+    position: relative;
+    padding: 160px 20px;
+    min-height: 800px;
+    z-index: 24;
+    overflow: hidden;
+}
+
+.agents-universe {
+    position: absolute;
+    inset: 0;
+}
+
+.agent-avatar {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    border: 2px solid rgba(255,255,255,0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s;
+    backdrop-filter: blur(10px);
+}
+
+.agent-avatar img {
+    width: 70%;
+    height: 70%;
+}
+
+.agent-avatar::before {
+    content: '';
+    position: absolute;
+    inset: -10px;
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--accent-3) 0%, transparent 70%);
+    opacity: 0;
+    z-index: -1;
+    transition: opacity 0.4s;
+}
+
+.agent-avatar:hover {
+    transform: scale(1.2) translateY(-10px) !important; /* Override inline GSAP if needed, though better handled in JS */
+    box-shadow: 0 30px 60px rgba(0,0,0,0.8), 0 0 40px rgba(255,0,85,0.4);
+    border-color: rgba(255,255,255,0.4);
+    z-index: 100;
+}
+
+.agent-avatar:hover::before {
+    opacity: 0.5;
+}
+
+/* Pseudo-random grid scatter */
+.av-1 { top: 20%; left: 15%; animation: floatY 7s ease-in-out infinite alternate; }
+.av-2 { top: 25%; right: 20%; animation: floatY 8s ease-in-out infinite alternate-reverse; width: 120px; height: 120px;}
+.av-3 { top: 50%; left: 40%; animation: floatY 6s ease-in-out infinite alternate; width: 140px; height: 140px;}
+.av-4 { bottom: 20%; left: 25%; animation: floatY 9s ease-in-out infinite alternate-reverse; }
+.av-5 { bottom: 25%; right: 15%; animation: floatY 5s ease-in-out infinite alternate; }

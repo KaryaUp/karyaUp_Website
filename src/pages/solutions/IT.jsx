@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { useRef, useState, useEffect } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { BrainCircuit, MessageSquare, Workflow, Check } from "lucide-react";
@@ -68,6 +69,19 @@ const FeatureStack = ({ items = [] }) => {
 
   return (
     <div className="relative h-[80px] sm:h-[100px] w-full max-w-[280px] sm:max-w-[320px] mt-6 lg:mt-8 group overflow-visible">
+      <Helmet>
+        <title>I T | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="i-t, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="I T | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/i-t" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/i-t" />
+      </Helmet>
+
       <AnimatePresence mode="popLayout">
         {[2, 1, 0].map((offset) => {
           const itemIndex = (index + offset) % items.length;
@@ -115,7 +129,7 @@ const FeatureStack = ({ items = [] }) => {
 export default function IT() {
   return (
     <div className="bg-white font-sans overflow-x-hidden selection:bg-purple-100">
-      
+
       {/* ================= HERO SECTION ================= */}
       <section className="py-19 md:py-24 max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
@@ -124,14 +138,9 @@ export default function IT() {
           transition={{ duration: 0.8 }}
           className="text-center lg:text-left"
         >
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: "easeOut" }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-10"
-          >
-            IT — SEAMLESS TECH GOVERNANCE
-          </motion.div>
+          <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
+            SOLUTIONS/IT
+          </span>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
             The Everything App<br />
             <motion.span
@@ -146,42 +155,57 @@ export default function IT() {
             Manage IT projects, service requests, and governance in one place—all connected by AI.
             KaryaUp streamlines workflows and compliance so IT operations run with speed and precision.
           </p>
-          <FeatureStack 
+          <FeatureStack
             items={[
-              {label: "Smart Routing", icon: BrainCircuit},
-              {label: "Automated Workflows", icon: Workflow},
-              {label: "Contextual Chat", icon: MessageSquare}
-            ]} 
+              { label: "Smart Routing", icon: BrainCircuit },
+              { label: "Automated Workflows", icon: Workflow },
+              { label: "Contextual Chat", icon: MessageSquare }
+            ]}
           />
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="rounded-2xl overflow-hidden shadow-2xl border border-slate-200"
-        >
-          <img src={dashboardImage} alt="IT PMO Dashboard" className="w-full h-auto" />
-        </motion.div>
+        <div className="pb-20 lg:pb-35 max-w-7xl mx-auto grid lg:grid-cols-1 gap-8 items-center">
+          {/* Text Column */}
+          <div className="text-center lg:text-left"> </div>
+
+          {/* Image Column */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            className="relative lg:-mr-24 xl:-mr-40"
+          >
+            <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+            <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+              <img
+                src={dashboardImage}
+                alt="KaryaUp task management"
+                className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+              />
+              {/* Right-side invisible/fade effect like reference */}
+              <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+            </div>
+          </motion.div>
+        </div>
       </section>
 
       {/* ================= AI BANNER SECTION ================= */}
       <section className="py-8 md:py-10 bg-white border-y border-slate-100">
         <div className="max-w-7xl mx-auto px-6 text-center">
 
-        <motion.h2
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             className="text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6"
           >
-               The World's most complete<br />
+            The World's most complete<br />
             <motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-600 bg-[length:200%_auto]"
               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             >
-               AI Task Workspace
+              AI Task Workspace
             </motion.span>
           </motion.h2>
 
@@ -196,12 +220,12 @@ export default function IT() {
               { title: "Tools", desc: "Automatically categorize, prioritize, and assign incoming service desk tickets to the optimal department.", icon: Workflow, color: "fuchsia" },
               { title: "Management", desc: "Generate status reports, draft technical documentation, or summarize meeting notes with a simple prompt.", icon: MessageSquare, color: "emerald" }
             ].map((feature, i) => (
-              <TiltCard 
-                key={i} 
+              <TiltCard
+                key={i}
                 className="bg-white border border-slate-200 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/40 group transition-all duration-300 hover:border-purple-300"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  {/* લોગો ઝૂમ કરવા માટે group-hover:scale-125 ઉમેર્યું છે */}
+
                   <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center shadow-sm transition-transform duration-500 group-hover:scale-125 ${getColorClasses(feature.color)}`}>
                     <feature.icon size={24} strokeWidth={2.5} />
                   </div>
@@ -249,7 +273,7 @@ export default function IT() {
               ].map((text, i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="bg-emerald-100 p-1.5 rounded-full shadow-sm shrink-0">
-                    <div className="w-2 h-2 bg-emerald-600 rounded-full" />
+                    <div className="w-2 h-2 bg-slate-600 rounded-full" />
                   </div>
                   <span className="font-bold text-slate-800 text-lg leading-snug">{text}</span>
                 </div>
@@ -263,7 +287,7 @@ export default function IT() {
             viewport={{ once: true }}
             className="relative"
           >
-            <div className="rounded-[2.5rem] overflow-hidden shadow-1xl border border-white bg-slate-900 p-1">
+            <div className="rounded-[2.5rem] overflow-hidden shadow-1xl border border-white bg-purple-100 p-1">
               <img src={planImage} alt="IT Plan" className="w-full h-auto rounded-[2.1rem] opacity-90" />
             </div>
           </motion.div>
