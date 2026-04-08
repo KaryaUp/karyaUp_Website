@@ -509,7 +509,7 @@ export default function Pricing() {
       <div className="min-h-screen bg-white font-sans selection:bg-purple-100 italic-none relative overflow-visible">
         <div className="relative z-10">
           {/* ── Hero / Pricing Cards Section ── */}
-          <section className="pt-16 sm:pt-20 md:pt-24 pb-10 px-4 sm:px-6 lg:px-8">
+          <section className="pt-32 sm:pt-36 md:pt-40 pb-10 px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <motion.h1
                 initial={{ opacity: 0, y: 20 }}

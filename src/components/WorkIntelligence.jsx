@@ -65,10 +65,10 @@ const WorkIntelligence = () => {
   return (
     /* outer: full-width bg so the page doesn't break; inner: constrained card */
     <section className="py-1.5 sm:py-6 sm:pb-10 bg-white relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
 
         {/* ── The constrained, rounded section ── */}
-        <div className="bg-slate-950 rounded-[2rem] sm:rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-5 sm:px-12 py-6 sm:py-14">
+        <div className="bg-slate-950 rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-3 sm:px-12 py-5 sm:py-14">
 
           {/* Glow blobs */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600/15 rounded-full blur-[80px] pointer-events-none" />
@@ -127,12 +127,18 @@ const WorkIntelligence = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.1 }}
               >
-                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500/30 p-4.5 sm:p-7 rounded-2xl cursor-default h-full transition-colors duration-300">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 mb-4 sm:mb-5">
-                    {card.icon}
+                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500/30 p-4 sm:p-7 rounded-2xl cursor-default h-full transition-colors duration-300 text-left w-full">
+                  <div className="flex flex-row sm:flex-col items-center sm:items-start justify-start gap-4 sm:gap-0 w-full text-left">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 mb-0 sm:mb-5 shrink-0">
+                      {card.icon}
+                    </div>
+                    <h3 className="text-base sm:text-lg font-bold text-white mb-0 sm:mb-2 leading-tight text-left">
+                      {card.title}
+                    </h3>
                   </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
-                  <p className="text-slate-400 text-sm font-medium leading-relaxed">{card.desc}</p>
+                  <p className="text-slate-400 text-sm font-medium leading-relaxed mt-3 sm:mt-0 text-left w-full">
+                    {card.desc}
+                  </p>
                 </TiltCard>
               </motion.div>
             ))}
@@ -143,27 +149,27 @@ const WorkIntelligence = () => {
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            className="relative z-10 bg-purple-900/20 border border-purple-500/20 rounded-2xl sm:rounded-full p-3 sm:p-5 overflow-hidden w-full lg:w-auto"
+            className="relative z-10 bg-purple-900/20 border border-purple-500/20 rounded-2xl sm:rounded-full p-2.5 sm:p-5 overflow-hidden w-full lg:w-auto"
           >
             {/* The flow path line */}
             <div className="hidden sm:block absolute top-1/2 left-[5%] right-[5%] h-px bg-white/10 -translate-y-1/2 pointer-events-none z-0" />
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-0 text-sm font-bold text-white relative z-10 max-w-5xl mx-auto px-6">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-0 text-[13px] sm:text-sm font-bold text-white relative z-10 max-w-5xl mx-auto px-1 sm:px-6">
 
               {/* Box 1: Raw Activity */}
-              <div className="flex items-center justify-center gap-2 bg-slate-900 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full border border-slate-700 hover:border-purple-500/50 transition-all duration-300 w-full sm:w-auto">
-                <Database size={18} className="text-purple-400" />
+              <div className="flex items-center justify-center gap-2 bg-slate-900 px-4 sm:px-8 py-2 sm:py-4 rounded-full border border-slate-700 hover:border-purple-500/50 transition-all duration-300 w-full sm:w-auto">
+                <Database size={16} className="text-purple-400" />
                 <span>Raw Activity</span>
               </div>
 
               {/* Gap 1: Arrow 1 */}
-              <div className="flex sm:hidden items-center justify-center h-8 -my-1 relative">
-                <div className="absolute top-[-6px] bottom-[-6px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-purple-400/70 to-fuchsia-400/20" />
+              <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
+                <div className="absolute top-[-4px] bottom-[-4px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-purple-400/70 to-fuchsia-400/20" />
                 <motion.div
-                  animate={{ y: [0, 8, 0], opacity: [0.45, 1, 0.45] }}
+                  animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                   className="relative text-white"
                 >
-                  <ArrowRight size={18} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                  <ArrowRight size={16} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
@@ -186,20 +192,20 @@ const WorkIntelligence = () => {
               </div>
 
               {/* Box 2: Clear Insight */}
-              <div className="flex items-center justify-center gap-2 bg-purple-900/40 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full border border-purple-500/40 backdrop-blur-md hover:border-purple-500/60 transition-all duration-300 w-full sm:w-auto">
-                <BrainCircuit size={18} className="text-fuchsia-300" />
+              <div className="flex items-center justify-center gap-2 bg-purple-900/40 px-4 sm:px-8 py-2 sm:py-4 rounded-full border border-purple-500/40 backdrop-blur-md hover:border-purple-500/60 transition-all duration-300 w-full sm:w-auto">
+                <BrainCircuit size={16} className="text-fuchsia-300" />
                 <span>Clear Insight</span>
               </div>
 
               {/* Gap 2: Arrow 2 */}
-              <div className="flex sm:hidden items-center justify-center h-8 -my-1 relative">
-                <div className="absolute top-[-6px] bottom-[-6px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-fuchsia-400/70 to-white/20" />
+              <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
+                <div className="absolute top-[-4px] bottom-[-4px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-fuchsia-400/70 to-white/20" />
                 <motion.div
-                  animate={{ y: [0, 8, 0], opacity: [0.45, 1, 0.45] }}
+                  animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, delay: 0.35, repeat: Infinity, ease: "easeInOut" }}
                   className="relative text-white"
                 >
-                  <ArrowRight size={18} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
+                  <ArrowRight size={16} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
@@ -223,8 +229,8 @@ const WorkIntelligence = () => {
               </div>
 
               {/* Box 3: Faster Decisions */}
-              <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-fuchsia-600 border border-white/10 px-6 sm:px-8 py-2.5 sm:py-4 rounded-full shadow-[0_0_20px_rgba(217,70,239,0.35)] transition-all duration-300 w-full sm:w-auto">
-                <Rocket size={18} className="text-white" />
+              <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-purple-600 to-fuchsia-600 border border-white/10 px-4 sm:px-8 py-2 sm:py-4 rounded-full shadow-[0_0_20px_rgba(217,70,239,0.35)] transition-all duration-300 w-full sm:w-auto">
+                <Rocket size={16} className="text-white" />
                 <span>Faster Decisions</span>
               </div>
 

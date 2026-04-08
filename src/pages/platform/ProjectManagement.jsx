@@ -1,4 +1,4 @@
- import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
@@ -23,7 +23,7 @@ const TiltCard = ({ children, className }) => {
     if (!ref.current) return;
     const rect = ref.current.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;   // -1 … 1
-    const y = ((e.clientY - rect.top)  / rect.height) * 2 - 1;
+    const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
     rawX.set(x);
     rawY.set(y);
   };
@@ -97,15 +97,15 @@ const LightShield3D = () => (
 
 const getColorClasses = (color) => {
   const colorMap = {
-      purple: "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
-      fuchsia: "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white",
-      emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
-      orange: "bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white",
-      blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
-      pink: "bg-pink-100 text-pink-600 group-hover:bg-pink-600 group-hover:text-white"
-    };
-    return colorMap[color] || "bg-slate-100 text-slate-600 group-hover:bg-slate-600 group-hover:text-white";
+    purple: "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
+    fuchsia: "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white",
+    emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
+    orange: "bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white",
+    blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-600 group-hover:text-white",
+    pink: "bg-pink-100 text-pink-600 group-hover:bg-pink-600 group-hover:text-white"
   };
+  return colorMap[color] || "bg-slate-100 text-slate-600 group-hover:bg-slate-600 group-hover:text-white";
+};
 /* ═══════════════════════════════════════════════
    SUB-COMPONENTS
 ═══════════════════════════════════════════════ */
@@ -296,92 +296,121 @@ export default function ProjectManagement() {
   // ];
 
   const aiFeatures = [
-    { 
-      icon: <Sparkles className="w-5 h-5" />, 
-      title: "Predictive Margins", 
+    {
+      icon: <Sparkles className="w-5 h-5" />,
+      title: "Predictive Margins",
       desc: "AI forecasts future profitability based on current sprint velocity.",
-      color: "purple" 
+      color: "purple"
     },
-    { 
-      icon: <BrainCircuit className="w-5 h-5" />, 
-      title: "Smart Allocation", 
+    {
+      icon: <BrainCircuit className="w-5 h-5" />,
+      title: "Smart Allocation",
       desc: "Automatically maps expenses to specific projects using NLP.",
-      color: "fuchsia" 
+      color: "fuchsia"
     },
-    { 
-      icon: <Search className="w-5 h-5" />, 
-      title: "Contextual Query", 
+    {
+      icon: <Search className="w-5 h-5" />,
+      title: "Contextual Query",
       desc: "Ask 'Which project is over budget?' and get instant visual data.",
-      color: "blue" 
+      color: "blue"
     },
-    { 
-      icon: <Zap className="w-5 h-5" />, 
-      title: "Automated Standups", 
+    {
+      icon: <Zap className="w-5 h-5" />,
+      title: "Automated Standups",
       desc: "AI summarizes daily progress vs budget utilization for the team.",
-      color: "orange" 
+      color: "orange"
     }
   ];
 
   return (
-    <div className="bg-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-white font-sans overflow-x-hidden pt-20 sm:pt-24">
 
       {/* Hero Section */}
-      <section className="py-28 md:py-20 px-6">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div className="text-center lg:text-left">
-            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
-              PROJECTMANAGEMENT-
-            </span>
-            <motion.h1
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-3xl sm:text-4xl md:text-6xl font-black text-slate-900 tracking-tight leading-tight mb-6"
-            >
-              The World's most Powerful
-              <motion.span
-                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
-                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              >
-                Project Management Software
-              </motion.span>
-            </motion.h1>
-            <p className="text-base md:text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium">
-              KaryaUp adapts to any workflow, eliminates busywork,<br /> and keeps everything organized with enterprise-<br />grade AI execution.
-            </p>
-            <FeatureStack
-              items={[
-                { label: "Intelligent Routing", icon: BrainCircuit },
-                { label: "Real-time Sync", icon: Zap },
-                { label: "Global Search", icon: Search },
-                { label: "Enterprise Security", icon: ShieldCheck }
-              ]}
-            />
-          </div>
-        
-          <div className="pb-20 lg:pb-35 max-w-7xl mx-auto grid lg:grid-cols-1 gap-8 items-center">
-  {/* Text Column */}
-  <div className="text-center lg:text-left"> </div>
+      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-start">
 
-  {/* Image Column */}
-  <motion.div
-              initial={{ opacity: 0, x: 30 }}
+            {/* Left */}
+            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4"
+              >
+                PROJECT MANAGEMENT — PLAN, EXECUTE, DELIVER
+              </motion.div>
+
+              <motion.h1
+                initial={{ opacity: 0, y: 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                className="mt-4 sm:mt-5 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]"
+              >
+                The World's Most Powerful Project
+                <span className="block">
+                  {" "}
+                  <motion.span
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                    Management
+                  </motion.span>
+                </span>
+              </motion.h1>
+
+              <motion.div
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
+              >
+                {[
+                  "Every project, owned, visible, and on track.",
+                  "KaryaUp adapts to any workflow, eliminates busywork, and keeps everything organized with enterprise-grade AI execution."
+                ].map((text, i) => (
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <CheckIcon />
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                      {text}
+                    </p>
+                  </div>
+                ))}
+              </motion.div>
+
+              <FeatureStack
+                items={[
+                  { label: "Intelligent Routing", icon: BrainCircuit },
+                  { label: "Real-time Sync", icon: Zap },
+                  { label: "Global Search", icon: Search },
+                  { label: "Enterprise Security", icon: ShieldCheck }
+                ]}
+              />
+            </div>
+
+            {/* Right – Image */}
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
+              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+              <div className="absolute -inset-6 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
+              <div className="relative overflow-hidden shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
                 <img
                   src={dashboardImage}
-                  alt="KaryaUp task management"
-                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                  alt="KaryaUp project management dashboard"
+                  className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[420px] xl:h-[460px] object-cover object-left-top bg-white transition-all duration-300"
                 />
-                {/* Right-side invisible/fade effect like reference */}
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+                {/* Right-side fade */}
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-24 sm:w-32 lg:w-44 bg-gradient-to-r from-transparent via-white/70 to-white" />
               </div>
             </motion.div>
-</div>
+
+          </div>
         </div>
       </section>
 
@@ -400,7 +429,7 @@ export default function ProjectManagement() {
               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             >
-              is broken, we fixed it
+              Is Broken, We Fixed It
             </motion.span>
           </motion.h2>
 
@@ -436,16 +465,8 @@ export default function ProjectManagement() {
                     <LightShield3D />
                   </div>
 
-                  <div className="relative z-30" style={{ transformStyle: "preserve-3d" }}>
-
-                    <video
-                      src={karyaUpLogo}
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      className="w-30 h-34 object-cover object-contain filter drop-shadow-[0_25px_40px_rgba(168,85,247,0.3)]"
-                    />
+                  {/* Centered spinning logo */}
+                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
                       animate={{
                         rotateY: [0, 360],
@@ -457,19 +478,42 @@ export default function ProjectManagement() {
                         y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
                         scale: { duration: 0.4 }
                       }}
-                      className="w-40 h-40 md:w-40 md:h-40 relative"
+                      className="w-28 h-28 md:w-32 md:h-32 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
+                      {/* Front face */}
                       <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain" style={{ filter: isShieldHovered ? "drop-shadow(0 20px 50px rgba(168,85,247,0.8)) hue-rotate(220deg) brightness(1.5) contrast(1.2)" : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))", transition: "filter 0.5s ease" }} />
+                        <img
+                          src={karyaUpLogo}
+                          alt="Logo Front"
+                          className="w-full h-full object-contain"
+                          style={{
+                            filter: isShieldHovered
+                              ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                              : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                            transition: "filter 0.5s ease"
+                          }}
+                        />
                       </div>
 
+                      {/* Back face — mirror of front, same purple color */}
                       <div className="absolute inset-0" style={{
                         backfaceVisibility: 'hidden',
                         WebkitBackfaceVisibility: 'hidden',
                         transform: 'rotateY(180deg) translateZ(1px)'
                       }}>
-                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" style={{ filter: isShieldHovered ? "hue-rotate(220deg) brightness(1.5) contrast(1.2)" : "none", transition: "filter 0.5s ease" }} />
+                        <img
+                          src={karyaUpLogo}
+                          alt="Logo Back"
+                          className="w-full h-full object-contain opacity-85"
+                          style={{
+                            filter: isShieldHovered
+                              ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                              : "drop-shadow(0 20px 50px rgba(168,85,247,0.4))",
+                            transition: "filter 0.5s ease",
+                            transform: "scaleX(-1)"
+                          }}
+                        />
                       </div>
                     </motion.div>
                   </div>
@@ -634,34 +678,34 @@ export default function ProjectManagement() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
-  {aiFeatures.map((feature, i) => (
-    <TiltCard 
-      key={i} 
-      className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-all duration-300 group"
-    >
-      <div className="relative z-10 flex flex-col h-full">
-        {/* HEADER: Icon and Title */}
-        <div className="flex items-center gap-4 mb-6">
-          
-          {/* LOGO CONTAINER: This is where the background color changes on hover */}
-          <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 group-hover:shadow-lg ${getColorClasses(feature.color)}`}>
-            {/* Render the icon without fixed colors so it can inherit the group-hover:text-white */}
-            {feature.icon}
-          </div>
-          
-          <h3 className="text-xl font-black text-slate-900 leading-tight">
-            {feature.title}
-          </h3>
-        </div>
+            {aiFeatures.map((feature, i) => (
+              <TiltCard
+                key={i}
+                className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-all duration-300 group"
+              >
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* HEADER: Icon and Title */}
+                  <div className="flex items-center gap-4 mb-6">
 
-        {/* DESCRIPTION */}
-        <p className="text-slate-500 font-medium leading-relaxed text-sm">
-          {feature.desc}
-        </p>
-      </div>
-    </TiltCard>
-  ))}
-</div>
+                    {/* LOGO CONTAINER: This is where the background color changes on hover */}
+                    <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 group-hover:shadow-lg ${getColorClasses(feature.color)}`}>
+                      {/* Render the icon without fixed colors so it can inherit the group-hover:text-white */}
+                      {feature.icon}
+                    </div>
+
+                    <h3 className="text-xl font-black text-slate-900 leading-tight">
+                      {feature.title}
+                    </h3>
+                  </div>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-slate-500 font-medium leading-relaxed text-sm">
+                    {feature.desc}
+                  </p>
+                </div>
+              </TiltCard>
+            ))}
+          </div>
         </div>
       </section>
 

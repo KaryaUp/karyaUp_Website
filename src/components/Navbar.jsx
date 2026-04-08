@@ -357,9 +357,10 @@ const Navbar = () => {
       <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isScrolled || isIframeDark ? 'max-h-0 opacity-0' : 'max-h-[60px] opacity-100'}`}>
       <Link 
         to="/features/ai-agents" 
-        className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-b border-slate-100"
+        className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-b border-slate-100 px-4"
       >
-        <span className="font-bold">Meet KAI Agent™</span> — Maximize human productivity with custom AI teammates 
+        <span className="font-bold">Meet KAI Agent™</span>
+        <span className="hidden md:inline"> — Maximize human productivity with custom AI teammates</span>
         <span className="ml-1 md:ml-1 text-inherit opacity-70 group-hover:opacity-100 inline-flex items-center"></span>
       </Link>
       </div>
@@ -690,7 +691,7 @@ const Navbar = () => {
           <div className="ml-auto md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-lg transition-colors ${isOverlayLightNav ? "text-white hover:bg-white/10" : "text-gray-600 hover:bg-gray-100"}`}
+              className={`p-2 rounded-lg transition-colors ${isOpen || !isOverlayLightNav ? "text-slate-900 hover:bg-gray-100" : "text-white hover:bg-white/10"}`}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -698,96 +699,136 @@ const Navbar = () => {
         </div>
       </div>
 
-      {isOpen && (
-        <div data-lenis-prevent="true" className="md:hidden fixed inset-x-0 top-[68px] bottom-0 z-40 bg-white shadow-2xl overflow-y-auto">
-          <div className="px-4 py-5 space-y-2 bg-white">
-            {navItems.map((item) => (
-              item.to ? (
-                <NavLink
-                  key={item.to}
-                  to={item.to}
-                  onClick={closeAllMenus}
-                  className={({ isActive }) =>
-                    `block rounded-xl px-4 py-3 text-base font-semibold transition ${isActive
-                      ? "bg-primary/10 text-primary"
-                      : "text-slate-700 hover:bg-primary/5"
-                    }`
-                  }
-                >
-                  {item.label}
-                </NavLink>
-              ) : (
-                <div
-                  key={item.label}
-                  className="overflow-hidden rounded-[1.35rem] border border-slate-200 bg-white shadow-[0_8px_24px_-18px_rgba(15,23,42,0.18)]"
-                >
-                  <button
-                    type="button"
-                    onClick={() => setMobileOpenSection((prev) => prev === item.label ? null : item.label)}
-                    className="w-full flex items-center justify-between px-5 py-4 text-[1.05rem] font-semibold text-slate-700"
-                  >
-                    <span>{item.label}</span>
-                    <ChevronDown
-                      className={`w-4 h-4 ml-4 shrink-0 transition-transform duration-200 ${mobileOpenSection === item.label ? "rotate-180" : ""}`}
-                    />
-                  </button>
-                  {mobileOpenSection === item.label && (
-                    <div className="px-3 pb-3">
-                      <div
-                        data-lenis-prevent="true"
-                        className={`rounded-xl bg-slate-50 border border-slate-100 overflow-hidden ${item.label === "Features" || item.label === "Solutions"
-                          ? "max-h-[320px] overflow-y-auto overscroll-contain"
-                          : ""
-                          }`}
-                      >
-                        {(mobileMenuSections[item.label] || []).map((subItem) => (
-                          <Link
-                            key={subItem.to}
-                            to={subItem.to}
-                            onClick={closeAllMenus}
-                            className="flex items-start gap-3 px-3 py-3 text-sm text-slate-700 hover:bg-white transition-colors border-b border-slate-100 last:border-b-0"
-                          >
-                            {subItem.icon && (
-                              <subItem.icon
-                                size={18}
-                                strokeWidth={2}
-                                className={`${subItem.iconColor || "text-purple-600"} mt-0.5 shrink-0`}
-                              />
-                            )}
-                            <div className="flex flex-col text-left">
-                              <span className="font-semibold text-slate-800">{subItem.label}</span>
-                              <span className="text-xs text-slate-400">
-                                {subItem.sublabel || subItem.description}
-                              </span>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )
-            ))}
-
-            <div className="pt-6 pb-4 mt-2 border-t border-gray-100 flex flex-col gap-3">
-              <a
-                href={authUrl}
-                onClick={() => setIsOpen(false)}
-                className="w-full flex justify-center items-center gap-2 rounded-xl border border-gray-200 bg-white py-3 text-[15px] font-semibold text-slate-700 hover:bg-gray-50 transition"
-              >
-                <LogIn size={18} /> Log in
-              </a>
-              <div className="flex justify-center w-full mt-2 pb-1">
-                <StartWorkspaceButton
-                  href={authUrl}
-                  onClick={() => setIsOpen(false)}
-                  size="lg"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden fixed inset-0 z-[100] bg-white flex flex-col"
+          >
+            {/* ClickUp Style Internal Header */}
+            <div className="flex items-center justify-between px-4 py-4 border-b border-slate-100 bg-white flex-shrink-0">
+              <Link to="/" onClick={closeAllMenus} className="flex items-center group">
+                <img
+                  src={logo}
+                  alt="KaryaUp Logo"
+                  width="130"
+                  height="36"
+                  className="h-9 w-auto"
                 />
+              </Link>
+              <button
+                onClick={closeAllMenus}
+                className="p-2 rounded-lg text-slate-900 hover:bg-slate-100 transition-colors"
+                aria-label="Close menu"
+              >
+                <X size={26} strokeWidth={2.5} />
+              </button>
+            </div>
+
+            {/* Scrollable Menu Content */}
+            <div 
+              data-lenis-prevent="true"
+              className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 bg-white"
+            >
+              <div className="space-y-4">
+                {navItems.map((item) => (
+                  item.to ? (
+                    <NavLink
+                      key={item.to}
+                      to={item.to}
+                      onClick={closeAllMenus}
+                      className={({ isActive }) =>
+                        `block rounded-2xl px-5 py-4 text-[17px] font-bold tracking-tight transition-all ${isActive
+                          ? "bg-primary/10 text-primary shadow-sm"
+                          : "text-slate-800 hover:bg-slate-50 border border-transparent hover:border-slate-100"
+                        }`
+                      }
+                    >
+                      {item.label}
+                    </NavLink>
+                  ) : (
+                    <div
+                      key={item.label}
+                      className="overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_4px_20px_-12px_rgba(15,23,42,0.12)]"
+                    >
+                      <button
+                        type="button"
+                        onClick={() => setMobileOpenSection((prev) => prev === item.label ? null : item.label)}
+                        className="w-full flex items-center justify-between px-5 py-5 text-[17px] font-bold text-slate-800 tracking-tight"
+                      >
+                        <span>{item.label}</span>
+                        <ChevronDown
+                          className={`w-5 h-5 ml-4 shrink-0 transition-transform duration-300 ${mobileOpenSection === item.label ? "rotate-180" : ""}`}
+                        />
+                      </button>
+                      <AnimatePresence>
+                        {mobileOpenSection === item.label && (
+                          <motion.div 
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            className="px-3 pb-4 overflow-hidden"
+                          >
+                            <div className="rounded-2xl bg-slate-50 border border-slate-100 overflow-hidden">
+                              {(mobileMenuSections[item.label] || []).map((subItem) => (
+                                <Link
+                                  key={subItem.to}
+                                  to={subItem.to}
+                                  onClick={closeAllMenus}
+                                  className="flex items-start gap-4 px-4 py-4 text-[15px] hover:bg-white transition-all border-b border-slate-100/50 last:border-b-0"
+                                >
+                                  {subItem.icon && (
+                                    <div className="w-10 h-10 rounded-xl bg-white shadow-sm border border-slate-200 flex items-center justify-center shrink-0">
+                                      <subItem.icon
+                                        size={20}
+                                        strokeWidth={2}
+                                        className={subItem.iconColor || "text-purple-600"}
+                                      />
+                                    </div>
+                                  )}
+                                  <div className="flex flex-col text-left justify-center">
+                                    <span className="font-bold text-slate-900 leading-tight">{subItem.label}</span>
+                                    { (subItem.sublabel || subItem.description) && (
+                                      <span className="text-[12px] text-slate-500 mt-0.5 line-clamp-1">
+                                        {subItem.sublabel || subItem.description}
+                                      </span>
+                                    )}
+                                  </div>
+                                </Link>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  )
+                ))}
+              </div>
+
+              {/* Bottom Actions */}
+              <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col gap-4 pb-12">
+                <a
+                  href={authUrl}
+                  onClick={closeAllMenus}
+                  className="w-full flex justify-center items-center gap-2 rounded-2xl border border-slate-200 bg-white py-4 text-[16px] font-bold text-slate-900 hover:bg-slate-50 transition-all shadow-sm"
+                >
+                  <LogIn size={20} /> Log in
+                </a>
+                <div className="flex justify-center w-full group">
+                  <StartWorkspaceButton
+                    href={authUrl}
+                    onClick={closeAllMenus}
+                    size="lg"
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-      )}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };

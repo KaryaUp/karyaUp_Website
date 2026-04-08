@@ -254,7 +254,7 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
         `}
       </style>
 
-      <div className="max-w-4xl mx-auto px-6 pt-28 md:pt-20 relative z-10">
+      <div className="max-w-4xl mx-auto px-6 pt-32 md:pt-40 relative z-10">
         <div className="flex items-center gap-3 mb-8">
           <div className="w-1 h-4 bg-[#7e22ce] rounded-full" />
           <span className="text-[#7e22ce] text-[12px] font-black uppercase tracking-[0.2em]">
@@ -520,7 +520,7 @@ export default function Blog() {
           href="https://karyaup.com/resources/blog"
         />
       </Helmet>
-      <div className="min-h-screen bg-white pt-14 sm:pt-16 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
+      <div className="min-h-screen bg-white pt-32 sm:pt-36 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
         <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
           <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
           <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
