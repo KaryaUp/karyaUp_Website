@@ -56,9 +56,7 @@ const FeatureStack = ({ items = [], interval = 2500 }) => {
     <div
       className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
       style={{
-        // Increased height for clean split (42px card + 12px gap = 54px offset)
-        height: hovered ? `${visibleItems.length * 54}px` : "80px",
-        transition: "height 0.5s cubic-bezier(0.22,1,0.36,1)",
+        height: "80px",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}

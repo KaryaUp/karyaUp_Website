@@ -258,7 +258,7 @@ export default function Integrations() {
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
                 className="relative w-full max-w-[660px] mx-auto lg:mx-0 lg:justify-self-end"
               >
-                <div className="relative min-h-[420px] sm:min-h-[500px] w-full overflow-hidden rounded-[2.1rem] sm:rounded-[2.35rem] border border-slate-900/80 bg-[#0b0b16] p-3 sm:p-4 shadow-[0_40px_100px_-40px_rgba(15,23,42,0.8)]">
+                <div className="relative min-h-[420px] sm:min-h-[500px] w-full overflow-hidden rounded-[2.1rem] sm:rounded-[2.35rem] border border-slate-900/80 bg-[#0b0b16] p-3 sm:p-4">
                   <motion.div
                     animate={{ backgroundPosition: ["0% 0%", "100% 100%", "0% 0%"] }}
                     transition={{ duration: 14, repeat: Infinity, ease: "linear" }}
@@ -373,12 +373,12 @@ export default function Integrations() {
                       transition={{ duration: 0.55, delay: 0.12 * index, ease: [0.22, 1, 0.36, 1] }}
                       whileHover={{ y: 4, scale: 1.015 }}
                       whileTap={{ scale: 1.01 }}
-                      className={`group absolute z-10 w-[72px] sm:w-[180px] rounded-[1.1rem] sm:rounded-[1.45rem] border border-white/10 bg-white/5 p-[1.5px] backdrop-blur-xl shadow-[0_0_32px_rgba(76,29,149,0.16)] ${item.position}`}
+                      className={`group absolute z-10 w-[72px] sm:w-[180px] rounded-[1.1rem] sm:rounded-[1.45rem] border border-white/10 bg-white/5 p-[1.5px] backdrop-blur-xl ${item.position}`}
                     >
-                      <div className="rounded-[calc(1.1rem-1.5px)] sm:rounded-[calc(1.45rem-1.5px)] border border-white/8 bg-[#131526]/95 px-2.5 py-2.5 sm:px-4 sm:py-4 shadow-[0_10px_28px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out group-hover:border-white/20 group-hover:bg-[#17192c]/95 group-hover:shadow-[0_20px_42px_rgba(0,0,0,0.3)]">
+                      <div className="rounded-[calc(1.1rem-1.5px)] sm:rounded-[calc(1.45rem-1.5px)] border border-white/8 bg-[#131526]/95 px-2.5 py-2.5 sm:px-4 sm:py-4 transition-all duration-500 ease-out group-hover:border-white/20 group-hover:bg-[#17192c]/95 group-hover:shadow-[0_20px_42px_rgba(0,0,0,0.3)]">
                         <div className="flex items-center justify-center sm:justify-start gap-0 sm:gap-3">
                           <div className={`flex h-11 w-11 sm:h-11 sm:w-11 items-center justify-center rounded-xl bg-white shadow-[0_10px_20px_-14px_rgba(255,255,255,0.4)] overflow-hidden`}>
-                            <img src={item.logo} alt={item.name} className={`${item.name === 'Teams' ? 'h-full w-full scale-[2.2]' : 'h-6 w-6 sm:h-7 sm:w-7'} object-contain`} />
+                            <img src={item.logo} alt={item.name} className={`${item.name === 'Teams' ? 'h-full w-full scale-[1.1]' : 'h-6 w-6 sm:h-7 sm:w-7'} object-contain`} />
                           </div>
                           <div className="min-w-0 hidden sm:block">
                             <div className="text-sm font-black text-white">{item.name}</div>
@@ -447,7 +447,7 @@ export default function Integrations() {
                       <img
                         src={item.logo}
                         alt={item.name}
-                        className={`${item.name === "Microsoft Teams" ? "w-10 h-10 sm:w-14 sm:h-14 scale-[2]" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
+                        className={`${item.name === "Microsoft Teams" ? "w-8 h-8 sm:w-11 sm:h-11" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
                         style={{ filter: item.color === 'white' ? 'none' : '' }}
                       />
                     </div>
