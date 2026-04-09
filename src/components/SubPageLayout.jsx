@@ -47,7 +47,7 @@ export default function SubPageLayout({ badge, badgeColor = "bg-purple-100 text-
         >
           {badge}
         </motion.div>
-        <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[1.1] tracking-tight mb-5">
+        <h1 className="text-4xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-[1.1] tracking-normal mb-5">
           {title}
         </h1>
         <p className="text-lg text-gray-500 mb-12 max-w-2xl font-medium leading-relaxed">{subtitle}</p>

@@ -11,8 +11,8 @@ export default function ScatteredWork() {
   const problems = [
     "Projects in one place.",
     "Tasks in another.",
-    "Conversations somewhere else.",
-    "CRM in a separate system.",
+    "Scattered chats.",
+    "Discrete CRMs.",
   ];
 
   const solutions = [
@@ -36,7 +36,7 @@ export default function ScatteredWork() {
           <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95]"
+            className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
           >
             Consolidate Your <br className="hidden md:block" />Tools
             For<br className="hidden md:block" /> <motion.span
@@ -65,8 +65,8 @@ export default function ScatteredWork() {
             </div>
 
             <div className="flex flex-col items-center lg:items-start lg:justify-start">
-              <h3 className="text-3xl md:text-5xl font-black text-slate-800 tracking-tighter leading-[0.9] mb-4">
-                Work is Scattered <br className="md:hidden" /> Across <br />
+              <h3 className="text-3xl md:text-[2.75rem] font-black text-slate-800 tracking-normal leading-[1.05] mb-4">
+                Work   Across <br />
                 <span className="text-purple-500">Too Many Tools.</span>
               </h3>
               <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
@@ -121,7 +121,7 @@ export default function ScatteredWork() {
             </div>
 
             <div className="flex flex-col items-center lg:items-start lg:justify-start">
-              <h3 className="text-3xl md:text-5xl font-black text-slate-900 tracking-tighter leading-[0.9] mb-4">
+              <h3 className="text-3xl md:text-[2.75rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-4">
                 One Central Hub. <br />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -132,7 +132,7 @@ export default function ScatteredWork() {
                 </motion.span>
               </h3>
               <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
-                KaryaUp brings every thread of your business into a single, high-fidelity pulse built for elite execution.
+               KaryaUp turns your business into one unified engine.
               </p>
             </div>
 
@@ -141,11 +141,16 @@ export default function ScatteredWork() {
               {solutions.map((item, i) => (
                 <motion.div
                   key={i}
-                  whileHover={{ y: -5, borderColor: "#7e22ce" }}
-                  className="p-3.5 sm:p-4 rounded-xl border border-slate-100 bg-white shadow-sm transition-all group flex flex-col justify-center"
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  whileHover={{ scale: 1.02 }}
+                  className="p-3.5 sm:p-4 rounded-xl border border-slate-100 hover:border-[#c084fc] hover:shadow-md bg-white shadow-sm transition-all flex items-center"
                 >
-                  <h4 className="font-black text-slate-800 text-base mb-1 group-hover:text-[#7e22ce] transition-colors">{item.text}</h4>
-                  <p className="text-[11px] text-slate-400 font-bold uppercase tracking-widest">{item.desc}</p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 rounded-full bg-[#7e22ce] flex-shrink-0" />
+                    <span className="font-black text-slate-800 text-base">{item.text}</span>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -153,16 +158,32 @@ export default function ScatteredWork() {
             {/* List and Outcome Section */}
             <div className="mt-auto lg:mt-6 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left w-full">
               {/* Transformation Steps */}
-              <div className="flex flex-col lg:items-start gap-4">
+              <div className="relative flex flex-col items-start gap-6 ml-2 lg:ml-0">
+                {/* Animated Vertical Line */}
+                <motion.div 
+                  initial={{ height: 0 }}
+                  whileInView={{ height: "calc(100% - 20px)" }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 2.5, ease: "easeInOut" }}
+                  className="absolute left-[8px] top-[14px] w-[4px] rounded-full bg-gradient-to-b from-[#7e22ce] to-[#c084fc] z-0"
+                />
+
                 {[
                   { text: "Plan the Karya.", icon: Target },
                   { text: "Move the Karya.", icon: Zap },
                   { text: "Complete the Karya.", icon: Rocket },
                 ].map((step, i) => (
-                  <div key={i} className="flex items-center justify-center gap-4 py-0.5 lg:justify-start">
-                    <div className="w-2 h-2 rounded-full bg-[#7e22ce] shadow-[0_0_8px_rgba(126,34,206,0.4)] flex-shrink-0" />
-                    <span className="text-lg font-black text-slate-800 tracking-tight leading-tight whitespace-nowrap">{step.text}</span>
-                  </div>
+                  <motion.div 
+                    key={i} 
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ delay: i * 0.8 + 0.3 }}
+                    className="relative z-10 flex items-center justify-start gap-4"
+                  >
+                    <div className="w-5 h-5 rounded-full bg-[#7e22ce] flex-shrink-0" />
+                    <span className="text-xl font-black text-slate-800 tracking-normal leading-tight whitespace-nowrap">{step.text}</span>
+                  </motion.div>
                 ))}
               </div>
 
@@ -172,16 +193,16 @@ export default function ScatteredWork() {
                 whileInView={{ scale: 1, opacity: 1 }}
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.4 }}
-                className="relative w-full max-w-[210px] lg:max-w-[230px] overflow-hidden rounded-[1.5rem] bg-slate-900 p-4 text-white flex flex-col gap-3 shadow-2xl shadow-purple-900/30 lg:-mr-2"
+                className="relative w-full max-w-[210px] lg:max-w-[230px] overflow-hidden rounded-[1.5rem] bg-gradient-to-br from-[#2e0b54] to-[#7e22ce] border border-[#a855f7]/30 p-4 text-white flex flex-col gap-3 shadow-2xl shadow-purple-900/40 lg:-mr-2"
               >
-                <div className="absolute inset-0 bg-gradient-to-br from-[#7e22ce]/10 to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent pointer-events-none" />
                 <div className="relative z-10 flex items-center gap-3">
                   <div className="w-10 h-10 bg-emerald-500/20 rounded-lg flex items-center justify-center text-emerald-400 border border-emerald-500/10">
                     <TrendingUp size={18} />
                   </div>
                   <div>
                     <p className="text-[9px] font-black uppercase tracking-[0.2em] text-slate-500 mb-0.5">Net Gain</p>
-                    <p className="font-black text-sm tracking-tight">40% Boost</p>
+                    <p className="font-black text-sm tracking-normal">40% Boost</p>
                   </div>
                 </div>
                 <div className="h-[1px] w-full bg-slate-800" />

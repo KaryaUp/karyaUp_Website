@@ -143,7 +143,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`g-${wIdx}`}
-                            className="inline-block py-1 text-[2.6rem] sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] whitespace-nowrap"
+                            className="inline-block py-1 text-[2.6rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] whitespace-nowrap"
                           >
                             <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]">
                               {word.split("").map((char, cIdx) => (
@@ -163,7 +163,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`w-${wIdx}`}
-                            className="inline-block py-1 text-[2.6rem] sm:text-5xl lg:text-[4.5rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white whitespace-nowrap"
+                            className="inline-block py-1 text-[2.6rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white whitespace-nowrap"
                           >
                             {word.split("").map((char, cIdx) => (
                               <motion.span
@@ -199,7 +199,7 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 16 }}
                             animate={i < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                             transition={{ duration: 0.26 }}
-                            className={`inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-tight leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] ${item.gradient ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]" : "text-white"}`}
+                            className={`inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] ${item.gradient ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]" : "text-white"}`}
                           >
                             {item.text}
                           </motion.span>
@@ -243,7 +243,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`l1-${wIdx}`}
-                            className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] text-white whitespace-nowrap"
+                            className="inline-block py-1 text-[2.9rem] sm:text-[2.75rem] lg:text-[4.25rem] font-black tracking-normal leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] text-white whitespace-nowrap"
                           >
                             {word.split("").map((char, cIdx) => (
                               <motion.span
@@ -269,7 +269,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`l2-${wIdx}`}
-                            className="inline-block py-1 text-[2.9rem] sm:text-5xl lg:text-7xl font-black tracking-tight leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] whitespace-nowrap"
+                            className="inline-block py-1 text-[2.9rem] sm:text-[2.75rem] lg:text-[4.25rem] font-black tracking-normal leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] whitespace-nowrap"
                           >
                             <motion.span
                               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -300,21 +300,14 @@ const Hero = () => {
             {/* ── STATIC CONTENT – always visible ── */}
 
             {/* Sub-text */}
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-              className="mx-auto max-w-2xl text-lg sm:text-xl font-bold text-white/90 mb-6"
-            >
-              KaryaUp replaces <span className="text-[#e9d5ff]">6+ tools</span> with one unified system.
-            </motion.p>
+             
 
             {/* CTA buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.55, ease: "easeOut" }}
-              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mb-8 w-full"
+              className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 w-full mt-16"
             >
               <Link
                 to="https://www.karyaup.com/auth"
@@ -328,11 +321,11 @@ const Hero = () => {
                 </span>
               </Link>
 
-              <button className="group flex items-center gap-4 text-white font-black text-base transition-colors hover:text-[#f5d0fe]">
-                <div className="w-12 h-12 rounded-full bg-white/14 shadow-lg shadow-slate-900/20 backdrop-blur-sm flex items-center justify-center border border-white/20 group-hover:scale-110 transition-transform">
-                  <Play className="w-5 h-5 fill-white text-white ml-0.5 group-hover:fill-[#f5d0fe] group-hover:text-[#f5d0fe] transition-colors" />
+              <button className="group relative flex h-[3.5em] w-full max-w-[14em] shrink-0 items-center justify-center gap-3 rounded-[30em] border border-transparent hover:border-[#c084fc] hover:bg-[#c084fc]/10 font-bold text-[15px] text-white transition-all duration-300 active:scale-95">
+                <div className="w-9 h-9 rounded-full bg-white/10 shadow-lg backdrop-blur-sm flex items-center justify-center border border-white/20 transition-transform">
+                  <Play className="w-4 h-4 fill-white text-white ml-[2px]" />
                 </div>
-                Watch Video
+                <span>Watch Video</span>
               </button>
             </motion.div>
 
@@ -341,13 +334,13 @@ const Hero = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.7 }}
-              className="flex flex-col items-center gap-2.5 text-sm font-semibold text-white/80"
+              className="flex flex-col items-start gap-2.5 text-sm font-semibold text-white/80 mx-auto w-fit"
             >
-              <div className="flex items-center gap-2 text-center">
+              <div className="flex items-center gap-2 text-left">
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 stroke-[2.5]" />
                 <p>No credit card required</p>
               </div>
-              <div className="flex items-center gap-2 text-center">
+              <div className="flex items-center gap-2 text-left">
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 stroke-[2.5]" />
                 <p className="flex items-center">
                   Setup in minutes

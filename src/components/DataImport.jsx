@@ -39,7 +39,7 @@ const DataImport = () => {
                   Zero Friction Sync
                 </span>
               </div>
-              <h2 className="mx-auto max-w-[12ch] text-3xl sm:max-w-[12ch] sm:text-4xl md:max-w-none md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1] mb-3 sm:mb-8 lg:mx-0">
+              <h2 className="mx-auto max-w-[12ch] text-3xl sm:max-w-[12ch] sm:text-4xl md:max-w-none md:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1] mb-3 sm:mb-8 lg:mx-0">
                 Seamless Import
                 <br />
                 From Your

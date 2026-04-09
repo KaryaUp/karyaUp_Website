@@ -1,7 +1,13 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-    ArrowRight, CheckCircle2, FolderKanban, Clock, MessageSquare, Briefcase, Users, Zap, Bot
+    ArrowRight, CheckCircle2, FolderKanban, Clock, MessageSquare, Briefcase, Users, Zap, Bot,
+    Calendar, UserCheck, AlertCircle, FileText,
+    Timer, Scale, Activity, DollarSign,
+    MessageCircle, CalendarDays, PenTool, Bell,
+    Target, Mail, TrendingUp, RefreshCw,
+    UserPlus, CalendarOff, CreditCard,
+    Link2, Eye, PlayCircle, ClipboardList
 } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -17,17 +23,14 @@ const teams = [
         icon: FolderKanban,
         title: 'Project & Task',
         titleHighlight: 'Management',
-        description:
-            'Break work into clear, structured tasks with ownership and priorities.',
+        description: 'Break work into clear, structured tasks with ownership and priorities.',
         replaces: ['Jira', 'Asana', 'Trello'],
-        bullets: [
-            'Outcome: Teams know exactly what to do next — every time.',
-        ],
-        agents: [
-            { name: 'Sprint Agent plans iterations', color: '#7e22ce' },
-            { name: 'Task Agent auto-assigns work', color: '#f59e0b' },
-            { name: 'Timeline Agent flags delays', color: '#10b981' },
-            { name: 'Reports Agent generates summaries', color: '#ef4444' },
+        bullets: ['Outcome: Teams know what to do next.'],
+        features: [
+            { name: 'Sprint planning & iterations', color: '#7e22ce', icon: Calendar },
+            { name: 'Automated task assignments', color: '#a855f7', icon: UserCheck },
+            { name: 'Timeline & delay tracking', color: '#d946ef', icon: AlertCircle },
+            { name: 'Automated progress summaries', color: '#ec4899', icon: FileText },
         ],
     },
     {
@@ -36,17 +39,14 @@ const teams = [
         icon: Clock,
         title: 'Time',
         titleHighlight: 'Tracking',
-        description:
-            'Track time where work happens.',
+        description: 'Track time where work happens.',
         replaces: ['Harvest', 'Toggl', 'Clockify'],
-        bullets: [
-            'Insight: Understand where every hour goes — and improve planning accuracy by up to 40%.',
-        ],
-        agents: [
-            { name: 'Time Agent logs hours automatically', color: '#e879f9' },
-            { name: 'Capacity Agent balances workload', color: '#7e22ce' },
-            { name: 'Report Agent highlights bottlenecks', color: '#f59e0b' },
-            { name: 'Billing Agent calculates costs', color: '#10b981' },
+        bullets: ['Improve planning accuracy by up to 40%.'],
+        features: [
+            { name: 'Automatic time tracking', color: '#7e22ce', icon: Timer },
+            { name: 'Workload & capacity balancing', color: '#a855f7', icon: Scale },
+            { name: 'Bottleneck & delay insights', color: '#d946ef', icon: Activity },
+            { name: 'Cost & billing calculations', color: '#ec4899', icon: DollarSign },
         ],
     },
     {
@@ -55,17 +55,14 @@ const teams = [
         icon: MessageSquare,
         title: 'Team',
         titleHighlight: 'Collaboration',
-        description:
-            'Communication stays connected to work.',
+        description: 'Communication stays connected to work.',
         replaces: ['Slack', 'Loom', 'Notion'],
-        bullets: [
-            'Impact: Reduce internal follow-ups by 50%+',
-        ],
-        agents: [
-            { name: 'Summary Agent catches you up', color: '#6366f1' },
-            { name: 'Sync Agent coordinates meetings', color: '#ef4444' },
-            { name: 'Draft Agent composes replies', color: '#10b981' },
-            { name: 'Ping Agent alerts dependencies', color: '#f59e0b' },
+        bullets: ['Impact: Reduce internal follow-ups by 50%+'],
+        features: [
+            { name: 'Instant message catch-ups', color: '#7e22ce', icon: MessageCircle },
+            { name: 'Automated meeting coordination', color: '#a855f7', icon: CalendarDays },
+            { name: 'Smart reply drafting', color: '#d946ef', icon: PenTool },
+            { name: 'Dependency alerts & pings', color: '#ec4899', icon: Bell },
         ],
     },
     {
@@ -74,17 +71,14 @@ const teams = [
         icon: Briefcase,
         title: 'CRM &',
         titleHighlight: 'Sales',
-        description:
-            'Manage leads, deals, and delivery in one flow.',
+        description: 'Manage leads, deals, and delivery in one flow.',
         replaces: ['Salesforce', 'HubSpot', 'Pipedrive'],
-        bullets: [
-            'Result: No disconnect between sales and execution.',
-        ],
-        agents: [
-            { name: 'Lead Agent scores prospects', color: '#7e22ce' },
-            { name: 'Nurture Agent sends follow-ups', color: '#f59e0b' },
-            { name: 'Deal Agent forecasts revenue', color: '#e879f9' },
-            { name: 'Handoff Agent briefs the team', color: '#ef4444' },
+        bullets: ['Result: Link sales directly to execution.'],
+        features: [
+            { name: 'Automated lead scoring', color: '#7e22ce', icon: Target },
+            { name: 'Smart prospect follow-ups', color: '#a855f7', icon: Mail },
+            { name: 'Predictive revenue forecasting', color: '#d946ef', icon: TrendingUp },
+            { name: 'Seamless team handoffs', color: '#ec4899', icon: RefreshCw },
         ],
     },
     {
@@ -93,17 +87,14 @@ const teams = [
         icon: Users,
         title: 'HR & Team',
         titleHighlight: 'Management',
-        description:
-            'Control roles, access, attendance, and team structure.',
+        description: 'Control roles, access, attendance, and team structure.',
         replaces: ['Gusto', 'BambooHR', 'HiBob'],
-        bullets: [
-            'Clarity: One system to manage people and performance.',
-        ],
-        agents: [
-            { name: 'Hiring Agent screens applicants', color: '#10b981' },
-            { name: 'Onboard Agent sets up new hires', color: '#7e22ce' },
-            { name: 'Leave Agent manages time-off', color: '#f59e0b' },
-            { name: 'Payroll Agent processes salaries', color: '#ef4444' },
+        bullets: ['Clarity: One system for people & performance.'],
+        features: [
+            { name: 'Applicant tracking & screening', color: '#7e22ce', icon: UserPlus },
+            { name: 'Automated new hire onboarding', color: '#a855f7', icon: Users },
+            { name: 'Time-off & leave management', color: '#d946ef', icon: CalendarOff },
+            { name: 'Integrated payroll processing', color: '#ec4899', icon: CreditCard },
         ],
     },
     {
@@ -112,28 +103,24 @@ const teams = [
         icon: Zap,
         title: 'Workflow',
         titleHighlight: 'Automation',
-        description:
-            'Automate repetitive workflows.',
+        description: 'Automate repetitive workflows.',
         replaces: ['Zapier', 'Make', 'Workato'],
-        bullets: [
-            'Efficiency: Save 10+ hours per team every week',
-        ],
-        agents: [
-            { name: 'Workflow Agent connects tools', color: '#6366f1' },
-            { name: 'Trigger Agent watches for events', color: '#f59e0b' },
-            { name: 'Action Agent executes routines', color: '#10b981' },
-            { name: 'Audit Agent logs activities', color: '#e879f9' },
+        bullets: ['Efficiency: Save 10+ hours per team every week'],
+        features: [
+            { name: 'Cross-tool workflow bridging', color: '#7e22ce', icon: Link2 },
+            { name: 'Event-based triggering', color: '#a855f7', icon: Eye },
+            { name: 'Automated routine execution', color: '#d946ef', icon: PlayCircle },
+            { name: 'Activity logging & auditing', color: '#ec4899', icon: ClipboardList },
         ],
     },
 ];
 
-/* ── Avatar placeholder ── */
-const AgentAvatar = ({ color }) => (
+/* ── Feature Icon placeholder ── */
+const FeatureIcon = ({ icon: Icon }) => (
     <div
-        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0"
-        style={{ background: `${color}20`, border: `2px solid ${color}40` }}
+        className="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300 bg-[#f5f3ff] border border-[#e9d5ff] group-hover:bg-purple-100 group-hover:border-purple-200"
     >
-        <Bot size={18} style={{ color }} />
+        <Icon size={18} className="text-[#a855f7] transition-colors duration-300 group-hover:text-purple-700" />
     </div>
 );
 
@@ -212,7 +199,7 @@ const TeamSolutions = () => {
                     viewport={{ once: true }}
                     className="text-center mb-4 sm:mb-8"
                 >
-                    <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 leading-[0.95] tracking-tight mb-3">
+                    <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-[1.05] tracking-normal mb-3">
                         Built For Teams That<br />
                         <motion.span
                             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -228,18 +215,18 @@ const TeamSolutions = () => {
                 </motion.div>
 
                 {/* Sticky scrolling sections container */}
-                <div className="teamsolutions-sticky-container relative h-[70vh] sm:h-[75vh] lg:h-[75vh] w-full mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-100 shadow-sm bg-white">
+                <div className="teamsolutions-sticky-container relative h-[70vh] sm:h-[75vh] lg:h-[75vh] w-full mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-100 shadow-sm bg-gradient-to-br from-white to-[#f5f3ff]/30">
                     {teams.map((active, i) => (
                         <div
                             key={active.id}
                             ref={(el) => (sectionRefs.current[i] = el)}
-                            className="absolute inset-0 w-full h-full bg-white flex flex-col items-center justify-center"
+                            className="absolute inset-0 w-full h-full bg-transparent flex flex-col items-center justify-center"
                         >
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-center p-4 sm:p-10 w-full h-full">
                                 {/* Left side */}
                                 <div className="relative overflow-hidden lg:pr-10 flex flex-col items-center lg:items-start text-center lg:text-left h-full justify-center">
                                     <div className="relative z-10 w-full flex flex-col items-center lg:items-start">
-                                        <h3 className="text-xl sm:text-3xl md:text-5xl font-black text-gray-900 leading-[1.1] mb-2 sm:mb-5">
+                                        <h3 className="text-xl sm:text-3xl md:text-[2.75rem] font-black text-gray-900 leading-[1.1] mb-2 sm:mb-5">
                                             {active.title}
                                             <br />
                                             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 italic">{active.titleHighlight}</span>
@@ -281,15 +268,15 @@ const TeamSolutions = () => {
                                     </div>
                                 </div>
 
-                                {/* Right side — agent cards */}
+                                {/* Right side — feature cards */}
                                 <div className="flex flex-col gap-2 sm:gap-3 w-full max-w-[400px] mx-auto lg:mx-0">
-                                    {active.agents.map((agent, agentIdx) => (
+                                    {active.features.map((feature, idx) => (
                                         <div
-                                            key={`${active.id}-${agent.name}`}
-                                            className="flex items-center gap-3 sm:gap-4 bg-gray-50 hover:bg-gray-100/80 rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-4 transition-colors cursor-default border border-gray-100"
+                                            key={`${active.id}-${idx}`}
+                                            className="flex items-center gap-3 sm:gap-4 bg-white/60 hover:bg-white rounded-xl sm:rounded-2xl px-3 py-2 sm:px-5 sm:py-4 transition-all duration-300 cursor-default border border-gray-100 hover:border-purple-600 hover:shadow-md group"
                                         >
-                                            <AgentAvatar color={agent.color} />
-                                            <span className="text-[11px] sm:text-sm font-bold text-gray-700">{agent.name}</span>
+                                            <FeatureIcon color={feature.color} icon={feature.icon} />
+                                            <span className="text-[11px] sm:text-sm font-bold text-gray-700 transition-colors group-hover:text-[#7e22ce]">{feature.name}</span>
                                         </div>
                                     ))}
                                 </div>

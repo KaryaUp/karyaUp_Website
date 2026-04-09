@@ -37,7 +37,7 @@ export default function TeamRoleShowcase() {
           >
             Role Management
           </motion.div>
-          <h2 className="text-4xl sm:text-5xl font-black text-slate-900 leading-tight tracking-tight mb-6">
+          <h2 className="text-4xl sm:text-[2.75rem] font-black text-slate-900 leading-tight tracking-normal mb-6">
             Permissions that scale <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">without the friction.</span>
           </h2>
@@ -84,7 +84,7 @@ export default function TeamRoleShowcase() {
                 className="grid lg:grid-cols-2 gap-12 items-center"
               >
                 <div>
-                  <h3 className="text-3xl font-black text-slate-900 mb-6 tracking-tight italic">
+                  <h3 className="text-3xl font-black text-slate-900 mb-6 tracking-normal italic">
                     Invite new people <br />
                     <span className="text-purple-600">aligned by intent.</span>
                   </h3>
@@ -160,7 +160,7 @@ export default function TeamRoleShowcase() {
                 className="flex flex-col items-center justify-center py-10"
               >
                 <div className="text-center mb-12 max-w-xl">
-                  <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-tight">
+                  <h3 className="text-3xl font-black text-slate-900 mb-4 tracking-normal">
                     Promote or re-assign <br />
                     <span className="text-indigo-600">in real-time.</span>
                   </h3>
@@ -171,7 +171,7 @@ export default function TeamRoleShowcase() {
 
                 <div className="flex flex-col md:flex-row items-center gap-8 bg-white p-8 rounded-[3rem] border border-slate-100 shadow-2xl">
                   <div className="w-48 h-48 rounded-full bg-indigo-50 flex items-center justify-center border-4 border-white shadow-xl">
-                    <div className="w-40 h-40 rounded-full bg-indigo-600 flex items-center justify-center text-white font-black text-5xl">JD</div>
+                    <div className="w-40 h-40 rounded-full bg-indigo-600 flex items-center justify-center text-white font-black text-[2.75rem]">JD</div>
                   </div>
                   <div className="space-y-6 text-center md:text-left">
                     <div>
@@ -200,7 +200,7 @@ export default function TeamRoleShowcase() {
                           key={demoRole}
                           initial={{ opacity: 0, y: 5 }}
                           animate={{ opacity: 1, y: 0 }}
-                          className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-tighter ${
+                          className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-normal ${
                             demoRole === "Administrator" ? "bg-indigo-100 text-indigo-600" :
                             demoRole === "Manager" ? "bg-purple-100 text-purple-600" :
                             "bg-blue-100 text-blue-600"
@@ -225,7 +225,7 @@ export default function TeamRoleShowcase() {
                 className="grid lg:grid-cols-12 gap-12"
               >
                 <div className="lg:col-span-4">
-                  <h3 className="text-3xl font-black text-slate-900 mb-6 tracking-tight">
+                  <h3 className="text-3xl font-black text-slate-900 mb-6 tracking-normal">
                     Find who you need, <br />
                     <span className="text-emerald-600">at light speed.</span>
                   </h3>
@@ -266,7 +266,7 @@ export default function TeamRoleShowcase() {
                           </div>
                           <div className="flex-1">
                             <div className="font-black text-slate-900 text-sm group-hover:text-purple-600 transition-colors">{m.name}</div>
-                            <div className={`text-[10px] font-black uppercase tracking-tighter ${m.color.split(' ')[1]}`}>{m.role}</div>
+                            <div className={`text-[10px] font-black uppercase tracking-normal ${m.color.split(' ')[1]}`}>{m.role}</div>
                           </div>
                           <ChevronRight className="w-4 h-4 text-slate-300 group-hover:text-purple-500" />
                         </motion.div>

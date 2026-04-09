@@ -57,7 +57,7 @@ const FeatureGlassStack = ({ items = [] }) => {
               <Smile className="w-4 h-4 text-purple-400" />
             </div>
             <div className="flex-1 overflow-hidden">
-              <p className="text-sm font-semibold text-white tracking-tight leading-none whitespace-nowrap overflow-hidden text-ellipsis">
+              <p className="text-sm font-semibold text-white tracking-normal leading-[1.05] whitespace-nowrap overflow-hidden text-ellipsis">
                 {item.text}
               </p>
             </div>

@@ -1,8 +1,11 @@
-import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo, useState, lazy, Suspense } from "react";
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from "framer-motion";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
 import karyaUpLogo from "../../assets/logo-svg.svg";
+
+// Lazy load the 3D component to improve initial page load speed
+const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
 
 import FeatureCTA from "../../components/FeatureCTA";
 import { Smile } from "lucide-react";
@@ -469,51 +472,31 @@ export default function ProjectManagement() {
                   <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
                       animate={{
-                        rotateY: [0, 360],
                         y: [0, -10, 0],
                         scale: isShieldHovered ? 1.1 : 1
                       }}
                       transition={{
-                        rotateY: { duration: 10, repeat: Infinity, ease: "linear" },
                         y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
                         scale: { duration: 0.4 }
                       }}
                       className="w-28 h-28 md:w-32 md:h-32 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      {/* Front face */}
-                      <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img
-                          src={karyaUpLogo}
-                          alt="Logo Front"
-                          className="w-full h-full object-contain"
-                          style={{
-                            filter: isShieldHovered
-                              ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
-                              : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
-                            transition: "filter 0.5s ease"
-                          }}
-                        />
-                      </div>
-
-                      {/* Back face — mirror of front, same purple color */}
-                      <div className="absolute inset-0" style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg) translateZ(1px)'
-                      }}>
-                        <img
-                          src={karyaUpLogo}
-                          alt="Logo Back"
-                          className="w-full h-full object-contain opacity-85"
-                          style={{
-                            filter: isShieldHovered
-                              ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
-                              : "drop-shadow(0 20px 50px rgba(168,85,247,0.4))",
-                            transition: "filter 0.5s ease",
-                            transform: "scaleX(-1)"
-                          }}
-                        />
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          filter: isShieldHovered
+                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                          transition: "filter 0.5s ease"
+                        }}
+                      >
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-10 h-10 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
+                          <SpinningLogo3D
+                            isHovered={isShieldHovered}
+                            className="w-full h-full object-contain"
+                          />
+                        </Suspense>
                       </div>
                     </motion.div>
                   </div>

@@ -56,7 +56,7 @@ const Integrations = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ delay: 0.1 }}
-                        className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] mb-4 tracking-tight"
+                        className="text-4xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] mb-4 tracking-normal"
                     >
                         Works with your <br/><motion.span 
                             className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-600 bg-[length:200%_auto]"

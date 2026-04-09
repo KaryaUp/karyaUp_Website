@@ -136,7 +136,7 @@ export default function CalendarStickySection() {
           viewport={{ once: true }}
           className="mb-12 text-center"
         >
-          <h2 className="mb-4 text-3xl font-black leading-[1.06] tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl">
+          <h2 className="mb-4 text-3xl font-black leading-[1.06] tracking-normal text-slate-900 sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem]">
             Everything Happens in
             <br />
             <span className="text-gradient inline-block">One Calendar</span>
@@ -154,7 +154,7 @@ export default function CalendarStickySection() {
               className="absolute inset-0 flex h-full w-full flex-col lg:flex-row items-center bg-white"
             >
               <div className="flex-none lg:flex-1 flex flex-col items-center justify-center px-4 pt-5 pb-2 text-center sm:h-full sm:p-8 lg:items-start lg:p-12 lg:text-left z-20 relative">
-                <h3 className="mb-2.5 sm:mb-6 text-[26px] sm:text-3xl font-black leading-[1.1] text-slate-900 md:text-5xl">
+                <h3 className="mb-2.5 sm:mb-6 text-[26px] sm:text-3xl font-black leading-[1.1] text-slate-900 md:text-[2.75rem]">
                   {item.title}
                   <br />
                   <span className="text-gradient">

@@ -100,7 +100,7 @@ export default function TeamInfoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.06] mb-6 tracking-tight"
+            className="text-4xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.06] mb-6 tracking-normal"
           >
             Your Team.{" "}Organized.<br className="hidden sm:block" />
             <motion.span 

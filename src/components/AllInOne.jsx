@@ -32,12 +32,12 @@ const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
 );
 
 const FeatureCard = ({ title, icon: Icon, image, color }) => (
-    <div className="-m-[0.5px] sm:m-0 w-full sm:w-80 h-[138px] sm:h-[192px] bg-white sm:border sm:border-gray-100 flex flex-col relative overflow-hidden group/card shadow-none sm:shadow-sm hover:shadow-md transition-shadow duration-300 leading-none">
+    <div className="-m-[0.5px] sm:m-0 w-full sm:w-80 h-[138px] sm:h-[192px] bg-white sm:border sm:border-gray-100 flex flex-col relative overflow-hidden group/card shadow-none sm:shadow-sm hover:shadow-md transition-shadow duration-300 leading-[1.05]">
         <div className="absolute top-2 left-2 z-10 flex items-center gap-2 bg-white/90 backdrop-blur-sm px-2 py-1 sm:border sm:border-gray-100 rounded-sm">
             <div className="p-1 bg-gray-50 rounded-sm">
                 <Icon className="w-3 h-3" style={{ color }} strokeWidth={2} />
             </div>
-            <h3 className="font-bold text-[9px] text-gray-900 tracking-tight uppercase">{title}</h3>
+            <h3 className="font-bold text-[9px] text-gray-900 tracking-normal uppercase">{title}</h3>
         </div>
         <div className="w-[calc(100%+2px)] h-[calc(100%+2px)] -mt-[1px] -ml-[1px] overflow-hidden bg-transparent">
             <img
@@ -214,7 +214,7 @@ const AllInOne = () => {
                         <Zap className="w-3.5 h-3.5 text-[#7e22ce]" />
                         <span className="text-[10px] font-bold text-[#7e22ce] uppercase tracking-wider">Zero Friction Sync</span>
                     </div>
-                    <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95]">
+                    <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]">
                         Replace All Your Tools <br /> With One<br />
                         <motion.span
                             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"

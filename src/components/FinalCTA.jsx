@@ -83,7 +83,7 @@ const FinalCTA = () => {
                         <Star key={i} size={8} className="text-amber-400 sm:w-[10px] sm:h-[10px]" fill="currentColor" />
                       ))}
                     </div>
-                    <span className="text-slate-400 font-bold text-xs sm:text-sm tracking-tight italic">"{t}"</span>
+                    <span className="text-slate-400 font-bold text-xs sm:text-sm tracking-normal italic">"{t}"</span>
                   </div>
                 ))}
               </motion.div>
@@ -93,7 +93,7 @@ const FinalCTA = () => {
             </div>
 
             {/* Main Value Prop */}
-            <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-2 sm:mb-3">
+            <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-2 sm:mb-3">
               Run Your Entire <br />
               <motion.span
                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"

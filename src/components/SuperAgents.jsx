@@ -77,7 +77,7 @@ const SuperAgents = () => {
                     transition={{ duration: 0.7, ease: 'easeOut' }}
                 >
                     <h2
-                        className="font-black text-white mb-6 leading-[1.05] tracking-tight mx-auto"
+                        className="font-black text-white mb-6 leading-[1.05] tracking-normal mx-auto"
                         style={{ fontSize: 'clamp(2.5rem, 6vw, 5.5rem)', maxWidth: '900px' }}
                     >
                         A new era of humans,{' '}

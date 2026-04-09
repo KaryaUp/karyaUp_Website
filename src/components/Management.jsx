@@ -21,7 +21,7 @@ const Management = () => {
                             <Sparkles size={11} />
                             Operations Layer
                         </div>
-                        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tighter leading-[0.95] mb-2 sm:mb-3">
+                        <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-2 sm:mb-3">
                             More Than <br />
                             <motion.span
                                 className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
@@ -44,7 +44,7 @@ const Management = () => {
                                         {React.cloneElement(item.icon, { className: "w-5 h-5" })}
                                     </div>
                                     <div className="flex flex-col items-center sm:items-start">
-                                        <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-tight">{item.title}</h4>
+                                        <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-normal">{item.title}</h4>
                                         <p className="text-xs sm:text-sm font-bold text-slate-400 leading-tight">{item.desc}</p>
                                     </div>
                                 </div>

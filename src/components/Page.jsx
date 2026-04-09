@@ -5,7 +5,7 @@ export default function Page({ title, subtitle, children }) {
     <div className="min-h-[calc(100vh-88px)] pt-24 pb-16 bg-slate-50">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <header className="mb-10">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900">
+          <h1 className="text-3xl sm:text-4xl md:text-[2.75rem] font-extrabold tracking-normal text-slate-900">
             {title}
           </h1>
           {subtitle ? (

@@ -14,7 +14,7 @@ export default function FeatureCTA({
   imageClassName = "w-full",
   containerClassName = "mt-24 mb-10",
   paddingClassName = "p-1.5 sm:p-3 lg:p-4",
-  titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.08] mb-2 tracking-tight drop-shadow-lg",
+  titleClassName = "text-2xl sm:text-3xl lg:text-4xl font-black text-white leading-[1.08] mb-2 tracking-normal drop-shadow-lg",
   imageOuterClassName = "relative w-full max-w-[260px] sm:max-w-[400px] lg:max-w-none lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-6"
 }) {
   const [isMobile, setIsMobile] = useState(false);

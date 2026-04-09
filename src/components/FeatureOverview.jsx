@@ -127,7 +127,7 @@ const FeatureRow = ({ feature, index }) => {
                 Metric
               </div>
               <div className="flex items-baseline justify-center sm:justify-end gap-2">
-                <span className="text-xl sm:text-2xl font-black leading-none" style={{ color: feature.accent }}>
+                <span className="text-xl sm:text-2xl font-black leading-[1.05]" style={{ color: feature.accent }}>
                   {feature.stat}
                 </span>
                 <span className="text-slate-500 text-[11px] sm:text-xs font-semibold">
@@ -157,7 +157,7 @@ const FeatureOverview = () => (
           <TrendingUp size={12} /> Product Features
         </span>
 
-        <h2 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[0.95] tracking-tight mb-3">
+        <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] tracking-normal mb-3">
           See Everything.{' '}
           <motion.span
             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"

@@ -340,7 +340,7 @@ const Navbar = () => {
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
   const isOverlayLightNav = isOverlayNav && (isHomePage || (isDarkOverlayPage && isIframeDark));
   const linkBase =
-    `text-base font-semibold transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
+    `text-base font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
   const linkActive = "text-primary";
 
   return (
@@ -396,7 +396,7 @@ const Navbar = () => {
                     <div className="bg-slate-900 border border-slate-800 shadow-2xl rounded-xl px-3 py-2 w-auto min-w-[180px] max-w-[280px] backdrop-blur-md">
                       <div className="absolute -top-1 w-2 h-2 bg-slate-900 border-t border-l border-slate-800 rotate-45 left-6" />
                       <p className="text-[13px] font-medium text-white leading-snug">
-                        <span className="text-purple-400 font-bold tracking-tight block mb-0.5">KaryaUp</span>
+                        <span className="text-purple-400 font-bold tracking-normal block mb-0.5">KaryaUp</span>
                         From Sanskrit word<br /> <span className="italic opacity-90">“कार्य   ”</span> meaning action <br /> or work.
                       </p>
                     </div>
@@ -680,7 +680,7 @@ const Navbar = () => {
             <a
               href={authUrl}
               onClick={closeAllMenus}
-              className={`group flex items-center gap-2 font-semibold transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
+              className={`group flex items-center gap-2 font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
             >
               <LogIn size={16} className={`${isOverlayLightNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
               <span className="text-[14px]">Log in</span>
@@ -741,7 +741,7 @@ const Navbar = () => {
                       to={item.to}
                       onClick={closeAllMenus}
                       className={({ isActive }) =>
-                        `block rounded-2xl px-5 py-4 text-[17px] font-bold tracking-tight transition-all ${isActive
+                        `block rounded-2xl px-5 py-4 text-[17px] font-bold tracking-wide transition-all ${isActive
                           ? "bg-primary/10 text-primary shadow-sm"
                           : "text-slate-800 hover:bg-slate-50 border border-transparent hover:border-slate-100"
                         }`
@@ -757,7 +757,7 @@ const Navbar = () => {
                       <button
                         type="button"
                         onClick={() => setMobileOpenSection((prev) => prev === item.label ? null : item.label)}
-                        className="w-full flex items-center justify-between px-5 py-5 text-[17px] font-bold text-slate-800 tracking-tight"
+                        className="w-full flex items-center justify-between px-5 py-5 text-[17px] font-bold text-slate-800 tracking-wide"
                       >
                         <span>{item.label}</span>
                         <ChevronDown
