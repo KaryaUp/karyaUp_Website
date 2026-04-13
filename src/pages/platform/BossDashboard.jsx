@@ -114,11 +114,10 @@ function Card({ data, type }) {
   return (
     <div className="border border-slate-200 rounded-xl px-2.5 py-2 sm:px-3 sm:py-2.5 lg:px-4 lg:py-3 flex flex-nowrap items-center gap-2 lg:gap-3 bg-white shadow-sm ring-1 ring-black/5">
       <div
-        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
-          isRed
+        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${isRed
             ? "bg-red-50 border-red-100 text-red-500"
             : "bg-purple-50 border-purple-100 text-purple-600"
-        }`}
+          }`}
       >
         {isRed ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
       </div>
@@ -212,9 +211,8 @@ const MarqueeRow = ({ text, direction, isShieldHovered }) => {
 function ScrollingDataBg({ isShieldHovered }) {
   return (
     <div
-      className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${
-        isShieldHovered ? "opacity-30" : "opacity-[0.05]"
-      }`}
+      className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${isShieldHovered ? "opacity-30" : "opacity-[0.05]"
+        }`}
     >
       {/* Row 1: Plan (Left) */}
       <MarqueeRow
@@ -520,25 +518,25 @@ const bossTiltPillars = [
   {
     icon: Layers,
     title: "One pane of truth",
-    desc: "Projects, people, and priorities in a single leadership view instead of five tabs and a spreadsheet.",
+    desc: "Projects, people, and priorities in a single leadership view.",
     color: "purple",
   },
   {
     icon: Activity,
     title: "Live operating rhythm",
-    desc: "See workload, blockers, and momentum update as work happens — not after the weekly status meeting.",
+    desc: "See workload, blockers, and momentum update as work happens.",
     color: "fuchsia",
   },
   {
     icon: Zap,
     title: "Decisions without delay",
-    desc: "Spot risks early, align tradeoffs fast, and keep teams on course before small gaps become expensive misses.",
+    desc: "Spot risks early, align tradeoffs fast.",
     color: "purple",
   },
   {
     icon: BarChart3,
     title: "Metrics that tell a story",
-    desc: "Utilization, throughput, and outcomes read clearly for you and your leads — without building custom reports.",
+    desc: "Utilization, throughput, and outcomes read clearly for you and your leads.",
     color: "fuchsia",
   },
 ];
@@ -547,7 +545,7 @@ const bossTiltPillars = [
    MAIN PAGE COMPONENT
 ═══════════════════════════════════════════════ */
 export default function BossDashboard() {
-  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+  const sectionSpacing = "py-8 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
@@ -690,125 +688,7 @@ export default function BossDashboard() {
     },
   ];
 
-  const DEFAULT_ICON_MAP = {
-    "Intelligent Routing": { icon: BrainCircuit, color: "#4c1d95" },
-    "Enterprise Security": { icon: Zap, color: "#4c1d95" },
-    "Global-Search": { icon: Search, color: "#4c1d95" },
-  };
-  const FeatureStack = ({ items = [], interval = 2500 }) => {
-    const [index, setIndex] = useState(0);
-    const [hovered, setHovered] = useState(false);
 
-    useEffect(() => {
-      if (items.length === 0 || hovered) return;
-      const timer = setInterval(() => {
-        setIndex((prev) => (prev + 1) % items.length);
-      }, interval);
-      return () => clearInterval(timer);
-    }, [items.length, interval, hovered]);
-
-    const visibleItems = useMemo(() => {
-      if (items.length === 0) return [];
-      return [0, 1, 2].map((offset) => {
-        const itemIndex = (index + offset) % items.length;
-        const rawItem = items[itemIndex];
-
-        // Normalize item to object
-        let itemObj =
-          typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
-
-        // Apply defaults for icons/colors if missing
-        if (!itemObj.icon || !itemObj.iconColor) {
-          const mapped = DEFAULT_ICON_MAP[itemObj.label] || {
-            icon: Check,
-            color: "#000000",
-          };
-          itemObj.icon = itemObj.icon || mapped.icon;
-          itemObj.iconColor = itemObj.iconColor || mapped.color;
-        }
-
-        return { offset, item: itemObj };
-      });
-    }, [items, index]);
-
-    if (items.length === 0) return null;
-
-    return (
-      <div
-        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
-        style={{
-          height: "80px",
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map(({ offset, item }) => {
-            const Icon = item.icon;
-            const color = item.iconColor;
-
-            return (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 15, scale: 0.9 }}
-                animate={
-                  hovered
-                    ? {
-                        opacity: 1,
-                        scale: 1,
-                        y: offset * 54, // Clear separation between cards
-                        zIndex: 10 - offset,
-                      }
-                    : {
-                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
-                        scale: 1 - offset * 0.035,
-                        y: offset * 11,
-                        zIndex: 10 - offset,
-                      }
-                }
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: hovered ? offset * 0.05 : offset * 0.02,
-                }}
-                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
-                style={{
-                  background:
-                    offset === 0
-                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
-                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
-                }}
-              >
-                {/* Icon box with colorful icon */}
-                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
-                  <Icon
-                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                    style={{ color: color }}
-                    strokeWidth={2.5}
-                  />
-                </div>
-
-                {/* Precise Small Uppercase Text */}
-                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
-                  {item.label}
-                </span>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-    );
-  };
   return (
     <div className="bg-white font-sans overflow-x-hidden">
       <Helmet>
@@ -839,7 +719,7 @@ export default function BossDashboard() {
         />
       </Helmet>
       {/* Hero Section */}
-      <section className="py-28 px-6">
+      <section className="pt-24 sm:pt-28 lg:pt-28 pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4">
@@ -889,14 +769,14 @@ export default function BossDashboard() {
                 {
                   label: "Intelligent Routing",
                   icon: BrainCircuit,
-                  color: "purple",
+                  iconColor: "#7e22ce",
                 },
 
-                { label: "Global-Search", icon: Search, color: "blue" },
+                { label: "Global-Search", icon: Search, iconColor: "#3b82f6" },
                 {
                   label: "Enterprise Security",
                   icon: ShieldCheck,
-                  color: "emerald",
+                  iconColor: "#10b981",
                 },
               ]}
             />
@@ -1047,7 +927,7 @@ export default function BossDashboard() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -1076,7 +956,7 @@ export default function BossDashboard() {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
             {bossTiltPillars.map((item, i) => (
-              <CollabTiltCard key={item.title} item={item} delay={i * 0.06} />
+              <CollabTiltCard key={item.title} item={item} delay={i * 0.06} variant="compact" />
             ))}
           </div>
         </div>

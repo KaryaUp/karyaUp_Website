@@ -1,9 +1,17 @@
 import { Helmet } from "react-helmet-async";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
+import { CheckCircle2, XCircle } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
+
 import { Rocket, Layers, Code2, Zap, Terminal, Cpu, BrainCircuit, Search, ShieldCheck, Check } from "lucide-react";
+import { lazy, Suspense } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
+import karyaupLogo from "../../assets/logo-svg.svg";
+import FeatureStack from "../../components/FeatureStack";
+
+// Lazy load the 3D component to improve initial page load speed
+const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
 
 
 const TiltCard = ({ children, className }) => {
@@ -44,16 +52,187 @@ const TiltCard = ({ children, className }) => {
   );
 };
 
+const MarqueeRow = ({ text, direction, isShieldHovered }) => {
+  const isLeft = direction === "left";
+  return (
+    <motion.div
+      initial={{ x: isLeft ? 0 : -1000 }}
+      animate={{ x: isLeft ? -1000 : 0 }}
+      transition={{
+        duration: isShieldHovered ? 15 : 40,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      // Added leading-none and kept text-2xl for smaller size
+      className="whitespace-nowrap text-purple-700 font-black text-2xl select-none tracking-tighter flex gap-10 leading-none"
+    >
+      {/* Repeating text to ensure a gapless loop */}
+      {Array(9).fill(null).map((_, i) => (
+        <span key={i}>{text}  </span>
+      ))}
+    </motion.div>
+  );
+};
+const CheckIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
+    <polyline points="3,9 7,13 13,5" />
+  </svg>
+);
+const XIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" width="13" height="13">
+    <line x1="4" y1="4" x2="12" y2="12" /><line x1="12" y1="4" x2="4" y2="12" />
+  </svg>
+);
+const ListIcon = () => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" width="11" height="11">
+    <line x1="5" y1="4" x2="13" y2="4" /><line x1="5" y1="8" x2="13" y2="8" /><line x1="5" y1="12" x2="13" y2="12" />
+    <circle cx="2.5" cy="4" r="1" fill="currentColor" stroke="none" />
+    <circle cx="2.5" cy="8" r="1" fill="currentColor" stroke="none" />
+    <circle cx="2.5" cy="12" r="1" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════
+   LIGHT 3D GLASS SHIELD
+═══════════════════════════════════════════════ */
+const LightShield3D = () => (
+  <svg viewBox="0 0 200 220" fill="none" className="w-full h-full drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
+    <defs>
+      <linearGradient id="glassBorderGradient" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
+        <stop stopColor="#F472B6" stopOpacity="0.4" />
+        <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
+        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z"
+      fill="white"
+      fillOpacity="0.03"
+      stroke="url(#glassBorderGradient)"
+      strokeOpacity="0.6"
+      strokeWidth="2"
+    />
+  </svg>
+);
+
+/* ═══════════════════════════════════════════════
+   SUB-COMPONENTS
+═══════════════════════════════════════════════ */
+function Card({ data, type, index }) {
+  const isRed = type === "red";
+  return (
+    <motion.div
+      initial={{ y: 0 }}
+      animate={{ y: [0, -8, 0] }}
+      transition={{ duration: 4, repeat: Infinity, delay: index * 0.4, ease: "easeInOut" }}
+      className="relative group rounded-xl w-full"
+    >
+      <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50">
+        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
+          }`}>
+          {isRed ? <XIcon /> : <CheckIcon />}
+        </div>
+        <div className="flex-1 min-w-0 text-left">
+          <div className="text-[13px] font-bold text-slate-900 truncate">{data.title}</div>
+          <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
+            <span>{data.tag}</span>
+            <span className="w-1 h-1 rounded-full bg-slate-300" />
+            <span className="flex items-center gap-1"><ListIcon /> Active</span>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+function ScrollTrack({ cards, direction }) {
+  const trackRef = useRef(null);
+  const posRef = useRef(direction === "up" ? -25 : 0);
+  const doubled = useMemo(() => [...cards, ...cards], [cards]);
+
+  useEffect(() => {
+    const speed = 0.045;
+    const animate = () => {
+      if (direction === "down") {
+        posRef.current -= speed;
+        if (posRef.current <= -25) posRef.current = 0;
+      } else {
+        posRef.current += speed;
+        if (posRef.current >= 0) posRef.current = -25;
+      }
+      if (trackRef.current) trackRef.current.style.transform = `translateY(${posRef.current}%)`;
+      requestAnimationFrame(animate);
+    };
+    const raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [direction]);
+
+  return (
+    <div className="h-[220px] overflow-hidden relative">
+      <Helmet>
+        <title>Product Development | Karyaup</title>
+        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
+        <meta name="keywords" content="product-development, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
+        <meta name="author" content="Karyaup" />
+        <meta property="og:title" content="Product Development | Karyaup" />
+        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://karyaup.com/features/product-development" />
+        <meta property="og:site_name" content="Karyaup" />
+        <link rel="canonical" href="https://karyaup.com/features/product-development" />
+      </Helmet>
+
+      <div className="relative h-full" style={{
+        maskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)',
+        WebkitMaskImage: 'linear-gradient(to bottom, transparent, black 15%, black 85%, transparent)'
+      }}>
+        <div ref={trackRef} className="flex flex-col gap-4 py-4 will-change-transform">
+          {doubled.map((card, i) => (
+            <Card key={i} data={card} type={direction === "down" ? "red" : "green"} index={i % cards.length} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ScrollingDataBg({ isShieldHovered }) {
+  return (
+    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${
+      isShieldHovered ? "opacity-30" : "opacity-[0.05]"
+    }`}>
+      {/* Row 1: Plan (Left) */}
+      <MarqueeRow text="Plan the Karya" direction="right" isShieldHovered={isShieldHovered} />
+      
+      {/* Row 2: Move (Right) */}
+      <MarqueeRow text="Move the Karya" direction="left" isShieldHovered={isShieldHovered} />
+      
+      {/* Row 3: Complete (Left) */}
+      <MarqueeRow text="Complete the Karya" direction="right" isShieldHovered={isShieldHovered} />
+    </div>
+  );
+}
+
 export default function ProductDevelopment() {
   const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
+  const [isShieldHovered, setIsShieldHovered] = useState(false);
 
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener("resize", checkMobile);
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
+  const redCards = [
+    { title: "Projects scattered across tools", tag: "Inefficiency" },
+    { title: "Critical info hidden in silos", tag: "Visibility" },
+    { title: "Manual updates strain capacity", tag: "Labor" },
+    { title: "Missed deadlines & bottlenecks", tag: "Risk" },
+    { title: "Unclear resource allocation", tag: "Planning" },
+  ];
+
+  const greenCards = [
+    { title: "Unified platform hub", tag: "Efficiency" },
+    { title: "Instant global search", tag: "Visibility" },
+    { title: "Automated report generation", tag: "Labor" },
+    { title: "AI-powered timeline tracking", tag: "Growth" },
+    { title: "Real-time resource analytics", tag: "Scale" },
+  ];
 
   const DEFAULT_ICON_MAP = {
     "CODE EXPLORE"  : { icon: Search, color: "#4c1d95" },
@@ -171,93 +350,172 @@ export default function ProductDevelopment() {
     );
   };
   return (
-    <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans overflow-x-hidden">
-      <Helmet>
-        <title>Product Development | Karyaup</title>
-        <meta name="description" content="Plan and manage schedules with Karyaup calendar. Track tasks, deadlines, meetings, and events in one unified calendar for better team coordination." />
-        <meta name="keywords" content="product-development, team calendar, scheduling software, task calendar, project deadlines, meeting planner, Karyaup" />
-        <meta name="author" content="Karyaup" />
-        <meta property="og:title" content="Product Development | Karyaup" />
-        <meta property="og:description" content="Organize tasks, events, and deadlines with a powerful team calendar." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://karyaup.com/features/product-development" />
-        <meta property="og:site_name" content="Karyaup" />
-        <link rel="canonical" href="https://karyaup.com/features/product-development" />
-      </Helmet>
+    <div className="bg-white font-sans overflow-x-hidden">
+      {/* ================= HERO SECTION ================= */}
 
-      {/* ================= HERO SECTION (matches Tasks.jsx type scale & spacing) ================= */}
+      <section className="py-28 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-4 border border-purple-100">
+              Product Intelligence
+            </span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
+            >
+              The Everything App<br />
+              <motion.span
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                for Software Teams
+              </motion.span>
+            </motion.h1>
 
-      <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
-            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
-              <motion.div
-                initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
-              >
-                Product Intelligence
-              </motion.div>
-              <motion.h1
-                initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
-              >
-                The Everything App
-                <span className="block">
-                  <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  >
-                    for Software Teams
-                  </motion.span>
-                </span>
-              </motion.h1>
-
-              <motion.div
-                initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
-              >
-                <div className="flex items-start gap-3 text-left">
-                  <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
-                  </div>
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
-                    Get real-time visibility into your revenue, expenses, and margins with KaryaUp.
-                  </p>
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
                 </div>
-              </motion.div>
-
-              <FeatureStack
-                items={[
-                  { label: "CODE EXPLORE", icon: BrainCircuit },
-                  { label: "SECURE DEPLOY", icon: Zap },
-                  { label: "DEV ROUTING", icon: Search },
-                ]}
+                <p className="text-sm sm:text-base text-slate-600 font-medium">Get real-time visibility into your revenue, expenses, 
+              <br />
+              and margins with KaryaUp. </p>
+              </div>
+            </div>
+           
+            <FeatureStack
+              items={[
+                { label: "CODE EXPLORE", icon: BrainCircuit },
+                { label: "SECURE DEPLOY", icon: Zap },
+                { label: "DEV ROUTING", icon: Search }
+                
+              ]}
+            />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
+          >
+            <div className="relative overflow-hidden  shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white mt-[-30px] lg:mt-[-5px]">
+              <img
+                src={dashboardImage}
+                alt="KaryaUp task management"
+                className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
               />
             </div>
-            <motion.div
-              initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Comparison Section */}
+      <section className="py-4 bg-white px-4">
+        <div className="max-w-7xl mx-auto">
+
+        <motion.h2
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
+          >
+            Project Management <br />
+            <motion.span
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             >
-              <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
-                <img
-                  src={dashboardImage}
-                  alt="KaryaUp product development"
-                  className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+              is broken, we fixed it
+            </motion.span>
+          </motion.h2>
+
+          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
+            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+              
+              {/* OLD WAY */}
+              <div className="p-8 border-r border-slate-200 bg-white/50">
+                <h3 className="text-center text-[1.5rem] font-black mb-1">Old Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Manual updates and scattered tools.</p>
+                <ScrollTrack cards={redCards} direction="down" />
+              </div>
+
+              {/* MIDDLE SHIELD & MARQUEE */}
+              <div 
+                className="relative flex flex-col items-center justify-start py-8 px-4 group overflow-hidden bg-white/40 min-h-[450px]"
+                onMouseEnter={() => setIsShieldHovered(true)}
+                onMouseLeave={() => setIsShieldHovered(false)}
+              >
+                <ScrollingDataBg isShieldHovered={isShieldHovered} />
+
+                <div className="relative z-40 text-center mb-10">
+                  <h3 className={`text-[1.55rem] font-black transition-colors ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
+                    Security You Can Trust
+                  </h3>
+                  <p className="text-[10px] mt-2 font-bold uppercase tracking-widest text-slate-500">
+                    More secure than using AI directly.
+                  </p>
+                </div>
+
+                <div className="relative flex items-center justify-center w-full max-w-[220px] h-[220px]" style={{ perspective: "1200px" }}>
+                  <div className="absolute inset-0 z-10 opacity-80 scale-110 pointer-events-none">
+                    <LightShield3D />
+                  </div>
+                  {/* Centered spinning logo */}
+                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
+                    <motion.div
+                      animate={{
+                        y: [0, -10, 0],
+                        scale: isShieldHovered ? 1.1 : 1
+                      }}
+                      transition={{
+                        y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
+                        scale: { duration: 0.4 }
+                      }}
+                      className="w-28 h-28 md:w-35 md:h-35 relative"
+                      style={{ transformStyle: "preserve-3d" }}
+                    >
+                      <div 
+                        className="absolute inset-0"
+                        style={{
+                          filter: isShieldHovered
+                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                          transition: "filter 0.5s ease"
+                        }}
+                      >
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-15 h-15 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
+                          <SpinningLogo3D
+                            isHovered={isShieldHovered}
+                            className="w-full h-full object-contain"
+                          />
+                        </Suspense>
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+
+                <motion.div
+                  animate={{ scale: isShieldHovered ? 1.4 : 1, opacity: isShieldHovered ? 0.4 : 0.15 }}
+                  className="absolute -bottom-40 w-64 h-64 bg-purple-400 rounded-full blur-[100px] pointer-events-none"
                 />
               </div>
-            </motion.div>
+
+
+              {/* KARYAUP WAY */}
+              <div className="p-8 border-l border-slate-200 bg-white/50">
+                <h3 className="text-center text-2xl font-black mb-1">The KaryaUp Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Advanced execution loops for growth.</p>
+                <ScrollTrack cards={greenCards} direction="up" />
+              </div>
+
+            </div>
           </div>
         </div>
       </section>
+      {/* ================= KARYAUP WORKSPACE FEATURES ================= */}
+      {/* ================= KARYAUP WORKSPACE FEATURES ================= */}
 
       <section className="py-6 bg-white relative overflow-hidden"> {/* Increased py-10 to py-20 for better breathing room */}
         {/* Glows */}
@@ -286,9 +544,9 @@ export default function ProductDevelopment() {
             <p className="text-[1rem] text-slate-600 font-medium leading-relaxed">
               Eliminate context switching. 
               <br />
-              Plan sprints, track bugs, write technical docs
+              Plan sprints, track bugs, write technical docs, 
               <br />
-             
+              and visualize roadmaps all in one intelligent platform.
             </p>
           </div>
 
@@ -299,38 +557,51 @@ export default function ProductDevelopment() {
                 icon: <Code2 size={24} />,
                 title: "Connected Code & Tasks",
                 desc: "Link GitHub PRs, commits, and branches directly to tasks. Tasks auto-update status when code merges.",
+                bgColor: "bg-blue-50 text-purple-600",
+                hoverBg: "group-hover:bg-purple-600",
+                borderColor: "group-hover:border-blue-200"
               },
               {
                 icon: <Rocket size={24} />,
                 title: "Automated Sprints",
                 desc: "Put sprints on autopilot. Unfinished work automatically rolls over, and capacity is calculated in real-time.",
+                bgColor: "bg-purple-50 text-fuchsia-600",
+                hoverBg: "group-hover:bg-fuchsia-600",
+                borderColor: "group-hover:border-purple-200"
               },
               {
                 icon: <Layers size={24} />,
                 title: "Infinite Custom Views",
                 desc: "Visualize your product roadmap via Gantt, execute daily tasks in Kanban, and report using custom Dashboards.",
+                bgColor: "bg-fuchsia-50 text-purple-600",
+                hoverBg: "group-hover:bg-purple-600",
+                borderColor: "group-hover:border-fuchsia-200"
               },
               {
                 icon: <Terminal size={24} />,
                 title: "Flawless Issue Tracking",
                 desc: "Capture bugs with custom forms. Prioritize, assign to engineers, and track resolution velocity seamlessly.",
+                bgColor: "bg-emerald-50 text-fuchsia-600",
+                hoverBg: "group-hover:bg-fuchsia-600",
+                borderColor: "group-hover:border-emerald-200"
               },
               {
                 icon: <Cpu size={24} />,
                 title: "Integrated Docs & Wikis",
                 desc: "Create beautiful technical documentation and PRDs natively. Tag tasks, embed roadmaps, and co-edit in real-time.",
+                bgColor: "bg-orange-50 text-purple-600",
+                hoverBg: "group-hover:bg-purple-600",
+                borderColor: "group-hover:border-orange-200"
               },
               {
                 icon: <Zap size={24} />,
                 title: "AI Project Manager",
                 desc: "Let KaryaUp AI generate subtasks from PRDs, summarize long threads, and automatically assign the best developer.",
-              },
-            ].map((feature, i) => {
-              const iconPurplePink =
-                i % 2 === 0
-                  ? "bg-purple-50 text-[#7e22ce] border border-purple-100/80 group-hover:bg-[#7e22ce] group-hover:border-purple-500/30"
-                  : "bg-pink-50 text-fuchsia-600 border border-pink-100/80 group-hover:bg-fuchsia-600 group-hover:border-fuchsia-500/30";
-              return (
+                bgColor: "bg-pink-50 text-fuchsia-600",
+                hoverBg: "group-hover:bg-fuchsia-600",
+                borderColor: "group-hover:border-pink-200"
+              }
+            ].map((feature, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
@@ -342,29 +613,18 @@ export default function ProductDevelopment() {
 
                 <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-white p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
 
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:text-white ${iconPurplePink}`}>
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:text-white ${feature.bgColor} ${feature.hoverBg}`}>
                     {feature.icon}
                   </div>
                   <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">{feature.title}</h3>
                   <p className="text-slate-600 text-sm font-medium leading-relaxed">{feature.desc}</p>
                 </TiltCard>
               </motion.div>
-            );
-            })}
+            ))}
           </div>
         </div>
       </section>
-      <FeatureCTA
-        
-        title="Tasks that connect to everything you ship"
-        description="Plan sprints and specs where your team already works—then let commits and PRs keep tasks honest without extra status meetings."
-        highlights={[
-        
-        ]}
-        image={dashboardImage}
-        imageAlt="KaryaUp product workspace"
-        containerClassName="my-10"
-      />
+      <FeatureCTA title="Tasks that connect to everything" description="Work smarter with unified tasks." image={dashboardImage} imageAlt="KaryaUp dashboard" containerClassName="my-10" />
     </div>
   );
 }

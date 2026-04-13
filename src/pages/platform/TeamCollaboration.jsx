@@ -231,121 +231,7 @@ export default function TeamCollaboration() {
     { title: "AI-powered timeline tracking", owner: "Agent", due: "Now", pr: "Normal" },
   ];
 
-  const DEFAULT_ICON_MAP = {
-    "INSTANT CHAT": { icon: Zap, color: "#4c1d95" },
-    "UNIVERSAL FIND": { icon: Search, color: "#4c1d95" },
-    "SMART ASSIGN": { icon: ShieldCheck, color: "#4c1d95" },
-  }
-  const FeatureStack = ({ items = [], interval = 2500 }) => {
-    const [index, setIndex] = useState(0);
-    const [hovered, setHovered] = useState(false);
 
-    useEffect(() => {
-      if (items.length === 0 || hovered) return;
-      const timer = setInterval(() => {
-        setIndex((prev) => (prev + 1) % items.length);
-      }, interval);
-      return () => clearInterval(timer);
-    }, [items.length, interval, hovered]);
-
-    const visibleItems = useMemo(() => {
-      if (items.length === 0) return [];
-      return [0, 1, 2].map((offset) => {
-        const itemIndex = (index + offset) % items.length;
-        const rawItem = items[itemIndex];
-
-        // Normalize item to object
-        let itemObj = typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
-
-        // Apply defaults for icons/colors if missing
-        if (!itemObj.icon || !itemObj.iconColor) {
-          const mapped = DEFAULT_ICON_MAP[itemObj.label] || { icon: Check, color: "#000000" };
-          itemObj.icon = itemObj.icon || mapped.icon;
-          itemObj.iconColor = itemObj.iconColor || mapped.color;
-        }
-
-        return { offset, item: itemObj };
-      });
-    }, [items, index]);
-
-    if (items.length === 0) return null;
-
-    return (
-      <div
-        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
-        style={{
-          height: "80px",
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map(({ offset, item }) => {
-            const Icon = item.icon;
-            const color = item.iconColor;
-
-            return (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 15, scale: 0.9 }}
-                animate={
-                  hovered
-                    ? {
-                      opacity: 1,
-                      scale: 1,
-                      y: offset * 54, // Clear separation between cards
-                      zIndex: 10 - offset,
-                    }
-                    : {
-                      opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
-                      scale: 1 - offset * 0.035,
-                      y: offset * 11,
-                      zIndex: 10 - offset,
-                    }
-                }
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: hovered ? offset * 0.05 : offset * 0.02,
-                }}
-                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
-                style={{
-                  background:
-                    offset === 0
-                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
-                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
-                }}
-              >
-                {/* Icon box with colorful icon */}
-                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
-                  <Icon
-                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                    style={{ color: color }}
-                    strokeWidth={2.5}
-                  />
-                </div>
-
-                {/* Precise Small Uppercase Text */}
-                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
-                  {item.label}
-                </span>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-    );
-  };
   return (
     <div className="bg-white font-sans overflow-x-hidden">
       <Helmet>
@@ -358,15 +244,15 @@ export default function TeamCollaboration() {
       </Helmet>
 
       {/* HERO */}
-      <section className="relative pt-30 pb-20 px-6 overflow-hidden bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
-            <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+      <section className="relative pt-24 sm:pt-28 lg:pt-30 pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="text-center lg:text-left">
               <motion.div
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4"
+                className="inline-flex max-w-full items-center justify-center gap-2 flex-wrap px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4 text-center whitespace-normal"
               >
                 TEAM COLLABORATION — ONE TEAM, ONE GOAL
               </motion.div>
@@ -374,7 +260,7 @@ export default function TeamCollaboration() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-2 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] text-balance max-w-xl sm:max-w-2xl mx-auto lg:mx-0"
+                className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-1 text-balance max-w-xl sm:max-w-2xl mx-auto lg:mx-0"
               >
                 <span className="text-slate-900">{"Smarter\u00A0Collaboration "}</span>
                 <motion.span
@@ -389,7 +275,7 @@ export default function TeamCollaboration() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-5 sm:mt-3 space-y-3 sm:space-y-4 max-w-lg w-full"
+                className="mt-5 space-y-3 max-w-lg w-full"
               >
                 <div className="flex items-start gap-3 text-left">
                   <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
@@ -411,9 +297,9 @@ export default function TeamCollaboration() {
               <FeatureStack
                 items={[
 
-                  { label: "INSTANT CHAT", icon: Zap, color: "fuchsia" },
-                  { label: "UNIVERSAL FIND", icon: Search, color: "purple" },
-                  { label: "SMART ASSIGN", icon: ShieldCheck, color: "fuchsia" }
+                  { label: "INSTANT CHAT", icon: Zap, iconColor: "#d946ef" },
+                  { label: "UNIVERSAL FIND", icon: Search, iconColor: "#7e22ce" },
+                  { label: "SMART ASSIGN", icon: ShieldCheck, iconColor: "#d946ef" }
                 ]}
               />
             </div>
@@ -517,7 +403,7 @@ export default function TeamCollaboration() {
       </section>
 
       {/* Team collaboration — how you work together */}
-      <section className="py-16 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100">
+      <section className="py-12 sm:py-20 px-4 sm:px-6 bg-gradient-to-b from-slate-50 to-white border-t border-slate-100">
         <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 24 }}
@@ -540,7 +426,7 @@ export default function TeamCollaboration() {
               </motion.span>
             </h2>
             <p className="mt-4 text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
-              KaryaUp keeps people aligned around tasks, projects, and decisions — so your team spends less time chasing updates and more time shipping.
+              KaryaUp keeps people aligned around tasks, projects, and decisions.
             </p>
           </motion.div>
 

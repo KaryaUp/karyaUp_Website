@@ -1,10 +1,16 @@
- import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import { useRef, useEffect, useMemo, useState } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
-import { CheckCircle2, XCircle, GraduationCap, BookOpen, School, Target, ArrowRight, Check } from "lucide-react";
+import { CheckCircle2, XCircle, GraduationCap, BookOpen, School, Target, ArrowRight, ShieldCheck } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import FeatureCTA from "../../components/FeatureCTA";
+import FeatureStack from "../../components/FeatureStack";
 import karyaUpLogo from "../../assets/logo-svg.svg";
+import { lazy, Suspense } from "react";
+// Lazy load the 3D component to improve initial page load speed
+const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
+import { Sparkles, BrainCircuit, Zap, Search, Check } from "lucide-react";
+
 
 const TiltCard = ({ children, className }) => {
   const ref = useRef(null);
@@ -41,6 +47,26 @@ const TiltCard = ({ children, className }) => {
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
       </div>
+    </motion.div>
+  );
+};
+
+const MarqueeRow = ({ text, direction, isShieldHovered }) => {
+  const isLeft = direction === "left";
+  return (
+    <motion.div
+      initial={{ x: isLeft ? 0 : -1000 }}
+      animate={{ x: isLeft ? -1000 : 0 }}
+      transition={{
+        duration: isShieldHovered ? 15 : 40,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      className="whitespace-nowrap text-purple-700 font-black text-2xl select-none tracking-tighter flex gap-10 leading-none"
+    >
+      {Array(9).fill(null).map((_, i) => (
+        <span key={i}>{text}  </span>
+      ))}
     </motion.div>
   );
 };
@@ -181,87 +207,141 @@ function ScrollTrack({ cards, direction }) {
 }
 
 function ScrollingDataBg({ isShieldHovered }) {
-  const infinitePatternRow = "KaryaUp ".repeat(25);
-  const patternRows = Array(14).fill(infinitePatternRow);
+
 
   return (
-    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-3 overflow-hidden ${isShieldHovered ? "opacity-40" : "opacity-[0.08]"
-      }`}>
-      {patternRows.map((pattern, i) => (
-        <motion.div
-          key={i}
-          initial={{ x: i % 2 === 0 ? 0 : -100 }}
-          animate={{ x: i % 2 === 0 ? -100 : 0 }}
-          transition={{ duration: isShieldHovered ? 8 : 25, repeat: Infinity, ease: "linear" }}
-          className="whitespace-nowrap text-purple-700 font-normal text-sm md:text-base select-none"
-        >
-          {pattern} {pattern}
-        </motion.div>
-      ))}
+    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${
+      isShieldHovered ? "opacity-30" : "opacity-[0.05]"
+    }`}>
+      <MarqueeRow text="Plan the Karya" direction="right" isShieldHovered={isShieldHovered} />
+      <MarqueeRow text="Move the Karya" direction="left" isShieldHovered={isShieldHovered} />
+      <MarqueeRow text="Complete the Karya" direction="right" isShieldHovered={isShieldHovered} />
     </div>
   );
 }
 
-const FeatureStack = ({ items = [] }) => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (items.length === 0) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % items.length);
-    }, 1500); // Snappy 1.5s interval
-    return () => clearInterval(timer);
-  }, [items.length]);
-
-  if (items.length === 0) return null;
-
-  return (
-    <div className="relative h-[80px] sm:h-[100px] w-full max-w-[280px] sm:max-w-[320px] mt-6 lg:mt-8 group overflow-visible">
-      <AnimatePresence mode="popLayout">
-        {[2, 1, 0].map((offset) => {
-          const itemIndex = (index + offset) % items.length;
-          const item = items[itemIndex];
-          const label = typeof item === "string" ? item : item.label;
-          const Icon = (typeof item === "object" && item.icon) ? item.icon : Check;
-
-          return (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
-              animate={{
-                opacity: offset === 0 ? 1 : offset === 1 ? 0.4 : 0.15,
-                scale: 1 - offset * 0.04,
-                y: offset * 12, // Compact vertical stacking for better hero-screen visibility
-                zIndex: 10 - offset,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 1.05,
-                transition: { duration: 0.4, ease: "easeIn" }
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: offset * 0.02
-              }}
-              className="absolute top-0 left-0 w-full px-5 py-3 rounded-xl bg-slate-400/10 backdrop-blur-xl border border-black/30 shadow-sm flex items-center gap-3 transition-colors duration-300 hover:bg-slate-400/20"
-            >
-              <div className="w-5 h-5 rounded bg-black/5 border border-black/10 flex items-center justify-center flex-shrink-0">
-                <Icon className="w-3 h-3 text-black stroke-[3]" />
-              </div>
-              <span className="text-[11px] sm:text-[13px] font-black uppercase tracking-widest text-black">
-                {label}
-              </span>
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </div>
-  );
-};
 
 export default function Education() {
+
+  const DEFAULT_ICON_MAP = {
+    "SMART ASSIGN"  : { icon: BrainCircuit, color: "#4c1d95" },
+    "CAMPUS LIVE"   : { icon: Zap, color: "#4c1d95" },
+    "RESOURCE FIND" : { icon: Search, color: "#4c1d95" },
+}
+  const FeatureStack = ({ items = [], interval = 2500 }) => {
+    const [index, setIndex] = useState(0);
+    const [hovered, setHovered] = useState(false);
+  
+    useEffect(() => {
+      if (items.length === 0 || hovered) return;
+      const timer = setInterval(() => {
+        setIndex((prev) => (prev + 1) % items.length);
+      }, interval);
+      return () => clearInterval(timer);
+    }, [items.length, interval, hovered]);
+  
+    const visibleItems = useMemo(() => {
+      if (items.length === 0) return [];
+      return [0, 1, 2].map((offset) => {
+        const itemIndex = (index + offset) % items.length;
+        const rawItem = items[itemIndex];
+        
+        // Normalize item to object
+        let itemObj = typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
+        
+        // Apply defaults for icons/colors if missing
+        if (!itemObj.icon || !itemObj.iconColor) {
+          const mapped = DEFAULT_ICON_MAP[itemObj.label] || { icon: Check, color: "#000000" };
+          itemObj.icon = itemObj.icon || mapped.icon;
+          itemObj.iconColor = itemObj.iconColor || mapped.color;
+        }
+  
+        return { offset, item: itemObj };
+      });
+    }, [items, index]);
+  
+    if (items.length === 0) return null;
+  
+    return (
+      <div
+        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
+        style={{
+          height: "80px",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <AnimatePresence mode="popLayout">
+          {visibleItems.map(({ offset, item }) => {
+            const Icon = item.icon;
+            const color = item.iconColor;
+  
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={
+                  hovered
+                    ? {
+                        opacity: 1,
+                        scale: 1,
+                        y: offset * 54, // Clear separation between cards
+                        zIndex: 10 - offset,
+                      }
+                    : {
+                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
+                        scale: 1 - offset * 0.035,
+                        y: offset * 11,
+                        zIndex: 10 - offset,
+                      }
+                }
+                exit={{
+                  opacity: 0,
+                  y: -10,
+                  scale: 0.95,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: hovered ? offset * 0.05 : offset * 0.02,
+                }}
+                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
+                style={{
+                  background:
+                    offset === 0
+                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
+                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
+                }}
+              >
+                {/* Icon box with colorful icon */}
+                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
+                  <Icon
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                    style={{ color: color }}
+                    strokeWidth={2.5}
+                  />
+                </div>
+  
+                {/* Precise Small Uppercase Text */}
+                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
+                  {item.label}
+                </span>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+  const [isMobile, setIsMobile] = useState(false);
+
   const [isShieldHovered, setIsShieldHovered] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0); // For Task Workspace
 
@@ -285,62 +365,87 @@ export default function Education() {
     <div className="bg-white font-sans overflow-x-hidden">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-10 lg:py-27">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
-          >
-            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
-              SOLUTIONS/EDUCATION
+
+      <section className="py-28 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-3 border border-purple-100">
+              Academic Intelligence
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-              Simplify <br />
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-3"
+            >
+              Simplify<br />
               <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               >
                 Education <br /> Management
               </motion.span>
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Manage academic and administrative resources in one place with KaryaUp's time-saving work tools. From admissions to graduation, keep every step connected.
-            </p>
-            <FeatureStack items={[ {label: "Admissions", icon: BookOpen}, {label: "Learning", icon: GraduationCap}, {label: "Administration", icon: School} ]} />
-          </motion.div>
+            </motion.h1>
 
-          <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
-            >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
-                <img
-                  src={dashboardImage}
-                  alt="KaryaUp task management"
-                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
-                />
-                {/* Right-side invisible/fade effect like reference */}
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">  Manage academic and administrative  resources</p>
               </div>
-            </motion.div>
+            </div>
+
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">  Resources in one place with KaryaUp time<br />saving work tools. </p>
+              </div>
+            </div>
+            {/* <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium">
+              Manage academic and administrative
+              <br />
+              resources in one place with KaryaUp's
+              <br />
+              time saving work tools.
+            </p> */}
+            <FeatureStack
+              items={[
+                { label: "SMART ASSIGN", icon: BrainCircuit },
+                { label: "CAMPUS LIVE", icon: Zap },
+                { label: "RESOURCE FIND", icon: Search }
+              ]}
+            />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
+          >
+            <div className="relative overflow-hidden  shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white mt-[-30px] lg:mt-[-60px]">
+              <img
+                src={dashboardImage}
+                alt="KaryaUp task management"
+                className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* ================= REIMAGINED COMPARISON SECTION ================= */}
       {/* Comparison Section */}
-      <section className="py-5 bg-white px-4 md:px-6">
+      <section className="py-8 bg-white px-4">
         <div className="max-w-7xl mx-auto">
+
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
+            className="text-center text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
           >
             Project Management <br />
             <motion.span
@@ -352,63 +457,65 @@ export default function Education() {
             </motion.span>
           </motion.h2>
 
-          <div className="p-[2px] rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
-            <div className="bg-slate-50 rounded-[1.4rem] md:rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
+            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
 
-              {/* LEFT: OLD WAY */}
-              <div className="p-4 md:p-3 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-1">
-                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">Old Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Manual updates and scattered tools.</p>
+              {/* OLD WAY */}
+              <div className="p-8 border-r border-slate-200 bg-white/50">
+                <h3 className="text-center text-[1.5rem] font-black mb-1">Old Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Manual updates and scattered tools.</p>
                 <ScrollTrack cards={redCards} direction="down" />
               </div>
 
-              {/* MIDDLE: 3D SHIELD & TEXT */}
+              {/* MIDDLE SHIELD & MARQUEE */}
               <div
-                className="relative flex flex-col items-center justify-start py-10 md:py-12 px-4 group overflow-hidden bg-white/40 min-h-[450px] order-2"
+                className="relative flex flex-col items-center justify-start py-8 px-4 group overflow-hidden bg-white/40 min-h-[450px]"
                 onMouseEnter={() => setIsShieldHovered(true)}
                 onMouseLeave={() => setIsShieldHovered(false)}
               >
                 <ScrollingDataBg isShieldHovered={isShieldHovered} />
 
-                <div className="relative z-40 text-center mb-10 pointer-events-none">
-                  <h3 className={`text-xl md:text-2xl font-black transition-colors duration-500 ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
+                <div className="relative z-40 text-center mb-10">
+                  <h3 className={`text-[1.55rem] font-black transition-colors ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
                     Security You Can Trust
                   </h3>
-                  <p className={`text-[10px] mt-2 font-bold uppercase tracking-widest transition-colors duration-500 ${isShieldHovered ? "text-fuchsia-500" : "text-slate-500"}`}>
+                  <p className="text-[10px] mt-2 font-bold uppercase tracking-widest text-slate-500">
                     More secure than using AI directly.
                   </p>
                 </div>
 
-                <div className="relative flex items-center justify-center w-full max-w-[200px] md:max-w-[240px] aspect-square" style={{ perspective: "1200px" }}>
-                  <div className="absolute inset-0 z-10 opacity-80 scale-110">
+                <div className="relative flex items-center justify-center w-full max-w-[220px] h-[220px]" style={{ perspective: "1200px" }}>
+                  <div className="absolute inset-0 z-10 opacity-80 scale-110 pointer-events-none">
                     <LightShield3D />
                   </div>
-
-                  <div className="relative z-30" style={{ transformStyle: "preserve-3d" }}>
+                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
                       animate={{
-                        rotateY: [0, 360],
                         y: [0, -10, 0],
                         scale: isShieldHovered ? 1.1 : 1
                       }}
                       transition={{
-                        rotateY: { duration: 10, repeat: Infinity, ease: "linear" },
                         y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
                         scale: { duration: 0.4 }
                       }}
-                      className="w-32 h-32 md:w-44 md:h-44 relative"
+                      className="w-28 h-28 md:w-35 md:h-35 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
-                      </div>
-
-                      <div className="absolute inset-0" style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg) translateZ(1px)'
-                      }}>
-                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          filter: isShieldHovered
+                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                          transition: "filter 0.5s ease"
+                        }}
+                      >
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-15 h-15 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
+                          <SpinningLogo3D
+                            isHovered={isShieldHovered}
+                            className="w-full h-full object-contain"
+                          />
+                        </Suspense>
                       </div>
                     </motion.div>
                   </div>
@@ -420,19 +527,21 @@ export default function Education() {
                 />
               </div>
 
-              {/* RIGHT: KARYAUP WAY */}
-              <div className="p-4 md:p-6 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-3">
-                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">The KaryaUp Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Advanced execution loops for growth.</p>
+              {/* KARYAUP WAY */}
+              <div className="p-8 border-l border-slate-200 bg-white/50">
+                <h3 className="text-center text-2xl font-black mb-1">The KaryaUp Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Advanced execution loops for growth.</p>
                 <ScrollTrack cards={greenCards} direction="up" />
               </div>
+
             </div>
           </div>
         </div>
       </section>
-         
+
+
       {/* ================= GLASS-EFFECT EDUCATION LIFECYCLE ================= */}
-      <section className="w-full py-10 relative overflow-hidden bg-white">
+      <section className="w-full py-7 relative overflow-hidden bg-white">
         {/* Animated Background Glows for Glass Effect */}
         <div className="absolute top-1/4 -left-20 w-80 h-80 bg-white rounded-full blur-[120px] opacity-40 animate-pulse" />
         <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-fuchsia-200 rounded-full blur-[120px] opacity-40 animate-pulse" />
@@ -443,7 +552,7 @@ export default function Education() {
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6"
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-3"
             >
               Streamline the <br />
               <motion.span
@@ -457,21 +566,30 @@ export default function Education() {
 
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 px-4">
             {[
-              { title: "Admissions", desc: "Simplify applications and intake with automated workflows.", icon: BookOpen, color: "fuchsia" },
-              { title: "Learning", desc: "Centralize coursework, assignments, and collaboration.", icon: GraduationCap, color: "blue" },
-              { title: "Administration", desc: "Manage schedules, resources, and compliance with ease.", icon: School, color: "emerald" },
-              { title: "Outcomes", desc: "Track performance, visualize progress, and celebrate success.", icon: Target, color: "orange" },
+              { title: "Admissions", desc: "Simplify applications and intake with automated workflows.", icon: BookOpen, color: "purple" },
+              { title: "Learning", desc: "Centralize coursework, assignments, and collaboration.", icon: GraduationCap, color: "fuchsia" },
+              { title: "Administration", desc: "Manage schedules, resources, and compliance with ease.", icon: School, color: "purple" },
+              { title: "Outcomes", desc: "Track performance, visualize progress, and celebrate success.", icon: Target, color: "fuchsia" },
             ].map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 ${getColorClasses(feature.color)}`}>
-                    <Icon size={20} strokeWidth={2.5} />
+                <TiltCard key={idx} className="bg-white border border-slate-200 p-7 sm:p-8 rounded-[2rem] h-full group">
+
+                  {/* HEADER SECTION: Icon and Title aligned horizontally */}
+                  <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 ${getColorClasses(feature.color)}`}>
+                      <Icon size={20} strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">
+                      {feature.title}
+                    </h3>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">{feature.title}</h3>
-                  <p className="text-slate-600 text-sm font-medium leading-relaxed">{feature.desc}</p>
+
+                  <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                    {feature.desc}
+                  </p>
                 </TiltCard>
               );
             })}

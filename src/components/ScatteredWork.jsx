@@ -6,6 +6,8 @@ import {
   CheckCircle2, AlertCircle, TrendingUp, ShieldCheck,
   ArrowRight, Zap, Target, Rocket, X
 } from "lucide-react";
+import problemImage from '../assets/problem.webp';
+import solutionImage from '../assets/Solution1.webp';
 
 export default function ScatteredWork() {
   const problems = [
@@ -38,7 +40,7 @@ export default function ScatteredWork() {
             whileInView={{ opacity: 1, y: 0 }}
             className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
           >
-            Consolidate Your <br className="hidden md:block" />Tools
+            One System
             For<br className="hidden md:block" /> <motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -56,7 +58,7 @@ export default function ScatteredWork() {
           className="bg-white border border-slate-200 rounded-[3rem] shadow-2xl shadow-purple-900/5 overflow-hidden flex flex-col lg:flex-row max-w-[1300px] mx-auto"
         >
           {/* THE PROBLEM SIDE */}
-          <div className="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 bg-white border-b lg:border-b-0 lg:border-r border-slate-100 flex flex-col items-center lg:items-start text-center lg:text-left h-full">
+          <div className="w-full lg:w-1/2 px-6 pt-4 pb-6 sm:px-10 sm:pt-6 sm:pb-10 lg:px-12 lg:pt-6 lg:pb-12 bg-gradient-to-br from-red-50/30 via-white to-white border-b lg:border-b-0 lg:border-r border-slate-100 flex flex-col items-center lg:items-start text-center lg:text-left h-full">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-xl bg-purple-50 flex items-center justify-center text-purple-500 border border-purple-100">
                 <AlertCircle size={18} />
@@ -65,31 +67,28 @@ export default function ScatteredWork() {
             </div>
 
             <div className="flex flex-col items-center lg:items-start lg:justify-start">
-              <h3 className="text-3xl md:text-[2.75rem] font-black text-slate-800 tracking-normal leading-[1.05] mb-4">
-                Work   Across <br />
+              <h3 className="text-2xl md:text-[2rem] lg:text-[2.25rem] font-black text-slate-800 tracking-normal leading-[1.05] mb-3">
+                Work Across <br />
                 <span className="text-purple-500">Too Many Tools.</span>
               </h3>
-              <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
+              <p className="text-slate-500 font-medium text-sm sm:text-base leading-relaxed mb-4 max-w-xl">
                 The average team struggles with 8–12 tools daily.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 w-full">
-              {problems.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  className="p-3.5 sm:p-4 rounded-xl border border-slate-100 bg-white shadow-sm transition-all flex items-center"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-purple-400 flex-shrink-0" />
-                    <span className="font-black text-slate-800 text-base">{item}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Problem Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "circOut" }}
+              className="w-full mb-6 rounded-2xl overflow-hidden h-[160px] sm:h-[200px]"
+            >
+              <img
+                src={problemImage}
+                alt="Scattered work across tools"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
 
             {/* Negative Result Box */}
             <div className="p-6 bg-purple-50/50 rounded-2xl border border-purple-100 mt-auto w-full">
@@ -112,7 +111,7 @@ export default function ScatteredWork() {
           </div>
 
           {/* THE SOLUTION SIDE */}
-          <div className="w-full lg:w-1/2 p-6 sm:p-10 lg:p-12 relative bg-white flex flex-col items-center lg:items-start text-center lg:text-left h-full">
+          <div className="w-full lg:w-1/2 px-6 pt-4 pb-6 sm:px-10 sm:pt-6 sm:pb-10 lg:px-12 lg:pt-6 lg:pb-12 relative bg-gradient-to-br from-emerald-50/30 via-white to-white flex flex-col items-center lg:items-start text-center lg:text-left h-full">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-9 h-9 rounded-xl bg-purple-50 flex items-center justify-center text-[#7e22ce] border border-purple-100">
                 <CheckCircle2 size={18} />
@@ -121,7 +120,7 @@ export default function ScatteredWork() {
             </div>
 
             <div className="flex flex-col items-center lg:items-start lg:justify-start">
-              <h3 className="text-3xl md:text-[2.75rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-4">
+              <h3 className="text-2xl md:text-[2rem] lg:text-[2.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-3">
                 One Central Hub. <br />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -131,29 +130,24 @@ export default function ScatteredWork() {
                   Absolute Clarity.
                 </motion.span>
               </h3>
-              <p className="text-slate-500 font-medium text-base sm:text-lg leading-relaxed mb-6 max-w-xl">
+              <p className="text-slate-500 font-medium text-sm sm:text-base leading-relaxed mb-4 max-w-xl">
                 KaryaUp turns your business into one unified engine.
               </p>
             </div>
 
-            {/* Solution Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 mt-2 w-full">
-              {solutions.map((item, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                  whileHover={{ scale: 1.02 }}
-                  className="p-3.5 sm:p-4 rounded-xl border border-slate-100 hover:border-[#c084fc] hover:shadow-md bg-white shadow-sm transition-all flex items-center"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-[#7e22ce] flex-shrink-0" />
-                    <span className="font-black text-slate-800 text-base">{item.text}</span>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
+            {/* Solution Image */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "circOut" }}
+              className="w-full mb-6 rounded-2xl overflow-hidden h-[160px] sm:h-[200px]"
+            >
+              <img
+                src={solutionImage}
+                alt="Unified solution with KaryaUp"
+                className="w-full h-full object-cover"
+              />
+            </motion.div>
 
             {/* List and Outcome Section */}
             <div className="mt-auto lg:mt-6 flex flex-col items-center gap-6 text-center sm:flex-row sm:items-end sm:justify-between sm:text-left w-full">

@@ -62,9 +62,8 @@ const MarqueeRow = ({ text, direction, isShieldHovered }) => {
 function ScrollingDataBg({ isShieldHovered }) {
   return (
     <div
-      className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${
-        isShieldHovered ? "opacity-30" : "opacity-[0.05]"
-      }`}
+      className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${isShieldHovered ? "opacity-30" : "opacity-[0.05]"
+        }`}
     >
       <MarqueeRow
         text="Plan the Karya"
@@ -243,11 +242,10 @@ function Card({ data, type }) {
   return (
     <div className="border border-slate-200 rounded-xl px-2.5 py-2 sm:px-3 sm:py-2.5 lg:px-4 lg:py-3 flex flex-nowrap items-center gap-2 lg:gap-3 bg-white shadow-sm ring-1 ring-black/5">
       <div
-        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${
-          isRed
+        className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${isRed
             ? "bg-red-50 border-red-100 text-red-500"
             : "bg-purple-50 border-purple-100 text-purple-600"
-        }`}
+          }`}
       >
         {isRed ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
       </div>
@@ -361,7 +359,7 @@ function ScrollTrack({ cards, direction }) {
    MAIN PAGE COMPONENT
 ═══════════════════════════════════════════════ */
 export default function ProjectManagement() {
-  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+  const sectionSpacing = "py-8 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
 
   const [isShieldHovered, setIsShieldHovered] = useState(false);
@@ -474,199 +472,7 @@ export default function ProjectManagement() {
     },
   ];
 
-  const DEFAULT_ICON_MAP = {
-    "Intelligent Routing": { icon: BrainCircuit, color: "#4c1d95" },
-    "Real-time Sync": { icon: Zap, color: "#4c1d95" },
-    Search: { icon: Search, color: "#4c1d95" },
-  };
-  const FeatureStack = ({ items = [], interval = 2500 }) => {
-    const [index, setIndex] = useState(0);
-    const [hovered, setHovered] = useState(false);
 
-    useEffect(() => {
-      if (items.length === 0 || hovered) return;
-      const timer = setInterval(() => {
-        setIndex((prev) => (prev + 1) % items.length);
-      }, interval);
-      return () => clearInterval(timer);
-    }, [items.length, interval, hovered]);
-
-    const visibleItems = useMemo(() => {
-      if (items.length === 0) return [];
-      return [0, 1, 2].map((offset) => {
-        const itemIndex = (index + offset) % items.length;
-        const rawItem = items[itemIndex];
-
-        // Normalize item to object
-        let itemObj =
-          typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
-
-        // Apply defaults for icons/colors if missing
-        if (!itemObj.icon || !itemObj.iconColor) {
-          const mapped = DEFAULT_ICON_MAP[itemObj.label] || {
-            icon: Check,
-            color: "#000000",
-          };
-          itemObj.icon = itemObj.icon || mapped.icon;
-          itemObj.iconColor = itemObj.iconColor || mapped.color;
-        }
-
-        return { offset, item: itemObj };
-      });
-    }, [items, index]);
-
-    if (items.length === 0) return null;
-
-    return (
-      <div
-        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
-        style={{
-          height: "80px",
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      >
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map(({ offset, item }) => {
-            const Icon = item.icon;
-            const color = item.iconColor;
-
-            return (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 15, scale: 0.9 }}
-                animate={
-                  hovered
-                    ? {
-                        opacity: 1,
-                        scale: 1,
-                        y: offset * 54, // Clear separation between cards
-                        zIndex: 10 - offset,
-                      }
-                    : {
-                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
-                        scale: 1 - offset * 0.035,
-                        y: offset * 11,
-                        zIndex: 10 - offset,
-                      }
-                }
-                exit={{
-                  opacity: 0,
-                  y: -10,
-                  scale: 0.95,
-                  transition: { duration: 0.5, ease: "easeOut" },
-                }}
-                transition={{
-                  duration: 0.5,
-                  ease: [0.22, 1, 0.36, 1],
-                  delay: hovered ? offset * 0.05 : offset * 0.02,
-                }}
-                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
-                style={{
-                  background:
-                    offset === 0
-                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
-                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
-                  backdropFilter: "blur(12px)",
-                  WebkitBackdropFilter: "blur(12px)",
-                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
-                }}
-              >
-                {/* Icon box with colorful icon */}
-                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
-                  <Icon
-                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                    style={{ color: color }}
-                    strokeWidth={2.5}
-                  />
-                </div>
-
-                {/* Precise Small Uppercase Text */}
-                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
-                  {item.label}
-                </span>
-              </motion.div>
-            );
-          })}
-        </AnimatePresence>
-      </div>
-    );
-  };
-
-  const FeatureGlassStack = ({ items = [] }) => {
-    const [index, setIndex] = useState(0);
-
-    // Default items if none provided
-    const displayItems =
-      items.length > 0
-        ? items
-        : [
-            "Streamline work",
-            "Automate tasks",
-            "Centralize data",
-            "Scale ambition",
-          ];
-
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setIndex((prev) => (prev + 1) % displayItems.length);
-      }, 3000); // Slower interval for smoother switching
-      return () => clearInterval(timer);
-    }, [displayItems.length]);
-
-    // Get the current order of items (top to bottom)
-    const visibleItems = [];
-    for (let i = 0; i < 4; i++) {
-      const itemIndex = (index + i) % displayItems.length;
-      visibleItems.push({
-        id: itemIndex,
-        text: displayItems[itemIndex],
-        position: i, // 0 is top (active), 1-3 are behind
-      });
-    }
-
-    return (
-      <div className="relative h-[160px] w-full max-w-[340px] lg:mx-0 mx-auto flex flex-col items-center justify-start perspective-1000">
-        <AnimatePresence mode="popLayout">
-          {visibleItems.map((item, i) => (
-            <motion.div
-              key={item.text}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              animate={{
-                opacity: 1 - item.position * 0.2, // Less aggressive opacity drop
-                y: item.position * 14, // Slightly more vertical spread for clarity
-                scale: 1 - item.position * 0.08, // More aggressive scaling for depth effect
-                zIndex: 10 - item.position,
-                filter: `blur(${item.position * 0.5}px)`, // Subtle blur for depth
-              }}
-              exit={{
-                opacity: 0,
-                y: 0,
-                scale: 0.95,
-                filter: "blur(4px)",
-                transition: { duration: 0.7, ease: "easeOut" },
-              }}
-              transition={{
-                duration: 1.0,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="absolute w-full px-5 py-3 rounded-full bg-[#1a1c1e]/80 backdrop-blur-xl border border-white/5 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.4)] flex items-center gap-4 group transition-colors duration-500"
-            >
-              <div className="w-8 h-8 rounded-full bg-purple-500/10 border border-purple-500/20 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-500 shadow-sm shadow-purple-500/20">
-                <Smile className="w-4 h-4 text-purple-400" />
-              </div>
-              <div className="flex-1 overflow-hidden">
-                <p className="text-sm font-semibold text-white tracking-normal leading-[1.05] whitespace-nowrap overflow-hidden text-ellipsis">
-                  {item.text}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </div>
-    );
-  };
   return (
     <div className="bg-white font-sans overflow-x-hidden">
       <Helmet>
@@ -674,7 +480,7 @@ export default function ProjectManagement() {
       </Helmet>
 
       {/* HERO SECTION */}
-      <section className="relative pt-30 pb-20 px-6 overflow-hidden bg-white">
+      <section className="relative pt-24 sm:pt-28 lg:pt-30 pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
@@ -732,10 +538,10 @@ export default function ProjectManagement() {
                   {
                     label: "Intelligent Routing",
                     icon: BrainCircuit,
-                    color: "purple",
+                    iconColor: "#7e22ce",
                   },
-                  { label: "Real-time Sync", icon: Zap, color: "fuchsia" },
-                  { label: "Search", icon: Search, color: "purple" },
+                  { label: "Real-time Sync", icon: Zap, iconColor: "#d946ef" },
+                  { label: "Search", icon: Search, iconColor: "#7e22ce" },
                 ]}
               />
             </div>
@@ -917,11 +723,11 @@ export default function ProjectManagement() {
               viewport={{ once: true }}
               className="relative order-2 lg:order-1 flex justify-center lg:justify-end"
             >
-              <div className="w-full max-w-[min(100%,400px)] sm:max-w-[440px] lg:max-w-[460px] overflow-hidden rounded-[48px]">
+              <div className="w-full max-w-[min(100%,400px)] sm:max-w-[440px] lg:max-w-[460px] overflow-hidden rounded-2xl sm:rounded-[48px]">
                 <img
                   src={projectImage}
                   alt="Project Management Dashboard"
-                  className="w-full max-h-[420px] object-contain rounded-[24px]"
+                  className="w-full max-h-[420px] object-contain rounded-xl sm:rounded-[24px]"
                 />
               </div>
             </motion.div>

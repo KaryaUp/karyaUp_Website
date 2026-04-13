@@ -138,7 +138,7 @@ const FeatureStack = ({ items = [], interval = 2500 }) => {
               <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
                 <Icon
                   className="w-3 h-3 sm:w-3.5 sm:h-3.5"
-                  style={{ color: "#9333ea" }} 
+                  style={{ color: color || "#9333ea" }} 
                   strokeWidth={2.5}
                 />
               </div>

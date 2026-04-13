@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet-async";
-import React, { useState, useEffect, useRef } from "react";
-import { 
-  useMotionValue,   // Added
-  useSpring,        // Added
-  useTransform      // Added
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import {
+  useMotionValue,
+  useSpring,
+  useTransform
 } from "framer-motion";
 import FeatureCTA from "../../components/FeatureCTA";
+import FeatureStack from "../../components/FeatureStack";
 import dashboardImage from "../../assets/dashboard2.webp";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -17,12 +18,17 @@ import {
   Users,
   Rocket,
   ShieldCheck,
-  BookOpen,
-  GraduationCap,
-  School,
-  Target
+  BrainCircuit,
+  Zap,
+  Search,
+  CalendarDays,
 } from "lucide-react";
 
+const CheckIcon = ({ className }) => (
+  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <polyline points="3,9 7,13 13,5" />
+  </svg>
+);
 
 const TiltCard = ({ children, className }) => {
   const ref = useRef(null);
@@ -74,66 +80,6 @@ const getColorClasses = (color) => {
   };
   return colorMap[color] || "bg-slate-50 text-slate-600 group-hover:bg-slate-600 group-hover:text-white";
 };
-const FeatureStack = ({ items = [] }) => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (items.length === 0) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % items.length);
-    }, 1500);
-    return () => clearInterval(timer);
-  }, [items.length]);
-
-  if (items.length === 0) return null;
-
-  return (
-    <div className="relative h-[80px] sm:h-[100px] w-full max-w-[280px] sm:max-w-[320px] mt-6 lg:mt-8 group overflow-visible">
-      <AnimatePresence mode="popLayout">
-        {[2, 1, 0].map((offset) => {
-          const itemIndex = (index + offset) % items.length;
-          const item = items[itemIndex];
-          const label = typeof item === "string" ? item : item.label;
-          const Icon =
-            typeof item === "object" && item.icon ? item.icon : Check;
-
-          return (
-            <motion.div
-              key={`${label}-${offset}`}
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
-              animate={{
-                opacity: offset === 0 ? 1 : offset === 1 ? 0.4 : 0.15,
-                scale: 1 - offset * 0.04,
-                y: offset * 12,
-                zIndex: 10 - offset,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 1.05,
-                transition: { duration: 0.4, ease: "easeIn" },
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: offset * 0.02,
-              }}
-              className="absolute top-0 left-0 w-full px-5 py-3 rounded-xl bg-slate-400/10 backdrop-blur-xl border border-black/30 shadow-sm flex items-center gap-3 transition-colors duration-300 hover:bg-slate-400/20"
-            >
-              <div className="w-5 h-5 rounded bg-black/5 border border-black/10 flex items-center justify-center flex-shrink-0">
-                <Icon className="w-3 h-3 text-black stroke-[3]" />
-              </div>
-              <span className="text-[11px] sm:text-[13px] font-black uppercase tracking-widest text-black">
-                {label}
-              </span>
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </div>
-  );
-};
-
 const ImpactCard = ({ icon: Icon, title, description }) => (
   <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition-shadow">
     <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[#7e22ce]/10 text-[#7e22ce]">
@@ -145,6 +91,141 @@ const ImpactCard = ({ icon: Icon, title, description }) => (
 );
 
 export default function NonProfit() {
+
+  const DEFAULT_ICON_MAP = {
+    "MISSION MATCH" : { icon: BrainCircuit, color: "#4c1d95" },
+    "LIVE IMPACT"   : { icon: Zap, color: "#4c1d95" },
+    "GRANT FIND"    : { icon: Search, color: "#4c1d95" },
+}
+  const FeatureStack = ({ items = [], interval = 2500 }) => {
+    const [index, setIndex] = useState(0);
+    const [hovered, setHovered] = useState(false);
+  
+    useEffect(() => {
+      if (items.length === 0 || hovered) return;
+      const timer = setInterval(() => {
+        setIndex((prev) => (prev + 1) % items.length);
+      }, interval);
+      return () => clearInterval(timer);
+    }, [items.length, interval, hovered]);
+  
+    const visibleItems = useMemo(() => {
+      if (items.length === 0) return [];
+      return [0, 1, 2].map((offset) => {
+        const itemIndex = (index + offset) % items.length;
+        const rawItem = items[itemIndex];
+        
+        // Normalize item to object
+        let itemObj = typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
+        
+        // Apply defaults for icons/colors if missing
+        if (!itemObj.icon || !itemObj.iconColor) {
+          const mapped = DEFAULT_ICON_MAP[itemObj.label] || { icon: Check, color: "#000000" };
+          itemObj.icon = itemObj.icon || mapped.icon;
+          itemObj.iconColor = itemObj.iconColor || mapped.color;
+        }
+  
+        return { offset, item: itemObj };
+      });
+    }, [items, index]);
+  
+    if (items.length === 0) return null;
+  
+    return (
+      <div
+        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
+        style={{
+          height: "80px",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <AnimatePresence mode="popLayout">
+          {visibleItems.map(({ offset, item }) => {
+            const Icon = item.icon;
+            const color = item.iconColor;
+  
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={
+                  hovered
+                    ? {
+                        opacity: 1,
+                        scale: 1,
+                        y: offset * 54, // Clear separation between cards
+                        zIndex: 10 - offset,
+                      }
+                    : {
+                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
+                        scale: 1 - offset * 0.035,
+                        y: offset * 11,
+                        zIndex: 10 - offset,
+                      }
+                }
+                exit={{
+                  opacity: 0,
+                  y: -10,
+                  scale: 0.95,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: hovered ? offset * 0.05 : offset * 0.02,
+                }}
+                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
+                style={{
+                  background:
+                    offset === 0
+                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
+                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
+                }}
+              >
+                {/* Icon box with colorful icon */}
+                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
+                  <Icon
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                    style={{ color: color }}
+                    strokeWidth={2.5}
+                  />
+                </div>
+  
+                {/* Precise Small Uppercase Text */}
+                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
+                  {item.label}
+                </span>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+  const [isMobile, setIsMobile] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
+
+  const whyItWorksFeatures = [
+    {
+      title: "Simple for mission-driven teams",
+      desc: "Simple interface for busy nonprofit teams.",
+    },
+    {
+      title: "Collaboration across your ecosystem",
+      desc: "Supports collaboration across departments and volunteers.",
+    },
+    {
+      title: "One place for the full picture",
+      desc: "Keeps planning, tasks, and communication in one place.",
+    },
+  ];
 
   const impactCards = [
     {
@@ -198,147 +279,206 @@ export default function NonProfit() {
       </Helmet>
 
       {/* HERO SECTION */}
-      <section className="w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-20 lg:py-24">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-center lg:text-left"
-          >
-            <span className="inline-block px-3 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
-              Solutions / Non Profit
-            </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-sm">
-              Grow your <br />
+      <section className="py-28 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-3 border border-purple-100">
+              Unified Non-Profit
+            </span>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-6"
+            >
+              Grow your Non-Profit <br />
               <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               >
-                Non-Profit <br />
                 with Karyaup.
               </motion.span>
-            </h1>
+            </motion.h1>
 
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Change the world one task at a time. Bring your team, tools, and work into
-              one place with Karyaup to move your mission forward more effectively.
-            </p>
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">  Change the world one task at a time.</p>
+              </div>
+            </div>
 
-          </motion.div>
-
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">Bring your team, tools, and work into one place with <br />Karyaup to move your mission forward more effectively. </p>
+              </div>
+            </div>
+           
+            <FeatureStack
+              items={[
+                { label: "MISSION MATCH", icon: BrainCircuit },
+                { label: "LIVE IMPACT", icon: Zap },
+                { label: "GRANT FIND", icon: Search }
+              ]}
+            />
+          </div>
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-            className="relative lg:-mr-24 xl:-mr-40"
+            className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
           >
-            <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-            <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
+            <div className="relative overflow-hidden  shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white mt-[-30px] lg:mt-[-40px]">
               <img
                 src={dashboardImage}
-                alt="Karyaup nonprofit workspace dashboard"
-                className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
+                alt="KaryaUp task management"
+                className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
               />
-              <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* ADDITIONAL SECTION */}
-      <section className="py-10 px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-           
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-  The Intelligence Behind <br />
-  <motion.span
-    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-  >
-    Every Great Cause.
-  </motion.span>
-</h1>
-            <p className="mt-5 text-lg leading-8 text-slate-600">
-              Karyaup helps nonprofit teams stay organized across every stage of work,
-              from planning campaigns to tracking outcomes and sharing updates with your
-              community.
-            </p>
+      {/* INTELLIGENCE + WORKSPACE (centered header | image left | Why it works right) */}
 
-            <div className="mt-8 space-y-4">
-              <div className="flex gap-4">
-                <div className="mt-1 h-10 w-10 rounded-xl bg-[#7e22ce]/10 flex items-center justify-center text-[#7e22ce]">
-                  <ClipboardList className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900">Program planning</h3>
-                  <p className="text-slate-600">
-                    Organize events, campaigns, and outreach tasks in a clear workflow.
-                  </p>
-                </div>
-              </div>
+      <section className="py-4 px-6 bg-white relative overflow-hidden">
+        {/* Background Glow */}
+        <div className="absolute -top-24 -right-24 w-90 h-90 bg-purple-50 rounded-full blur-[120px] pointer-events-none opacity-50" />
 
-              <div className="flex gap-4">
-                <div className="mt-1 h-10 w-10 rounded-xl bg-[#7e22ce]/10 flex items-center justify-center text-[#7e22ce]">
-                  <Database className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900">Data collection</h3>
-                  <p className="text-slate-600">
-                    Use forms and surveys to gather volunteer, donor, and community data.
-                  </p>
-                </div>
-              </div>
+        <div className="max-w-7xl mx-auto">
+          {/* CENTERED HEADING & DESCRIPTION */}
+          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-20">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-block px-4 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-3 border border-purple-100">
+                Unified Task Workspace
+              </span>
 
-              <div className="flex gap-4">
-                <div className="mt-1 h-10 w-10 rounded-xl bg-[#7e22ce]/10 flex items-center justify-center text-[#7e22ce]">
-                  <LineChart className="h-5 w-5" />
-                </div>
-                <div>
-                  <h3 className="font-bold text-slate-900">Reporting</h3>
-                  <p className="text-slate-600">
-                    Track performance, progress, and impact in one organized workspace.
-                  </p>
-                </div>
-              </div>
-            </div>
+              <h1 className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-3">
+                Supercharge your <br />
+                <motion.span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >
+                  Daily Workflows.
+                </motion.span>
+              </h1>
+
+              <p className="text-[1rem] text-slate-600 leading-relaxed font-medium max-w-xl mx-auto">
+                Centralize communication, assign dynamic tasks,
+                <br />
+                and execute flawlessly with enterprise grade AI execution.
+              </p>
+            </motion.div>
           </div>
 
-          <div className="rounded-3xl bg-slate-50 border border-slate-200 p-8 shadow-sm">
-            <h3 className="text-2xl font-bold text-slate-900">Why it works</h3>
-            <ul className="mt-6 space-y-4">
-              {[
-                "Simple interface for busy nonprofit teams.",
-                "Supports collaboration across departments and volunteers.",
-                "Keeps planning, tasks, and communication in one place.",
-                "Helps your team focus more on impact and less on admin work.",
-              ].map((item) => (
-                <li key={item} className="flex gap-3 text-slate-700">
-                  <Check className="mt-1 h-5 w-5 text-emerald-600 flex-shrink-0" />
-                  <span>{item}</span>
-                </li>
+          {/* SIDE-BY-SIDE GRID (IMAGE LEFT | FEATURES RIGHT) */}
+          <div className="grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+
+            {/* Image Card Container */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="relative rounded-[2.5rem] p-2 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 border border-slate-100 shadow-2xl">
+                <img
+                  src={dashboardImage}
+                  alt="Workspace Preview"
+                  className="relative z-10 w-full h-auto rounded-[2rem] border border-white/50 shadow-sm transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+              </div>
+            </motion.div>
+
+            {/* Feature List — numbered steps with connecting lines */}
+            <div className="flex flex-col">
+              {whyItWorksFeatures.map((item, i) => (
+                <div key={i} className="flex items-stretch gap-5">
+
+                  {/* Left column: number circle + connecting line */}
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <motion.div
+                      animate={
+                        activeFeature === i
+                          ? { backgroundColor: "#7c3aed", color: "#ffffff", scale: 1.1 }
+                          : { backgroundColor: "#f3f4f6", color: "#9ca3af", scale: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                      className="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold shrink-0 z-10"
+                    >
+                      {i + 1}
+                    </motion.div>
+
+                    {/* Connecting line — hidden after last item */}
+                    {i < whyItWorksFeatures.length - 1 && (
+                      <motion.div
+                        animate={
+                          activeFeature === i
+                            ? { backgroundColor: "#7c3aed", opacity: 0.35 }
+                            : { backgroundColor: "#e5e7eb", opacity: 1 }
+                        }
+                        transition={{ duration: 0.3 }}
+                        className="w-0.5 flex-1 my-1 min-h-8"
+                      />
+                    )}
+                  </div>
+
+                  {/* Right column: feature card */}
+                  <motion.div
+                    onMouseEnter={() => setActiveFeature(i)}
+                    className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${
+                      activeFeature === i
+                        ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
+                        : "bg-transparent border-transparent opacity-60 hover:opacity-100"
+                    }`}
+                  >
+                    <h3 className="text-xl font-bold text-slate-900 leading-none">
+                      {item.title}
+                    </h3>
+                    <AnimatePresence>
+                      {activeFeature === i && (
+                        <motion.p
+                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                          animate={{ height: "auto", opacity: 1, marginTop: 8 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                          className="text-slate-500 font-medium text-sm leading-relaxed overflow-hidden"
+                        >
+                          {item.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                </div>
               ))}
-            </ul>
+            </div>
+
           </div>
         </div>
       </section>
 
-      <section className="w-full py-10 relative overflow-hidden bg-white">
+      <section className="w-full py-7 pb-15 relative overflow-hidden bg-white">
         {/* Animated Background Glows for Glass Effect */}
         <div className="absolute top-1/4 -left-20 w-80 h-80 bg-white rounded-full blur-[120px] opacity-40 animate-pulse" />
         <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-fuchsia-200 rounded-full blur-[120px] opacity-40 animate-pulse" />
 
         <div className="max-w-7xl mx-auto px-4 relative z-10">
-          <div className="text-center mb-16">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
 
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6"
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-3"
             >
               Streamline the <br />
               <motion.span
@@ -346,18 +486,23 @@ export default function NonProfit() {
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               >
-                Education Lifecycle
+                Mission Lifecycle
               </motion.span>
             </motion.h1>
+            <p className="text-[1rem] text-slate-600 font-medium leading-relaxed">
+              From fundraising and programs to volunteers and impact 
+              <br />
+              reporting run every stage of nonprofit work in one connected workspace.
+            </p>
 
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { title: "Admissions", desc: "Simplify applications and intake with automated workflows.", icon: BookOpen, color: "fuchsia" },
-              { title: "Learning", desc: "Centralize coursework, assignments, and collaboration.", icon: GraduationCap, color: "blue" },
-              { title: "Administration", desc: "Manage schedules, resources, and compliance with ease.", icon: School, color: "emerald" },
-              { title: "Outcomes", desc: "Track performance, visualize progress, and celebrate success.", icon: Target, color: "orange" },
+              { title: "Fundraising & stewardship", desc: "Track campaigns, donor touchpoints, and pledges so relationships stay personal at scale.", icon: HeartHandshake, color: "fuchsia" },
+              { title: "Programs & outreach", desc: "Plan events, field programs, and community campaigns with clear ownership and timelines.", icon: CalendarDays, color: "purple" },
+              { title: "Volunteers & operations", desc: "Coordinate schedules, roles, and internal tasks across staff and volunteers.", icon: Users, color: "fuchsia" },
+              { title: "Impact & reporting", desc: "Measure outcomes, share progress with boards and funders, and tell your story with data.", icon: LineChart, color: "purple" },
             ].map((feature, idx) => {
               const Icon = feature.icon;
               return (

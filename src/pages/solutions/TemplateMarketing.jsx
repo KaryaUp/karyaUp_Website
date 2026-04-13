@@ -1,13 +1,19 @@
-import { Helmet } from "react-helmet-async";
+ import { Helmet } from "react-helmet-async";
 import { useRef, useEffect, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { CheckCircle2, XCircle, Check, Zap, Target, Search } from "lucide-react";
+import { AnimatePresence } from "framer-motion";
+import { CheckCircle2, XCircle, Zap, Target, Search, BrainCircuit, ShieldCheck, Check, Network, TrendingUp, BarChart3 } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
-import FeatureCTA from "../../components/FeatureCTA";
-import karyaUpLogo from "../../assets/logo-svg.svg";
 
+import { lazy, Suspense } from "react";
+import FeatureCTA from "../../components/FeatureCTA";
+import karyaupLogo from "../../assets/logo-svg.svg";
+import FeatureStack from "../../components/FeatureStack";
+const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
+
+// Lazy load the 3D component to improve initial page load speed
 
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
@@ -81,6 +87,28 @@ function Card({ data, type, index }) {
   );
 }
 
+const MarqueeRow = ({ text, direction, isShieldHovered }) => {
+  const isLeft = direction === "left";
+  return (
+    <motion.div
+      initial={{ x: isLeft ? 0 : -1000 }}
+      animate={{ x: isLeft ? -1000 : 0 }}
+      transition={{
+        duration: isShieldHovered ? 15 : 40,
+        repeat: Infinity,
+        ease: "linear",
+      }}
+      // Added leading-none and kept text-2xl for smaller size
+      className="whitespace-nowrap text-purple-700 font-black text-2xl select-none tracking-tighter flex gap-10 leading-none"
+    >
+      {/* Repeating text to ensure a gapless loop */}
+      {Array(9).fill(null).map((_, i) => (
+        <span key={i}>{text}  </span>
+      ))}
+    </motion.div>
+  );
+};
+
 function ScrollTrack({ cards, direction }) {
   const trackRef = useRef(null);
   const posRef = useRef(direction === "up" ? -25 : 0);
@@ -132,88 +160,144 @@ function ScrollTrack({ cards, direction }) {
   );
 }
 
-function ScrollingDataBg({ isShieldHovered }) {
-  const infinitePatternRow = "KaryaUp ".repeat(25);
-  const patternRows = Array(14).fill(infinitePatternRow);
 
+function ScrollingDataBg({ isShieldHovered }) {
   return (
-    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-3 overflow-hidden ${isShieldHovered ? "opacity-40" : "opacity-[0.08]"
+    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${isShieldHovered ? "opacity-30" : "opacity-[0.05]"
       }`}>
-      {patternRows.map((pattern, i) => (
-        <motion.div
-          key={i}
-          initial={{ x: i % 2 === 0 ? 0 : -100 }}
-          animate={{ x: i % 2 === 0 ? -100 : 0 }}
-          transition={{ duration: isShieldHovered ? 8 : 25, repeat: Infinity, ease: "linear" }}
-          className="whitespace-nowrap text-purple-700 font-normal text-sm md:text-base select-none"
-        >
-          {pattern} {pattern}
-        </motion.div>
-      ))}
+      {/* Row 1: Plan (Left) */}
+      <MarqueeRow text="Plan the Karya" direction="right" isShieldHovered={isShieldHovered} />
+
+      {/* Row 2: Move (Right) */}
+      <MarqueeRow text="Move the Karya" direction="left" isShieldHovered={isShieldHovered} />
+
+      {/* Row 3: Complete (Left) */}
+      <MarqueeRow text="Complete the Karya" direction="right" isShieldHovered={isShieldHovered} />
     </div>
   );
 }
 
-const FeatureStack = ({ items = [] }) => {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    if (items.length === 0) return;
-    const timer = setInterval(() => {
-      setIndex((prev) => (prev + 1) % items.length);
-    }, 1500); // Snappy 1.5s interval
-    return () => clearInterval(timer);
-  }, [items.length]);
-
-  if (items.length === 0) return null;
-
-  return (
-    <div className="relative h-[80px] sm:h-[100px] w-full max-w-[280px] sm:max-w-[320px] mt-6 lg:mt-8 group overflow-visible">
-      <AnimatePresence mode="popLayout">
-        {[2, 1, 0].map((offset) => {
-          const itemIndex = (index + offset) % items.length;
-          const item = items[itemIndex];
-          const label = typeof item === "string" ? item : item.label;
-          const Icon = (typeof item === "object" && item.icon) ? item.icon : Check;
-
-          return (
-            <motion.div
-              key={label}
-              initial={{ opacity: 0, y: 15, scale: 0.9 }}
-              animate={{
-                opacity: offset === 0 ? 1 : offset === 1 ? 0.4 : 0.15,
-                scale: 1 - offset * 0.04,
-                y: offset * 12, // Compact vertical stacking for better hero-screen visibility
-                zIndex: 10 - offset,
-              }}
-              exit={{
-                opacity: 0,
-                y: -20,
-                scale: 1.05,
-                transition: { duration: 0.4, ease: "easeIn" }
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.22, 1, 0.36, 1],
-                delay: offset * 0.02
-              }}
-              className="absolute top-0 left-0 w-full px-5 py-3 rounded-xl bg-slate-400/10 backdrop-blur-xl border border-black/30 shadow-sm flex items-center gap-3 transition-colors duration-300 hover:bg-slate-400/20"
-            >
-              <div className="w-5 h-5 rounded bg-black/5 border border-black/10 flex items-center justify-center flex-shrink-0">
-                <Icon className="w-3 h-3 text-black stroke-[3]" />
-              </div>
-              <span className="text-[11px] sm:text-[13px] font-black uppercase tracking-widest text-black">
-                {label}
-              </span>
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </div>
-  );
-};
-
 export default function MarketingPage() {
+
+  const DEFAULT_ICON_MAP = {
+    "ASSET FIND"    : { icon: Search, color: "#4c1d95" },
+    "BRAND GUARD"   : { icon: ShieldCheck, color: "#4c1d95" },
+    "CAMPAIGN FLOW" : { icon: BrainCircuit, color: "#4c1d95" },
+}
+  const FeatureStack = ({ items = [], interval = 2500 }) => {
+    const [index, setIndex] = useState(0);
+    const [hovered, setHovered] = useState(false);
+  
+    useEffect(() => {
+      if (items.length === 0 || hovered) return;
+      const timer = setInterval(() => {
+        setIndex((prev) => (prev + 1) % items.length);
+      }, interval);
+      return () => clearInterval(timer);
+    }, [items.length, interval, hovered]);
+  
+    const visibleItems = useMemo(() => {
+      if (items.length === 0) return [];
+      return [0, 1, 2].map((offset) => {
+        const itemIndex = (index + offset) % items.length;
+        const rawItem = items[itemIndex];
+        
+        // Normalize item to object
+        let itemObj = typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
+        
+        // Apply defaults for icons/colors if missing
+        if (!itemObj.icon || !itemObj.iconColor) {
+          const mapped = DEFAULT_ICON_MAP[itemObj.label] || { icon: Check, color: "#000000" };
+          itemObj.icon = itemObj.icon || mapped.icon;
+          itemObj.iconColor = itemObj.iconColor || mapped.color;
+        }
+  
+        return { offset, item: itemObj };
+      });
+    }, [items, index]);
+  
+    if (items.length === 0) return null;
+  
+    return (
+      <div
+        className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
+        style={{
+          height: "80px",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <AnimatePresence mode="popLayout">
+          {visibleItems.map(({ offset, item }) => {
+            const Icon = item.icon;
+            const color = item.iconColor;
+  
+            return (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={
+                  hovered
+                    ? {
+                        opacity: 1,
+                        scale: 1,
+                        y: offset * 54, // Clear separation between cards
+                        zIndex: 10 - offset,
+                      }
+                    : {
+                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
+                        scale: 1 - offset * 0.035,
+                        y: offset * 11,
+                        zIndex: 10 - offset,
+                      }
+                }
+                exit={{
+                  opacity: 0,
+                  y: -10,
+                  scale: 0.95,
+                  transition: { duration: 0.5, ease: "easeOut" },
+                }}
+                transition={{
+                  duration: 0.5,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: hovered ? offset * 0.05 : offset * 0.02,
+                }}
+                className="absolute top-0 left-0 w-full px-4 sm:px-4 py-1.5 sm:py-2 rounded-xl flex items-center justify-center gap-3"
+                style={{
+                  background:
+                    offset === 0
+                      ? "linear-gradient(135deg, rgba(226, 232, 240, 0.15) 0%, rgba(203, 213, 225, 0.08) 100%)"
+                      : "linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(203, 213, 225, 0.03) 100%)",
+                  backdropFilter: "blur(12px)",
+                  WebkitBackdropFilter: "blur(12px)",
+                  border: "1.2px solid rgba(0, 0, 0, 0.25)",
+                  boxShadow: "0 2px 8px rgba(0,0,0,0.02)",
+                }}
+              >
+                {/* Icon box with colorful icon */}
+                <div className="flex-shrink-0 w-6 h-6 sm:w-6.5 sm:h-6.5 rounded-md border border-black/5 bg-white/25 flex items-center justify-center">
+                  <Icon
+                    className="w-3 h-3 sm:w-3.5 sm:h-3.5"
+                    style={{ color: color }}
+                    strokeWidth={2.5}
+                  />
+                </div>
+  
+                {/* Precise Small Uppercase Text */}
+                <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
+                  {item.label}
+                </span>
+              </motion.div>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+    );
+  };
+
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
+  const [isMobile, setIsMobile] = useState(false);
+
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
   const redCards = [
@@ -236,73 +320,80 @@ export default function MarketingPage() {
     <div className="bg-white font-sans overflow-x-hidden">
 
       {/* ================= HERO SECTION ================= */}
-      <section className="pb-5 w-screen relative left-1/2 right-1/2 -translate-x-1/2 py-17 lg:py-32">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center lg:text-left"
-          >
-            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-8 border border-purple-100">
-              SOLUTIONS/MARKETING
+
+      <section className="py-28 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+          <div className="text-center lg:text-left">
+            <span className="inline-block px-2 py-1.5 rounded-full bg-purple-50 text-[11px] font-black uppercase tracking-widest text-purple-600 mb-3 border border-purple-100">
+              Marketing Analytics
             </span>
-            <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6">
-              The Everything App for<br />
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
+            >
+              The Everything App<br />
               <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
               >
-                 Marketing Teams
+                for Marketing Teams
               </motion.span>
-            </h1>
-            <p className="text-lg text-slate-600 leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Brainstorm, plan, and execute your team's marketing programs from multi-channel campaigns to global events and more with KaryaUp.
-            </p>
-            <FeatureStack 
-              items={[
-                {label: "Campaign tracking", icon: Target},
-                {label: "Global Search", icon: Search},
-                {label: "Real Time Sync", icon: Zap}
-              ]} 
-            />
-          </motion.div>
-
-          <div className="pb-10 lg:pb-35 max-w-7xl mx-auto grid lg:grid-cols-1 gap-8 items-center">
-  {/* Text Column */}
-  <div className="text-center lg:text-left"> </div>
-
-  {/* Image Column */}
-  <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-              className="relative lg:-mr-24 xl:-mr-40"
-            >
-              <div className="absolute -inset-8 bg-gradient-to-tr from-[#7e22ce]/16 via-fuchsia-500/8 to-transparent blur-3xl opacity-55" />
-              <div className="relative overflow-hidden border border-slate-200/80 rounded-3xl shadow-2xl shadow-slate-900/10 bg-white">
-                <img
-                  src={dashboardImage}
-                  alt="KaryaUp task management"
-                  className="w-full h-[320px] sm:h-[420px] lg:h-[500px] object-cover object-left"
-                />
-                {/* Right-side invisible/fade effect like reference */}
-                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 sm:w-44 lg:w-56 bg-gradient-to-r from-transparent via-white/70 to-white" />
+            </motion.h1>
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">  Brainstorm, Plan, and Execute your Team's Marketing Programs.</p>
               </div>
-            </motion.div>
-</div>
+            </div>
+            <div className="mt-5 space-y-3 max-w-lg w-full">
+              <div className="flex items-start gap-3">
+                <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
+                  <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+                </div>
+                <p className="text-sm sm:text-base text-slate-600 font-medium"> Multi channel campaigns to global events and more with KaryaUp. </p>
+              </div>
+            </div>
+            {/* <p className="text-lg text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 font-medium">
+              Brainstorm, plan, and execute your team's marketing programs from multi channel campaigns to global events and more with KaryaUp.
+            </p> */}
+            <FeatureStack
+              items={[
+                { label: "ASSET FIND", icon: BrainCircuit },
+                { label: "BRAND GUARD", icon: Zap },
+                { label: "CAMPAIGN FLOW", icon: Search }
+              ]}
+            />
+          </div>
+          <motion.div
+            initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
+          >
+            <div className="relative overflow-hidden  shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white mt-[-30px] lg:mt-[-5px]">
+              <img
+                src={dashboardImage}
+                alt="KaryaUp task management"
+                className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
 
-       {/* Comparison Section */}
-       <section className="py-5 bg-white px-4 md:px-3">
+      {/* Comparison Section */}
+      <section className="py-4 bg-white px-4">
         <div className="max-w-7xl mx-auto">
+
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
+            className="text-center text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-10"
           >
             Project Management <br />
             <motion.span
@@ -314,65 +405,66 @@ export default function MarketingPage() {
             </motion.span>
           </motion.h2>
 
-          <div className="p-[2px] rounded-[1.5rem] md:rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
-            <div className="bg-slate-50 rounded-[1.4rem] md:rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
+          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
+            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
 
-              {/* LEFT: OLD WAY */}
-              <div className="p-4 md:p-3 border-b md:border-b-0 md:border-r border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-1">
-                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">Old Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Manual updates and scattered tools.</p>
+              {/* OLD WAY */}
+              <div className="p-8 border-r border-slate-200 bg-white/50">
+                <h3 className="text-center text-[1.5rem] font-black mb-1">Old Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Manual updates and scattered tools.</p>
                 <ScrollTrack cards={redCards} direction="down" />
               </div>
 
-              {/* MIDDLE: 3D SHIELD & TEXT (MOVED UP) */}
+              {/* MIDDLE SHIELD & MARQUEE */}
               <div
-                className="relative flex flex-col items-center justify-start py-10 md:py-12 px-4 group overflow-hidden bg-white/40 min-h-[450px] order-2"
+                className="relative flex flex-col items-center justify-start py-8 px-4 group overflow-hidden bg-white/40 min-h-[450px]"
                 onMouseEnter={() => setIsShieldHovered(true)}
                 onMouseLeave={() => setIsShieldHovered(false)}
               >
                 <ScrollingDataBg isShieldHovered={isShieldHovered} />
 
-                {/* TEXT CONTAINER - Now at the top of the middle col */}
-                <div className="relative z-40 text-center mb-10 pointer-events-none">
-                  <h3 className={`text-xl md:text-2xl font-black transition-colors duration-500 ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
+                <div className="relative z-40 text-center mb-10">
+                  <h3 className={`text-[1.55rem] font-black transition-colors ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
                     Security You Can Trust
                   </h3>
-                  <p className={`text-[10px] mt-2 font-bold uppercase tracking-widest transition-colors duration-500 ${isShieldHovered ? "text-fuchsia-500" : "text-slate-500"}`}>
+                  <p className="text-[10px] mt-2 font-bold uppercase tracking-widest text-slate-500">
                     More secure than using AI directly.
                   </p>
                 </div>
 
-                {/* LOGO CONTAINER */}
-                <div className="relative flex items-center justify-center w-full max-w-[200px] md:max-w-[240px] aspect-square" style={{ perspective: "1200px" }}>
-                  <div className="absolute inset-0 z-10 opacity-80 scale-110">
+                <div className="relative flex items-center justify-center w-full max-w-[220px] h-[220px]" style={{ perspective: "1200px" }}>
+                  <div className="absolute inset-0 z-10 opacity-80 scale-110 pointer-events-none">
                     <LightShield3D />
                   </div>
-
-                  <div className="relative z-30" style={{ transformStyle: "preserve-3d" }}>
+                  {/* Centered spinning logo */}
+                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
                     <motion.div
                       animate={{
-                        rotateY: [0, 360],
                         y: [0, -10, 0],
                         scale: isShieldHovered ? 1.1 : 1
                       }}
                       transition={{
-                        rotateY: { duration: 10, repeat: Infinity, ease: "linear" },
                         y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
                         scale: { duration: 0.4 }
                       }}
-                      className="w-32 h-32 md:w-44 md:h-44 relative"
+                      className="w-28 h-28 md:w-35 md:h-35 relative"
                       style={{ transformStyle: "preserve-3d" }}
                     >
-                      <div className="absolute inset-0" style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}>
-                        <img src={karyaUpLogo} alt="Logo Front" className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(168,85,247,0.5)]" />
-                      </div>
-
-                      <div className="absolute inset-0" style={{
-                        backfaceVisibility: 'hidden',
-                        WebkitBackfaceVisibility: 'hidden',
-                        transform: 'rotateY(180deg) translateZ(1px)'
-                      }}>
-                        <img src={karyaUpLogo} alt="Logo Back" className="w-full h-full object-contain opacity-80" />
+                      <div
+                        className="absolute inset-0"
+                        style={{
+                          filter: isShieldHovered
+                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
+                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
+                          transition: "filter 0.5s ease"
+                        }}
+                      >
+                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-15 h-15 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
+                          <SpinningLogo3D
+                            isHovered={isShieldHovered}
+                            className="w-full h-full object-contain"
+                          />
+                        </Suspense>
                       </div>
                     </motion.div>
                   </div>
@@ -380,14 +472,15 @@ export default function MarketingPage() {
 
                 <motion.div
                   animate={{ scale: isShieldHovered ? 1.4 : 1, opacity: isShieldHovered ? 0.4 : 0.15 }}
-                  className="absolute -bottom-40 w-64 h-64 bg-white rounded-full blur-[100px] pointer-events-none"
+                  className="absolute -bottom-40 w-64 h-64 bg-purple-400 rounded-full blur-[100px] pointer-events-none"
                 />
               </div>
 
-              {/* RIGHT: KARYAUP WAY */}
-              <div className="p-4 md:p-6 border-t md:border-t-0 md:border-l border-slate-200 flex flex-col justify-start pt-10 md:pt-12 bg-white/50 order-3">
-                <h3 className="text-center text-2xl font-black mb-1 text-slate-900">The KaryaUp Way</h3>
-                <p className="text-sm text-center text-slate-500 mb-6 font-medium">Advanced execution loops for growth.</p>
+
+              {/* KARYAUP WAY */}
+              <div className="p-8 border-l border-slate-200 bg-white/50">
+                <h3 className="text-center text-2xl font-black mb-1">The KaryaUp Way</h3>
+                <p className="text-xs text-center text-slate-500 mb-6">Advanced execution loops for growth.</p>
                 <ScrollTrack cards={greenCards} direction="up" />
               </div>
 
@@ -396,7 +489,7 @@ export default function MarketingPage() {
         </div>
       </section>
 
-      <section className="py-5 bg-white pt-5">
+      <section className="py-10 pb-10 bg-white pt-10">
         <div className="max-w-7xl mx-auto px-3 lg:px-5">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <motion.div
@@ -405,7 +498,7 @@ export default function MarketingPage() {
               viewport={{ once: true }}
               className="order-2 lg:order-1"
             >
-              <div className="rounded-3xl overflow-hidden shadow-2xl border-8 border-purple-100">
+              <div className="rounded-3xl overflow-hidden shadow-2xl pt-10 border-8 border-purple-100">
                 <img src={planImage} alt="Gantt Planning" className="w-full h-auto" />
               </div>
             </motion.div>
@@ -416,7 +509,7 @@ export default function MarketingPage() {
               viewport={{ once: true }}
               className="text-center lg:text-left"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[1.1] mb-6 drop-shadow-sm">
+              <h1 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-3 drop-shadow-sm">
                 Visualize your<br />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
@@ -426,17 +519,51 @@ export default function MarketingPage() {
                   Marketing ROI
                 </motion.span>
               </h1>
-              <p className="text-xl text-slate-600 mb-8">
-                Stop guessing which campaigns work. Align your budget with performance data using our built-in marketing analytics.
+              <p className="text-[1rem] text-slate-600 mb-3">
+                Stop guessing which campaigns work.
+                <br />
+                Align your budget with performance data.
               </p>
-              <ul className="space-y-4">
+
+              <div className="relative mt-8 space-y-6">
+                {/* THE CONNECTING LINE: Spans from top icon to bottom icon */}
+                <div className="absolute left-[21px] top-5 bottom-5 w-[3px] bg-purple-600 opacity-60" />
+
+                {[
+                  { label: "Multi-channel Attribution", icon: Network, color: "fuchsia" },
+                  { label: "Real-time Budget Tracking", icon: TrendingUp, color: "purple" },
+                  { label: "Customizable KPI Dashboards", icon: BarChart3, color: "fuchsia" },
+                ].map((item, index) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={index} className="relative flex items-center gap-5 group">
+
+                      {/* ICON CONTAINER: Purple/Emerald Bordered Logo */}
+                      <div className={`relative z-10 w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 
+                      bg-white border-2 transition-all duration-300 shadow-sm
+                      ${item.color === 'emerald'
+                          ? 'border-emerald-100 text-emerald-600 group-hover:bg-white group-hover:text-purple group-hover:border-emerald-600'
+                          : 'border-purple-200 text-purple-600 group-hover:bg-white group-hover:text-purple group-hover:border-purple-600'
+                        }`}>
+                        <Icon size={18} strokeWidth={2.5} />
+                      </div>
+
+                      {/* LABEL */}
+                      <span className="text-lg font-bold text-slate-800 tracking-tight group-hover:text-black transition-colors">
+                        {item.label}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
+              {/* <ul className="space-y-4">
                 {['Multi-channel Attribution', 'Real-time Budget Tracking', 'Customizable KPI Dashboards'].map((item, i) => (
                   <li key={i} className="flex items-center gap-3 text-lg font-bold text-slate-800 justify-center lg:justify-start">
                     <span className="flex-shrink-0 w-6 h-6 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-sm">✓</span>
                     {item}
                   </li>
                 ))}
-              </ul>
+              </ul> */}
             </motion.div>
           </div>
         </div>
