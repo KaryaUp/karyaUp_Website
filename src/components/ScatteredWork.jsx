@@ -7,7 +7,7 @@ import {
   ArrowRight, Zap, Target, Rocket, X
 } from "lucide-react";
 import problemImage from '../assets/problem.webp';
-import solutionImage from '../assets/Solution1.webp';
+import solutionImage from '../assets/solution1.webp';
 
 export default function ScatteredWork() {
   const problems = [
@@ -159,7 +159,7 @@ export default function ScatteredWork() {
                   whileInView={{ scaleY: 1 }}
                   viewport={{ once: true, margin: "-50px" }}
                   transition={{ duration: 2.5, ease: "easeInOut" }}
-                  className="hidden sm:block absolute left-[8px] top-[14px] bottom-3 w-[4px] origin-top rounded-full bg-gradient-to-b from-[#7e22ce] to-[#c084fc] z-0"
+                  className="hidden sm:block absolute left-[8px] top-[14px] bottom-3 w-[4px] origin-top rounded-full bg-gradient-to-b from-emerald-400 to-emerald-200 z-0"
                 />
 
                 {[
@@ -175,7 +175,7 @@ export default function ScatteredWork() {
                     transition={{ delay: i * 0.4 + 0.2 }}
                     className="relative z-10 flex flex-row items-center justify-start text-left gap-4 !w-full !mr-auto"
                   >
-                    <div className="hidden sm:block w-5 h-5 rounded-full bg-[#7e22ce] flex-shrink-0" />
+                    <div className="hidden sm:block w-5 h-5 rounded-full bg-emerald-500 flex-shrink-0 border-2 border-emerald-100" />
                     <span className="text-xl font-black text-slate-800 tracking-normal leading-tight whitespace-nowrap">{step.text}</span>
                   </motion.div>
                 ))}
