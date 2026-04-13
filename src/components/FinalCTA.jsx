@@ -114,7 +114,7 @@ const FinalCTA = () => {
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <Link
-                to="https://www.karyaup.com/auth"
+                to="https://app.karyaup.com/auth"
                 onMouseEnter={() => setIsHoveringCTA(true)}
                 onMouseLeave={() => setIsHoveringCTA(false)}
                 className="group relative z-10 flex h-[3.5em] w-[16.5em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"

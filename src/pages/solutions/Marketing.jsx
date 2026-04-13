@@ -3,7 +3,7 @@ import { useRef, useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { CheckCircle2, XCircle, Zap, Target, Search, BrainCircuit, ShieldCheck, Check, Network, TrendingUp, BarChart3 } from "lucide-react";
+import { CheckCircle2, XCircle, Zap, Target, Search, BrainCircuit, ShieldCheck, Check } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
 
@@ -11,9 +11,9 @@ import { lazy, Suspense } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
 import karyaupLogo from "../../assets/logo-svg.svg";
 import FeatureStack from "../../components/FeatureStack";
-const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
-
-// Lazy load the 3D component to improve initial page load speed
+import MetricStorySlider from "../../components/MetricStorySlider";
+// import karyaupInfographicMarketing from "../../assets/karyaup-soft-marketing.png";
+import karyaupInfographicProduct from "../../assets/karyaup-soft-product.png";
 
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
@@ -33,81 +33,6 @@ const ListIcon = () => (
     <circle cx="2.5" cy="12" r="1" fill="currentColor" stroke="none" />
   </svg>
 );
-
-/* ═══════════════════════════════════════════════
-   LIGHT 3D GLASS SHIELD
-═══════════════════════════════════════════════ */
-const LightShield3D = () => (
-  <svg viewBox="0 0 200 220" fill="none" className="w-full h-full drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
-    <defs>
-      <linearGradient id="glassBorderGradient" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F472B6" stopOpacity="0.4" />
-        <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
-        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
-      </linearGradient>
-    </defs>
-    <path
-      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z"
-      fill="white"
-      fillOpacity="0.03"
-      stroke="url(#glassBorderGradient)"
-      strokeOpacity="0.6"
-      strokeWidth="2"
-    />
-  </svg>
-);
-
-/* ═══════════════════════════════════════════════
-   SUB-COMPONENTS
-═══════════════════════════════════════════════ */
-function Card({ data, type, index }) {
-  const isRed = type === "red";
-  return (
-    <motion.div
-      initial={{ y: 0 }}
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 4, repeat: Infinity, delay: index * 0.4, ease: "easeInOut" }}
-      className="relative group rounded-xl w-full"
-    >
-      <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50">
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
-          }`}>
-          {isRed ? <XIcon /> : <CheckIcon />}
-        </div>
-        <div className="flex-1 min-w-0 text-left">
-          <div className="text-[13px] font-bold text-slate-900 truncate">{data.title}</div>
-          <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
-            <span>{data.tag}</span>
-            <span className="w-1 h-1 rounded-full bg-slate-300" />
-            <span className="flex items-center gap-1"><ListIcon /> Active</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
-const MarqueeRow = ({ text, direction, isShieldHovered }) => {
-  const isLeft = direction === "left";
-  return (
-    <motion.div
-      initial={{ x: isLeft ? 0 : -1000 }}
-      animate={{ x: isLeft ? -1000 : 0 }}
-      transition={{
-        duration: isShieldHovered ? 15 : 40,
-        repeat: Infinity,
-        ease: "linear",
-      }}
-      // Added leading-none and kept text-2xl for smaller size
-      className="whitespace-nowrap text-purple-700 font-black text-2xl select-none tracking-tighter flex gap-10 leading-none"
-    >
-      {/* Repeating text to ensure a gapless loop */}
-      {Array(9).fill(null).map((_, i) => (
-        <span key={i}>{text}  </span>
-      ))}
-    </motion.div>
-  );
-};
 
 function ScrollTrack({ cards, direction }) {
   const trackRef = useRef(null);
@@ -156,23 +81,6 @@ function ScrollTrack({ cards, direction }) {
           ))}
         </div>
       </div>
-    </div>
-  );
-}
-
-
-function ScrollingDataBg({ isShieldHovered }) {
-  return (
-    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${isShieldHovered ? "opacity-30" : "opacity-[0.05]"
-      }`}>
-      {/* Row 1: Plan (Left) */}
-      <MarqueeRow text="Plan the Karya" direction="right" isShieldHovered={isShieldHovered} />
-
-      {/* Row 2: Move (Right) */}
-      <MarqueeRow text="Move the Karya" direction="left" isShieldHovered={isShieldHovered} />
-
-      {/* Row 3: Complete (Left) */}
-      <MarqueeRow text="Complete the Karya" direction="right" isShieldHovered={isShieldHovered} />
     </div>
   );
 }
@@ -300,22 +208,6 @@ export default function MarketingPage() {
 
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
-  const redCards = [
-    { title: "Projects scattered across tools", tag: "Inefficiency" },
-    { title: "Critical info hidden in silos", tag: "Visibility" },
-    { title: "Manual updates strain capacity", tag: "Labor" },
-    { title: "Missed deadlines & bottlenecks", tag: "Risk" },
-    { title: "Unclear resource allocation", tag: "Planning" },
-  ];
-
-  const greenCards = [
-    { title: "Unified platform hub", tag: "Efficiency" },
-    { title: "Instant global search", tag: "Visibility" },
-    { title: "Automated report generation", tag: "Labor" },
-    { title: "AI-powered timeline tracking", tag: "Growth" },
-    { title: "Real-time resource analytics", tag: "Scale" },
-  ];
-
   return (
     <div className="bg-white font-sans overflow-x-hidden">
 
@@ -385,110 +277,6 @@ export default function MarketingPage() {
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="py-4 bg-white px-4">
-        <div className="max-w-7xl mx-auto">
-
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-10"
-          >
-            Project Management <br />
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            >
-              is broken, we fixed it
-            </motion.span>
-          </motion.h2>
-
-          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
-            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
-
-              {/* OLD WAY */}
-              <div className="p-8 border-r border-slate-200 bg-white/50">
-                <h3 className="text-center text-[1.5rem] font-black mb-1">Old Way</h3>
-                <p className="text-xs text-center text-slate-500 mb-6">Manual updates and scattered tools.</p>
-                <ScrollTrack cards={redCards} direction="down" />
-              </div>
-
-              {/* MIDDLE SHIELD & MARQUEE */}
-              <div
-                className="relative flex flex-col items-center justify-start py-8 px-4 group overflow-hidden bg-white/40 min-h-[450px]"
-                onMouseEnter={() => setIsShieldHovered(true)}
-                onMouseLeave={() => setIsShieldHovered(false)}
-              >
-                <ScrollingDataBg isShieldHovered={isShieldHovered} />
-
-                <div className="relative z-40 text-center mb-10">
-                  <h3 className={`text-[1.55rem] font-black transition-colors ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
-                    Security You Can Trust
-                  </h3>
-                  <p className="text-[10px] mt-2 font-bold uppercase tracking-widest text-slate-500">
-                    More secure than using AI directly.
-                  </p>
-                </div>
-
-                <div className="relative flex items-center justify-center w-full max-w-[220px] h-[220px]" style={{ perspective: "1200px" }}>
-                  <div className="absolute inset-0 z-10 opacity-80 scale-110 pointer-events-none">
-                    <LightShield3D />
-                  </div>
-                  {/* Centered spinning logo */}
-                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
-                    <motion.div
-                      animate={{
-                        y: [0, -10, 0],
-                        scale: isShieldHovered ? 1.1 : 1
-                      }}
-                      transition={{
-                        y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                        scale: { duration: 0.4 }
-                      }}
-                      className="w-28 h-28 md:w-35 md:h-35 relative"
-                      style={{ transformStyle: "preserve-3d" }}
-                    >
-                      <div
-                        className="absolute inset-0"
-                        style={{
-                          filter: isShieldHovered
-                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
-                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
-                          transition: "filter 0.5s ease"
-                        }}
-                      >
-                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-15 h-15 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
-                          <SpinningLogo3D
-                            isHovered={isShieldHovered}
-                            className="w-full h-full object-contain"
-                          />
-                        </Suspense>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <motion.div
-                  animate={{ scale: isShieldHovered ? 1.4 : 1, opacity: isShieldHovered ? 0.4 : 0.15 }}
-                  className="absolute -bottom-40 w-64 h-64 bg-purple-400 rounded-full blur-[100px] pointer-events-none"
-                />
-              </div>
-
-
-              {/* KARYAUP WAY */}
-              <div className="p-8 border-l border-slate-200 bg-white/50">
-                <h3 className="text-center text-2xl font-black mb-1">The KaryaUp Way</h3>
-                <p className="text-xs text-center text-slate-500 mb-6">Advanced execution loops for growth.</p>
-                <ScrollTrack cards={greenCards} direction="up" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="py-10 pb-10 bg-white pt-10">
         <div className="max-w-7xl mx-auto px-3 lg:px-5">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -526,35 +314,60 @@ export default function MarketingPage() {
               </p>
               <div className="relative mt-8 space-y-6">
                 {[
-                  { label: "Multi-channel Attribution", icon: Network, color: "fuchsia" },
-                  { label: "Real-time Budget Tracking", icon: TrendingUp, color: "purple" },
-                  { label: "Customizable KPI Dashboards", icon: BarChart3, color: "fuchsia" },
-                ].map((item, index) => {
-                  const Icon = item.icon;
-                  return (
-                    <div key={index} className="relative flex items-center gap-5 group">
-
-                      {/* ICON CONTAINER: Purple/Emerald Bordered Logo */}
-                      <div className={`relative z-10 w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 
-                      bg-white border-2 transition-all duration-300 shadow-sm
-                      ${item.color === 'emerald'
-                          ? 'border-emerald-100 text-emerald-600 group-hover:bg-white group-hover:text-purple group-hover:border-emerald-600'
-                          : 'border-purple-200 text-purple-600 group-hover:bg-white group-hover:text-purple group-hover:border-purple-600'
-                        }`}>
-                        <Icon size={18} strokeWidth={2.5} />
-                      </div>
-                      {/* LABEL */}
-                      <span className="text-lg font-bold text-slate-800 tracking-tight group-hover:text-black transition-colors">
-                        {item.label}
-                      </span>
+                  { label: "Multi-channel Attribution" },
+                  { label: "Real-time Budget Tracking" },
+                  { label: "Customizable KPI Dashboards" },
+                ].map((item, index) => (
+                  <div key={index} className="relative flex items-center gap-4">
+                    <div className="relative z-10 w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-purple-100 border border-purple-200 text-purple-700">
+                      <Check className="w-5 h-5 stroke-[4]" />
                     </div>
-                  );
-                })}
+                    <span className="text-lg font-bold text-slate-800 tracking-tight">
+                      {item.label}
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
           </div>
         </div>
       </section>
+
+      <MetricStorySlider
+        logoSrc={karyaupLogo}
+        title="Campaign clarity in KaryaUp AI Workspace"
+        description="Generate ideas faster, align stakeholders, and marketing runs as one infographic clear workspace."
+        intervalMs={5100}
+        fastIntervalMs={2600}
+        slides={[
+          {
+            metric: "Guesswork to proof",
+            description: "Campaign and pipeline signals roll into one AI workspace.",
+            image: karyaupInfographicProduct,
+            imageFocus: "48% 32%",
+            storyTitle: "KaryaUp AI Workspace for growth teams",
+            storySubtitle: "Channel mix, creative iterations, and budget guardrails stay visible from brief to board review.",
+          },
+          {
+            metric: "Channels to one ledger",
+            description: "Less between ads, email, and ledger of outcomes and next actions.",
+            image: karyaupInfographicProduct,
+            imageFocus: "50% 50%",
+            storyTitle: "Creative and media in one motion",
+            storySubtitle: "AI drafts recaps, surfaces underperforming assets, and opens tasks for the right owners automatically.",
+          },
+          {
+            metric: "Briefs to live ROI",
+            description: "Faster alignment on goals with living dashboards.",
+            image: karyaupInfographicProduct,
+            imageFocus: "52% 68%",
+            storyTitle: "ROI that updates while campaigns run",
+            storySubtitle: "KaryaUp connects tasks, approvals, and metrics so marketing leadership always sees the latest story.",
+          },
+        ]}
+       
+      />
+
       {/* ================= FINAL CTA ================= */}
       <FeatureCTA
         title={

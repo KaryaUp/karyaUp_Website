@@ -9,9 +9,8 @@ import { lazy, Suspense } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
 import karyaupLogo from "../../assets/logo-svg.svg";
 import FeatureStack from "../../components/FeatureStack";
-
-// Lazy load the 3D component to improve initial page load speed
-const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
+import MetricStorySlider from "../../components/MetricStorySlider";
+import karyaupInfographicProduct from "../../assets/karyaup-soft-product.png";
 
 
 const TiltCard = ({ children, className }) => {
@@ -52,27 +51,6 @@ const TiltCard = ({ children, className }) => {
   );
 };
 
-const MarqueeRow = ({ text, direction, isShieldHovered }) => {
-  const isLeft = direction === "left";
-  return (
-    <motion.div
-      initial={{ x: isLeft ? 0 : -1000 }}
-      animate={{ x: isLeft ? -1000 : 0 }}
-      transition={{
-        duration: isShieldHovered ? 15 : 40,
-        repeat: Infinity,
-        ease: "linear",
-      }}
-      // Added leading-none and kept text-2xl for smaller size
-      className="whitespace-nowrap text-purple-700 font-black text-2xl select-none tracking-tighter flex gap-10 leading-none"
-    >
-      {/* Repeating text to ensure a gapless loop */}
-      {Array(9).fill(null).map((_, i) => (
-        <span key={i}>{text}  </span>
-      ))}
-    </motion.div>
-  );
-};
 const CheckIcon = () => (
   <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" width="13" height="13">
     <polyline points="3,9 7,13 13,5" />
@@ -91,59 +69,6 @@ const ListIcon = () => (
     <circle cx="2.5" cy="12" r="1" fill="currentColor" stroke="none" />
   </svg>
 );
-
-/* ═══════════════════════════════════════════════
-   LIGHT 3D GLASS SHIELD
-═══════════════════════════════════════════════ */
-const LightShield3D = () => (
-  <svg viewBox="0 0 200 220" fill="none" className="w-full h-full drop-shadow-[0_25px_50px_rgba(0,0,0,0.12)]">
-    <defs>
-      <linearGradient id="glassBorderGradient" x1="100" y1="10" x2="100" y2="208" gradientUnits="userSpaceOnUse">
-        <stop stopColor="#F472B6" stopOpacity="0.4" />
-        <stop offset="0.5" stopColor="white" stopOpacity="0.6" />
-        <stop offset="1" stopColor="#A855F7" stopOpacity="0.4" />
-      </linearGradient>
-    </defs>
-    <path
-      d="M100 10 L182 42 L182 108 C182 154 146 190 100 208 C54 190 18 154 18 108 L18 42 Z"
-      fill="white"
-      fillOpacity="0.03"
-      stroke="url(#glassBorderGradient)"
-      strokeOpacity="0.6"
-      strokeWidth="2"
-    />
-  </svg>
-);
-
-/* ═══════════════════════════════════════════════
-   SUB-COMPONENTS
-═══════════════════════════════════════════════ */
-function Card({ data, type, index }) {
-  const isRed = type === "red";
-  return (
-    <motion.div
-      initial={{ y: 0 }}
-      animate={{ y: [0, -8, 0] }}
-      transition={{ duration: 4, repeat: Infinity, delay: index * 0.4, ease: "easeInOut" }}
-      className="relative group rounded-xl w-full"
-    >
-      <div className="backdrop-blur-md bg-white/40 border border-white/30 rounded-xl p-3 flex items-start gap-3 w-full shadow-[0_8px_32px_0_rgba(0,0,0,0.05)] transition-all duration-300 group-hover:border-purple-400/50">
-        <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 border ${isRed ? "bg-red-500/20 border-red-500/50 text-red-600" : "bg-green-500/20 border-green-500/50 text-green-600"
-          }`}>
-          {isRed ? <XIcon /> : <CheckIcon />}
-        </div>
-        <div className="flex-1 min-w-0 text-left">
-          <div className="text-[13px] font-bold text-slate-900 truncate">{data.title}</div>
-          <div className="text-[11px] text-slate-500 mt-1 flex items-center gap-1.5 font-medium">
-            <span>{data.tag}</span>
-            <span className="w-1 h-1 rounded-full bg-slate-300" />
-            <span className="flex items-center gap-1"><ListIcon /> Active</span>
-          </div>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
 
 function ScrollTrack({ cards, direction }) {
   const trackRef = useRef(null);
@@ -196,53 +121,20 @@ function ScrollTrack({ cards, direction }) {
   );
 }
 
-function ScrollingDataBg({ isShieldHovered }) {
-  return (
-    <div className={`absolute inset-0 pointer-events-none transition-all duration-1000 flex flex-col justify-center gap-20 overflow-hidden ${
-      isShieldHovered ? "opacity-30" : "opacity-[0.05]"
-    }`}>
-      {/* Row 1: Plan (Left) */}
-      <MarqueeRow text="Plan the Karya" direction="right" isShieldHovered={isShieldHovered} />
-      
-      {/* Row 2: Move (Right) */}
-      <MarqueeRow text="Move the Karya" direction="left" isShieldHovered={isShieldHovered} />
-      
-      {/* Row 3: Complete (Left) */}
-      <MarqueeRow text="Complete the Karya" direction="right" isShieldHovered={isShieldHovered} />
-    </div>
-  );
-}
-
 export default function ProductDevelopment() {
   const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
-  const redCards = [
-    { title: "Projects scattered across tools", tag: "Inefficiency" },
-    { title: "Critical info hidden in silos", tag: "Visibility" },
-    { title: "Manual updates strain capacity", tag: "Labor" },
-    { title: "Missed deadlines & bottlenecks", tag: "Risk" },
-    { title: "Unclear resource allocation", tag: "Planning" },
-  ];
-
-  const greenCards = [
-    { title: "Unified platform hub", tag: "Efficiency" },
-    { title: "Instant global search", tag: "Visibility" },
-    { title: "Automated report generation", tag: "Labor" },
-    { title: "AI-powered timeline tracking", tag: "Growth" },
-    { title: "Real-time resource analytics", tag: "Scale" },
-  ];
-
   const DEFAULT_ICON_MAP = {
-    "CODE EXPLORE"  : { icon: Search, color: "#4c1d95" },
-    "SECURE DEPLOY" : { icon: ShieldCheck, color: "#4c1d95" },
-    "DEV ROUTING"   : { icon: BrainCircuit, color: "#4c1d95" },
-}
+    "CODE EXPLORE": { icon: Search, color: "#4c1d95" },
+    "SECURE DEPLOY": { icon: ShieldCheck, color: "#4c1d95" },
+    "DEV ROUTING": { icon: BrainCircuit, color: "#4c1d95" },
+  }
   const FeatureStack = ({ items = [], interval = 2500 }) => {
     const [index, setIndex] = useState(0);
     const [hovered, setHovered] = useState(false);
-  
+
     useEffect(() => {
       if (items.length === 0 || hovered) return;
       const timer = setInterval(() => {
@@ -250,29 +142,29 @@ export default function ProductDevelopment() {
       }, interval);
       return () => clearInterval(timer);
     }, [items.length, interval, hovered]);
-  
+
     const visibleItems = useMemo(() => {
       if (items.length === 0) return [];
       return [0, 1, 2].map((offset) => {
         const itemIndex = (index + offset) % items.length;
         const rawItem = items[itemIndex];
-        
+
         // Normalize item to object
         let itemObj = typeof rawItem === "string" ? { label: rawItem } : { ...rawItem };
-        
+
         // Apply defaults for icons/colors if missing
         if (!itemObj.icon || !itemObj.iconColor) {
           const mapped = DEFAULT_ICON_MAP[itemObj.label] || { icon: Check, color: "#000000" };
           itemObj.icon = itemObj.icon || mapped.icon;
           itemObj.iconColor = itemObj.iconColor || mapped.color;
         }
-  
+
         return { offset, item: itemObj };
       });
     }, [items, index]);
-  
+
     if (items.length === 0) return null;
-  
+
     return (
       <div
         className="relative w-full max-w-[240px] sm:max-w-[320px] mt-6 lg:mt-8 overflow-visible mx-auto lg:mx-0"
@@ -286,7 +178,7 @@ export default function ProductDevelopment() {
           {visibleItems.map(({ offset, item }) => {
             const Icon = item.icon;
             const color = item.iconColor;
-  
+
             return (
               <motion.div
                 key={item.label}
@@ -294,17 +186,17 @@ export default function ProductDevelopment() {
                 animate={
                   hovered
                     ? {
-                        opacity: 1,
-                        scale: 1,
-                        y: offset * 54, // Clear separation between cards
-                        zIndex: 10 - offset,
-                      }
+                      opacity: 1,
+                      scale: 1,
+                      y: offset * 54, // Clear separation between cards
+                      zIndex: 10 - offset,
+                    }
                     : {
-                        opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
-                        scale: 1 - offset * 0.035,
-                        y: offset * 11,
-                        zIndex: 10 - offset,
-                      }
+                      opacity: offset === 0 ? 1 : offset === 1 ? 0.45 : 0.2,
+                      scale: 1 - offset * 0.035,
+                      y: offset * 11,
+                      zIndex: 10 - offset,
+                    }
                 }
                 exit={{
                   opacity: 0,
@@ -337,7 +229,7 @@ export default function ProductDevelopment() {
                     strokeWidth={2.5}
                   />
                 </div>
-  
+
                 {/* Precise Small Uppercase Text */}
                 <span className="text-[10px] sm:text-[11.5px] font-black tracking-widest text-black uppercase">
                   {item.label}
@@ -379,18 +271,18 @@ export default function ProductDevelopment() {
                 <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
                   <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
                 </div>
-                <p className="text-sm sm:text-base text-slate-600 font-medium">Get real-time visibility into your revenue, expenses, 
-              <br />
-              and margins with KaryaUp. </p>
+                <p className="text-sm sm:text-base text-slate-600 font-medium">Get real-time visibility into your revenue, expenses,
+                  <br />
+                  and margins with KaryaUp. </p>
               </div>
             </div>
-           
+
             <FeatureStack
               items={[
                 { label: "CODE EXPLORE", icon: BrainCircuit },
                 { label: "SECURE DEPLOY", icon: Zap },
                 { label: "DEV ROUTING", icon: Search }
-                
+
               ]}
             />
           </div>
@@ -411,110 +303,6 @@ export default function ProductDevelopment() {
         </div>
       </section>
 
-      {/* Comparison Section */}
-      <section className="py-4 bg-white px-4">
-        <div className="max-w-7xl mx-auto">
-
-        <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center text-3xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-12"
-          >
-            Project Management <br />
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            >
-              is broken, we fixed it
-            </motion.span>
-          </motion.h2>
-
-          <div className="p-[2px] rounded-[2.5rem] bg-gradient-to-br from-pink-400 via-purple-500 to-indigo-500 shadow-2xl overflow-hidden">
-            <div className="bg-slate-50 rounded-[2.4rem] overflow-hidden grid grid-cols-1 md:grid-cols-3">
-              
-              {/* OLD WAY */}
-              <div className="p-8 border-r border-slate-200 bg-white/50">
-                <h3 className="text-center text-[1.5rem] font-black mb-1">Old Way</h3>
-                <p className="text-xs text-center text-slate-500 mb-6">Manual updates and scattered tools.</p>
-                <ScrollTrack cards={redCards} direction="down" />
-              </div>
-
-              {/* MIDDLE SHIELD & MARQUEE */}
-              <div 
-                className="relative flex flex-col items-center justify-start py-8 px-4 group overflow-hidden bg-white/40 min-h-[450px]"
-                onMouseEnter={() => setIsShieldHovered(true)}
-                onMouseLeave={() => setIsShieldHovered(false)}
-              >
-                <ScrollingDataBg isShieldHovered={isShieldHovered} />
-
-                <div className="relative z-40 text-center mb-10">
-                  <h3 className={`text-[1.55rem] font-black transition-colors ${isShieldHovered ? "text-purple-600" : "text-slate-900"}`}>
-                    Security You Can Trust
-                  </h3>
-                  <p className="text-[10px] mt-2 font-bold uppercase tracking-widest text-slate-500">
-                    More secure than using AI directly.
-                  </p>
-                </div>
-
-                <div className="relative flex items-center justify-center w-full max-w-[220px] h-[220px]" style={{ perspective: "1200px" }}>
-                  <div className="absolute inset-0 z-10 opacity-80 scale-110 pointer-events-none">
-                    <LightShield3D />
-                  </div>
-                  {/* Centered spinning logo */}
-                  <div className="relative z-30 flex items-center justify-center w-full h-full" style={{ transformStyle: "preserve-3d" }}>
-                    <motion.div
-                      animate={{
-                        y: [0, -10, 0],
-                        scale: isShieldHovered ? 1.1 : 1
-                      }}
-                      transition={{
-                        y: { duration: 6, repeat: Infinity, ease: "easeInOut" },
-                        scale: { duration: 0.4 }
-                      }}
-                      className="w-28 h-28 md:w-35 md:h-35 relative"
-                      style={{ transformStyle: "preserve-3d" }}
-                    >
-                      <div 
-                        className="absolute inset-0"
-                        style={{
-                          filter: isShieldHovered
-                            ? "drop-shadow(0 20px 50px rgba(168,85,247,0.9)) brightness(1.2)"
-                            : "drop-shadow(0 20px 50px rgba(168,85,247,0.5))",
-                          transition: "filter 0.5s ease"
-                        }}
-                      >
-                        <Suspense fallback={<div className="w-full h-full flex items-center justify-center"><div className="w-15 h-15 rounded-full border-2 border-purple-500 border-t-transparent animate-spin" /></div>}>
-                          <SpinningLogo3D
-                            isHovered={isShieldHovered}
-                            className="w-full h-full object-contain"
-                          />
-                        </Suspense>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-
-                <motion.div
-                  animate={{ scale: isShieldHovered ? 1.4 : 1, opacity: isShieldHovered ? 0.4 : 0.15 }}
-                  className="absolute -bottom-40 w-64 h-64 bg-purple-400 rounded-full blur-[100px] pointer-events-none"
-                />
-              </div>
-
-
-              {/* KARYAUP WAY */}
-              <div className="p-8 border-l border-slate-200 bg-white/50">
-                <h3 className="text-center text-2xl font-black mb-1">The KaryaUp Way</h3>
-                <p className="text-xs text-center text-slate-500 mb-6">Advanced execution loops for growth.</p>
-                <ScrollTrack cards={greenCards} direction="up" />
-              </div>
-
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* ================= KARYAUP WORKSPACE FEATURES ================= */}
       {/* ================= KARYAUP WORKSPACE FEATURES ================= */}
 
       <section className="py-6 bg-white relative overflow-hidden"> {/* Increased py-10 to py-20 for better breathing room */}
@@ -542,9 +330,9 @@ export default function ProductDevelopment() {
             </motion.h1>
 
             <p className="text-[1rem] text-slate-600 font-medium leading-relaxed">
-              Eliminate context switching. 
+              Eliminate context switching.
               <br />
-              Plan sprints, track bugs, write technical docs, 
+              Plan sprints, track bugs, write technical docs,
               <br />
               and visualize roadmaps all in one intelligent platform.
             </p>
@@ -555,49 +343,49 @@ export default function ProductDevelopment() {
             {[
               {
                 icon: <Code2 size={24} />,
-                title: "Connected Code & Tasks",
-                desc: "Link GitHub PRs, commits, and branches directly to tasks. Tasks auto-update status when code merges.",
-                bgColor: "bg-blue-50 text-purple-600",
+                title: "Connected Tasks",
+                desc: "Link GitHub PRs, commits, and branches directly to tasks.",
+                bgColor: "bg-purple-100 text-purple-600",
                 hoverBg: "group-hover:bg-purple-600",
                 borderColor: "group-hover:border-blue-200"
               },
               {
                 icon: <Rocket size={24} />,
                 title: "Automated Sprints",
-                desc: "Put sprints on autopilot. Unfinished work automatically rolls over, and capacity is calculated in real-time.",
-                bgColor: "bg-purple-50 text-fuchsia-600",
+                desc: "Unfinished work automatically and capacity is calculated in real-time.",
+                bgColor: "bg-fuchsia-100 text-fuchsia-600",
                 hoverBg: "group-hover:bg-fuchsia-600",
                 borderColor: "group-hover:border-purple-200"
               },
               {
                 icon: <Layers size={24} />,
                 title: "Infinite Custom Views",
-                desc: "Visualize your product roadmap via Gantt, execute daily tasks in Kanban, and report using custom Dashboards.",
-                bgColor: "bg-fuchsia-50 text-purple-600",
+                desc: "Visualize your product roadmap via Gantt, execute daily tasks in Kanban.",
+                bgColor: "bg-purple-100 text-purple-600",
                 hoverBg: "group-hover:bg-purple-600",
                 borderColor: "group-hover:border-fuchsia-200"
               },
               {
                 icon: <Terminal size={24} />,
                 title: "Flawless Issue Tracking",
-                desc: "Capture bugs with custom forms. Prioritize, assign to engineers, and track resolution velocity seamlessly.",
-                bgColor: "bg-emerald-50 text-fuchsia-600",
+                desc: "Prioritize, assign to engineers, and track resolution velocity.",
+                bgColor: "bg-fuchsia-100 text-fuchsia-600",
                 hoverBg: "group-hover:bg-fuchsia-600",
                 borderColor: "group-hover:border-emerald-200"
               },
               {
                 icon: <Cpu size={24} />,
                 title: "Integrated Docs & Wikis",
-                desc: "Create beautiful technical documentation and PRDs natively. Tag tasks, embed roadmaps, and co-edit in real-time.",
-                bgColor: "bg-orange-50 text-purple-600",
+                desc: "Create beautiful technical documentation and natively.",
+                bgColor: "bg-purple-100 text-purple-600",
                 hoverBg: "group-hover:bg-purple-600",
                 borderColor: "group-hover:border-orange-200"
               },
               {
                 icon: <Zap size={24} />,
                 title: "AI Project Manager",
-                desc: "Let KaryaUp AI generate subtasks from PRDs, summarize long threads, and automatically assign the best developer.",
-                bgColor: "bg-pink-50 text-fuchsia-600",
+                desc: "Let's KaryaUp AI generate subtasks summarize long threads.",
+                bgColor: "bg-fuchsia-100 text-fuchsia-600",
                 hoverBg: "group-hover:bg-fuchsia-600",
                 borderColor: "group-hover:border-pink-200"
               }
@@ -624,6 +412,42 @@ export default function ProductDevelopment() {
           </div>
         </div>
       </section>
+
+      <MetricStorySlider
+        logoSrc={karyaupLogo}
+        title="Boost productivity with KaryaUp AI Workspace"
+        description="One place for product, design, and smart collaboration, automated tasks, and AI that keeps roadmaps."
+        intervalMs={5400}
+        fastIntervalMs={2600}
+        slides={[
+          {
+            metric: "Specs to shipped",
+            description: "Reduction in time spent turning PRDs into actionable engineering work.",
+            image: karyaupInfographicProduct,
+            imageFocus: "45% 35%",
+            storyTitle: "KaryaUp AI Workspace for product discovery",
+            storySubtitle: "One surface where research, epics, and backlog tasks stay aligned as the product evolves.",
+          },
+          {
+            metric: "Hours to one view",
+            description: "Faster standups with live sprint health, risks, and docs summarized.",
+            image: karyaupInfographicProduct,
+            imageFocus: "50% 55%",
+            storyTitle: "From standups to release without drift",
+            storySubtitle: "AI drafts recap, surfaces blockers, and routes follow-ups so PM and eng stay in sync.",
+          },
+          {
+            metric: "Silos to one runway",
+            description: "Lost between design, QA, and engineering every link lives in the workspace.",
+            image: karyaupInfographicProduct,
+            imageFocus: "55% 70%",
+            storyTitle: "Design, build, and ship in one AI runway",
+            storySubtitle: "KaryaUp keeps specs, branches, and approvals visible so nothing ships without context.",
+          },
+        ]}
+
+      />
+
       <FeatureCTA title="Tasks that connect to everything" description="Work smarter with unified tasks." image={dashboardImage} imageAlt="KaryaUp dashboard" containerClassName="my-10" />
     </div>
   );

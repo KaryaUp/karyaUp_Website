@@ -98,26 +98,27 @@ const MarqueeRow = ({
 const AllInOne = () => {
     const [pausedRowIndex, setPausedRowIndex] = useState(null);
     const [maskWidth, setMaskWidth] = useState(320);
+    const [isDesktop, setIsDesktop] = useState(true);
 
     useEffect(() => {
-        const updateMaskWidth = () => {
-            if (window.innerWidth < 640) {
+        const updateLayout = () => {
+            const width = window.innerWidth;
+            if (width < 640) {
                 setMaskWidth(0);
-                return;
-            }
-
-            if (window.innerWidth < 1024) {
+                setIsDesktop(false);
+            } else if (width < 1024) {
                 setMaskWidth(180);
-                return;
+                setIsDesktop(false);
+            } else {
+                setMaskWidth(320);
+                setIsDesktop(true);
             }
-
-            setMaskWidth(320);
         };
 
-        updateMaskWidth();
-        window.addEventListener("resize", updateMaskWidth);
+        updateLayout();
+        window.addEventListener("resize", updateLayout);
 
-        return () => window.removeEventListener("resize", updateMaskWidth);
+        return () => window.removeEventListener("resize", updateLayout);
     }, []);
 
     const handleRowClick = (idx) => {
@@ -202,44 +203,39 @@ const AllInOne = () => {
                 </motion.div>
             </div>
 
-            {/* Desktop Layout Container */}
-            <div className="hidden lg:flex w-full relative flex-col items-center">
-                <div className="flex flex-col items-center w-full border-y border-gray-100">
-                    <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                    <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                    <MarqueeRow icons={rows[2]} direction="left" speed={22} isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                    <MarqueeRow icons={rows[3]} direction="right" speed={22} isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+            {isDesktop ? (
+                <div className="w-full relative flex flex-col items-center">
+                    <div className="flex flex-col items-center w-full border-y border-gray-100">
+                        <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[2]} direction="left" speed={22} isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[3]} direction="right" speed={22} isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                    </div>
+                    <div className="absolute inset-0 flex items-center justify-center px-0 pointer-events-none">
+                        <div className="grid grid-cols-2">
+                            <FeatureCard title="Projects" image={featureProjects} />
+                            <FeatureCard title="Automation" image={automationImage} />
+                            <FeatureCard title="Calendar" image={calendarImage} />
+                            <FeatureCard title="Team" image={teamImage} />
+                        </div>
+                    </div>
                 </div>
-                <div className="absolute inset-0 flex items-center justify-center px-0 pointer-events-none">
-                    <div className="grid grid-cols-2">
+            ) : (
+                <div className="flex w-full flex-col items-center bg-white border-y border-gray-100">
+                    <div className="w-full overflow-hidden border-b border-gray-100">
+                        <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={false} maskHole={false} />
+                    </div>
+                    <div className="grid grid-cols-2 w-full gap-0">
                         <FeatureCard title="Projects" image={featureProjects} />
                         <FeatureCard title="Automation" image={automationImage} />
                         <FeatureCard title="Calendar" image={calendarImage} />
                         <FeatureCard title="Team" image={teamImage} />
                     </div>
+                    <div className="w-full overflow-hidden border-t border-gray-100">
+                        <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={false} maskHole={false} />
+                    </div>
                 </div>
-            </div>
-
-            {/* Mobile Layout Container */}
-            <div className="flex lg:hidden w-full flex-col items-center bg-white border-y border-gray-100">
-                {/* Top Marquee */}
-                <div className="w-full overflow-hidden border-b border-gray-100">
-                    <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={false} maskHole={false} />
-                </div>
-                
-                {/* Images grid covering all width */}
-                <div className="grid grid-cols-2 w-full gap-0">
-                    <FeatureCard title="Projects" image={featureProjects} />
-                    <FeatureCard title="Automation" image={automationImage} />
-                    <FeatureCard title="Calendar" image={calendarImage} />
-                    <FeatureCard title="Team" image={teamImage} />
-                </div>
-
-                {/* Bottom Marquee */}
-                <div className="w-full overflow-hidden border-t border-gray-100">
-                    <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={false} maskHole={false} />
-                </div>
-            </div>
+            )}
 
         </section>
     );

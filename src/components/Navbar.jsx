@@ -10,7 +10,7 @@ import {
 import logo from "../assets/logo.webp";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
 
-const authUrl = "https://www.karyaup.com/auth";
+const authUrl = "https://app.karyaup.com/auth";
 
 const navItems = [
   { label: "Platform" },

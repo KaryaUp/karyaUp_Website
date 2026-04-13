@@ -9,7 +9,7 @@ import {
 import { ArrowRight, Check } from "lucide-react";
 import logo from "../assets/logo.webp";
 
-const authUrl = "https://www.karyaup.com/auth";
+const authUrl = "https://app.karyaup.com/auth";
 
 export default function FeatureCTA({
   title,

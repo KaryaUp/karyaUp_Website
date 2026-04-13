@@ -4,8 +4,12 @@ import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from
 import { BrainCircuit, MessageSquare, Zap, Search, ShieldCheck, Brain, Network, Check } from "lucide-react";
 import dashboardImage from "../../assets/dashboard2.webp";
 import planImage from "../../assets/Gantt.webp";
+import karyaupLogo from "../../assets/logo-svg.svg";
+// import karyaupInfographicIt from "../../assets/karyaup-soft-it.png";
+import karyaupInfographicProduct from "../../assets/karyaup-soft-product.png";
 import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
+import MetricStorySlider from "../../components/MetricStorySlider";
 
 const getColorClasses = (colorName) => {
   const colors = {
@@ -355,20 +359,20 @@ export default function IT() {
               </motion.span>
               {/* <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600">Timeline Control</span> */}
             </h2>
-            <p className="text-xl text-slate-600 mb-4 font-medium">
+            <p className="text-[1rem] text-slate-600 mb-5 font-medium">
               KaryaUp’s AI-powered Gantt charts act as a living
               <br />
               roadmap for your projects.
             </p>
-            <div className="space-y-7">
+            <div className="space-y-5">
               {[
                 "Reorganize phases instantly with a responsive interface.",
                 "View multiple department timelines in one consolidated view.",
                 "Link tasks to safely update the entire project flow."
               ].map((text, i) => (
                 <div key={i} className="flex items-center gap-4">
-                  <div className="bg-emerald-100 p-1.5 rounded-full shadow-sm shrink-0">
-                    <div className="w-2 h-2 bg-slate-600 rounded-full" />
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0 bg-purple-100 border border-purple-200 text-purple-700">
+                    <Check className="w-5 h-5 stroke-[4]" />
                   </div>
                   <span className="font-bold text-slate-800 text-lg leading-snug">{text}</span>
                 </div>
@@ -388,6 +392,41 @@ export default function IT() {
           </motion.div>
         </div>
       </section>
+
+      <MetricStorySlider
+        logoSrc={karyaupLogo}
+        title="Secure delivery with KaryaUp AI Workspace"
+        description="Service desk, change management, and security reviews stay connected automate tasks, collaborate with context."
+        intervalMs={5300}
+        fastIntervalMs={2600}
+        slides={[
+          {
+            metric: "Incidents to minutes",
+            description: "Mean time to acknowledge drops when AI triages alerts, groups duplicates.",
+            image: karyaupInfographicProduct,
+            imageFocus: "42% 38%",
+            storyTitle: "KaryaUp AI Workspace for IT service",
+            storySubtitle: "Tickets, chat, and infra context stay attached so L1–L3 resolve with less back-and-forth.",
+          },
+          {
+            metric: "Policies to proof",
+            description: "Security reviews and change windows stay traceable with auto linked evidence.",
+            image: karyaupInfographicProduct,
+            imageFocus: "50% 52%",
+            storyTitle: "Compliance that does not slow shipping",
+            storySubtitle: "AI summarizes diffs, control checks, and approvals so audits read like a story, not a scavenger hunt.",
+          },
+          {
+            metric: "Silos to shared truth",
+            description: "Fewer shadow spreadsheets one workspace for projects, assets.",
+            image: karyaupInfographicProduct,
+            imageFocus: "55% 65%",
+            storyTitle: "One IT runway across departments",
+            storySubtitle: "Roadmaps, incidents, and vendor tasks roll up to leadership without manual consolidation.",
+          },
+        ]}
+        
+      />
 
       {/* ================= CTA SECTION ================= */}
       <div className="py-10">

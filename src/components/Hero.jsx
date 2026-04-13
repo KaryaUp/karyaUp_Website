@@ -143,7 +143,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`g-${wIdx}`}
-                            className="inline-block py-1 text-[2.6rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] whitespace-nowrap"
+                            className="inline-block py-1 text-[2.2rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] whitespace-nowrap"
                           >
                             <motion.span className="text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]">
                               {word.split("").map((char, cIdx) => (
@@ -163,7 +163,7 @@ const Hero = () => {
                         return (
                           <span
                             key={`w-${wIdx}`}
-                            className="inline-block py-1 text-[2.6rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white whitespace-nowrap"
+                            className="inline-block py-1 text-[2.2rem] sm:text-[2.75rem] lg:text-[4.5rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] text-white whitespace-nowrap"
                           >
                             {word.split("").map((char, cIdx) => (
                               <motion.span
@@ -190,7 +190,7 @@ const Hero = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -12, scale: 0.97 }}
                     transition={{ duration: 0.38, ease: "easeOut" }}
-                    className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 lg:gap-x-6 gap-y-2 w-full max-w-4xl mx-auto"
+                    className="flex items-center justify-center gap-x-1.5 sm:gap-x-4 lg:gap-x-6 w-full max-w-4xl mx-auto whitespace-nowrap"
                   >
                     {SUMMARY_ITEMS.map((item, i) => (
                       <React.Fragment key={i}>
@@ -199,7 +199,7 @@ const Hero = () => {
                             initial={{ opacity: 0, y: 16 }}
                             animate={i < summaryVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
                             transition={{ duration: 0.26 }}
-                            className={`inline-block pb-[2px] text-[2.2rem] sm:text-4xl lg:text-[4rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] ${item.gradient ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]" : "text-white"}`}
+                            className={`inline-block pb-[2px] text-[1.55rem] sm:text-4xl lg:text-[4rem] font-black tracking-normal leading-[1.15] drop-shadow-[0_8px_24px_rgba(15,23,42,0.4)] ${item.gradient ? "text-transparent bg-clip-text bg-gradient-to-r from-[#a855f7] via-fuchsia-400 to-[#7e22ce]" : "text-white"}`}
                           >
                             {item.text}
                           </motion.span>
@@ -208,14 +208,14 @@ const Hero = () => {
                             initial={{ opacity: 0, scale: 0.3 }}
                             animate={i < summaryVisible ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.3 }}
                             transition={{ duration: 0.2 }}
-                            className="inline-flex items-center justify-center"
+                            className="inline-flex items-center justify-center shrink-0"
                             aria-hidden="true"
                           >
                             <span
                               className="block rounded-full bg-white"
                               style={{
-                                width: "clamp(8px,1.2vw,14px)",
-                                height: "clamp(8px,1.2vw,14px)",
+                                width: "clamp(6px,1vw,14px)",
+                                height: "clamp(6px,1vw,14px)",
                                 transform: "translateY(4px)",
                                 boxShadow: "0 0 10px 2px rgba(255,255,255,0.5)"
                               }}
@@ -310,7 +310,7 @@ const Hero = () => {
               className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 mb-8 w-full mt-16"
             >
               <Link
-                to="https://www.karyaup.com/auth"
+                to="https://app.karyaup.com/auth"
                 className="group relative z-10 flex h-[3.5em] w-full max-w-[14em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300 active:scale-95"
                 style={{ boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)" }}
               >

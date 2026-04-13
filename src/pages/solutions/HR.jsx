@@ -2,20 +2,23 @@ import { Helmet } from "react-helmet-async";
 import React, { useRef, useEffect, useState, useMemo } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import dashboardImage from "../../assets/dashboard2.webp";
+import karyaupLogo from "../../assets/logo-svg.svg";
+// import karyaupInfographicHr from "../../assets/karyaup-soft-hr.png";
+import karyaupInfographicProduct from "../../assets/karyaup-soft-product.png";
 import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
+import MetricStorySlider from "../../components/MetricStorySlider";
 import {
   Zap,
   UserPlus,
   ClipboardCheck,
   TrendingUp,
   BarChart3,
-  Calendar,
   UserCheck,
   BrainCircuit,
   Search,
   ShieldCheck,
-  Check
+  Check,
 } from "lucide-react";
 
 const TiltCard = ({ children, className }) => {
@@ -341,6 +344,40 @@ export default function HR() {
         </div>
       </section>
 
+      <MetricStorySlider
+        logoSrc={karyaupLogo}
+        title="People success in KaryaUp AI Workspace"
+        description="Automate repetitive HR work, keep teams aligned, and turn people insights into tasks."
+        intervalMs={5200}
+        fastIntervalMs={2600}
+        slides={[
+          {
+            metric: "Policy ping-pong to answers",
+            description: "Employees get consistent HR guidance while your team spends less time.",
+            image: karyaupInfographicProduct,
+            imageFocus: "45% 36%",
+            storyTitle: "KaryaUp AI Workspace for people programs",
+            storySubtitle: "Handbooks, tickets, and approvals stay linked so every answer is grounded and traceable.",
+          },
+          {
+            metric: "Hiring chaos to cadence",
+            description: "Interview loops, scorecards, and stay orchestrated without another shared drive.",
+            image: karyaupInfographicProduct,
+            imageFocus: "50% 52%",
+            storyTitle: "Recruiting that feels coordinated, not frantic",
+            storySubtitle: "AI drafts briefs, nudges owners, and keeps hiring managers aligned on next steps.",
+          },
+          {
+            metric: "Surveys to next actions",
+            description: "Engagement signals turn into prioritized work managers.",
+            image: karyaupInfographicProduct,
+            imageFocus: "55% 66%",
+            storyTitle: "People analytics that land as tasks",
+            storySubtitle: "KaryaUp routes insights to the right HRBPs and leaders with context already attached.",
+          },
+        ]}
+       
+      />
 
       {/* ================= CTA ================= */}
       <div className="px-3 md:px-3">

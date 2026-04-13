@@ -24,7 +24,7 @@ import NumberFlow from "@number-flow/react";
 import microsoftTeamsLogo from "../assets/Teams-logo.webp";
 import { Helmet } from "react-helmet-async";
 
-const authUrl = "https://karyaup.com/auth";
+const authUrl = "https://app.karyaup.com/auth";
 
 const plans = [
   {
@@ -378,6 +378,10 @@ const DrawingIcon = ({ icon: IconName, size = 20, className }) => {
 };
 
 export default function Pricing() {
+  const handleAuthRedirect = useCallback(() => {
+    window.location.href = authUrl;
+  }, []);
+
   const [billingCycle, setBillingCycle] = useState("monthly");
   const [activeFaq, setActiveFaq] = useState(null);
   const [showComparison, setShowComparison] = useState(false);
@@ -717,6 +721,11 @@ export default function Pricing() {
                         href={
                           plan.name === "Enterprise" ? "/book-demo" : authUrl
                         }
+                        onClick={
+                          plan.name === "Enterprise"
+                            ? undefined
+                            : handleAuthRedirect
+                        }
                         className="group relative z-10 flex h-[3.4em] w-full items-center justify-center overflow-hidden rounded-[30em] font-bold text-[14px] sm:text-[15px] transition-all duration-300 active:scale-95"
                         style={{
                           boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)",
@@ -807,6 +816,11 @@ export default function Pricing() {
                                     ? "/book-demo"
                                     : authUrl
                                 }
+                                onClick={
+                                  plan.name === "Enterprise"
+                                    ? undefined
+                                    : handleAuthRedirect
+                                }
                                 className="group relative mt-1 flex h-[2.5em] sm:h-[2.8em] items-center justify-center overflow-hidden rounded-[30em] bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 px-3 sm:px-6 text-[10px] sm:text-xs font-black transition-all duration-300 active:scale-95"
                                 style={{
                                   boxShadow:
@@ -882,6 +896,11 @@ export default function Pricing() {
                                       plan.name === "Enterprise"
                                         ? "/book-demo"
                                         : authUrl
+                                    }
+                                    onClick={
+                                      plan.name === "Enterprise"
+                                        ? undefined
+                                        : handleAuthRedirect
                                     }
                                     className="group relative mt-1 sm:mt-2 flex h-[2.7em] sm:h-[3em] items-center justify-center overflow-hidden rounded-[30em] bg-gradient-to-r from-[#7e22ce] to-fuchsia-500 px-3 sm:px-6 text-[10px] sm:text-xs font-black transition-all duration-300 active:scale-95"
                                     style={{
@@ -1144,6 +1163,7 @@ export default function Pricing() {
 
                   <a
                     href={authUrl}
+                    onClick={handleAuthRedirect}
                     className="group relative z-10 flex h-[3.4em] w-full items-center justify-center overflow-hidden rounded-[30em] font-bold text-[14px] sm:text-[15px] transition-all duration-300 active:scale-95"
                     style={{
                       boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)",
@@ -1380,6 +1400,7 @@ export default function Pricing() {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                   <a
                     href={authUrl}
+                    onClick={handleAuthRedirect}
                     className="group relative z-10 flex h-[3.5em] w-full sm:w-auto min-w-[16em] items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300 active:scale-95"
                     style={{ boxShadow: "0 18px 40px rgba(126, 34, 206, 0.22)" }}
                   >
