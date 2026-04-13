@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Briefcase, CalendarCheck2, MoveRight, PhoneCall, Send } from "lucide-react";
+import { Briefcase, CalendarCheck2, MoveRight, Send } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import MovingPurpleRing from "../components/MovingPurpleRing";
 
 const initialForm = {
   first_name: "",
@@ -116,7 +117,7 @@ export default function BookDemo() {
     href="https://karyaup.com/book-demo"
   />
 </Helmet>
-    <section className="min-h-screen bg-[linear-gradient(180deg,#fafbff_0%,#f3f5fb_100%)] pt-32 sm:pt-36 lg:pt-32 pb-8 sm:pb-10 lg:pb-12 text-slate-900">
+    <section className="min-h-screen overflow-x-hidden bg-[linear-gradient(180deg,#fafbff_0%,#f3f5fb_100%)] pt-32 sm:pt-36 lg:pt-32 pb-8 sm:pb-10 lg:pb-12 text-slate-900">
       <div className="mx-auto grid max-w-5xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_0.88fr] lg:px-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -143,11 +144,13 @@ export default function BookDemo() {
 
           <div className="mt-6 space-y-3 w-full max-w-md">
             <InfoCard
+              ringIndex={0}
               icon={<CalendarCheck2 className="h-5 w-5 text-purple-700" />}
               title="Personalized walkthrough"
               text="We can tailor the demo around your workflow, team structure, and business goals."
             />
             <InfoCard
+              ringIndex={1}
               icon={<Briefcase className="h-5 w-5 text-purple-700" />}
               title="Right people, right context"
               text="Company and phone details help us prepare the right conversation before the call."
@@ -222,14 +225,16 @@ export default function BookDemo() {
             </button>
 
             {status.message && status.type === "success" && (
-              <div className="flex items-center gap-2 pt-1 text-base font-bold text-emerald-600">
-                <MoveRight className="h-5 w-5" />
-                <span>{status.message}</span>
+              <div className="flex flex-col items-center justify-center gap-2 pt-2 text-center text-base font-bold text-emerald-600 sm:flex-row sm:justify-start sm:text-left">
+                <MoveRight className="h-5 w-5 shrink-0" />
+                <span className="max-w-md text-pretty">{status.message}</span>
               </div>
             )}
 
             {status.message && status.type === "error" && (
-              <div className="pt-1 text-sm font-semibold text-rose-600">{status.message}</div>
+              <div className="pt-2 text-center text-sm font-semibold text-rose-600 sm:text-left">
+                <span className="inline-block max-w-md text-pretty">{status.message}</span>
+              </div>
             )}
           </form>
         </motion.div>
@@ -239,17 +244,24 @@ export default function BookDemo() {
   );
 }
 
-function InfoCard({ icon, title, text }) {
+function InfoCard({ icon, title, text, ringIndex = 0 }) {
   return (
-    <div className="flex flex-col items-center text-center lg:flex-row lg:items-start lg:text-left gap-3 rounded-2xl border border-slate-200/70 bg-white/70 p-3.5 shadow-sm">
-      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-purple-100">
+    <MovingPurpleRing
+      rounded="rounded-2xl"
+      ringPadding="p-[2px]"
+      innerRounded="rounded-[calc(1rem-2px)]"
+      delayIndex={ringIndex}
+      compact
+      innerClassName="flex flex-col items-center gap-3 border border-slate-200/70 bg-white/90 p-4 text-center shadow-sm sm:p-3.5 lg:flex-row lg:items-start lg:gap-4 lg:text-left"
+    >
+      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-purple-100 lg:mt-0.5">
         {icon}
       </div>
-      <div>
-        <h2 className="text-[0.95rem] font-black text-slate-900">{title}</h2>
-        <p className="mt-1 text-[13px] font-medium leading-5 text-slate-500">{text}</p>
+      <div className="min-w-0 max-w-md lg:max-w-none">
+        <h2 className="text-[0.95rem] font-black leading-snug tracking-tight text-slate-900 text-balance">{title}</h2>
+        <p className="mt-1.5 text-[13px] font-medium leading-relaxed text-slate-500 text-pretty sm:text-sm">{text}</p>
       </div>
-    </div>
+    </MovingPurpleRing>
   );
 }
 

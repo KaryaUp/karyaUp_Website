@@ -16,7 +16,7 @@ export default function FeatureCTA({
   description,
   eyebrow,
   highlights,
-  buttonText = "Get started. It's FREE",
+  buttonText = "Get Started. It's FREE",
   image,
   imageAlt = "KaryaUp Showcase",
   imageClassName = "w-full",

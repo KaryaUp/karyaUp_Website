@@ -352,3 +352,62 @@ html {
     text-align: left !important;
   }
 }
+
+/* Blog list cards — traveling purple outline (conic gradient) */
+@keyframes ku-blog-card-outline-rotate {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.ku-blog-card-outline-spin {
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 252deg,
+    rgba(196, 181, 253, 0.35) 268deg,
+    rgba(167, 139, 250, 0.95) 286deg,
+    rgba(216, 180, 254, 0.85) 302deg,
+    rgba(167, 139, 250, 0.75) 318deg,
+    rgba(196, 181, 253, 0.4) 332deg,
+    transparent 348deg
+  );
+  animation: ku-blog-card-outline-rotate 8s linear infinite;
+}
+
+/* Narrow pills (FeatureStack heroes) — slightly faster loop reads better at small size */
+.ku-blog-card-outline-spin--fast {
+  animation-duration: 5.5s;
+}
+
+/* Hero pills — thin light violet trace only (no heavy glow) */
+.ku-blog-card-outline-spin--pill {
+  background: conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    transparent 274deg,
+    rgba(196, 181, 253, 0.55) 286deg,
+    rgba(167, 139, 250, 0.5) 294deg,
+    rgba(196, 181, 253, 0.45) 302deg,
+    transparent 312deg
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ku-blog-card-outline-spin {
+    animation: none;
+    opacity: 0.45;
+  }
+
+  .ku-blog-card-outline-spin--fast {
+    animation: none;
+  }
+
+  .ku-blog-card-outline-spin--pill {
+    opacity: 0.35;
+  }
+}

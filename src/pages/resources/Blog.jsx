@@ -12,6 +12,7 @@ import Blog6 from "../../assets/Blog6.webp";
 
 import BlogHero from "../../assets/Blog_Hero.webp";
 import { Helmet } from "react-helmet-async";
+import MovingPurpleRing from "../../components/MovingPurpleRing";
 
 const EASING = [0.2, 0.8, 0.2, 1];
 
@@ -157,78 +158,133 @@ const articles = [
   }
 ];
 
-const PostRow = ({ article, onClick }) => {
+const PostRow = ({ article, onClick, index = 0 }) => {
+  const altLayout = index % 2 === 1;
+
   return (
-
-    <motion.div
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, x: -10 }}
-      className="group py-10 md:py-14 border-b border-slate-100 flex flex-col md:flex-row gap-6 md:gap-10 lg:gap-16 items-start"
+    <MovingPurpleRing
+      className="group scroll-mt-28"
+      rounded="rounded-2xl lg:rounded-3xl"
+      ringPadding="p-[2px] lg:p-[2.5px]"
+      innerRounded="rounded-[calc(1rem-2px)] lg:rounded-[calc(1.5rem-2.5px)]"
+      delayIndex={index}
     >
-      {/* Left Column (Content) */}
-      <div className="flex-1 text-left">
-        <div className="flex items-center gap-3 mb-4 md:mb-6">
-          <div className="w-1.5 h-4 bg-[#7e22ce] rounded-full" />
-          <span className="text-[#7e22ce] text-[13px] font-black uppercase tracking-[0.2em]">{article.category}</span>
-        </div>
-
-        <h3
-          onClick={() => onClick(article)}
-          className="text-[28px] sm:text-[32px] md:text-[40px] font-black text-[#0A2540] mb-5 md:mb-8 leading-[1.05] tracking-tight cursor-pointer transition-colors"
-        >
-          {article.title}
-        </h3>
-
-        <p className="text-[#425466] text-lg md:text-xl leading-relaxed mb-6 md:mb-10 font-medium line-clamp-3">
-          {article.excerpt}
-        </p>
-
-        <button
-          onClick={() => onClick(article)}
-          className="text-[#7e22ce] font-black text-[15px] flex items-center gap-2 hover:gap-4 transition-all"
-        >
-          Read more <ArrowRight size={18} strokeWidth={3} />
-        </button>
-      </div>
-
-      {/* Right Column (Metadata + Image) */}
-      <div className="w-full md:w-[400px] lg:w-[460px] shrink-0 md:-mt-6 lg:-mt-10">
-        {/* Top: Metadata */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-5 sm:gap-6 mb-6 md:mb-10">
-          <div className="text-[#425466] text-[15px] font-bold">
-            {article.date}
-          </div>
-
-          <div className="flex items-center gap-5">
-            <div className="w-12 h-12 rounded-full bg-[#F6F9FC] border border-slate-100 flex items-center justify-center font-black text-[#0A2540] text-sm overflow-hidden">
-              {article.author.charAt(0)}
-            </div>
-            <div>
-              <div className="text-[#0A2540] font-black text-[15px] leading-tight mb-1">{article.author}</div>
-              <div className="text-[#425466] text-[11px] uppercase font-bold tracking-[0.2em]">{article.role}</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom: Post Image */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 16 }}
+        transition={{ type: "spring", stiffness: 380, damping: 32 }}
+        className={`relative overflow-hidden border border-slate-100/90 bg-white p-6 shadow-[0_4px_12px_rgba(15,23,42,0.06),0_16px_40px_-16px_rgba(15,23,42,0.12)] transition-all duration-500 ease-out hover:-translate-y-0.5 md:p-8 lg:p-9 ${
+          altLayout
+            ? "hover:border-violet-300/50 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.12),0_24px_56px_-16px_rgba(124,58,237,0.22),0_12px_32px_-12px_rgba(15,23,42,0.06)]"
+            : "hover:border-violet-200/60 hover:shadow-[0_0_0_1px_rgba(167,139,250,0.2),0_28px_64px_-18px_rgba(109,40,217,0.18),0_12px_32px_-12px_rgba(15,23,42,0.06)]"
+        }`}
+      >
+        {/* Purple hover washes */}
         <div
-          onClick={() => onClick(article)}
-          className="relative aspect-video rounded-[40px] overflow-hidden cursor-pointer shadow-[0_40px_100px_-30px_rgba(0,0,0,0.1)] group-hover:shadow-[0_40px_100px_-20px_rgba(0,0,0,0.15)] transition-all bg-[#F6F9FC]"
-        >
-          {article.illustration ? (
-            article.illustration
-          ) : (
-            <img
-              src={article.image}
-              alt={article.title}
-              className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
-            />
-          )}
+          className="pointer-events-none absolute -right-32 -top-32 h-[min(22rem,55vw)] w-[min(22rem,55vw)] rounded-full bg-gradient-to-br from-violet-500/25 via-fuchsia-500/10 to-transparent opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -bottom-28 -left-28 h-52 w-52 rounded-full bg-violet-600/15 blur-3xl opacity-0 transition-opacity duration-500 delay-100 group-hover:opacity-100"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-violet-500 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-90"
+          aria-hidden
+        />
+
+        <div className="relative z-[1] flex flex-col gap-7 md:gap-8">
+          {/* Top metadata */}
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            {altLayout ? (
+              <span className="w-fit rounded-full border border-violet-200/70 bg-gradient-to-r from-violet-50 to-fuchsia-50/80 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-[0.16em] text-violet-800 shadow-sm shadow-violet-200/20 transition-all duration-300 group-hover:border-violet-400/60 group-hover:shadow-md group-hover:shadow-violet-300/25">
+                {article.category}
+              </span>
+            ) : (
+              <div className="flex items-center gap-3">
+                <div
+                  className="h-5 w-1 shrink-0 rounded-full bg-gradient-to-b from-violet-600 to-fuchsia-500 transition-transform duration-300 group-hover:scale-y-110"
+                  aria-hidden
+                />
+                <span className="text-[12px] font-bold uppercase tracking-[0.18em] text-violet-700 transition-colors duration-300 group-hover:text-violet-600">
+                  {article.category}
+                </span>
+              </div>
+            )}
+
+            <div className="flex flex-wrap items-center gap-5 sm:gap-8">
+              <span className="text-[14px] font-medium text-slate-500 transition-colors duration-300 group-hover:text-violet-900/55">
+                {article.date}
+              </span>
+              <div className="flex items-center gap-3">
+                <div
+                  className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full border border-slate-200/80 bg-slate-50 text-sm font-bold text-slate-800 transition-all duration-300 group-hover:border-violet-300/80 group-hover:bg-violet-50 group-hover:text-violet-900"
+                  aria-hidden
+                >
+                  {article.author.charAt(0)}
+                </div>
+                <div className="min-w-0 text-left">
+                  <div className="truncate text-[15px] font-bold leading-tight text-slate-900 transition-colors duration-300 group-hover:text-violet-950">
+                    {article.author}
+                  </div>
+                  <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-500 transition-colors duration-300 group-hover:text-violet-700/70">
+                    {article.role}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Body — alternate image side on large screens */}
+          <div
+            className={`flex flex-col items-start gap-8 lg:gap-14 xl:gap-16 ${altLayout ? "lg:flex-row-reverse" : "lg:flex-row"}`}
+          >
+            <div className="min-w-0 flex-1 text-left">
+              <h3
+                onClick={() => onClick(article)}
+                className="mb-4 cursor-pointer text-[26px] font-extrabold leading-[1.12] tracking-tight text-slate-900 transition-colors duration-300 group-hover:text-violet-950 sm:text-[30px] md:text-[36px] lg:mb-6"
+              >
+                {article.title}
+              </h3>
+
+              <p className="mb-6 line-clamp-3 text-base font-medium leading-relaxed text-slate-500 transition-colors duration-300 group-hover:text-slate-600 md:text-lg lg:mb-8">
+                {article.excerpt}
+              </p>
+
+              <button
+                type="button"
+                onClick={() => onClick(article)}
+                className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-[15px] font-semibold text-violet-700 transition-all duration-300 hover:gap-3 group-hover:bg-gradient-to-r group-hover:from-violet-600 group-hover:to-fuchsia-600 group-hover:px-5 group-hover:text-white group-hover:shadow-lg group-hover:shadow-violet-500/35"
+              >
+                Read more <ArrowRight size={17} strokeWidth={2.5} />
+              </button>
+            </div>
+
+            <div className="w-full shrink-0 lg:w-[min(100%,420px)] xl:w-[min(100%,460px)]">
+              <div
+                onClick={() => onClick(article)}
+                className="relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-slate-200/70 transition-all duration-500 group-hover:ring-2 group-hover:ring-violet-400/60 group-hover:shadow-[0_16px_48px_-12px_rgba(109,40,217,0.28)] sm:aspect-video lg:rounded-[22px]"
+              >
+                {article.illustration ? (
+                  article.illustration
+                ) : (
+                  <img
+                    src={article.image}
+                    alt={article.title}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                )}
+                <div
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-violet-700/30 via-transparent to-fuchsia-500/25 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                  aria-hidden
+                />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </MovingPurpleRing>
   );
 };
 
@@ -520,7 +576,7 @@ export default function Blog() {
           href="https://karyaup.com/resources/blog"
         />
       </Helmet>
-      <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans selection:bg-[#7e22ce] selection:text-white overflow-hidden">
+      <div className="min-h-screen max-w-full overflow-x-hidden bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans selection:bg-[#7e22ce] selection:text-white">
         <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
           <div className="absolute top-0 right-0 -z-10 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />
           <div className="absolute bottom-0 left-0 -z-10 h-[420px] w-[420px] -translate-x-1/4 translate-y-1/3 rounded-full bg-fuchsia-100/50 blur-[110px]" />
@@ -591,18 +647,19 @@ export default function Blog() {
             </div>
           </div>
         </section>
-        {/* Articles Feed - Stripe List Style */}
-        <section className="relative pt-10 pb-12 sm:pb-12 lg:pb-14 min-h-[600px]">
+        {/* Articles feed — card grid */}
+        <section className="relative bg-gradient-to-b from-slate-50/50 via-white to-violet-50/25 pt-10 pb-16 sm:pb-20 lg:pb-24 min-h-[600px]">
           <div className="max-w-6xl mx-auto px-6">
-            <div className="flex flex-col">
+            <div className="relative isolate flex flex-col gap-5 pb-16 pt-2 sm:gap-6 md:gap-7 md:pb-20">
               <AnimatePresence mode="popLayout" initial={false}>
                 {filteredArticles
-                  .filter(a => activeCategory !== "All" || appliedSearch || a.id !== "featured")
-                  .map((article) => (
+                  .filter((a) => activeCategory !== "All" || appliedSearch || a.id !== "featured")
+                  .map((article, index) => (
                     <PostRow
                       key={article.id}
                       article={article}
                       onClick={openArticle}
+                      index={index}
                     />
                   ))}
               </AnimatePresence>

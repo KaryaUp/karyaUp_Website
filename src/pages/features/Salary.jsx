@@ -439,7 +439,7 @@ export default function Salary() {
         <FeatureCTA
           title={<>Salary That Stays <br /> Clear Every Month</>}
           description="Automate payroll and track profit without spreadsheet confusion."
-          buttonText="Get started. It's FREE"
+          buttonText="Get Started. It's FREE"
           image={featureSalary}
           imageAlt="KaryaUp salary dashboard"
           containerClassName="mt-0"

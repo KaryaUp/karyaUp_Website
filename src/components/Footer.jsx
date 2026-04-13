@@ -34,6 +34,8 @@ const footerColumns = [
   },
 ];
 
+const FOOTER_WORDMARK = "KARYAUP";
+
 const socialLinks = [
   {
     label: "LinkedIn",
@@ -113,10 +115,46 @@ const Footer = () => {
   };
 
   return (
-    <footer className="border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
+    <footer className="relative overflow-hidden border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
+      {/* Watermark: purple type on white + perspective ramp */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex min-h-[13rem] items-end justify-center overflow-hidden select-none sm:min-h-[18rem] md:min-h-[26rem] lg:min-h-[30rem]"
+        aria-hidden
+      >
+        <div
+          className="flex w-full max-w-[100vw] justify-center px-0 [perspective:min(100vw,600px)] sm:[perspective:min(120vw,1400px)] lg:[perspective:min(140vw,2400px)]"
+        >
+          <div className="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-7 sm:translate-x-16 sm:scale-100 md:-translate-y-9 md:translate-x-[4.5rem] lg:-translate-y-11 lg:translate-x-24">
+            <div
+              className="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,2%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-px sm:[transform:translate(0,20%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,24%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,28%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]"
+            >
+              {FOOTER_WORDMARK.split("").map((char, i) => {
+                const last = FOOTER_WORDMARK.length - 1;
+                const t = last > 0 ? i / last : 0;
+                const scale = 4;
+                const minRem = scale * (2.2 + t * 1.5);
+                const prefVw = scale * (4.85 + t * 3.25);
+                const maxRem = scale * (2.9 + t * 1.85);
+                return (
+                  <span
+                    key={`wm-${i}`}
+                    className="inline-block font-black font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-[#5b21b6]/[0.48] sm:text-[#5b21b6]/[0.4] md:text-[#5b21b6]/[0.34] lg:text-[#5b21b6]/[0.28]"
+                    style={{
+                      fontSize: `clamp(${minRem}rem, ${prefVw}vw, ${maxRem}rem)`,
+                      transform: `translateZ(${Math.round(t * 72 * scale)}px)`,
+                    }}
+                  >
+                    {char}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
           {/* LEFT: Branding & Socials */}
           <div className="flex flex-col items-center sm:items-start lg:w-1/3">
             <div className="mb-6 space-y-4 text-center sm:text-left">
@@ -130,14 +168,13 @@ const Footer = () => {
                   className="h-12 w-auto sm:h-14"
                 />
               </a>
-              <p className="text-[13px] font-medium leading-relaxed text-slate-500 max-w-xs">
-
-                From Sanskrit <span className="italic opacity-90">"Karya"</span> meaning action or work. Empowering teams to ship faster.
+              <p className="max-w-xs text-[13px] font-medium leading-relaxed text-slate-500">
+                From Sanskrit <span className="italic opacity-90">“Karya”</span> meaning action or work. Empowering
+                teams to ship faster.
               </p>
             </div>
 
-            {/* Social icons - Moved here */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap justify-center gap-3 sm:justify-start">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -153,7 +190,6 @@ const Footer = () => {
 
           {/* RIGHT: Combined Nav Columns */}
           <div className="flex-1">
-            {/* Desktop Nav */}
             <div className="hidden sm:grid sm:grid-cols-3 sm:gap-x-8 lg:gap-x-12">
               {footerColumns.map((column) => (
                 <div key={column.title}>
@@ -176,8 +212,7 @@ const Footer = () => {
               ))}
             </div>
 
-            {/* Mobile Accordion */}
-            <div className="sm:hidden w-full divide-y divide-slate-100 border-y border-slate-100">
+            <div className="w-full divide-y divide-slate-100 border-y border-slate-100 sm:hidden">
               {footerColumns.map((column) => {
                 const isOpen = openSection === column.title;
                 return (
@@ -188,7 +223,7 @@ const Footer = () => {
                       className="flex w-full items-center justify-between py-4 text-left"
                       aria-expanded={isOpen}
                     >
-                      <span className="text-sm font-bold text-slate-900 uppercase tracking-widest">
+                      <span className="text-sm font-bold uppercase tracking-widest text-slate-900">
                         {column.title}
                       </span>
                       <span
@@ -207,12 +242,12 @@ const Footer = () => {
                         transition: "max-height 0.3s ease",
                       }}
                     >
-                      <ul className="pb-4 space-y-3">
+                      <ul className="space-y-3 pb-4">
                         {column.links.map((link) => (
                           <li key={link.label}>
                             <Link
                               to={link.to}
-                              className="text-sm font-medium text-slate-500"
+                              className="text-sm font-medium text-slate-500 hover:text-purple-600"
                             >
                               {link.label}
                             </Link>
@@ -227,15 +262,20 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* BOTTOM: Minimal Bar with Top Border */}
-        <div className="mt-6 border-t border-slate-100 pt-8 flex flex-col items-center gap-4 text-center sm:flex-row sm:justify-between sm:text-left">
-          <p className="text-xs font-medium text-slate-400">
+        <div className="relative mt-6 flex flex-col items-center gap-4 border-t border-slate-100 pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
+          <p className="text-xs font-medium text-slate-600 max-sm:[text-shadow:0_1px_0_rgba(255,255,255,0.92),0_0_12px_rgba(255,255,255,0.75)]">
             &copy; 2026 KaryaUp. All rights reserved.
           </p>
-          <div className="flex flex-wrap justify-center gap-5 text-xs font-semibold text-slate-400">
-            <Link to="/disclaimer" className="hover:text-purple-600 transition-colors">Disclaimer</Link>
-            <Link to="/privacy-policy" className="hover:text-purple-600 transition-colors">Privacy Policy</Link>
-            <Link to="/terms-of-service" className="hover:text-purple-600 transition-colors">Terms of Service</Link>
+          <div className="flex flex-wrap justify-center gap-5 text-xs font-semibold text-slate-600 max-sm:[text-shadow:0_1px_0_rgba(255,255,255,0.92),0_0_12px_rgba(255,255,255,0.75)]">
+            <Link to="/disclaimer" className="transition-colors hover:text-purple-600">
+              Disclaimer
+            </Link>
+            <Link to="/privacy-policy" className="transition-colors hover:text-purple-600">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-of-service" className="transition-colors hover:text-purple-600">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
