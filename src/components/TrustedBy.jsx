@@ -35,7 +35,7 @@ const TrustedBy = () => {
                             <div 
                                 key={index} 
                                 // Increased horizontal margin (mx-16 to mx-24) for more space
-                                className="mx-12 sm:mx-16 md:mx-20 lg:mx-24 flex items-center shrink-0"
+                                className="mx-8 sm:mx-16 md:mx-20 lg:mx-24 flex items-center shrink-0"
                             >
                                 <img
                                     src={brand.logo}
@@ -43,7 +43,7 @@ const TrustedBy = () => {
                                     width="200"
                                     height="80"
                                     loading="lazy"
-                                    className="h-10 sm:h-16 md:h-20 w-auto brightness-0 opacity-70 hover:opacity-100 transition-opacity duration-300 block object-contain"
+                                    className="h-20 sm:h-16 md:h-20 w-auto brightness-0 opacity-70 hover:opacity-100 transition-opacity duration-300 block object-contain"
                                 />
                             </div>
                         ))}

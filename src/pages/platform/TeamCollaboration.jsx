@@ -94,10 +94,19 @@ const MarqueeRow = ({ text, direction, isShieldHovered }) => {
 function Card({ data, type }) {
   const isRed = type === "red";
   return (
-    <div className="border border-slate-200 rounded-xl px-2.5 py-2 sm:px-3 sm:py-2.5 lg:px-4 lg:py-3 flex flex-nowrap items-center gap-2 lg:gap-3 bg-white shadow-sm ring-1 ring-black/5">
+    <div
+      className="rounded-xl px-2.5 py-2 sm:px-3 sm:py-2.5 lg:px-4 lg:py-3 flex flex-nowrap items-center gap-2 lg:gap-3 shadow-sm ring-1"
+      style={{
+        borderWidth: "1px",
+        borderStyle: "solid",
+        borderColor: isRed ? "rgba(248,113,113,0.18)" : "rgba(34,197,94,0.32)",
+        background: isRed ? "rgba(254,242,242,0.72)" : "rgb(255,255,255)",
+        boxShadow: isRed ? "0 8px 24px rgba(248,113,113,0.06)" : "0 8px 24px rgba(34,197,94,0.08)",
+      }}
+    >
       <div className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${isRed
         ? "bg-red-50 border-red-100 text-red-500"
-        : "bg-purple-50 border-purple-100 text-purple-600"
+        : "bg-emerald-50 border-emerald-100 text-emerald-600"
         }`}>
         {isRed ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
       </div>
@@ -119,9 +128,9 @@ function Card({ data, type }) {
       <div
         className="text-[9px] sm:text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full border flex-shrink-0"
         style={{
-          borderColor: isRed ? "rgba(239,68,68,0.25)" : "rgba(126,34,206,0.25)",
-          background: isRed ? "rgba(239,68,68,0.05)" : "rgba(126,34,206,0.05)",
-          color: isRed ? "rgb(185,28,28)" : "rgb(126,34,206)",
+          borderColor: isRed ? "rgba(239,68,68,0.25)" : "rgba(34,197,94,0.28)",
+          background: isRed ? "rgba(239,68,68,0.05)" : "rgba(34,197,94,0.08)",
+          color: isRed ? "rgb(185,28,28)" : "rgb(21,128,61)",
         }}
       >
         {data.pr || (isRed ? "HIGH" : "NORMAL")}

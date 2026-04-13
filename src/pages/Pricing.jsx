@@ -749,7 +749,7 @@ export default function Pricing() {
           </section>
 
           {/* ── Toggle Comparison Button ── */}
-          <section className="pt-12 sm:pt-14 lg:pt-16 pb-12 sm:pb-16 lg:pb-24 flex justify-center px-4">
+          <section className="pt-12 sm:pt-14 lg:pt-16 pb-4 sm:pb-6 lg:pb-8 flex justify-center px-4">
             <motion.button
               onClick={() => setShowComparison(!showComparison)}
               whileHover={{ scale: 1.05 }}
@@ -1324,7 +1324,7 @@ export default function Pricing() {
               onMouseMove={handleCtaMouseMove}
               onMouseEnter={() => setIsHoveredCta(true)}
               onMouseLeave={() => setIsHoveredCta(false)}
-              className={`max-w-6xl mx-auto rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-[3.25rem] p-8 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden text-center shadow-[0_40px_100px_-24px_rgba(126,34,206,0.35)] border border-white/10 ${isHoveredCta ? 'cursor-none' : ''}`}
+              className={`max-w-6xl mx-auto rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-[3.25rem] p-8 sm:p-10 md:p-12 lg:p-14 relative overflow-hidden text-center border border-white/10 ${isHoveredCta ? 'cursor-none' : ''}`}
             >
               {/* FeatureCTA-style Black Background */}
               <div className="absolute inset-0 bg-black rounded-[2.5rem] sm:rounded-[3rem] lg:rounded-[3.25rem]" />

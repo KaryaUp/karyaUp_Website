@@ -124,9 +124,9 @@ export default function BookDemo() {
           transition={{ duration: 0.45, ease: "easeOut" }}
           className="flex flex-col items-center text-center lg:items-start lg:text-left lg:pr-4"
         >
-          <div className="inline-flex w-fit items-center gap-2 rounded-full border border-purple-200 bg-purple-100 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700 mx-auto lg:mx-0">
+          {/* <div className="inline-flex w-fit items-center gap-2 rounded-full border border-purple-200 bg-purple-100 px-3.5 py-1.5 text-xs font-black uppercase tracking-widest text-purple-700 mx-auto lg:mx-0">
             Demo Request
-          </div>
+          </div> */}
           <h1 className="mt-4 text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-[1.06]">
             Book a demo <br />built for your
             <motion.span
@@ -137,9 +137,9 @@ export default function BookDemo() {
               workflow
             </motion.span>
           </h1>
-          <p className="mt-3 max-w-lg text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-slate-500">
+          {/* <p className="mt-3 max-w-lg text-sm sm:text-base lg:text-lg font-medium leading-relaxed text-slate-500">
             Get a free 1:1 demo and consultation tailored to your business to ensure your team's success.
-          </p>
+          </p> */}
 
           <div className="mt-6 space-y-3 w-full max-w-md">
             <InfoCard
