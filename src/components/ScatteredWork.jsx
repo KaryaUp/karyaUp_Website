@@ -81,7 +81,7 @@ export default function ScatteredWork() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: "circOut" }}
-              className="w-full mb-6 rounded-2xl overflow-hidden h-[160px] sm:h-[200px]"
+              className="w-full mb-6 rounded-2xl overflow-hidden h-[130px] sm:h-[160px]"
             >
               <img
                 src={problemImage}
