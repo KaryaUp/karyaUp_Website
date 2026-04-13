@@ -14,7 +14,8 @@ export default defineConfig({
   },
   preview: {
     host: true,
-    allowedHosts: ["all", "karyaup-website.onrender.com", ".onrender.com"]
+    allowedHosts: ["all", "karyaup-website.onrender.com", "karyaup.com", "onrender.com"]
+    
   }
 })
 

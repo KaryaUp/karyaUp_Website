@@ -32,12 +32,12 @@ const MarqueeTile = ({ icon: Icon, label, isPaused }) => (
 );
 
 const FeatureCard = ({ title, image }) => (
-    <div className="-m-[0.5px] sm:m-0 w-full sm:w-80 h-[220px] sm:h-[240px] bg-white sm:border sm:border-gray-100 flex flex-col relative overflow-hidden group/card shadow-none transition-shadow duration-300">
-        <div className="w-full h-full overflow-hidden">
+    <div className="w-full h-[150px] lg:h-[240px] bg-white border border-gray-50 flex flex-col relative overflow-hidden group/card shadow-none transition-shadow duration-300">
+        <div className="w-full h-full overflow-hidden flex items-center justify-center">
             <img
                 src={image}
                 alt={title}
-                className="block w-full h-full object-cover scale-[1.18] grayscale-[30%] group-hover/card:grayscale-0 group-hover/card:scale-125 transition-all duration-1000 ease-out"
+                className="block w-[130%] h-[130%] lg:w-full lg:h-full object-cover scale-[1.3] lg:scale-[1.18] grayscale-[30%] group-hover/card:grayscale-0 group-hover/card:scale-[1.35] transition-all duration-1000 ease-out object-center"
             />
         </div>
     </div>
@@ -190,7 +190,7 @@ const AllInOne = () => {
                         <span className="text-[10px] font-bold text-[#7e22ce] uppercase tracking-wider">Zero Friction Sync</span>
                     </div>
                     <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]">
-                       Unify your tools into one<br/>
+                        Unify your tools into one<br />
                         <motion.span
                             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
                             animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -202,49 +202,43 @@ const AllInOne = () => {
                 </motion.div>
             </div>
 
-            {/* Portal Layout Container */}
-            <div className="w-full relative flex flex-col items-center">
-
+            {/* Desktop Layout Container */}
+            <div className="hidden lg:flex w-full relative flex-col items-center">
                 <div className="flex flex-col items-center w-full border-y border-gray-100">
-                    <MarqueeRow
-                        icons={rows[0]} direction="left" speed={22}
-                        isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth}
-                    />
-                    <MarqueeRow
-                        icons={rows[1]} direction="right" speed={22}
-                        isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth}
-                    />
-                    <MarqueeRow
-                        icons={rows[2]} direction="left" speed={22}
-                        isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth}
-                    />
-                    <MarqueeRow
-                        icons={rows[3]} direction="right" speed={22}
-                        isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth}
-                    />
+                    <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                    <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                    <MarqueeRow icons={rows[2]} direction="left" speed={22} isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                    <MarqueeRow icons={rows[3]} direction="right" speed={22} isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
                 </div>
-
                 <div className="absolute inset-0 flex items-center justify-center px-0 pointer-events-none">
                     <div className="grid grid-cols-2">
-                        <FeatureCard
-                            title="Projects"
-                            image={featureProjects}
-                        />
-                        <FeatureCard
-                            title="Automation"
-                            image={automationImage}
-                        />
-                        <FeatureCard
-                            title="Calendar"
-                            image={calendarImage}
-                        />
-                        <FeatureCard
-                            title="Team"
-                            image={teamImage}
-                        />
+                        <FeatureCard title="Projects" image={featureProjects} />
+                        <FeatureCard title="Automation" image={automationImage} />
+                        <FeatureCard title="Calendar" image={calendarImage} />
+                        <FeatureCard title="Team" image={teamImage} />
                     </div>
                 </div>
+            </div>
 
+            {/* Mobile Layout Container */}
+            <div className="flex lg:hidden w-full flex-col items-center bg-white border-y border-gray-100">
+                {/* Top Marquee */}
+                <div className="w-full overflow-hidden border-b border-gray-100">
+                    <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={false} maskHole={false} />
+                </div>
+                
+                {/* Images grid covering all width */}
+                <div className="grid grid-cols-2 w-full gap-0">
+                    <FeatureCard title="Projects" image={featureProjects} />
+                    <FeatureCard title="Automation" image={automationImage} />
+                    <FeatureCard title="Calendar" image={calendarImage} />
+                    <FeatureCard title="Team" image={teamImage} />
+                </div>
+
+                {/* Bottom Marquee */}
+                <div className="w-full overflow-hidden border-t border-gray-100">
+                    <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={false} maskHole={false} />
+                </div>
             </div>
 
         </section>
