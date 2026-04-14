@@ -184,14 +184,15 @@ const WorkIntelligence = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white leading-[1.05] mb-3 tracking-normal"
+              className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white leading-[1.12] mb-3 tracking-normal"
             >
+              <span className="block text-white">Your Company's</span>
               <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                className="block pb-[0.08em] text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                 animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
               >
-                Your Company's Work Intelligence
+                Work Intelligence
               </motion.span>
             </motion.h2>
 

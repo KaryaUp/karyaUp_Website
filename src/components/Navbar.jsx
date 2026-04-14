@@ -340,8 +340,8 @@ const Navbar = () => {
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
   const isOverlayLightNav = isOverlayNav && (isHomePage || (isDarkOverlayPage && isIframeDark));
   const linkBase =
-    `text-base font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`;
-  const linkActive = "text-primary";
+    `text-base font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-[#7e22ce]"}`;
+  const linkActive = "text-[#7e22ce]";
 
   return (
     <nav
@@ -680,9 +680,9 @@ const Navbar = () => {
             <a
               href={authUrl}
               onClick={closeAllMenus}
-              className={`group flex items-center gap-2 font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-primary"}`}
+              className={`group flex items-center gap-2 font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-[#7e22ce]"}`}
             >
-              <LogIn size={16} className={`${isOverlayLightNav ? "text-white" : "text-primary"} group-hover:-translate-x-0.5 transition-transform`} />
+              <LogIn size={16} className={`${isOverlayLightNav ? "text-white" : "text-slate-500"} group-hover:-translate-x-0.5 group-hover:text-[#7e22ce] transition-all`} />
               <span className="text-[14px]">Log in</span>
             </a>
             <StartWorkspaceButton href={authUrl} onClick={closeAllMenus} />

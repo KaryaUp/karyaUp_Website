@@ -201,7 +201,7 @@ const TeamSolutions = () => {
                     className="text-center mb-4 sm:mb-8"
                 >
                     <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-gray-900 leading-[1.05] tracking-normal mb-3">
-                        Built For Teams That <br className="hidden md:block" />
+                        Built For Teams That <br />
                         <motion.span
                             className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                             animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -226,7 +226,7 @@ const TeamSolutions = () => {
                         >
                             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-center p-4 sm:p-10 w-full h-full">
                                 {/* Left side */}
-                                <div className="relative overflow-hidden lg:pr-10 flex flex-col items-center lg:items-start text-center lg:text-left h-full justify-center">
+                                <div className="relative overflow-hidden lg:pr-10 flex flex-col items-center lg:items-start text-center lg:text-left h-auto lg:h-full justify-center mb-6 lg:mb-0">
                                     <div className="relative z-10 w-full flex flex-col items-center lg:items-start">
                                         <h3 className="text-xl sm:text-3xl md:text-[2.75rem] font-black text-gray-900 leading-[1.1] mb-2 sm:mb-5">
                                             {active.title}
@@ -265,9 +265,9 @@ const TeamSolutions = () => {
                                         {/* Bullet list */}
                                         <ul className="space-y-2 sm:space-y-3 w-full">
                                             {active.bullets.map((b) => (
-                                                <li key={b} className="flex items-start gap-3 text-gray-600 text-[11px] sm:text-base font-bold bg-purple-50/40 p-2 sm:p-4 rounded-xl sm:rounded-2xl border border-purple-100/30 text-left">
-                                                    <CheckCircle2 size={16} className="text-[#a855f7] mt-0.5 flex-shrink-0" />
-                                                    {b}
+                                                <li key={b} className="flex items-center sm:items-start justify-center sm:justify-start gap-3 text-gray-600 text-[11px] sm:text-base font-bold bg-purple-50/40 p-2 sm:p-4 rounded-xl sm:rounded-2xl border border-purple-100/30 text-center sm:text-left">
+                                                    <CheckCircle2 size={16} className="text-[#a855f7] flex-shrink-0" />
+                                                    <span>{b}</span>
                                                 </li>
                                             ))}
                                         </ul>

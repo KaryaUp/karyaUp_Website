@@ -52,24 +52,24 @@ const DataImport = () => {
                   Existing Tools
                 </motion.span>
               </h2>
-              <div className="flex flex-col items-start justify-start text-left gap-2 sm:gap-4 mb-8 sm:mb-12">
-                <div className="flex items-center justify-start text-left gap-2.5">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+              <div className="flex flex-col items-start justify-start text-left gap-2 sm:gap-4 mb-8 sm:mb-12 w-full">
+                <div className="grid grid-cols-[20px_1fr] items-center justify-start text-left gap-x-3 w-full">
+                  <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 self-center">
                     <Check className="w-3 h-3 text-[#7e22ce]" strokeWidth={3} />
                   </div>
-                  <span className="text-sm sm:text-base font-bold text-slate-700">One-click Migration from ClickUp & Jira</span>
+                  <span className="text-[13px] sm:text-base font-bold text-slate-700 whitespace-nowrap leading-none">One-click Migration from ClickUp & Jira</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+                <div className="grid grid-cols-[20px_1fr] items-center justify-start text-left gap-x-3 w-full">
+                  <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 self-center">
                     <Check className="w-3 h-3 text-[#7e22ce]" strokeWidth={3} />
                   </div>
-                  <span className="text-sm sm:text-base font-bold text-slate-700">Zero Data Loss & Pure Productivity</span>
+                  <span className="text-[13px] sm:text-base font-bold text-slate-700 whitespace-nowrap leading-none">Zero Data Loss & Pure Productivity</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100">
+                <div className="grid grid-cols-[20px_1fr] items-center justify-start text-left gap-x-3 w-full">
+                  <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 self-center">
                     <Check className="w-3 h-3 text-[#7e22ce]" strokeWidth={3} />
                   </div>
-                  <span className="text-sm sm:text-base font-bold text-slate-700">Retain all comments, attachments & histories</span>
+                  <span className="text-[13px] sm:text-base font-bold text-slate-700 whitespace-nowrap leading-none">Retain all comments, attachments & histories</span>
                 </div>
               </div>
             </motion.div>

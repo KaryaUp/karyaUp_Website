@@ -46,7 +46,7 @@ const Management = () => {
                                 <span className="text-sm sm:text-base font-bold text-slate-700">Salary, attendance, and HR seamlessly integrated</span>
                             </div>
                         </div>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-7 w-full">
+                        <div className="grid grid-cols-2 gap-4 sm:gap-7 w-full">
                             {items.map((item, idx) => (
                                 <div
                                     key={idx}
@@ -59,12 +59,12 @@ const Management = () => {
                                         delayIndex={idx}
                                         compact
                                         className="group-hover:scale-110 transition-transform flex-shrink-0"
-                                        innerClassName="p-2.5 bg-white flex items-center justify-center border border-purple-200/50"
+                                        innerClassName="p-2 sm:p-2.5 bg-white flex items-center justify-center border border-purple-200/50"
                                     >
-                                        {React.cloneElement(item.icon, { className: "w-5 h-5 text-[#7e22ce]" })}
+                                        {React.cloneElement(item.icon, { className: "w-4 h-4 sm:w-5 sm:h-5 text-[#7e22ce]" })}
                                     </MovingPurpleRing>                                    <div className="flex flex-col items-center sm:items-start">
-                                        <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-normal">{item.title}</h4>
-                                        <p className="text-xs sm:text-sm font-medium text-slate-400 leading-tight">{item.desc}</p>
+                                        <h4 className="font-black text-slate-800 text-[13px] sm:text-lg mb-0.5 tracking-normal leading-tight">{item.title}</h4>
+                                        <p className="text-[10px] sm:text-sm font-medium text-slate-400 leading-tight">{item.desc}</p>
                                     </div>
                                 </div>
                             ))}

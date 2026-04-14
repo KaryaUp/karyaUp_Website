@@ -259,7 +259,7 @@ const TeamsSection = () => {
             <Users size={12} /> Who it's for
           </span>
           <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] tracking-normal max-w-3xl mx-auto">
-            Built For Teams That{' '}<br className="hidden md:block" />
+            Built For Teams That{' '}<br />
             <motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
               animate={{ backgroundPosition: ['0% center', '-200% center'] }}
