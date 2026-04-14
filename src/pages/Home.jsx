@@ -39,7 +39,7 @@ export default function Home() {
         <TrustedBy />
 
         <div className="home-mobile-optimize [&>section]:!pt-10 [&>section]:!pb-10 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12 text-center sm:text-left">
-          <ScatteredWork />
+         
           <AllInOne />
 
           <Suspense fallback={<div className="h-40 flex items-center justify-center"><Loader /></div>}>
@@ -47,6 +47,7 @@ export default function Home() {
             <WorkIntelligence />
             <FeatureOverview />
             <TeamsSection />
+             <ScatteredWork />
             <DataImport />
             <Management />
             <FinalCTA />

@@ -5,7 +5,7 @@
 /* A. EXPLORE KAI CAPABILITIES (HORIZONTAL SCROLL) */
 .horizontal-scroll-section {
     position: relative;
-    padding-top: 100px;
+    padding-top: clamp(40px, 8vh, 100px);
     height: 100vh; /* Pinned area */
     display: flex;
     flex-direction: column;
@@ -21,19 +21,19 @@
 .h-track {
     display: flex;
     gap: 80px;
-    margin-top: 80px;
+    margin-top: clamp(20px, 6vh, 80px);
     width: max-content;
     padding-right: 20vw; /* Ensures scroll distance works on ultra-wide viewports */
 }
 
 .h-card {
     position: relative;
-    width: 420px;
-    height: 520px;
+    width: clamp(320px, 30vw, 420px);
+    height: clamp(340px, 55vh, 520px);
     background: var(--glass-bg);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
-    padding: 40px;
+    padding: clamp(20px, 4vh, 40px);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     display: flex;

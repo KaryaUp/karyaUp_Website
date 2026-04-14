@@ -8,9 +8,70 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif !important;
+        }
+
+        /* Override primary font sizes to match main website */
+        .headline {
+            font-size: clamp(2.2rem, 5vw, 4.5rem) !important;
+        }
+
+        .subtext {
+            font-size: clamp(1.25rem, 3vw, 2rem) !important;
+        }
+
+        .supporting-text {
+            font-size: clamp(1rem, 1.5vw, 1.15rem) !important;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3.5rem) !important;
+        }
+
+        .mega-title {
+            font-size: clamp(2.5rem, 5vw, 4rem) !important;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem !important;
+        }
+
+        .feature-card p {
+            font-size: 1rem !important;
+        }
+
+        .calc-price {
+            font-size: clamp(3rem, 6vw, 4rem) !important;
+        }
+
+        .metric-number {
+            font-size: clamp(2rem, 4vw, 3rem) !important;
+        }
+
+        /* Reduce and standardize section spacing */
+        section:not(.hero-section):not(.horizontal-scroll-section):not(.marquee-section) {
+            padding: clamp(60px, 8vh, 80px) 20px !important;
+        }
+
+        .marquee-section {
+            padding: clamp(40px, 6vh, 60px) 0 !important;
+        }
+    </style>
+
+    <!-- Tailwind CSS (for Footer styling without interfering with core CSS) -->
+    <script>
+        window.tailwind = {
+            corePlugins: {
+                preflight: false,
+            }
+        };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles2.css">
@@ -122,10 +183,7 @@
                 <!-- Stage 4 -->
                 <div class="stage stage-4">
                     <div class="cta-wrapper magnetic-wrap">
-                        <button class="cta-btn magnetic-element">
-                            <span class="btn-text">Start Using Kai</span>
-                            <div class="ripple-container"></div>
-                        </button>
+
                         <div class="btn-glow"></div>
                     </div>
                 </div>
@@ -188,23 +246,23 @@
                 </div>
 
                 <!-- Floating Nodes -->
-                <div class="node n-slack magnetic-wrap">
+                <!-- <div class="node n-slack magnetic-wrap">
                     <div class="magnetic-element">Slack</div>
-                </div>
+                </div> -->
                 <div class="node n-github magnetic-wrap">
-                    <div class="magnetic-element">Hub</div>
+                    <div class="magnetic-element">Microsoft Teams</div>
                 </div>
                 <div class="node n-stripe magnetic-wrap">
-                    <div class="magnetic-element">Stripe</div>
+                    <div class="magnetic-element">Google Drive</div>
                 </div>
                 <div class="node n-notion magnetic-wrap">
-                    <div class="magnetic-element">Notion</div>
+                    <div class="magnetic-element">Google Calender</div>
                 </div>
                 <div class="node n-mail magnetic-wrap">
-                    <div class="magnetic-element">GWS</div>
+                    <div class="magnetic-element">Gmail</div>
                 </div>
                 <div class="node n-figma magnetic-wrap">
-                    <div class="magnetic-element">Figma</div>
+                    <div class="magnetic-element">Slack</div>
                 </div>
 
                 <!-- Connection Lines Canvas -->
@@ -478,7 +536,8 @@
                         <div class="nn-popup-label">
                             <span class="nn-popup-dot" style="background:var(--accent-1)"></span>Autonomous Planning
                         </div>
-                        <p class="nn-popup-desc">Generates multi-step task trees and execution roadmaps autonomously.</p>
+                        <p class="nn-popup-desc">Generates multi-step task trees and execution roadmaps autonomously.
+                        </p>
                     </div>
                 </div>
                 <div class="nn-node n3" data-cursor="Real-time Decision Making">
@@ -505,57 +564,71 @@
                 </div>
                 <div class="nn-node n5" data-cursor="Logic Validation">
                     <div class="nn-popup popup-left">
-                        <div class="nn-popup-screen"><img src="images/node_logic_validation.png" alt="Logic Validation UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#00ff88"></span>Logic Validation</div>
+                        <div class="nn-popup-screen"><img src="images/node_logic_validation.png"
+                                alt="Logic Validation UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#00ff88"></span>Logic
+                            Validation</div>
                         <p class="nn-popup-desc">Catches rule violations and self-corrects before execution.</p>
                     </div>
                 </div>
                 <div class="nn-node n6" data-cursor="Data Synthesis">
                     <div class="nn-popup popup-right">
-                        <div class="nn-popup-screen"><img src="images/node_data_synthesis.png" alt="Data Synthesis UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff00cc"></span>Data Synthesis</div>
+                        <div class="nn-popup-screen"><img src="images/node_data_synthesis.png" alt="Data Synthesis UI">
+                        </div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff00cc"></span>Data
+                            Synthesis</div>
                         <p class="nn-popup-desc">Fuses 3.2TB of multi-modal data streams into unified intelligence.</p>
                     </div>
                 </div>
                 <div class="nn-node n7" data-cursor="Threat Analysis">
                     <div class="nn-popup popup-left">
-                        <div class="nn-popup-screen"><img src="images/node_threat_analysis.png" alt="Threat Analysis UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff2255"></span>Threat Analysis</div>
+                        <div class="nn-popup-screen"><img src="images/node_threat_analysis.png"
+                                alt="Threat Analysis UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#ff2255"></span>Threat
+                            Analysis</div>
                         <p class="nn-popup-desc">Real-time threat radar with zero-day vulnerability detection.</p>
                     </div>
                 </div>
                 <div class="nn-node n8" data-cursor="Pattern Recognition">
                     <div class="nn-popup popup-right">
-                        <div class="nn-popup-screen"><img src="images/node_pattern_recognition.png" alt="Pattern Recognition UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#9b59b6"></span>Pattern Recognition</div>
+                        <div class="nn-popup-screen"><img src="images/node_pattern_recognition.png"
+                                alt="Pattern Recognition UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#9b59b6"></span>Pattern
+                            Recognition</div>
                         <p class="nn-popup-desc">98% accuracy waveform and anomaly detection at scale.</p>
                     </div>
                 </div>
                 <div class="nn-node n9" data-cursor="API Orchestration">
                     <div class="nn-popup popup-left">
-                        <div class="nn-popup-screen"><img src="images/node_api_orchestration.png" alt="API Orchestration UI"></div>
+                        <div class="nn-popup-screen"><img src="images/node_api_orchestration.png"
+                                alt="API Orchestration UI"></div>
                         <div class="nn-popup-label"><span class="nn-popup-dot"></span>API Orchestration</div>
                         <p class="nn-popup-desc">12 live API integrations with sub-millisecond dynamic routing.</p>
                     </div>
                 </div>
                 <div class="nn-node n10" data-cursor="Workflow Engine">
                     <div class="nn-popup popup-right">
-                        <div class="nn-popup-screen"><img src="images/node_workflow_engine.png" alt="Workflow Engine UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#c6ff00"></span>Workflow Engine</div>
+                        <div class="nn-popup-screen"><img src="images/node_workflow_engine.png"
+                                alt="Workflow Engine UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot"
+                                style="background:#c6ff00"></span>Workflow Engine</div>
                         <p class="nn-popup-desc">847 concurrent pipelines: Input → Parse → Execute → Output.</p>
                     </div>
                 </div>
                 <div class="nn-node n11" data-cursor="Output Generator">
                     <div class="nn-popup popup-left">
-                        <div class="nn-popup-screen"><img src="images/node_output_generator.png" alt="Output Generator UI"></div>
+                        <div class="nn-popup-screen"><img src="images/node_output_generator.png"
+                                alt="Output Generator UI"></div>
                         <div class="nn-popup-label"><span class="nn-popup-dot"></span>Output Generator</div>
                         <p class="nn-popup-desc">Produces JSON, Markdown, HTML outputs in 0.2 seconds flat.</p>
                     </div>
                 </div>
                 <div class="nn-node n12" data-cursor="Self-Correction">
                     <div class="nn-popup popup-right">
-                        <div class="nn-popup-screen"><img src="images/node_self_correction.png" alt="Self-Correction UI"></div>
-                        <div class="nn-popup-label"><span class="nn-popup-dot" style="background:#00ff88"></span>Self-Correction</div>
+                        <div class="nn-popup-screen"><img src="images/node_self_correction.png"
+                                alt="Self-Correction UI"></div>
+                        <div class="nn-popup-label"><span class="nn-popup-dot"
+                                style="background:#00ff88"></span>Self-Correction</div>
                         <p class="nn-popup-desc">99.7% confidence loop: detects errors, auto-fixes instantly.</p>
                     </div>
                 </div>
@@ -604,69 +677,263 @@
     </section>
 
     <!-- Floating AI Agents -->
-    <section class="floating-agents-section dark-theme">
-        <h2 class="section-title text-center split-text-scroll">Meet the Kai Agents</h2>
-        <div class="agents-universe">
-            <div class="agent-avatar av-1 magnetic-wrap" data-cursor="Research"><img
-                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai1" alt="Kai Research"></div>
-            <div class="agent-avatar av-2 magnetic-wrap" data-cursor="Builder"><img
-                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai2" alt="Kai Builder"></div>
-            <div class="agent-avatar av-3 magnetic-wrap" data-cursor="Analyst"><img
-                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai3" alt="Kai Analyst"></div>
-            <div class="agent-avatar av-4 magnetic-wrap" data-cursor="Strategist"><img
-                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai4" alt="Kai Strategist"></div>
-            <div class="agent-avatar av-5 magnetic-wrap" data-cursor="Automation"><img
-                    src="https://api.dicebear.com/7.x/bottts/svg?seed=Kai5" alt="Kai Automation"></div>
-        </div>
-    </section>
+
 
     <!-- Final CTA Section -->
-    <section class="final-cta">
-        <div class="gradient-bg-anim"></div>
 
-        <!-- Floating Avatars -->
-        <div class="avatar-layer">
-            <div class="avatar a1"></div>
-            <div class="avatar a2"></div>
-            <div class="avatar a3"></div>
-            <div class="avatar a4"></div>
-            <div class="avatar a5"></div>
-        </div>
-
-        <div class="cta-content">
-            <div class="section-label" style="margin: 0 auto 24px">Get Started</div>
-            <h2 class="mega-title split-text-scroll">Build Your Future With Kai</h2>
-            <p class="cta-subtitle">Autonomous AI agents designed to think, plan, and execute.</p>
-
-            <div class="cta-wrapper magnetic-wrap mt-40">
-                <button class="cta-btn magnetic-element">
-                    <span class="btn-text">Start Using Kai</span>
-                    <div class="ripple-container"></div>
-                </button>
-                <div class="btn-glow"></div>
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-logo">KAI.</div>
-            <div class="footer-links">
-                <a href="#" class="hover-underline">Platform</a>
-                <a href="#" class="hover-underline">Agents</a>
-                <a href="#" class="hover-underline">Security</a>
-                <a href="#" class="hover-underline">Company</a>
-            </div>
-            <div class="footer-social">
-                <a href="#" class="hover-icon">𝕏</a>
-                <a href="#" class="hover-icon">in</a>
-                <a href="#" class="hover-icon">GH</a>
+    <footer class="relative overflow-hidden border-t border-white/10 bg-[#050505] pt-10 pb-8 text-white">
+        <!-- Watermark: purple type on white + perspective ramp -->
+        <div class="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex min-h-[13rem] items-end justify-center overflow-hidden select-none sm:min-h-[18rem] md:min-h-[26rem] lg:min-h-[30rem]"
+            aria-hidden="true">
+            <div
+                class="flex w-full max-w-[100vw] justify-center px-0 [perspective:min(100vw,600px)] sm:[perspective:min(120vw,1400px)] lg:[perspective:min(140vw,2400px)]">
+                <div
+                    class="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-7 sm:translate-x-16 sm:scale-100 md:-translate-y-9 md:translate-x-[4.5rem] lg:-translate-y-11 lg:translate-x-24">
+                    <div
+                        class="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,2%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-px sm:[transform:translate(0,20%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,24%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,28%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]">
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(8.8rem, 19.4vw, 11.6rem); transform: translateZ(0px);">K</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(9.8rem, 21.56vw, 12.83rem); transform: translateZ(48px);">A</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(10.8rem, 23.73vw, 14.06rem); transform: translateZ(96px);">R</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(11.8rem, 25.9vw, 15.3rem); transform: translateZ(144px);">Y</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(12.8rem, 28.06vw, 16.53rem); transform: translateZ(192px);">A</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(13.8rem, 30.23vw, 17.76rem); transform: translateZ(240px);">U</span>
+                        <span
+                            class="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-white/10"
+                            style="font-size: clamp(14.8rem, 32.4vw, 19rem); transform: translateZ(288px);">P</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <span>&copy; 2026 Kai Automation Inc. All rights reserved.</span>
-            <span>Design Inspired by Future</span>
+
+        <div class="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
+                <!-- LEFT: Branding & Socials -->
+                <div class="flex flex-col items-center sm:items-start lg:w-1/3">
+                    <div class="mb-6 space-y-4 text-center sm:text-left">
+                        <a href="/#hero-section" class="inline-flex items-center">
+                            <img src="../../../src/assets/logo.webp" alt="KaryaUp Logo" width="160" height="56"
+                                loading="lazy" class="h-12 w-auto sm:h-14 brightness-0 invert" />
+                        </a>
+                        <p class="max-w-xs text-[13px] font-medium leading-relaxed text-slate-400">
+                            From Sanskrit <span class="italic opacity-90">“Karya”</span> meaning action or work.
+                            Empowering
+                            teams to ship faster.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap justify-center gap-3 sm:justify-start">
+                        <a href="https://www.linkedin.com/company/karyaup/" aria-label="LinkedIn"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-all duration-200 hover:bg-purple-500/20 hover:text-purple-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                <rect x="2" y="9" width="4" height="12" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Facebook"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-all duration-200 hover:bg-purple-500/20 hover:text-purple-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.instagram.com/karyaup_?igsh=cHczemR2dmRxdWhx" aria-label="Instagram"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-all duration-200 hover:bg-purple-500/20 hover:text-purple-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                viewBox="0 0 24 24">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="X"
+                            class="flex h-9 w-9 items-center justify-center rounded-full bg-white/5 text-slate-400 transition-all duration-200 hover:bg-purple-500/20 hover:text-purple-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- RIGHT: Combined Nav Columns -->
+                <div class="flex-1">
+                    <div class="hidden sm:grid sm:grid-cols-3 sm:gap-x-8 lg:gap-x-12">
+                        <div>
+                            <h5 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Features</h5>
+                            <ul class="space-y-2.5">
+                                <li><a href="/features/tasks"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Tasks</a>
+                                </li>
+                                <li><a href="/features/chat"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Chat</a>
+                                </li>
+                                <li><a href="/features/team"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Team</a>
+                                </li>
+                                <li><a href="/features/integrations"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Integrations</a>
+                                </li>
+                                <li><a href="/features/calendar"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Calendar</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Solutions</h5>
+                            <ul class="space-y-2.5">
+                                <li><a href="/solutions/product-development"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Product
+                                        Development</a></li>
+                                <li><a href="/solutions/enterprise"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Enterprise</a>
+                                </li>
+                                <li><a href="/solutions/project-management"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Project
+                                        Management</a></li>
+                                <li><a href="/solutions/crm"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Sales/CRM</a>
+                                </li>
+                                <li><a href="/solutions/marketing"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Marketing</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="mb-4 text-sm font-bold uppercase tracking-wider text-white">Resources</h5>
+                            <ul class="space-y-2.5">
+                                <li><a href="/resources/blog"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Blog</a>
+                                </li>
+                                <li><a href="/resources/docs"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Documentation</a>
+                                </li>
+                                <li><a href="/resources/tutorials"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Video</a>
+                                </li>
+                                <li><a href="/book-demo"
+                                        class="text-sm font-medium text-slate-400 transition-colors duration-200 hover:text-purple-400">Book
+                                        Demo</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Mobile Nav -->
+                    <div class="w-full divide-y divide-white/10 border-y border-white/10 sm:hidden">
+                        <div>
+                            <button type="button"
+                                onclick="const p = this.nextElementSibling; const closed = p.style.maxHeight === '0px' || p.style.maxHeight === ''; p.style.maxHeight = closed ? '400px' : '0px'; this.querySelector('.plus-icon').style.transform = closed ? 'rotate(45deg)' : 'rotate(0deg)';"
+                                class="flex w-full items-center justify-between py-4 text-left">
+                                <span class="text-sm font-bold uppercase tracking-widest text-white">Features</span>
+                                <span class="plus-icon text-lg text-slate-500 transition-transform duration-300"
+                                    style="transform: rotate(0deg)">+</span>
+                            </button>
+                            <div style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
+                                <ul class="space-y-3 pb-4">
+                                    <li><a href="/features/tasks"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Tasks</a>
+                                    </li>
+                                    <li><a href="/features/chat"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Chat</a>
+                                    </li>
+                                    <li><a href="/features/team"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Team</a>
+                                    </li>
+                                    <li><a href="/features/integrations"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Integrations</a>
+                                    </li>
+                                    <li><a href="/features/calendar"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Calendar</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button"
+                                onclick="const p = this.nextElementSibling; const closed = p.style.maxHeight === '0px' || p.style.maxHeight === ''; p.style.maxHeight = closed ? '400px' : '0px'; this.querySelector('.plus-icon').style.transform = closed ? 'rotate(45deg)' : 'rotate(0deg)';"
+                                class="flex w-full items-center justify-between py-4 text-left">
+                                <span class="text-sm font-bold uppercase tracking-widest text-white">Solutions</span>
+                                <span class="plus-icon text-lg text-slate-500 transition-transform duration-300"
+                                    style="transform: rotate(0deg)">+</span>
+                            </button>
+                            <div style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
+                                <ul class="space-y-3 pb-4">
+                                    <li><a href="/solutions/product-development"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Product
+                                            Development</a></li>
+                                    <li><a href="/solutions/enterprise"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Enterprise</a>
+                                    </li>
+                                    <li><a href="/solutions/project-management"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Project
+                                            Management</a></li>
+                                    <li><a href="/solutions/crm"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Sales/CRM</a>
+                                    </li>
+                                    <li><a href="/solutions/marketing"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Marketing</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button"
+                                onclick="const p = this.nextElementSibling; const closed = p.style.maxHeight === '0px' || p.style.maxHeight === ''; p.style.maxHeight = closed ? '400px' : '0px'; this.querySelector('.plus-icon').style.transform = closed ? 'rotate(45deg)' : 'rotate(0deg)';"
+                                class="flex w-full items-center justify-between py-4 text-left">
+                                <span class="text-sm font-bold uppercase tracking-widest text-white">Resources</span>
+                                <span class="plus-icon text-lg text-slate-500 transition-transform duration-300"
+                                    style="transform: rotate(0deg)">+</span>
+                            </button>
+                            <div style="max-height: 0px; overflow: hidden; transition: max-height 0.3s ease;">
+                                <ul class="space-y-3 pb-4">
+                                    <li><a href="/resources/blog"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Blog</a>
+                                    </li>
+                                    <li><a href="/resources/docs"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Documentation</a>
+                                    </li>
+                                    <li><a href="/resources/tutorials"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Video</a>
+                                    </li>
+                                    <li><a href="/book-demo"
+                                            class="text-sm font-medium text-slate-400 hover:text-purple-400">Book
+                                            Demo</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div
+                class="relative mt-6 flex flex-col items-center gap-4 border-t border-white/10 pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
+                <p class="text-xs font-medium text-slate-400">
+                    &copy; 2026 KaryaUp. All rights reserved.
+                </p>
+                <div class="flex flex-wrap justify-center gap-5 text-xs font-semibold text-slate-400">
+                    <a href="/disclaimer" class="transition-colors hover:text-purple-400">Disclaimer</a>
+                    <a href="/privacy-policy" class="transition-colors hover:text-purple-400">Privacy Policy</a>
+                    <a href="/terms-of-service" class="transition-colors hover:text-purple-400">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 

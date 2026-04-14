@@ -60,14 +60,7 @@ const FinalCTA = () => {
           <div className="relative z-10 text-center">
 
             {/* Trust Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-slate-50 border border-slate-200 text-slate-500 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] mb-3 shadow-sm"
-            >
-              <ShieldCheck size={13} className="text-[#7e22ce]" />
-              Elite execution standard
-            </motion.div>
+          
 
             {/* Testimonial Marquee (Infinite Scroll) - Seamless Loop */}
             <div className="mb-2 sm:mb-3 overflow-hidden relative w-full h-8 sm:h-12 flex items-center">

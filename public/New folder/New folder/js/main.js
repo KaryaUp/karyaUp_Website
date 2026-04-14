@@ -132,11 +132,39 @@ function splitText(selector) {
     elements.forEach(el => {
         const text = el.innerText;
         el.innerText = '';
-        text.split('').forEach(char => {
-            const span = document.createElement('span');
-            span.innerHTML = char === ' ' ? '&nbsp;' : char;
-            span.className = 'split-char';
-            el.appendChild(span);
+        
+        // Split by whitespace but keep the whitespace as tokens
+        const tokens = text.split(/(\s+)/);
+        tokens.forEach(token => {
+            if (!token) return;
+            
+            // If it's a whitespace token
+            if (/^\s+$/.test(token)) {
+                token.split('').forEach(char => {
+                    if (char === '\n') {
+                        el.appendChild(document.createElement('br'));
+                    } else {
+                        const span = document.createElement('span');
+                        span.innerHTML = '&nbsp;';
+                        span.className = 'split-char';
+                        el.appendChild(span);
+                    }
+                });
+            } else {
+                // It's a word
+                const wordSpan = document.createElement('span');
+                wordSpan.style.display = 'inline-block';
+                wordSpan.style.whiteSpace = 'nowrap';
+                
+                token.split('').forEach(char => {
+                    const charSpan = document.createElement('span');
+                    charSpan.innerText = char;
+                    charSpan.className = 'split-char';
+                    wordSpan.appendChild(charSpan);
+                });
+                
+                el.appendChild(wordSpan);
+            }
         });
     });
 }

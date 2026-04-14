@@ -98,7 +98,7 @@ const Hero = () => {
   return (
     <section
       id="hero-section"
-      className="relative overflow-hidden bg-white min-h-screen pt-[8rem] pb-8 sm:pt-32 sm:pb-14 lg:pt-24 lg:pb-16 flex items-start justify-center"
+      className="relative overflow-hidden bg-white min-h-screen pt-24 sm:pt-32 lg:pt-40 pb-16 flex items-center justify-center"
     >
       {/* Background */}
       <div className="absolute inset-0 z-0 overflow-hidden">
@@ -117,8 +117,8 @@ const Hero = () => {
       </div>
 
       {/* Content */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full pt-10 sm:pt-16 lg:pt-16">
-        <div className="flex flex-col items-center justify-start text-center">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 w-full">
+        <div className="flex flex-col items-center justify-center text-center">
           <div className="max-w-5xl w-full">
 
             {/* ── HEADLINE AREA ── */}

@@ -37,7 +37,7 @@ const FeatureCard = ({ title, image }) => (
             <img
                 src={image}
                 alt={title}
-                className="block w-[132%] h-[132%] sm:w-[136%] sm:h-[136%] lg:w-[150%] lg:h-[150%] object-cover scale-[1.16] sm:scale-[1.18] lg:scale-[1.12] grayscale-[30%] group-hover/card:grayscale-0 group-hover/card:scale-[1.2] transition-all duration-1000 ease-out object-center"
+                className="block w-full h-full object-contain p-2 sm:p-4 grayscale-[30%] group-hover/card:grayscale-0 group-hover/card:scale-[1.05] transition-all duration-1000 ease-out object-center"
             />
         </div>
     </div>

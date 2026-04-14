@@ -124,9 +124,9 @@ const Footer = () => {
         <div
           className="flex w-full max-w-[100vw] justify-center px-0 [perspective:min(100vw,600px)] sm:[perspective:min(120vw,1400px)] lg:[perspective:min(140vw,2400px)]"
         >
-          <div className="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-7 sm:translate-x-16 sm:scale-100 md:-translate-y-9 md:translate-x-[4.5rem] lg:-translate-y-11 lg:translate-x-24">
+          <div className="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-7 sm:translate-x-6 sm:scale-100 md:-translate-y-9 md:translate-x-8 lg:-translate-y-11 lg:translate-x-12">
             <div
-              className="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,2%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-px sm:[transform:translate(0,20%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,24%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,28%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]"
+              className="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,2%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-0 sm:[transform:translate(0,20%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,24%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,28%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]"
             >
               {FOOTER_WORDMARK.split("").map((char, i) => {
                 const last = FOOTER_WORDMARK.length - 1;
@@ -138,7 +138,7 @@ const Footer = () => {
                 return (
                   <span
                     key={`wm-${i}`}
-                    className="inline-block font-black font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-[#5b21b6]/[0.48] sm:text-[#5b21b6]/[0.4] md:text-[#5b21b6]/[0.34] lg:text-[#5b21b6]/[0.28]"
+                    className="inline-block font-black font-sans uppercase leading-none tracking-[-0.12em] antialiased text-[#7e22ce]/[0.18] sm:text-[#7e22ce]/[0.15] md:text-[#7e22ce]/[0.12] lg:text-[#7e22ce]/[0.1]"
                     style={{
                       fontSize: `clamp(${minRem}rem, ${prefVw}vw, ${maxRem}rem)`,
                       transform: `translateZ(${Math.round(t * 72 * scale)}px)`,

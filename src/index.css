@@ -368,13 +368,12 @@ html {
   background: conic-gradient(
     from 0deg at 50% 50%,
     transparent 0deg,
-    transparent 252deg,
-    rgba(196, 181, 253, 0.35) 268deg,
-    rgba(167, 139, 250, 0.95) 286deg,
-    rgba(216, 180, 254, 0.85) 302deg,
-    rgba(167, 139, 250, 0.75) 318deg,
-    rgba(196, 181, 253, 0.4) 332deg,
-    transparent 348deg
+    transparent 230deg,
+    rgba(126, 34, 206, 0.4) 250deg,
+    rgba(126, 34, 206, 1) 280deg,
+    rgba(217, 70, 239, 0.9) 310deg,
+    rgba(126, 34, 206, 0.5) 340deg,
+    transparent 360deg
   );
   animation: ku-blog-card-outline-rotate 8s linear infinite;
 }

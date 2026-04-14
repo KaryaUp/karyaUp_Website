@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CreditCard, Calendar, BarChart, Briefcase, Sparkles, Check } from 'lucide-react';
 import TeamImg from "../assets/Team2.webp";
+import MovingPurpleRing from './MovingPurpleRing';
 
 const Management = () => {
     const items = [
@@ -51,10 +52,17 @@ const Management = () => {
                                     key={idx}
                                     className="flex flex-col items-center text-center gap-2 sm:flex-row sm:items-start sm:text-left sm:justify-start sm:gap-5 group"
                                 >
-                                    <div className="p-2.5 bg-purple-50 rounded-2xl text-[#7e22ce] border border-purple-100 group-hover:scale-110 transition-transform flex-shrink-0">
-                                        {React.cloneElement(item.icon, { className: "w-5 h-5" })}
-                                    </div>
-                                    <div className="flex flex-col items-center sm:items-start">
+                                    <MovingPurpleRing
+                                        rounded="rounded-2xl"
+                                        ringPadding="p-[1.5px]"
+                                        innerRounded="rounded-[calc(1rem-1.5px)]"
+                                        delayIndex={idx}
+                                        compact
+                                        className="group-hover:scale-110 transition-transform flex-shrink-0"
+                                        innerClassName="p-2.5 bg-white flex items-center justify-center border border-purple-200/50"
+                                    >
+                                        {React.cloneElement(item.icon, { className: "w-5 h-5 text-[#7e22ce]" })}
+                                    </MovingPurpleRing>                                    <div className="flex flex-col items-center sm:items-start">
                                         <h4 className="font-black text-slate-800 text-base sm:text-lg mb-0.5 tracking-normal">{item.title}</h4>
                                         <p className="text-xs sm:text-sm font-medium text-slate-400 leading-tight">{item.desc}</p>
                                     </div>

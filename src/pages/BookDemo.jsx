@@ -1,9 +1,33 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import { Briefcase, CalendarCheck2, MoveRight, Send } from "lucide-react";
+import { Briefcase, CalendarCheck2, MoveRight, Send, ChevronDown, ArrowRight } from "lucide-react";
 import { Helmet } from "react-helmet-async";
+import { Link } from "react-router-dom";
 import MovingPurpleRing from "../components/MovingPurpleRing";
+
+const demoFaqs = [
+  {
+    question: "What happens during a KaryaUp demo?",
+    answer: "You'll get a 1-on-1 personalized walkthrough with an expert. We'll show you how KaryaUp can be customized to your specific team workflows, industry, and business goals."
+  },
+  {
+    question: "How long does a typical demo last?",
+    answer: "A standard demo usually takes 30-45 minutes. We can make it shorter if you're on a tight schedule, or longer if you'd like to dive deep into specific technical questions."
+  },
+  {
+    question: "Do I need to prepare anything for the call?",
+    answer: "Not much! It's helpful if you bring a few bullet points about your current team size, the tools you're currently using, and your biggest workflow pain points."
+  },
+  {
+    question: "Can my whole team join the demo session?",
+    answer: "Absolutely! We highly encourage bringing key decision-makers or team leads so they can see how Karyaup will specifically benefit their daily operations."
+  },
+  {
+    question: "Is the demo free of charge?",
+    answer: "Yes, the demo is 100% free and comes with no strings attached. Our primary goal is to help you determine if Karyaup is the right solution for your scalability needs."
+  }
+];
 
 const initialForm = {
   first_name: "",
@@ -17,6 +41,7 @@ export default function BookDemo() {
   const [formData, setFormData] = useState(initialForm);
   const [status, setStatus] = useState({ type: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeFaq, setActiveFaq] = useState(null);
 
   const emailJsConfig = {
     serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID,
@@ -239,6 +264,148 @@ export default function BookDemo() {
           </form>
         </motion.div>
       </div>
+      </section>
+
+      {/* ── FAQ Section ── */}
+      <section className="py-12 sm:py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white relative overflow-hidden">
+        <div className="max-w-4xl mx-auto relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-10 sm:mb-12 lg:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 sm:mb-6 font-display tracking-tight leading-[1.1]">
+              Everything You Need <br />
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] italic"
+                animate={{
+                  backgroundPosition: ["0% center", "-200% center"],
+                }}
+                transition={{
+                  duration: 4,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+              >
+                To Know.
+              </motion.span>
+            </h2>
+            <p className="text-slate-500 text-base sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed px-2">
+              Common questions about our demo process and how we help teams transform their workflow with Karyaup.
+            </p>
+          </motion.div>
+
+          <div className="space-y-3 sm:space-y-4">
+            {demoFaqs.map((faq, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className={`group rounded-[1.5rem] sm:rounded-[2rem] border transition-all duration-300 overflow-hidden ${
+                  activeFaq === index
+                    ? "bg-white border-purple-200/50 shadow-[0_20px_40px_-15px_rgba(59,42,90,0.15)]"
+                    : "bg-white/50 border-slate-200 hover:border-slate-300 hover:bg-white"
+                }`}
+              >
+                <button
+                  onClick={() =>
+                    setActiveFaq(activeFaq === index ? null : index)
+                  }
+                  className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
+                >
+                  <motion.span
+                    animate={{
+                      backgroundPosition: ["0% center", "-200% center"],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className={`text-base sm:text-xl font-bold font-display transition-colors pr-3 ${
+                      activeFaq === index
+                        ? "text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                        : "text-slate-900 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce] group-hover:bg-[length:200%_auto]"
+                    }`}
+                  >
+                    {faq.question}
+                  </motion.span>
+                  <motion.div
+                    animate={{
+                      backgroundPosition:
+                        activeFaq === index
+                          ? ["0% center", "-200% center"]
+                          : "0% center",
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                    className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center transition-all duration-300 ${
+                      activeFaq === index
+                        ? "bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] text-white rotate-180"
+                        : "bg-slate-100 text-slate-500 group-hover:bg-slate-200"
+                    }`}
+                  >
+                    <ChevronDown
+                      size={18}
+                      className={`transform transition-transform duration-300 ${
+                        activeFaq === index ? "scale-110" : ""
+                      }`}
+                    />
+                  </motion.div>
+                </button>
+                <AnimatePresence>
+                  {activeFaq === index && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                    >
+                      <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+                        <div className="h-px w-full bg-slate-100 mb-3 sm:mb-4" />
+                        <p className="text-slate-600 font-medium leading-relaxed text-base sm:text-lg">
+                          {faq.answer}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+            className="mt-12 sm:mt-16 text-center"
+          >
+            <p className="text-slate-400 font-bold text-sm mb-6">Still have questions?</p>
+            <div className="flex justify-center">
+              <Link
+                to="/contact-us"
+                className="group relative flex h-[3.4em] items-center justify-center overflow-hidden rounded-[30em] px-10 text-[15px] font-black transition-all duration-300 active:scale-95 shadow-[0_18px_40px_rgba(126,34,206,0.12)]"
+              >
+                <div className="absolute inset-0 -z-20 bg-gradient-to-r from-[#7e22ce] to-fuchsia-500" />
+                <div className="absolute -inset-[3px] -z-10 origin-left scale-x-0 rounded-[30em] bg-white transition-transform duration-500 ease-in-out group-hover:scale-x-100" />
+                <span className="relative z-10 flex items-center justify-center gap-2 text-white transition-colors duration-300 group-hover:text-slate-800">
+                  Contact Support
+                  <ArrowRight
+                    size={16}
+                    className="transition-transform group-hover:translate-x-1"
+                  />
+                </span>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
       </section>
       </>
   );

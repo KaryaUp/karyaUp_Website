@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useVelocity } from 'framer-motion';
 import { Network, LineChart, Zap, ArrowRight, Database, BrainCircuit, Rocket } from 'lucide-react';
 
 /* 3D tilt card — corner under cursor dips IN */
@@ -61,6 +61,57 @@ const cards = [
 ];
 
 const WorkIntelligence = () => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  // Mouse tracking logic for snake trail cursor
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Chained springs for snake effect
+  const trailConfig = [
+    { stiffness: 250, damping: 25 },
+    { stiffness: 200, damping: 22 },
+    { stiffness: 150, damping: 18 },
+    { stiffness: 100, damping: 15 },
+    { stiffness: 80, damping: 12 },
+  ];
+
+  const s1x = useSpring(mouseX, trailConfig[0]);
+  const s1y = useSpring(mouseY, trailConfig[0]);
+  const s2x = useSpring(s1x, trailConfig[1]);
+  const s2y = useSpring(s1y, trailConfig[1]);
+  const s3x = useSpring(s2x, trailConfig[2]);
+  const s3y = useSpring(s2y, trailConfig[2]);
+  const s4x = useSpring(s3x, trailConfig[3]);
+  const s4y = useSpring(s3y, trailConfig[3]);
+  const s5x = useSpring(s4x, trailConfig[4]);
+  const s5y = useSpring(s4y, trailConfig[4]);
+
+  const velX = useVelocity(mouseX);
+  const velY = useVelocity(mouseY);
+  const velocity = useTransform([velX, velY], ([vx, vy]) =>
+    Math.sqrt(vx * vx + vy * vy),
+  );
+
+  // Create a spring-smoothed opacity that reacts to movement
+  const movementOpacity = useSpring(
+    useTransform(velocity, [0, 50, 300], [0, 0, 1]),
+    { stiffness: 60, damping: 20 },
+  );
+
+  const segments = [
+    { x: s1x, y: s1y, size: 160, opacity: 0.8, blur: 18 },
+    { x: s2x, y: s2y, size: 130, opacity: 0.7, blur: 22 },
+    { x: s3x, y: s3y, size: 100, opacity: 0.6, blur: 28 },
+    { x: s4x, y: s4y, size: 80, opacity: 0.5, blur: 34 },
+    { x: s5x, y: s5y, size: 60, opacity: 0.35, blur: 40 },
+  ];
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    mouseX.set(e.clientX - rect.left);
+    mouseY.set(e.clientY - rect.top);
+  };
 
   return (
     /* outer: full-width bg so the page doesn't break; inner: constrained card */
@@ -68,7 +119,49 @@ const WorkIntelligence = () => {
       <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">
 
         {/* ── The constrained, rounded section ── */}
-        <div className="bg-slate-950 rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-3 sm:px-12 py-5 sm:py-14">
+        <div
+          onMouseMove={handleMouseMove}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          className={`bg-slate-950 rounded-[1.5rem] sm:rounded-[2.5rem] overflow-hidden border border-purple-900/30 relative px-3 sm:px-12 py-5 sm:py-14 ${isHovered ? "cursor-none" : ""}`}>
+
+          {/* Snake Trail Effect */}
+          {segments.map((seg, i) => (
+            <motion.div
+              key={i}
+              className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
+              style={{
+                width: seg.size,
+                height: seg.size,
+                left: seg.x,
+                top: seg.y,
+                x: "-50%",
+                y: "-50%",
+                opacity: useTransform([movementOpacity], ([v]) =>
+                  isHovered ? (i === 0 ? seg.opacity : v * seg.opacity) : 0,
+                ),
+                scale: isHovered ? 1 : 0,
+                background: `radial-gradient(circle, rgba(168, 85, 247, 0.9) 0%, rgba(168, 85, 247, 0) 70%)`,
+                filter: `blur(${seg.blur}px)`,
+              }}
+            />
+          ))}
+
+          {/* Lead Cursor Glow */}
+          <motion.div
+            className="absolute w-80 h-80 pointer-events-none z-[90] rounded-full mix-blend-screen"
+            style={{
+              left: s1x,
+              top: s1y,
+              x: "-50%",
+              y: "-50%",
+              opacity: isHovered ? 0.45 : 0,
+              scale: isHovered ? 1 : 0,
+              background:
+                "radial-gradient(circle, rgba(168, 85, 247, 0.35) 0%, transparent 70%)",
+              filter: "blur(50px)",
+            }}
+          />
 
           {/* Glow blobs */}
           <div className="absolute top-0 right-0 w-72 h-72 bg-purple-600/15 rounded-full blur-[80px] pointer-events-none" />

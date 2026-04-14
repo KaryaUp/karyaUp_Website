@@ -69,7 +69,11 @@ export default function ScatteredWork() {
             <div className="flex flex-col items-center lg:items-start lg:justify-start">
               <h3 className="text-2xl md:text-[2rem] lg:text-[2.25rem] font-black text-slate-800 tracking-normal leading-[1.05] mb-3">
                 Work Across <br />
-                <span className="text-purple-500">Too Many Tools.</span>
+                <motion.span
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
+                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                >Too Many Tools.</motion.span>
               </h3>
               <p className="text-slate-500 font-medium text-sm sm:text-base leading-relaxed mb-4 max-w-xl">
                 The average team struggles with 8–12 tools daily.
@@ -91,7 +95,7 @@ export default function ScatteredWork() {
             </motion.div>
 
             {/* Negative Result Box */}
-            <div className="p-6 bg-red-50/40 rounded-2xl border border-red-200 mt-auto w-full flex-shrink-0 h-[170px] flex flex-col justify-center">
+            <div className="group p-6 bg-red-50/40 rounded-2xl border border-red-200 mt-auto w-full flex-shrink-0 h-[170px] flex flex-col justify-center transition-all duration-300 hover:border-red-400/50 hover:shadow-lg hover:shadow-red-500/5">
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-red-400 mb-4 text-left">Daily Friction</p>
               <ul className="space-y-3">
                 {[
@@ -100,7 +104,7 @@ export default function ScatteredWork() {
                   "Zero visibility into real performance"
                 ].map((text, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-black text-slate-800">
-                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-red-400 shadow-sm border border-red-100">
+                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-red-400 shadow-sm border border-red-100 transition-all duration-300 group-hover:border-red-400 group-hover:scale-110">
                       <X size={11} strokeWidth={3.5} className="shrink-0" />
                     </div>
                     {text}
@@ -150,7 +154,7 @@ export default function ScatteredWork() {
             </motion.div>
 
             {/* List and Outcome Section */}
-            <div className="p-6 bg-emerald-50/40 rounded-2xl border border-emerald-200 mt-auto w-full flex-shrink-0 h-[170px] flex flex-col justify-center">
+            <div className="group p-6 bg-emerald-50/40 rounded-2xl border border-emerald-200 mt-auto w-full flex-shrink-0 h-[170px] flex flex-col justify-center transition-all duration-300 hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/5">
               <p className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-500 mb-4 text-left">Instant Value</p>
               <ul className="space-y-3 text-left">
                 {[
@@ -159,7 +163,7 @@ export default function ScatteredWork() {
                   "Real-time visibility & reporting"
                 ].map((text, i) => (
                   <li key={i} className="flex items-center gap-3 text-sm font-black text-slate-800">
-                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-emerald-200">
+                    <div className="w-5 h-5 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm border border-emerald-200 transition-all duration-300 group-hover:border-emerald-500 group-hover:scale-110">
                       <Check size={11} strokeWidth={3.5} className="shrink-0" />
                     </div>
                     {text}
