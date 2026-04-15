@@ -180,7 +180,7 @@ export default function Salary() {
         <link rel="icon" href="/favicon.ico" />
       </Helmet>
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-0">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-24">
           {/* Background Blobs Container - isolates overflow clipping from actual content */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
             <div className="absolute top-0 right-0 h-[560px] w-[560px] translate-x-1/4 -translate-y-1/3 rounded-full bg-purple-100/60 blur-[120px]" />

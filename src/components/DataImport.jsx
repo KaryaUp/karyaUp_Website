@@ -39,7 +39,7 @@ const DataImport = () => {
                   Zero Friction Sync
                 </span>
               </div>
-              <h2 className="mx-auto text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.12] sm:leading-[1] pb-1 mb-8 sm:mb-10 lg:mx-0">
+              <h2 className="mx-auto text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.12] sm:leading-[1] pb-1 mb-6 sm:mb-10 lg:mx-0">
                 Seamless Import
                 <span className="block sm:inline">From Your</span>
                 <br className="hidden sm:block" />
@@ -53,7 +53,7 @@ const DataImport = () => {
                   Existing Tools
                 </motion.span>
               </h2>
-              <div className="flex flex-col items-start justify-start text-left gap-2 sm:gap-4 mb-8 sm:mb-12 w-full">
+              <div className="flex flex-col items-start justify-start text-left gap-2 sm:gap-4 mb-6 sm:mb-12 w-full">
                 <div className="grid grid-cols-[20px_1fr] items-center justify-start text-left gap-x-3 w-full">
                   <div className="w-5 h-5 rounded-full bg-purple-50 flex items-center justify-center border border-purple-100 self-center">
                     <Check className="w-3 h-3 text-[#7e22ce]" strokeWidth={3} />
@@ -190,11 +190,6 @@ const DataImport = () => {
 
             {/* ══════════════════════════════════
                             MOBILE  below sm
-                            Layout mirrors big screen:
-                              ClickUp  top-left    (~x=56,  y=60)
-                              Jira     bottom-left (~x=56,  y=240)
-                              KaryaUp  right-center (~x=255, y=150)
-                            Paths curve from each logo → hub center
                         ══════════════════════════════════ */}
             <div className="block sm:hidden relative w-full max-w-[350px] mx-auto h-[280px]">
               {/* Glow behind KaryaUp */}
@@ -270,17 +265,6 @@ const DataImport = () => {
                 />
               </motion.div>
 
-              {/* Mobile animated file icons
-                                offsetPath coordinates are relative to the element's
-                                containing block (the 300px-tall div).
-                                ClickUp logo center  ≈ left:8 + 32 = x40,  top:24 + 32 = y56
-                                Jira logo center     ≈ left:8 + 32 = x40,  bottom:24 → top ~220, center y252 → use y240
-                                KaryaUp logo center  ≈ right:10 + 52 = from-right ~62 → 
-                                  We don't know exact container width on mobile (~360px typical)
-                                  KaryaUp right edge: containerWidth - 10 - 0 = ~350
-                                  KaryaUp center x  ≈ 350 - 52 = 298 → use 260 (safe center estimate)
-                                  KaryaUp center y  ≈ 98 + 52 = 150
-                            */}
               <div className="absolute inset-0 z-40 pointer-events-none overflow-hidden">
                 {/* ClickUp → KaryaUp */}
                 {[0, 1, 2].map((i) => (

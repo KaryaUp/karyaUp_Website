@@ -114,7 +114,7 @@ export default function Scheduling() {
 
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-8 sm:pb-10 lg:pb-12 overflow-hidden">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-8 sm:pb-10 lg:pb-24 overflow-hidden">
           <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-[120px] -z-10 animate-pulse" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

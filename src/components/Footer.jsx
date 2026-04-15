@@ -114,20 +114,17 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative overflow-hidden border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] flex items-end justify-end overflow-hidden select-none"
+    <footer className="relative flex flex-col overflow-hidden border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
+      {/* Watermark — Anchored directly to bottom for universal consistency */}
+      <img
+        src={watermark}
+        alt=""
         aria-hidden="true"
-      >
-        <img
-          src={watermark}
-          alt=""
-          aria-hidden="true"
-          className="absolute bottom-[-17%] right-[-1%] h-auto w-[min(150vw,1050px)] select-none opacity-[0.14] grayscale saturate-0 contrast-[0.86] brightness-[0.72] sm:bottom-[-6%] sm:right-[-10%] sm:w-[min(105vw,1200px)] md:bottom-[-10%] md:right-[-6%] md:w-[min(80vw,1380px)] lg:bottom-[-100%] lg:right-[-4%] lg:w-[min(90vw,1700px)] xl:w-[min(94vw,1900px)]"
-        />
-      </div>
+        className="pointer-events-none absolute bottom-0 left-1/2 z-0 h-auto w-[min(160vw,1200px)] -translate-x-1/2 translate-y-0 select-none opacity-40 grayscale contrast-[0.9] brightness-[0.7] sm:w-[min(140vw,1400px)] md:w-[min(120vw,1600px)] lg:w-[min(100vw,1920px)]"
+      />
 
-      <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+      <div className="relative z-[2] mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
           {/* LEFT: Branding & Socials */}
           <div className="flex flex-col items-center sm:items-start lg:w-1/3">
@@ -236,7 +233,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="relative mt-6 flex flex-col items-center gap-4 border-t border-slate-100 pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
+        <div className="relative mt-auto flex flex-col items-center gap-4 border-t border-slate-100 pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
           <p className="text-xs font-medium text-slate-600 max-sm:[text-shadow:0_1px_0_rgba(255,255,255,0.92),0_0_12px_rgba(255,255,255,0.75)]">
             &copy; 2026 KaryaUp. All rights reserved.
           </p>

@@ -58,7 +58,7 @@ export default function CalendarPage() {
       </Helmet>
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-2 sm:pb-4 lg:pb-4">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-2 sm:pb-4 lg:pb-24">
           {/* Ambient Background Glows */}
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-slate-200/20 rounded-full blur-[120px] -z-10" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-slate-100/30 rounded-full blur-[100px] -z-10" />

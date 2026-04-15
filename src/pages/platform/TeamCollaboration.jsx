@@ -1,8 +1,8 @@
 import { Helmet } from "react-helmet-async";
-import { useRef, useEffect, useState, useMemo } from "react";
+import { useRef, useEffect, useState, useMemo, isStackOpen } from "react";
 import { motion, AnimatePresence, useMotionValue, useAnimationFrame } from "framer-motion";
 import {
-  Check, BrainCircuit, Zap, Search, ShieldCheck, X
+  Check, BrainCircuit, Zap, Search, ShieldCheck, X, MessagesSquare, Eye
 } from "lucide-react";
 import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
@@ -20,27 +20,28 @@ const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
 
 const MsTeamsLogoSVG = ({ size = 40 }) => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 48 48"
+    xmlns="data:image/png;base64,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"
+    viewBox="0 0 48 48" // Keep viewBoxconsistent
     width={size}
     height={size}
+    className="translate-y-[1px]" // Micro-nudge down for perfect visual center
   >
-    {/* Back person — purple */}
-    <circle cx="30" cy="11" r="5" fill="#5059C9" />
+    {/* Back person — Moved Up */}
+    <circle cx="32" cy="11" r="5" fill="#5059C9" />
     <path
-      d="M38 21H22.5A2.5 2.5 0 0 0 20 23.5V35a9 9 0 0 0 18 0V23.5A2.5 2.5 0 0 0 38 21z"
+      d="M40 21H24.5A2.5 2.5 0 0 0 22 23.5V35a9 9 0 0 0 18 0V23.5A2.5 2.5 0 0 0 40 21z"
       fill="#5059C9"
     />
-    {/* Front person — indigo/blue */}
-    <circle cx="19" cy="9.5" r="5.5" fill="#7B83EB" />
+    {/* Front person — Moved Up */}
+    <circle cx="21" cy="9.5" r="5.5" fill="#7B83EB" />
     <path
-      d="M25.5 19h-17A2.5 2.5 0 0 0 6 21.5V33a8 8 0 0 0 16 0V21.5A2.5 2.5 0 0 0 25.5 19z"
+      d="M27.5 19h-17A2.5 2.5 0 0 0 8 21.5V33a8 8 0 0 0 16 0V21.5A2.5 2.5 0 0 0 27.5 19z"
       fill="#7B83EB"
     />
-    {/* White lines (chat/document icon inside front person) */}
-    <rect x="10" y="24"  width="10" height="1.4" rx="0.9" fill="white" opacity="0.95" />
-    <rect x="10" y="27.5" width="9"  height="1.4" rx="0.9" fill="white" opacity="0.95" />
-    <rect x="10" y="31"  width="10" height="1.4" rx="0.9" fill="white" opacity="0.95" />
+    {/* White lines inside chat icon */}
+    <rect x="14" y="29" width="10" height="1.4" rx="0.7" fill="white" opacity="0.9" />
+    <rect x="14" y="32.5" width="9" height="1.4" rx="0.7" fill="white" opacity="0.9" />
+    <rect x="14" y="36" width="10" height="1.4" rx="0.7" fill="white" opacity="0.9" />
   </svg>
 );
 
@@ -76,7 +77,7 @@ const LightShield3D = () => (
       strokeOpacity="0.9"
       strokeLinecap="round"
       strokeWidth="3"
-      
+
       className="group-hover:stroke-purple-700 transition-all duration-100 group-hover:stroke-purple group-hover:stroke-[3px] drop-shadow-sm"
     />
   </svg>
@@ -207,12 +208,12 @@ function TiltCard({ logoSrc, logoNode, name, glowColor, delay = 0 }) {
    MS Teams uses logoNode instead of logoSrc
 ═══════════════════════════════════════════════ */
 const integrations = [
-  { logoSrc: slackLogo,          name: "Slack",    glowColor: "rgba(234, 118, 236, 0.15)"  },
-  { logoSrc: gmailLogo,          name: "Gmail",    glowColor: "rgba(234, 118, 236, 0.15)"  },
-  { logoSrc: googleDriveLogo,    name: "Drive",    glowColor: "rgba(234, 118, 236, 0.15)"  },
+  { logoSrc: slackLogo, name: "Slack", glowColor: "rgba(234, 118, 236, 0.15)" },
+  { logoSrc: gmailLogo, name: "Gmail", glowColor: "rgba(234, 118, 236, 0.15)" },
+  { logoSrc: googleDriveLogo, name: "Drive", glowColor: "rgba(234, 118, 236, 0.15)" },
   { logoSrc: googleCalendarLogo, name: "Calendar", glowColor: "rgba(234, 118, 236, 0.15)" },
   {
-    logoNode: <MsTeamsLogoSVG size={72} />,  // ← inline SVG, no white bg, size=72
+    logoNode: <MsTeamsLogoSVG size={59} />,  // ← inline SVG, no white bg, size=72
     name: "MS Team",
     glowColor: "rgba(225, 105, 213, 0.2)",
   },
@@ -302,8 +303,8 @@ function Card({ data, type }) {
     >
       <div
         className={`w-8 h-8 rounded-lg flex items-center justify-center shrink-0 border ${isRed
-            ? "bg-red-50 border-red-100 text-red-500"
-            : "bg-green-50 border-emerald-100 text-emerald-600"
+          ? "bg-red-50 border-red-100 text-red-500"
+          : "bg-green-50 border-emerald-100 text-emerald-600"
           }`}
       >
         {isRed ? <X className="w-4 h-4" /> : <Check className="w-4 h-4" />}
@@ -411,8 +412,21 @@ function ScrollingDataBg({ isShieldHovered }) {
    MAIN PAGE
 ═══════════════════════════════════════════════ */
 export default function TeamCollaboration() {
+
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
+  const aiAgentRef = useRef(null);
+  const listContainerRef = useRef(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const [isShieldHovered, setIsShieldHovered] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(0);
 
   const redCards = [
     {
@@ -482,11 +496,11 @@ export default function TeamCollaboration() {
 
 
   const DEFAULT_ICON_MAP = {
-    "INSTANT CHAT" : { icon: Zap, color: "#4c1d95" },
-    "UNIVERSAL FIND" : { icon: Search, color: "#4c1d95" },
-    "SMART ASSIGN" : { icon: ShieldCheck, color: "#4c1d95" },
-}
-  
+    "INSTANT CHAT": { icon: Zap, color: "#4c1d95" },
+    "UNIVERSAL FIND": { icon: Search, color: "#4c1d95" },
+    "SMART ASSIGN": { icon: ShieldCheck, color: "#4c1d95" },
+  }
+
   return (
     <div className="bg-white font-sans overflow-x-hidden">
       <Helmet>
@@ -499,26 +513,34 @@ export default function TeamCollaboration() {
       </Helmet>
 
       {/* HERO */}
-      <section className="relative pt-24 pb-10 px-6 overflow-hidden bg-white">
+
+      <section className="relative pt-26 sm:pt-30 lg:pt-34 pb-8 sm:pb-16 lg:pb-20 px-4 sm:px-6 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
-          <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
+          <div
+            className={`grid lg:grid-cols-2 items-center transition-all duration-300 ${isStackOpen ? "gap-10" : "gap-0"
+              }`}
+            style={{ transition: "gap 0.32s ease" }}
+          >
             <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <motion.div
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
                 One Team, One Goal
               </motion.div>
+
               <motion.h1
                 initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                className="mt-2 text-3xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.06]"
+                // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+                className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
               >
                 Smarter Collaboration
                 <span className="block">
+
                   <motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -532,24 +554,22 @@ export default function TeamCollaboration() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="mt-4 sm:mt-3 space-y-3 sm:space-y-4 max-w-lg w-full"
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
               >
-                <div className="flex items-start gap-3 text-left">
-                  <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                {[
+                  { text: " Stop context-switching.", icon: Check },
+                  { text: "From real‑time chat to intelligent task coordination.", icon: Check }
+
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                      {item.text}
+                    </p>
                   </div>
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
-                    Stop context-switching.
-                  </p>
-                </div>
-                <div className="flex items-start gap-3 text-left">
-                  <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                    <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
-                  </div>
-                  <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
-                     From real‑time chat to intelligent task coordination.
-                  </p>
-                </div>
+                ))}
               </motion.div>
               <FeatureStack
                 items={[
@@ -577,11 +597,11 @@ export default function TeamCollaboration() {
               transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
               className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
             >
-              <div className="lg:mt-[-10px] relative overflow-hidden shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white mt-[-30px] lg:mt-[-10px]">
+              <div className="pt-6   relative w-full max-w-[540px] mx-auto lg:max-w-none overflow-hidden rounded-[10px]">
                 <img
                   src={dashboardImage}
-                  alt="KaryaUp task management"
-                  className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
+                  alt="Dashboard"
+                  className="w-full h-auto rounded-[10px] shadow-2xl"
                 />
               </div>
             </motion.div>
@@ -733,7 +753,7 @@ export default function TeamCollaboration() {
           >
             Entire Stack
           </motion.span>
-          <p style={{ marginTop: 8, fontSize: 15, color: "#64748b", fontWeight: 500, maxWidth: 480, margin: "20px auto 0", lineHeight: 1.2 }}>
+          <p style={{ marginTop: 5, fontSize: 13, color: "#64748b", fontWeight: 500, maxWidth: 480, margin: "20px auto 0", lineHeight: 1.2 }}>
             Plug KaryaUp into the tools your team
             <br />
             already loves no migration needed.

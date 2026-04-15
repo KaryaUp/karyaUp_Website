@@ -86,7 +86,7 @@ const FinalCTA = () => {
             </div>
 
             {/* Main Value Prop */}
-            <h2 className="mx-auto text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-2 sm:mb-3 sm:leading-[1.05]">
+            <h2 className="mx-auto max-w-[11ch] md:max-w-none text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-2 sm:mb-3 sm:leading-[1.05]">
               <span className="md:hidden block">Run Your Entire</span>
               <motion.span
                 className="md:hidden block text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
@@ -105,10 +105,12 @@ const FinalCTA = () => {
               </motion.span>
             </h2>
 
-            <p className="text-base sm:text-xl text-slate-500 font-medium max-w-xl mx-auto mb-4 sm:mb-5 leading-relaxed">
-              Stop switching tools. Start moving move. <br className="hidden md:block" />
-              <span className="text-slate-900 font-black">
-                Execution speed <span className="text-[#7e22ce] sm:inline">{speed.toFixed(1)}x faster</span>.
+            <p className="text-base sm:text-xl text-slate-500 font-medium max-w-[20rem] sm:max-w-xl mx-auto mb-4 sm:mb-5 leading-relaxed">
+              <span className="block md:inline">Stop switching tools. Start moving move.</span>
+              <span className="block md:inline">
+                <span className="text-slate-900 font-black">
+               <br/>   Execution speed <span className="text-[#7e22ce] sm:inline">{speed.toFixed(1)}x faster</span>.
+                </span>
               </span>
             </p>
 
@@ -137,7 +139,7 @@ const FinalCTA = () => {
               >
                 <Link
                   to="/book-demo"
-                  className="inline-flex w-[12em] sm:w-auto items-center justify-center px-10 py-3 rounded-full border-2 border-slate-200 text-slate-900 font-black text-lg transition-all hover:bg-slate-100"
+                  className="inline-flex h-[3.5em] w-[16.5em] items-center justify-center rounded-[30em] border-2 border-slate-200 text-slate-900 font-bold text-[15px] transition-all hover:bg-slate-100"
                 >
                   Book a Demo
                 </Link>

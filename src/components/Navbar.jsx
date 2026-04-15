@@ -354,19 +354,19 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className={`fixed w-full flex flex-col z-50 transition-all duration-300 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
+        className={`fixed top-0 w-full flex flex-col z-50 transition-all duration-300 ${isPlatformOpen || isFeaturesOpen || isSolutionsOpen || isResourcesOpen
           ? "bg-white md:shadow-md border-b border-gray-100"
           : isOpen
             ? "bg-white border-b border-slate-100"
             : isScrolled
               ? "bg-white md:bg-white/70 md:backdrop-blur-md md:shadow-sm md:border-b md:border-slate-200/70"
-              : "bg-transparent border-b border-transparent shadow-none backdrop-blur-0"
+              : "bg-transparent border-none shadow-none backdrop-blur-0"
           }`}
       >
-        <div className={`overflow-hidden transition-all duration-300 ease-in-out ${isScrolled || isIframeDark ? 'max-h-0 opacity-0' : 'max-h-[60px] opacity-100'}`}>
+        <div className={`overflow-hidden bg-white border-none shadow-none transition-all duration-300 ease-in-out ${isScrolled || isIframeDark ? 'max-h-0 opacity-0' : 'max-h-[60px] opacity-100'}`}>
           <Link
             to="/features/ai-agents"
-            className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-b border-slate-100 px-4"
+            className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-none shadow-none outline-none ring-0 px-4"
           >
             <span className="font-bold">Meet KAI Agent</span>
             <span className="hidden md:inline"> -Boost human efficiency with tailored AI assistants</span>

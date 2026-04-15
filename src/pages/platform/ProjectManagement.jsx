@@ -1,4 +1,4 @@
- import { useRef, useEffect, useMemo, useState } from "react";
+import { useRef, useEffect, useMemo, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -7,10 +7,11 @@ import {
   useTransform,
   color,
   useAnimationFrame,
+
 } from "framer-motion";
-import { ShieldCheck } from "lucide-react";
+import { ShieldCheck, MessagesSquare, Eye } from "lucide-react";
 import dashboardImage from "../../assets/projects.webp";
-import projectImage from "../../assets/project.webp";
+import projectImage from "../../assets/projects.webp";
 import { lazy, Suspense } from "react";
 import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
@@ -371,8 +372,18 @@ function ScrollTrack({ cards, direction }) {
    MAIN PAGE COMPONENT
 ═══════════════════════════════════════════════ */
 export default function ProjectManagement() {
-  const sectionSpacing = "py-8 sm:py-16 lg:py-20";
+
+  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
+  const aiAgentRef = useRef(null);
+  const listContainerRef = useRef(null);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const [isShieldHovered, setIsShieldHovered] = useState(false);
   const [activeFeature, setActiveFeature] = useState(0);
@@ -507,53 +518,64 @@ export default function ProjectManagement() {
           <div
             className={`grid lg:grid-cols-2 items-center transition-all duration-300 ${isStackOpen ? "gap-10" : "gap-0"
               }`}
-            style={{ transition: "gap 0.35s ease" }}
+            style={{ transition: "gap 0.32s ease" }}
           >
             <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+              <motion.div
+                initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+              >
+                PROJECT MANAGEMENT — PLAN, EXECUTE
+              </motion.div>
+              {/* <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
               <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4">
                 PROJECT MANAGEMENT — PLAN, EXECUTE
-              </div>
+              </div> */}
 
               <motion.h1
-  initial={{ opacity: 0, y: 30 }}
-  animate={{ opacity: 1, y: 0 }}
-  /* FIX 1: Adjusted mobile text to 'text-3xl' (approx 30px) so it fits.
-     FIX 2: Added 'whitespace-nowrap' to the span below to force a single line.
-  */
-  className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
->
-  Unified Project
-  {/* FIX 3: Added 'hidden md:block' so the break ONLY happens on desktop */}
-  <br className="hidden md:block" /> 
-  
-  <motion.span
-    className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto] whitespace-nowrap"
-    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-  >
-    Management Software
-  </motion.span>
-</motion.h1>
+                initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+                className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
+              >
+                Unified Project
+                <span className="block">
 
-              <div className="mt-5 space-y-3 max-w-lg w-full">
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
-                    <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
-                  </div>
-                  <p className="text-sm sm:text-base text-slate-600 font-medium">
-                    Plan smarter, track faster, deliver on time.
-                  </p>
-                </div>
+                  <motion.span
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                  >
+                    Management Software
+                  </motion.span>
+                </span>
+              </motion.h1>
 
-                <div className="flex items-start gap-3">
-                  <div className="mt-1 w-4 h-4 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center shrink-0">
-                    <Check className="w-2.5 h-2.5 text-purple-700 stroke-[4]" />
+              <motion.div
+                initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
+              >
+                {[
+                  { text: "Every piece of work, owned and visible.", icon: Check },
+                  { text: "Turn conversations into tasks with a single click.", icon: Check }
+
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-3 text-left">
+                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    </div>
+                    <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                      {item.text}
+                    </p>
                   </div>
-                  <p className="text-sm sm:text-base text-slate-600 font-medium">
-                    Keep projects organized and your team aligned.
-                  </p>
-                </div>
-              </div>
+                ))}
+              </motion.div>
+
               <FeatureStack
                 items={[
                   {
@@ -566,7 +588,7 @@ export default function ProjectManagement() {
                 ]}
               />
             </div>
-            <div className="pt-6   relative w-full max-w-[540px] mx-auto lg:max-w-none overflow-hidden rounded-[10px]">
+            <div className="pt-6 relative w-full max-w-[540px] mx-auto lg:max-w-none overflow-hidden rounded-[10px]">
               <img
                 src={dashboardImage}
                 alt="Dashboard"
@@ -703,23 +725,27 @@ export default function ProjectManagement() {
       </section>
 
       {/* TASK WORKSPACE SECTION */}
-      <section className="mt-10 pb-0 p-4 py-10 sm:py-16 lg:py-6 px-4 bg-white relative overflow-hidden">
+      <section className="mt-6 pb-0 px-4 py-10 sm:py-10 lg:py-6 bg-white relative overflow-hidden">
         <div className="max-w-7xl mx-auto">
-          {/* HEADING */}
+          {/* HEADING SECTION */}
           <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-slate-50 text-[11px] font-black uppercase tracking-widest text-slate-600 mb-3 border border-slate-200">
+              {/* Adjusted Pill: Increased padding for a more premium look */}
+              <span className="inline-block px-4 py-1.5 rounded-full bg-slate-50 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] text-slate-600 mb-5 border border-slate-200">
                 Unified Task Workspace
               </span>
 
-              <h2 className="text-3xl min-[420px]:text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.06] md:leading-[1.1] mb-3 text-balance max-w-[min(100%,36rem)] mx-auto px-1">
+              {/* FIX: Use text-3xl for small phones to avoid cutting off letters.
+          Added pb-2 to protect 'y' and 'g' descenders.
+        */}
+              <h2 className="text-3xl sm:text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] md:leading-[1.1] mb-5 text-balance max-w-[20rem] sm:max-w-3xl mx-auto pb-2">
                 <span className="text-slate-900">{"Supercharge\u00A0Your "}</span>
                 <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto] inline-block"
                   animate={{
                     backgroundPosition: ["0% center", "-200% center"],
                   }}
@@ -729,7 +755,10 @@ export default function ProjectManagement() {
                 </motion.span>
               </h2>
 
-              <p className="text-lg text-slate-600 leading-relaxed font-medium max-w-xl mx-auto">
+              {/* FIX: text-sm on mobile ensures the entire sentence fits without 
+          becoming a massive wall of text.
+        */}
+              <p className="mt-1 mb-2 text-sm sm:text-[1rem] text-slate-600 leading-relaxed font-medium max-w-[22rem] sm:max-w-xl mx-auto">
                 Centralize communication, assign dynamic tasks, and execute
                 flawlessly with enterprise grade AI execution.
               </p>
@@ -761,9 +790,6 @@ export default function ProjectManagement() {
                 const isPast = activeFeature > i;
                 const isLineActive = activeFeature > i;
 
-                // Gap from circle edge to row boundary:
-                //   collapsed row ≈ 52px  → center=26, radius=22, gap=4
-                //   expanded  row ≈ 104px → center=52, radius=22, gap=30
                 const COLL = 4;
                 const EXP = 30;
                 const upperGap = activeFeature === i ? EXP : COLL;
@@ -865,7 +891,7 @@ export default function ProjectManagement() {
       </section>
 
       {/* NEW AI WORKSPACE SECTION */}
-      <section className="py-6 px-6 pb-10 bg-white-50 relative overflow-hidden border-t border-slate-200">
+      <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden border-t border-slate-200">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
 
@@ -908,11 +934,12 @@ export default function ProjectManagement() {
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
             {aiFeatures.map((feature, i) => (
               <TiltCard
                 key={i}
-                className="bg-white border border-slate-200 shadow-xl p-7 sm:p-8 rounded-[2rem] cursor-default group"
+                className="bg-white border border-slate-200 lg:hover:border-purple-300 shadow-xl p-7 sm:p-8 rounded-[2rem] cursor-default group"
               >
                 <div className="flex items-center gap-4 mb-3">
                   <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 ${getColorClasses(feature.color)}`}>

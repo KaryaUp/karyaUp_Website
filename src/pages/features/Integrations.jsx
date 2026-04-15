@@ -225,7 +225,7 @@ export default function Integrations() {
         />
       </Helmet>
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
-        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-0">
+        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-24">
           <div className="absolute top-0 left-1/2 -z-10 h-[520px] w-[520px] -translate-x-1/2 rounded-full bg-purple-100/70 blur-[130px]" />
           <div className="absolute right-0 top-20 -z-10 h-[300px] w-[300px] rounded-full bg-cyan-100/70 blur-[120px]" />
 
@@ -290,13 +290,13 @@ export default function Integrations() {
                 initial={{ opacity: 0, x: isMobile ? 0 : 50 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.16 }}
-                className="relative w-full max-w-[560px] mx-auto lg:mx-0 lg:justify-self-end"
+                className="relative w-full max-w-[480px] mx-auto lg:mx-0 lg:justify-self-end"
               >
                 <div
                   onMouseMove={handleHubMouseMove}
                   onMouseEnter={() => setIsHoveredOrbit(true)}
                   onMouseLeave={() => setIsHoveredOrbit(false)}
-                  className={`relative aspect-square sm:aspect-auto sm:h-[520px] w-full rounded-[2rem] sm:rounded-[2.2rem] border border-slate-800/50 bg-[#080516] flex items-center justify-center p-2.5 sm:p-3 ${isHoveredOrbit ? 'cursor-none' : ''}`}
+                  className={`relative aspect-square sm:aspect-auto sm:h-[440px] w-full rounded-[2rem] sm:rounded-[2.2rem] border border-slate-800/50 bg-[#080516] flex items-center justify-center p-2.5 sm:p-3 ${isHoveredOrbit ? 'cursor-none' : ''}`}
                 >
                   {segments.map((seg, i) => (
                     <motion.div
@@ -340,12 +340,12 @@ export default function Integrations() {
 
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
                     {[
-                      isMobile ? 42 : 85,
-                      isMobile ? 58 : 105,
-                      isMobile ? 74 : 130,
-                      isMobile ? 90 : 155,
-                      isMobile ? 106 : 180,
-                      isMobile ? 122 : 205
+                      isMobile ? 42 : 70,
+                      isMobile ? 58 : 90,
+                      isMobile ? 74 : 110,
+                      isMobile ? 90 : 130,
+                      isMobile ? 106 : 150,
+                      isMobile ? 122 : 170
                     ].map((radius, i) => (
                       <div
                         key={i}
@@ -378,12 +378,12 @@ export default function Integrations() {
                   {integrations.map((item, index) => {
                     const baseDuration = 48;
                     const configs = [
-                      { radius: isMobile ? 42 : 85, angle: 0 },
-                      { radius: isMobile ? 58 : 105, angle: 60 },
-                      { radius: isMobile ? 74 : 130, angle: 120 },
-                      { radius: isMobile ? 90 : 155, angle: 180 },
-                      { radius: isMobile ? 106 : 180, angle: 240 },
-                      { radius: isMobile ? 122 : 205, angle: 300 },
+                      { radius: isMobile ? 42 : 70, angle: 0 },
+                      { radius: isMobile ? 58 : 90, angle: 60 },
+                      { radius: isMobile ? 74 : 110, angle: 120 },
+                      { radius: isMobile ? 90 : 130, angle: 180 },
+                      { radius: isMobile ? 106 : 150, angle: 240 },
+                      { radius: isMobile ? 122 : 170, angle: 300 },
                     ];
                     const cfg = configs[index];
 

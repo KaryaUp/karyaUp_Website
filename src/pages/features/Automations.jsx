@@ -56,9 +56,26 @@ export default function Automations() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Hardcoded states for unclickable display
-  const toggleStates = [true, false, false];
-  const selectedMonths = new Set([0, 3, 6, 9]); // Jan, Apr, Jul, Oct
+  // Interative states
+  const [toggleStates, setToggleStates] = useState([true, false, false]);
+  const [selectedMonths, setSelectedMonths] = useState(new Set([0, 3, 6, 9])); // Jan, Apr, Jul, Oct
+  
+  const handleToggle = (index) => {
+    const newStates = [...toggleStates];
+    newStates[index] = !newStates[index];
+    setToggleStates(newStates);
+  };
+
+  const handleMonthToggle = (index) => {
+    const newMonths = new Set(selectedMonths);
+    if (newMonths.has(index)) {
+      newMonths.delete(index);
+    } else {
+      newMonths.add(index);
+    }
+    setSelectedMonths(newMonths);
+  };
+
   const assignedTeams = new Set(["Design Team", "Engineering", "Marketing"]);
 
   return (
@@ -78,7 +95,7 @@ export default function Automations() {
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900 overflow-x-hidden">
 
         {/* Hero Section */}
-        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-4 pb-2 sm:pb-4 lg:pb-4">
+        <section className="relative overflow-hidden pt-4 sm:pt-6 lg:pt-4 pb-2 sm:pb-4 lg:pb-24">
           <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-0">
             <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-12 items-center">
               {/* Left Content */}
@@ -188,12 +205,19 @@ export default function Automations() {
                     "Weekly Standup Tasks",
                     "Quarterly Review Prep",
                   ].map((label, i) => (
-                    <div key={i} className="flex items-center justify-between bg-slate-50/80 rounded-xl px-3 py-2.5 border border-slate-100/80 w-full">
+                    <button 
+                      key={i} 
+                      onClick={() => handleToggle(i)}
+                      className="flex items-center justify-between bg-slate-50/80 hover:bg-slate-100/80 transition-colors cursor-pointer rounded-xl px-3 py-2.5 border border-slate-100/80 w-full group/row"
+                    >
                       <span className={`text-[12px] font-semibold transition-all ${toggleStates[i] ? "text-slate-800" : "text-slate-400 line-through"}`}>{label}</span>
-                      <div className={`w-8 h-[18px] rounded-full flex items-center px-0.5 transition-colors flex-shrink-0 ml-2 ${toggleStates[i] ? "bg-emerald-500" : "bg-slate-200"}`}>
-                        <div className={`w-3.5 h-3.5 bg-white rounded-full shadow-sm transition-transform duration-200 ${toggleStates[i] ? "translate-x-[14px]" : "translate-x-0"}`} />
+                      <div className={`w-8 h-[18px] rounded-full flex items-center px-0.5 transition-all flex-shrink-0 ml-2 ${toggleStates[i] ? "bg-emerald-500" : "bg-slate-200"}`}>
+                        <motion.div 
+                          animate={{ x: toggleStates[i] ? 14 : 0 }}
+                          className="w-3.5 h-3.5 bg-white rounded-full shadow-sm"
+                        />
                       </div>
-                    </div>
+                    </button>
                   ))}
                 </div>
 
@@ -212,15 +236,16 @@ export default function Automations() {
                 {/* Mini UI */}
                 <div className="grid grid-cols-4 gap-1.5 w-full">
                   {["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"].map((m, i) => (
-                    <div
+                    <button
                       key={m}
-                      className={`text-center py-1.5 rounded-lg text-[10px] font-bold border transition-all ${selectedMonths.has(i)
+                      onClick={() => handleMonthToggle(i)}
+                      className={`text-center py-1.5 rounded-lg text-[10px] font-bold border transition-all cursor-pointer hover:scale-105 active:scale-95 ${selectedMonths.has(i)
                         ? "bg-[#9333ea] text-white border-[#9333ea] shadow-sm shadow-purple-300 scale-[1.02]"
-                        : "border-slate-200 text-slate-400 bg-slate-50/50"
+                        : "border-slate-200 text-slate-400 bg-slate-50/50 hover:border-purple-200"
                         }`}
                     >
                       {m}
-                    </div>
+                    </button>
                   ))}
                 </div>
 

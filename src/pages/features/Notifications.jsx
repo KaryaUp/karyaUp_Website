@@ -138,7 +138,7 @@ export default function Notifications() {
 
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-0 overflow-visible">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-24 overflow-visible">
           {/* Ambient Background Glows */}
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-[120px] -z-10 animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-100/30 rounded-full blur-[100px] -z-10" />

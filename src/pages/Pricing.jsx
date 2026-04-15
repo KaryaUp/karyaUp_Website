@@ -1380,16 +1380,18 @@ export default function Pricing() {
               </div>
 
               <div className="relative z-10">
-                <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white mb-4 sm:mb-5 tracking-normal leading-[1.05]">
-                  Transform Your <br />
-                  <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
+                <h2 className="text-[clamp(1.9rem,5.5vw,3.25rem)] font-black text-white mb-4 sm:mb-5 tracking-normal leading-[1.08]">
+                  <span className="block">Transform Your</span>
+                  <span className="block">
+                    <motion.span
+                      className="inline-block mx-1 tracking-[0.03em] text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                   >
                     Workflow
-                  </motion.span>{" "}
-                  Today.
+                    </motion.span>{" "}
+                    <span className="inline-block">Today.</span>
+                  </span>
                 </h2>
                 <p className="text-slate-400 text-sm sm:text-base md:text-lg font-medium mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed px-2">
                   Join thousands of high-performing teams who have already
