@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.webp";
+import watermark from "../assets/karyaup-wm.webp";
 
 const footerColumns = [
   {
@@ -33,8 +34,6 @@ const footerColumns = [
     ],
   },
 ];
-
-const FOOTER_WORDMARK = "KARYAUP";
 
 const socialLinks = [
   {
@@ -116,41 +115,16 @@ const Footer = () => {
 
   return (
     <footer className="relative overflow-hidden border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
-      {/* Watermark: purple type on white + perspective ramp */}
       <div
-        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex min-h-[13rem] items-end justify-center overflow-hidden select-none sm:min-h-[18rem] md:min-h-[26rem] lg:min-h-[30rem]"
-        aria-hidden
+        className="pointer-events-none absolute inset-0 z-[1] flex items-end justify-end overflow-hidden select-none"
+        aria-hidden="true"
       >
-        <div
-          className="flex w-full max-w-[100vw] justify-center px-0 [perspective:min(100vw,600px)] sm:[perspective:min(120vw,1400px)] lg:[perspective:min(140vw,2400px)]"
-        >
-          <div className="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-7 sm:translate-x-6 sm:scale-100 md:-translate-y-9 md:translate-x-8 lg:-translate-y-11 lg:translate-x-12">
-            <div
-              className="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,2%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-0 sm:[transform:translate(0,20%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,24%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,28%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]"
-            >
-              {FOOTER_WORDMARK.split("").map((char, i) => {
-                const last = FOOTER_WORDMARK.length - 1;
-                const t = last > 0 ? i / last : 0;
-                const scale = 4;
-                const minRem = scale * (2.2 + t * 1.5);
-                const prefVw = scale * (4.85 + t * 3.25);
-                const maxRem = scale * (2.9 + t * 1.85);
-                return (
-                  <span
-                    key={`wm-${i}`}
-                   className="inline-block font-black font-sans uppercase leading-none tracking-[-0.12em] antialiased text-slate-500/[0.18] sm:text-slate-500/[0.15] md:text-slate-500/[0.12] lg:text-slate-500/[0.1]"
-                    style={{
-                      fontSize: `clamp(${minRem}rem, ${prefVw}vw, ${maxRem}rem)`,
-                      transform: `translateZ(${Math.round(t * 72 * scale)}px)`,
-                    }}
-                  >
-                    {char}
-                  </span>
-                );
-              })}
-            </div>
-          </div>
-        </div>
+        <img
+          src={watermark}
+          alt=""
+          aria-hidden="true"
+          className="absolute bottom-[-17%] right-[-1%] h-auto w-[min(150vw,1050px)] select-none opacity-[0.14] grayscale saturate-0 contrast-[0.86] brightness-[0.72] sm:bottom-[-6%] sm:right-[-10%] sm:w-[min(105vw,1200px)] md:bottom-[-10%] md:right-[-6%] md:w-[min(80vw,1380px)] lg:bottom-[-100%] lg:right-[-4%] lg:w-[min(90vw,1700px)] xl:w-[min(94vw,1900px)]"
+        />
       </div>
 
       <div className="relative z-[2] mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -278,6 +252,7 @@ const Footer = () => {
             </Link>
           </div>
         </div>
+
       </div>
     </footer>
   );

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
-import { Check, MessageSquare, Hash, FileText, Reply, Users, Bot, Sparkles, Send, Kanban, Zap, Shield, Link as LinkIcon, Briefcase } from "lucide-react";
+import { Check, MessageSquare, FileText, Reply, Users, Bot, Sparkles, Send, Kanban, Zap, Shield, Link as LinkIcon, Briefcase } from "lucide-react";
 import { FeatureCard, CTABanner } from "../../components/SubPageLayout";
 
 import FeatureCTA from "../../components/FeatureCTA";
@@ -168,7 +168,14 @@ export default function Chat() {
 
                 </motion.div>
 
-                <FeatureStack items={["Threaded replies", "Direct messages", "Project channels", "File sharing"]} />
+                <FeatureStack
+                  items={[
+                    { label: "Threaded replies", icon: Reply },
+                    "Direct messages",
+                    { label: "Project channels", icon: Kanban },
+                    "File sharing",
+                  ]}
+                />
               </div>
 
               {/* Right Hero Preview */}
@@ -323,7 +330,7 @@ export default function Chat() {
                     { text: "Team discussions", icon: Users },
                     { text: "File sharing", icon: FileText },
                     { text: "Mentions & threads", icon: Reply },
-                    { text: "Instant updates", icon: Zap }
+                  
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">
                       <div className="w-4 h-4 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0">

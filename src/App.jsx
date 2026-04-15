@@ -1,10 +1,11 @@
-import React, { lazy, Suspense } from "react";
-import { Routes, Route } from "react-router-dom";
+import React, { lazy, Suspense, useEffect, useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import Loader from "./components/Loader";
+import AIAgents from "./pages/features/AIAgents";
 
 // Lazy imports (same as your file)
 
@@ -47,7 +48,6 @@ const Automations = lazy(() => import("./pages/features/Automations"));
 const FeaturesTimeTracking = lazy(() => import("./pages/features/FeaturesTimeTracking"));
 const Integrations = lazy(() => import("./pages/features/Integrations"));
 const WatchDemo = lazy(() => import("./pages/features/Watch_Demo"));
-const AIAgents = lazy(() => import("./pages/features/AIAgents"));
 
 // Solutions
 const ProductDevelopment = lazy(() => import("./pages/solutions/ProductDevelopment"));
@@ -71,8 +71,37 @@ const Demo = lazy(() => import("./pages/resources/Demo"));
 const VideoTutorials = lazy(() => import("./pages/resources/VideoTutorials"));
 
 function App() {
+  const currentVersion = useRef(null);
+  const location = useLocation();
+  const isFeatureRoute = location.pathname.startsWith("/features");
+
+  useEffect(() => {
+    // Initial fetch to get the current version
+    fetch("/version.json")
+      .then((res) => res.json())
+      .then((data) => {
+        currentVersion.current = data.version;
+      })
+      .catch((err) => console.log("Failed to fetch initial version", err));
+
+    // Poll every 5 minutes
+    const interval = setInterval(() => {
+      fetch(`/version.json?t=${Date.now()}`)
+        .then((res) => res.json())
+        .then((data) => {
+          if (currentVersion.current && data.version !== currentVersion.current) {
+            console.log("New version detected, auto-reloading...");
+            window.location.reload();
+          }
+        })
+        .catch((err) => console.log("Failed to poll version", err));
+    }, 300000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <div className="min-h-screen font-sans w-full max-w-full overflow-x-hidden">
+    <div className={`min-h-screen font-sans w-full max-w-full overflow-x-hidden ${isFeatureRoute ? "feature-route-mobile-gap" : ""}`}>
       <ScrollToTop />
       <Navbar />
 

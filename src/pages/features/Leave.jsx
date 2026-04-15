@@ -246,7 +246,7 @@ export default function Leave() {
           </div>
         </section>
 
-        <section className="relative overflow-hidden pt-2 lg:pt-4 pb-8 sm:pb-10 lg:pb-12">
+        <section className="relative overflow-hidden pt-2 lg:pt-4 pb-0 sm:pb-4 lg:pb-0">
           <div className="pointer-events-none absolute left-1/2 top-24 -z-10 h-[420px] w-[980px] -translate-x-1/2 rounded-full bg-gradient-to-r from-purple-100/80 via-fuchsia-100/60 to-transparent blur-[130px]" />
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

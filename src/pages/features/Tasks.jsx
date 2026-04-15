@@ -150,12 +150,12 @@ export default function Tasks() {
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
 
         {/* ── Hero ── */}
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-2 sm:pb-4 lg:pb-4">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-8 sm:pb-4 lg:pb-0">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
+            <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center lg:items-start">
 
               {/* Left */}
-              <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
+              <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start">
                 <motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -191,8 +191,8 @@ export default function Tasks() {
                   className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
                 >
                   {[
-                    { text: "Every piece of work, owned and visible.", icon: Eye },
-                    { text: "Turn conversations into tasks with a single click.", icon: MessageSquare }
+                    { text: "Every piece of work, owned and visible.", icon: Check },
+                    { text: "Turn conversations into tasks with a single click.", icon: Check }
 
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3 text-left">
@@ -214,7 +214,7 @@ export default function Tasks() {
                 initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
+                className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:self-start lg:-mr-12 xl:-mr-24"
               >
                 <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
                   <img
@@ -228,7 +228,7 @@ export default function Tasks() {
           </div>
         </section>
 
-        <section className="pt-2 lg:pt-4 pb-12 sm:pb-16 lg:pb-20">
+        <section className="pt-8 sm:pt-4 lg:pt-6 pb-12 sm:pb-16 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
               <motion.div
@@ -325,7 +325,7 @@ export default function Tasks() {
 
 
         {/* 🔥 Visual Analytics - Restored Section */}
-        <section className="pt-2 sm:pt-4 lg:pt-4 pb-12 sm:pb-20 lg:pb-24 bg-slate-50/50 relative overflow-hidden">
+        <section className="pt-12 sm:pt-10 lg:pt-20 pb-12 sm:pb-20 lg:pb-24 bg-slate-50/50 relative overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
 
@@ -370,9 +370,9 @@ export default function Tasks() {
 
                 <div className="mt-8 space-y-4 w-full max-w-md">
                   {[
-                    { text: "Custom filters for members, status, and priority", icon: Filter },
-                    { text: "Real-time completion and trend tracking", icon: Activity },
-                    { text: "Visual work distribution across your whole team", icon: Users }
+                    { text: "Custom filters for members, status, and priority", icon: Check },
+                    { text: "Real-time completion and trend tracking", icon: Check },
+                    { text: "Visual work distribution across your whole team", icon: Check }
                   ].map((item) => (
                     <div key={item.text} className="flex items-center gap-4 text-left">
                       <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">

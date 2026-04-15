@@ -221,7 +221,7 @@ const WorkIntelligence = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.15 + i * 0.1 }}
               >
-                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500/30 p-4 sm:p-7 rounded-2xl cursor-default h-full transition-colors duration-300 text-left w-full">
+                <TiltCard className="bg-slate-900 border border-slate-800 hover:border-purple-500 p-4 sm:p-7 rounded-2xl cursor-default h-full transition-colors duration-300 text-left w-full">
                   <div className="flex flex-row sm:flex-col items-center sm:items-start justify-start gap-4 sm:gap-0 w-full text-left">
                     <div className="w-10 h-10 sm:w-12 sm:h-12 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 mb-0 sm:mb-5 shrink-0">
                       {card.icon}
@@ -246,7 +246,7 @@ const WorkIntelligence = () => {
             className="relative z-10 bg-purple-900/20 border border-purple-500/20 rounded-2xl sm:rounded-full p-2.5 sm:p-5 overflow-hidden w-full lg:w-auto"
           >
             {/* The flow path line */}
-            <div className="hidden sm:block absolute top-1/2 left-[5%] right-[5%] h-px bg-white/10 -translate-y-1/2 pointer-events-none z-0" />
+
             <div className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-0 text-[13px] sm:text-sm font-bold text-white relative z-10 max-w-5xl mx-auto px-1 sm:px-6">
 
               {/* Box 1: Raw Activity */}
@@ -266,7 +266,6 @@ const WorkIntelligence = () => {
 
               {/* Gap 1: Arrow 1 */}
               <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
-                <div className="absolute top-[-4px] bottom-[-4px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-purple-400/70 to-fuchsia-400/20" />
                 <motion.div
                   animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -276,6 +275,7 @@ const WorkIntelligence = () => {
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 -translate-y-1/2 pointer-events-none z-0" />
                 <motion.div
                   initial={{ left: "-12px", opacity: 0 }}
                   animate={{
@@ -311,7 +311,6 @@ const WorkIntelligence = () => {
 
               {/* Gap 2: Arrow 2 */}
               <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
-                <div className="absolute top-[-4px] bottom-[-4px] left-1/2 w-px -translate-x-1/2 bg-gradient-to-b from-fuchsia-400/70 to-white/20" />
                 <motion.div
                   animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
                   transition={{ duration: 1.5, delay: 0.35, repeat: Infinity, ease: "easeInOut" }}
@@ -321,6 +320,7 @@ const WorkIntelligence = () => {
                 </motion.div>
               </div>
               <div className="hidden sm:flex flex-1 items-center justify-center h-10 relative overflow-visible">
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-white/10 -translate-y-1/2 pointer-events-none z-0" />
                 <motion.div
                   initial={{ left: "-12px", opacity: 0 }}
                   animate={{

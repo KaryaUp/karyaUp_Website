@@ -38,7 +38,7 @@ export default function Home() {
         <Hero />
         <TrustedBy />
 
-        <div className="home-mobile-optimize [&>section]:!pt-10 [&>section]:!pb-10 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12 text-center sm:text-left">
+        <div className="home-mobile-optimize [&>section]:!pt-4 [&>section]:!pb-4 sm:[&>section]:!pt-10 sm:[&>section]:!pb-10 lg:[&>section]:!pt-12 lg:[&>section]:!pb-12 text-center sm:text-left">
          
           <AllInOne />
 

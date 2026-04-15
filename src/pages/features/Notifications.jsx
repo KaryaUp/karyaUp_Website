@@ -138,7 +138,7 @@ export default function Notifications() {
 
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
-        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-8 sm:pb-10 lg:pb-12 overflow-hidden">
+        <section className="relative pt-4 sm:pt-6 lg:pt-4 pb-0 sm:pb-4 lg:pb-0 overflow-visible">
           {/* Ambient Background Glows */}
           <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-purple-100/30 rounded-full blur-[120px] -z-10 animate-pulse" />
           <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-fuchsia-100/30 rounded-full blur-[100px] -z-10" />
@@ -165,12 +165,15 @@ export default function Notifications() {
                     stiffness: 100,
                     delay: 0.1
                   }}
-                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
-                >
+                className="mt-3 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.12] sm:leading-[1.05]"
+              >
                   Connected With Smart
                   <span className="block">
                     {" "}
-                    <span className="text-gradient inline-block">
+                    <span
+                      className="text-gradient inline-block tracking-[0.015em]"
+                      style={{ fontVariantLigatures: "none" }}
+                    >
                       Notifications
                     </span>
                   </span>
@@ -183,9 +186,9 @@ export default function Notifications() {
                   className="mt-5 sm:mt-6 space-y-4 max-w-2xl w-full mx-auto lg:mx-0"
                 >
                   {[
-                    "Conversations and alerts that stay close to the work",
+                    "Conversations and alerts that stay close to work",
                     "Chat directly inside projects, tasks, and teams",
-                    "Retrieve any past alert with smart history search"
+                   
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3.5 text-left">
                       <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">

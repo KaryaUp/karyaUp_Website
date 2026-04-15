@@ -21,7 +21,7 @@ const DataImport = () => {
   };
 
   return (
-    <section className="py-3 sm:py-6 lg:py-8 bg-white overflow-x-hidden overflow-y-hidden relative">
+    <section className="!py-0 bg-white overflow-x-hidden overflow-y-hidden relative">
       <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-12">
         <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
           {/* Left: Content */}
@@ -39,7 +39,7 @@ const DataImport = () => {
                   Zero Friction Sync
                 </span>
               </div>
-              <h2 className="mx-auto text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1] mb-8 sm:mb-10 lg:mx-0">
+              <h2 className="mx-auto text-3xl sm:text-4xl md:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.12] sm:leading-[1] pb-1 mb-8 sm:mb-10 lg:mx-0">
                 Seamless Import
                 <span className="block sm:inline">From Your</span>
                 <br className="hidden sm:block" />
@@ -196,7 +196,7 @@ const DataImport = () => {
                               KaryaUp  right-center (~x=255, y=150)
                             Paths curve from each logo → hub center
                         ══════════════════════════════════ */}
-            <div className="block sm:hidden relative w-full max-w-[320px] mx-auto h-[240px]">
+            <div className="block sm:hidden relative w-full max-w-[350px] mx-auto h-[280px]">
               {/* Glow behind KaryaUp */}
               <motion.div
                 animate={{ scale: [1, 1.2, 1], opacity: [0.08, 0.18, 0.08] }}
@@ -206,7 +206,7 @@ const DataImport = () => {
                   ease: "easeInOut",
                 }}
                 className="absolute rounded-full bg-slate-100 blur-[50px] -z-10"
-                style={{ width: 100, height: 100, top: 62, right: 12 }}
+                style={{ width: 112, height: 112, top: 64, right: 8 }}
               />
 
               {/* KaryaUp logo -right center */}
@@ -215,7 +215,7 @@ const DataImport = () => {
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
                 className="absolute flex items-center justify-center"
-                style={{ width: 84, height: 84, top: 76, right: 12 }}
+                style={{ width: 100, height: 100, top: 76, right: 8 }}
               >
                 <img
                   src={KaryaUpLogo}
@@ -236,7 +236,7 @@ const DataImport = () => {
                   ease: "easeInOut",
                 }}
                 className="absolute"
-                style={{ left: 10, top: 12 }}
+                style={{ left: 8, top: 10 }}
               >
                 <img
                   src={ClickUpLogo}
@@ -244,7 +244,7 @@ const DataImport = () => {
                   width="64"
                   height="64"
                   loading="lazy"
-                  className="w-16 h-16 object-contain drop-shadow-xl"
+                  className="w-[4.75rem] h-[4.75rem] object-contain drop-shadow-xl"
                 />
               </motion.div>
 
@@ -258,7 +258,7 @@ const DataImport = () => {
                   delay: 1,
                 }}
                 className="absolute"
-                style={{ left: 10, bottom: 12 }}
+                style={{ left: 8, bottom: 38 }}
               >
                 <img
                   src={JiraLogo}
@@ -266,7 +266,7 @@ const DataImport = () => {
                   width="64"
                   height="64"
                   loading="lazy"
-                  className="w-16 h-16 object-contain drop-shadow-xl"
+                  className="w-[4.75rem] h-[4.75rem] object-contain drop-shadow-xl"
                 />
               </motion.div>
 
@@ -286,7 +286,7 @@ const DataImport = () => {
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={`m-cu-${i}`}
-                    className="absolute top-0 left-0 w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#7e22ce] -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-0 left-0 w-7 h-7 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#7e22ce] -translate-x-1/2 -translate-y-1/2"
                     style={{
                       offsetPath:
                         "path('M42 44 C112 44, 148 118, 204 118 L232 118')",
@@ -296,7 +296,7 @@ const DataImport = () => {
                     variants={fileVariants}
                     animate="animate"
                   >
-                    <FileText className="w-3 h-3" />
+                    <FileText className="w-3.5 h-3.5" />
                   </motion.div>
                 ))}
 
@@ -304,7 +304,7 @@ const DataImport = () => {
                 {[0, 1, 2].map((i) => (
                   <motion.div
                     key={`m-ji-${i}`}
-                    className="absolute top-0 left-0 w-6 h-6 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#ec4899] -translate-x-1/2 -translate-y-1/2"
+                    className="absolute top-0 left-0 w-7 h-7 flex items-center justify-center bg-white rounded-md shadow-md border border-slate-100 text-[#ec4899] -translate-x-1/2 -translate-y-1/2"
                     style={{
                       offsetPath:
                         "path('M42 196 C112 196, 148 118, 204 118 L232 118')",
@@ -314,7 +314,7 @@ const DataImport = () => {
                     variants={fileVariants}
                     animate="animate"
                   >
-                    <Database className="w-3 h-3" />
+                    <Database className="w-3.5 h-3.5" />
                   </motion.div>
                 ))}
               </div>

@@ -572,7 +572,7 @@ export default function Pricing() {
                 transition={{ delay: 0.1 }}
                 className="text-base sm:text-lg text-slate-500 mb-6 leading-relaxed max-w-2xl mx-auto font-medium px-2"
               >
-                From individual projects to enterprise-scale operations, we have
+                From individual projects to enterprise-scale operations.<br/> we have
                 a plan tailored for your growth.
               </motion.p>
 
@@ -1210,7 +1210,7 @@ export default function Pricing() {
                   </motion.span>
                 </h2>
                 <p className="text-slate-500 text-base sm:text-lg font-medium max-w-2xl mx-auto leading-relaxed px-2">
-                  Everything you need to know about our plans and features.
+                  Everything you need to know about our plans and features.<br/>
                   Can't find what you're looking for?
                 </p>
                 <motion.div
@@ -1245,16 +1245,16 @@ export default function Pricing() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
+                    onMouseEnter={() => setActiveFaq(index)}
+                    onMouseLeave={() => setActiveFaq(null)}
                     className={`group rounded-[1.5rem] sm:rounded-[2rem] border transition-all duration-300 overflow-hidden ${activeFaq === index
                       ? "bg-white border-primary/20 shadow-[0_20px_40px_-15px_rgba(59,42,90,0.15)]"
                       : "bg-white/50 border-slate-200 hover:border-slate-300 hover:bg-white"
                       }`}
                   >
                     <button
-                      onClick={() =>
-                        setActiveFaq(activeFaq === index ? null : index)
-                      }
-                      className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
+                      type="button"
+                      className="w-full flex items-center justify-between p-4 sm:p-6 text-left cursor-default"
                     >
                       <motion.span
                         animate={{

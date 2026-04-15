@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import {
-  LayoutDashboard, Kanban, Briefcase, Zap, BarChart3, TrendingUp, ArrowRight
+  LayoutDashboard, Kanban, Briefcase, Zap, BarChart3, TrendingUp
 } from 'lucide-react';
 
 /* ── Card data ── */
@@ -83,7 +83,7 @@ const FeatureRow = ({ feature, index }) => {
       className="w-full"
     >
       <div
-        className="relative overflow-hidden bg-white border border-slate-100 rounded-2xl px-5 sm:px-8 py-2.5 sm:py-5"
+        className="relative overflow-hidden bg-white border border-slate-100 hover:border-purple-400 transition-colors duration-300 rounded-2xl px-5 sm:px-8 py-2.5 sm:py-5"
         style={{ boxShadow: '0 4px 20px -8px rgba(2,6,23,0.12)' }}
       >
         <div className="relative flex flex-col sm:flex-row sm:items-center gap-2.5 sm:gap-6 text-center sm:text-left items-center sm:items-start">
@@ -142,7 +142,6 @@ const FeatureRow = ({ feature, index }) => {
     </motion.div>
   );
 };
-
 const FeatureOverview = () => (
   <section className="py-6 sm:py-14 sm:pb-20 bg-white relative px-2 sm:px-0">
     <div className="max-w-7xl mx-auto px-1 sm:px-6 lg:px-8">

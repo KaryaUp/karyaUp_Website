@@ -368,8 +368,8 @@ const Navbar = () => {
             to="/features/ai-agents"
             className="flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-b border-slate-100 px-4"
           >
-            <span className="font-bold">Meet KAI Agent™</span>
-            <span className="hidden md:inline"> -Maximize human productivity with custom AI teammates</span>
+            <span className="font-bold">Meet KAI Agent</span>
+            <span className="hidden md:inline"> -Boost human efficiency with tailored AI assistants</span>
             <span className="ml-1 md:ml-1 text-inherit opacity-70 group-hover:opacity-100 inline-flex items-center"></span>
           </Link>
         </div>
@@ -383,7 +383,7 @@ const Navbar = () => {
                 onMouseLeave={() => setIsLogoHovered(false)}
               >
                 <Link
-                  to="/#hero-section"
+                  to="/"
                   onClick={handleLogoClick}
                   className="flex items-center group"
                 >
@@ -723,7 +723,7 @@ const Navbar = () => {
             >
               {/* ClickUp Style Internal Header */}
               <div className="flex items-center justify-between px-4 py-4 border-b border-slate-100 bg-white flex-shrink-0">
-                <Link to="/#hero-section" onClick={handleLogoClick} className="flex items-center group">
+                <Link to="/" onClick={handleLogoClick} className="flex items-center group">
                   <img
                     src={logo}
                     alt="KaryaUp Logo"

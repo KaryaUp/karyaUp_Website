@@ -345,7 +345,7 @@ const Hero = () => {
                 <p className="flex items-center">
                   Setup in minutes
                   <span className="ml-2 inline-flex items-center justify-center bg-white/10 border border-white/15 text-white px-2 py-0.5 text-xs rounded-md font-black italic backdrop-blur-sm">
-                    &lt; 5 minutes
+                    &lt; 2 minutes
                   </span>
                 </p>
               </div>

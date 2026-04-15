@@ -92,9 +92,9 @@ const FeatureStack = ({ items = [], interval = 2500 }) => {
   return (
     <motion.div
       ref={containerRef}
-      className={`relative z-20 mx-auto mt-6 w-full max-w-[240px] overflow-visible sm:mb-12 sm:min-h-[162px] sm:max-w-[320px] md:mb-0 md:min-h-[100px] lg:mx-0 lg:mt-8 lg:min-h-[92px] transition-all duration-500 ease-in-out cursor-pointer sm:cursor-default ${
-        isExpanded ? "mb-0 min-h-[146px] pb-0" : "mb-0 min-h-[55px] pb-0"
-      }`}
+      className={`relative z-20 mx-auto mt-4 w-full max-w-[240px] overflow-visible sm:mt-6 sm:mb-12 sm:max-w-[320px] md:mb-0 lg:mx-0 lg:mt-8 transition-all duration-500 ease-in-out cursor-pointer sm:cursor-default ${
+        isExpanded ? "min-h-[132px] sm:min-h-[92px] lg:min-h-[92px]" : "min-h-[54px] sm:min-h-[92px] lg:min-h-[92px]"
+      } pb-0`}
       onMouseEnter={() => {
         if (!isMobile) setHovered(true);
       }}

@@ -304,6 +304,8 @@ export default function BookDemo() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
+                onMouseEnter={() => setActiveFaq(index)}
+                onMouseLeave={() => setActiveFaq(null)}
                 className={`group rounded-[1.5rem] sm:rounded-[2rem] border transition-all duration-300 overflow-hidden ${
                   activeFaq === index
                     ? "bg-white border-purple-200/50 shadow-[0_20px_40px_-15px_rgba(59,42,90,0.15)]"
@@ -311,10 +313,8 @@ export default function BookDemo() {
                 }`}
               >
                 <button
-                  onClick={() =>
-                    setActiveFaq(activeFaq === index ? null : index)
-                  }
-                  className="w-full flex items-center justify-between p-4 sm:p-6 text-left"
+                  type="button"
+                  className="w-full flex items-center justify-between p-4 sm:p-6 text-left cursor-default"
                 >
                   <motion.span
                     animate={{
