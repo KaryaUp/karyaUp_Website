@@ -79,10 +79,10 @@ const TiltCard = ({ children, className }) => {
         transformStyle: 'preserve-3d', 
         perspective: 1000 // Moved to standard style property
       }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div 
         style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }} 
@@ -129,15 +129,15 @@ export default function NonProfit() {
   const whyItWorksFeatures = [
     {
       title: "Simple for mission-driven teams",
-      desc: "Simple interface for busy nonprofit teams.",
+      desc: "Simple interface for busy nonprofit teams.Our streamlined interface is built for busy nonprofit teams.",
     },
     {
       title: "Collaboration across your ecosystem",
-      desc: "Supports collaboration across departments and volunteers.",
+      desc: "Supports collaboration across departments and volunteers.Break down the silos between your headquarters and the field.",
     },
     {
       title: "One place for the full picture",
-      desc: "Keeps planning, tasks, and communication in one place.",
+      desc: "Keeps planning, tasks, and communication in one place.From fundraising campaigns to community outreach.",
     },
   ];
 

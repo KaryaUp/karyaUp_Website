@@ -50,9 +50,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -128,7 +129,7 @@ export default function Agency() {
 
       {/* ================= HERO SECTION ================= */}
 
-      <section className="relative pt-10 sm:pt-20 lg:pt-20 pb-10 sm:pb-16 lg:pb-16 px-4 sm:px-6 overflow-hidden bg-white">
+      <section className="relative pt-3 sm:pt-8 lg:pt-10 pb-10 sm:pb-16 lg:pb-16 px-4 sm:px-6 overflow-hidden bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
           <div
             className={`grid lg:grid-cols-2 items-center transition-all duration-300 ${isStackOpen ? "gap-10" : "gap-0"
@@ -194,7 +195,7 @@ export default function Agency() {
               />
             </div>
 
-            <div className="pt-3 relative w-full max-w-[540px] mx-auto lg:max-w-none overflow-hidden rounded-[10px]">
+            <div className="pt-1 relative w-full max-w-[540px] mx-auto lg:max-w-none overflow-hidden rounded-[10px]">
               <img
                 src={dashboardImage}
                 alt="Dashboard"
@@ -237,11 +238,11 @@ export default function Agency() {
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10 px-8"
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-10 px-24"
       >
         {[
           { title: "Video Editing", icon: Video, color: "purple" },
-          { title: "Digital Marketing", icon: Megaphone, color: "fuchsia" },
+          { title: "Digital Marketing", icon: Megaphone, color: "purple" },
           { title: "Motion Graphic", icon: Layers, color: "purple" },
         ].map((feature, idx) => (
           <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 active:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl active:shadow-2xl hover:shadow-purple-900/15 active:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-pointer h-fulltransition-colors transition-shadow duration-300 group">

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 
 export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
   const [active, setActive] = useState(0);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [isImageResetting, setIsImageResetting] = useState(false);
   const realLen = slides.length;
   
   // Ref for height calculation of the vertical text
@@ -23,6 +25,26 @@ export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
   // Handle the index loop
   const goNext = useCallback(() => {
     setActive((prev) => (prev + 1) % realLen);
+    setImageIndex((prev) => prev + 1);
+  }, [realLen]);
+
+  useEffect(() => {
+    if (realLen <= 1) return;
+    if (imageIndex !== realLen) return;
+
+    const resetTimer = setTimeout(() => {
+      setIsImageResetting(true);
+      setImageIndex(0);
+      requestAnimationFrame(() => setIsImageResetting(false));
+    }, 760);
+
+    return () => clearTimeout(resetTimer);
+  }, [imageIndex, realLen]);
+
+  useEffect(() => {
+    setActive(0);
+    setImageIndex(0);
+    setIsImageResetting(false);
   }, [realLen]);
 
   useEffect(() => {
@@ -32,6 +54,7 @@ export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
   }, [realLen, goNext]);
 
   if (!realLen) return null;
+  const imageSlides = realLen > 1 ? [...slides, slides[0]] : slides;
 
   return (
     <section className={`py-8 md:py-10 px-4 sm:px-6 bg-white overflow-hidden ${className}`}>
@@ -88,11 +111,11 @@ export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
           <div className="order-1 lg:order-2 lg:col-span-8">
             <div className="relative w-full rounded-[2rem] md:rounded-[3rem] overflow-hidden bg-slate-50 aspect-[4/3] md:aspect-video shadow-2xl border border-slate-100">
               <motion.div
-                animate={{ x: `-${active * 100}%` }}
-                transition={{ duration: 0.75, ease: [0.22, 0.61, 0.36, 1] }}
+                animate={{ x: `-${imageIndex * 100}%` }}
+                transition={isImageResetting ? { duration: 0 } : { duration: 0.75, ease: [0.22, 0.61, 0.36, 1] }}
                 className="flex h-full w-full"
               >
-                {slides.map((slide, i) => (
+                {imageSlides.map((slide, i) => (
                   <div key={i} className="relative w-full h-full p-4 md:p-8 shrink-0">
                     <div className="relative w-full h-full bg-white rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-inner">
                       <img

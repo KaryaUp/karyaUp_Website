@@ -407,6 +407,16 @@ body::-webkit-scrollbar {
   animation-duration: 5.5s;
 }
 
+/* Flat card mode across card-heavy pages */
+.ku-card-flat {
+  box-shadow: none !important;
+}
+
+.ku-card-flat:hover,
+.ku-card-flat:active {
+  box-shadow: none !important;
+}
+
 /* Hero pills -thin light violet trace only (no heavy glow) */
 .ku-blog-card-outline-spin--pill {
   background: conic-gradient(from 0deg at 50% 50%,

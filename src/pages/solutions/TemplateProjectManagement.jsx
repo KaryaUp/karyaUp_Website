@@ -132,10 +132,10 @@ const TiltCard = ({ children, className }) => {
         transformStyle: 'preserve-3d', 
         perspective: 1000 // Moved to standard style property
       }}
-      whileHover={{ scale: 1.02 }}
-      whileTap={{ scale: 0.98 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div 
         style={{ transform: 'translateZ(30px)', transformStyle: 'preserve-3d' }} 

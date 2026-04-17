@@ -71,7 +71,7 @@ const TiltCard = ({ children, className }) => {
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }} // Fixed for Mobile
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}

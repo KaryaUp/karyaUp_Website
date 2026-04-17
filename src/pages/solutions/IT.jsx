@@ -62,9 +62,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -228,7 +229,7 @@ export default function IT() {
                 title: "Apps",
                 desc: "KaryaUp AI continuously learns from your documents, chats, and code to provide answers with full project context.",
                 icon: Brain,
-                color: "fuchsia"
+                color: "purple"
               },
               {
                 title: "Tools",
@@ -240,7 +241,7 @@ export default function IT() {
                 title: "Management",
                 desc: "Generate status reports, draft technical documentation, or summarize meeting notes with a simple prompt.",
                 icon: MessageSquare,
-                color: "fuchsia"
+                color: "purple"
               }
             ].map((feature, i) => {
               const Icon = feature.icon;

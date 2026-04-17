@@ -65,9 +65,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -83,10 +84,10 @@ export default function Operations() {
   const [isShieldHovered, setIsShieldHovered] = useState(false);
 
   const workflowSteps = [
-    { label: "Intake", desc: "AI categorizes incoming requests.", icon: Zap, color: "purple" },
-    { label: "Assign", desc: "Logic-based task distribution.", icon: Users, color: "fuchsia" },
-    { label: "Track", desc: "Automated status sync across apps.", icon: BarChart3, color: "purple" },
-    { label: "Report", desc: "Weekly summaries sent to stakeholders.", icon: Eye, color: "fuchsia" }
+    { label: "Intake", desc: "Our AI parses incoming emails, messages, instantly categorizing them into actionable projects", icon: Zap, color: "purple" },
+    { label: "Assign", desc: "KaryaUp analyzes team bandwidth and skill sets to auto distribute tasks", icon: Users, color: "fuchsia" },
+    { label: "Track", desc: "Automated status sync across apps.Every milestone and file update is synced in real time.", icon: BarChart3, color: "purple" },
+    { label: "Report", desc: "KaryaUp distills complex project data into high level weekly summaries.", icon: Eye, color: "fuchsia" }
   ];
 
   const DEFAULT_ICON_MAP = {
@@ -247,7 +248,7 @@ export default function Operations() {
       />
 
       <div className="py-20">
-        <FeatureCTA title={<>Tasks That Connect <br /> To Everything You Do</>} description="Work smarter with unified tasks." image={dashboardImage} containerClassName="max-w-7xl mx-auto px-6" />
+        <FeatureCTA title={<>Tasks That Connect To <br /> Everything You Do</>} image={dashboardImage} containerClassName="max-w-7xl mx-auto px-6" />
       </div>
     </div>
   );

@@ -5,11 +5,11 @@ import { motion } from "framer-motion";
 function getCollabIconColorClasses(color) {
   switch (color) {
     case "purple":
-      return "bg-purple-100 text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white shadow-purple-200/50";
+      return "bg-purple-100 text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white group-active:bg-[#7e22ce] group-active:text-white";
     case "fuchsia":
-      return "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-500 group-hover:text-white shadow-fuchsia-200/50";
+      return "bg-purple-100 text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white group-active:bg-[#7e22ce] group-active:text-white";
     default:
-      return "bg-purple-100 text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white shadow-purple-200/50";
+      return "bg-purple-100 text-[#7e22ce] group-hover:bg-[#7e22ce] group-hover:text-white group-active:bg-[#7e22ce] group-active:text-white";
   }
 }
 
@@ -53,15 +53,15 @@ export default function CollabTiltCard({ item, delay = 0, variant = "default" })
       >
         <article
           className={`group relative h-full rounded-[1.75rem] sm:rounded-[2rem] border border-slate-200 bg-white ${isCompact ? "p-6 sm:p-7" : "p-7 sm:p-8"
-            } shadow-xl shadow-slate-200/40 cursor-default transition-all duration-300 hover:shadow-2xl ${item.color === "fuchsia"
-              ? "hover:border-fuchsia-300/60 hover:shadow-fuchsia-900/10"
-              : "hover:border-purple-300 hover:shadow-purple-900/15"
+            } ku-card-flat cursor-default transition-all duration-300 ${item.color === "fuchsia"
+              ? "hover:border-purple-300/60 active:border-purple-300/60"
+              : "hover:border-purple-300 active:border-purple-300"
             }`}
           style={{ transform: "translateZ(0)" }}
         >
           <div
             className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center ${isCompact ? "mb-4 sm:mb-5" : "mb-5 sm:mb-6"
-              } transition-all duration-300 group-hover:shadow-md group-hover:scale-110 ${getCollabIconColorClasses(item.color)}`}
+              } transition-all duration-300 group-hover:scale-110 group-active:scale-110 ${getCollabIconColorClasses(item.color)}`}
             style={{ transform: "translateZ(24px)" }}
           >
             <Icon className="w-5 h-5 sm:w-6 sm:h-6" strokeWidth={2.25} />

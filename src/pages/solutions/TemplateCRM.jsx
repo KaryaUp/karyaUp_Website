@@ -85,7 +85,7 @@ const TiltCard = ({ children, className }) => {
       }}
       whileHover={{ scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className={className}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: "translateZ(20px)", height: "100%", display: "flex", flexDirection: "column" }}>
         {children}

@@ -51,9 +51,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -159,7 +160,7 @@ export default function ProductDevelopment() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[8px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[7px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
                 Product Development - Product Intelligence
               </motion.div>
@@ -260,7 +261,6 @@ export default function ProductDevelopment() {
               all in one intelligent platform.
             </p>
           </div>
-
           {/* Using gap-6 for a cleaner separation between TiltCards */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-9">
             {[
@@ -301,7 +301,7 @@ export default function ProductDevelopment() {
                 title: "Integrated Docs & Wikis",
                 desc: "Create beautiful technical documentation and natively.",
                 bgColor: "bg-purple-100 text-purple-600",
-                hoverBg: "group-hover:bg-purple-600 group-active:bg-purple-600",
+                hoverBg: "group-hover:bg-purple-600",
                 borderColor: "group-hover:border-orange-200"
               },
               {
@@ -309,7 +309,7 @@ export default function ProductDevelopment() {
                 title: "AI Project Manager",
                 desc: "Let's KaryaUp AI generate subtasks summarize long threads.",
                 bgColor: "bg-fuchsia-100 text-fuchsia-600",
-                hoverBg: "group-hover:bg-fuchsia-600 group-active:bg-fuchsia-600",
+                hoverBg: "group-hover:bg-fuchsia-600",
                 borderColor: "group-hover:border-pink-200"
               }
             ].map((feature, i) => (
@@ -328,7 +328,7 @@ export default function ProductDevelopment() {
                     <div className={`
             w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center 
             transition-all duration-300 shrink-0
-            group-hover:shadow-md group-hover:scale-110 group-hover:text-white group-active:shadow-md group-active:scale-110 group-active:text-white
+            group-hover:shadow-md group-hover:scale-110 group-hover:text-white group-active:scale-110 group-active:text-white
             ${feature.bgColor} ${feature.hoverBg}
           `}>
                       {feature.icon}

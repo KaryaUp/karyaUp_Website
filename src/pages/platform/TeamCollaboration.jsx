@@ -8,7 +8,6 @@ import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
 import { lazy, Suspense } from "react";
 import dashboardImage from "../../assets/dashboard2.webp";
-
 import slackLogo from "../../assets/slack.svg";
 import gmailLogo from "../../assets/gmail.svg";
 import googleDriveLogo from "../../assets/google-drive.svg";
@@ -20,7 +19,7 @@ const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
 
 const MsTeamsLogoSVG = ({ size = 40 }) => (
   <svg
-    xmlns="https://th.bing.com/th/id/OIP.v6GYa9pPZGSaDDimKXqkCwHaHa?w=178&h=180&c=7&r=0&o=7&dpr=1.5&pid=1.7&rm=3"
+    xmlns="https://www.liblogo.com/img-logo/mi462me99-microsoft-teams-logo-microsoft-teams.png"
     viewBox="0 0 48 48" // Keep viewBoxconsistent
     width={size}
     height={size}
@@ -140,7 +139,7 @@ function TiltCard({ logoSrc, logoNode, name, glowColor, delay = 0 }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      style={{ perspective: "900px" }}
+      style={{ perspective: "900px", width: "100%" }}
     >
       <motion.div
         ref={cardRef}
@@ -152,7 +151,7 @@ function TiltCard({ logoSrc, logoNode, name, glowColor, delay = 0 }) {
         style={{ transformStyle: "preserve-3d", cursor: "pointer" }}
       >
         <div style={{
-          width: 160, height: 180, borderRadius: 24,
+          width: "100%", maxWidth: 170, height: 170, borderRadius: 24, margin: "0 auto",
           background: "#fff",
           border: "1.5px solid rgba(0,0,0,0.07)",
           display: "flex", flexDirection: "column",
@@ -214,7 +213,7 @@ const integrations = [
   { logoSrc: googleCalendarLogo, name: "Calendar", glowColor: "rgba(234, 118, 236, 0.15)" },
   {
     logoNode: <MsTeamsLogoSVG size={59} />,  // ← inline SVG, no white bg, size=72
-    name: "MS Team",
+    name: "MS Teams",
     glowColor: "rgba(225, 105, 213, 0.2)",
   },
 ];
@@ -526,7 +525,7 @@ export default function TeamCollaboration() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[9px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[8px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
                 Team Collaboration - One Team, One Goal
               </motion.div>
@@ -735,7 +734,7 @@ export default function TeamCollaboration() {
       </section>
 
       {/* INTEGRATION GRID */}
-      <section style={{ padding: "100px 60px 20px", background: "white", textAlign: "center", overflow: "hidden" }}>
+      <section className="bg-white text-center overflow-hidden py-14 sm:py-20 px-4 sm:px-6 lg:px-14">
       <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -757,7 +756,7 @@ export default function TeamCollaboration() {
             already loves no migration needed.
           </p> */}
 
-        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 20, maxWidth: 920, margin: "0 auto 40px" }}>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-5 max-w-5xl mx-auto mb-10">
           {integrations.map((tool, i) => (
             <TiltCard
               key={tool.name}

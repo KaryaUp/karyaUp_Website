@@ -47,9 +47,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -212,13 +213,13 @@ export default function Enterprise() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-4"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-7 px-1"
         >
           {[
-            { title: "Enterprise Workspace", desc: "High-Velocity Enterprise Workspace.", icon: Zap, color: "purple" },
-            { title: "Strategic Dashboards", desc: "Strategic Executive Dashboards.", icon: Lock, color: "fuchsia" },
-            { title: "Smart Gantt", desc: "Visualize the future of enterprise delivery.", icon: Grid, color: "purple" },
-            { title: "Secure Data", desc: "Scale globally without compromising sensitive data.", icon: Globe, color: "fuchsia" },
+            { title: "Enterprise Workspace", desc: "High-Velocity Enterprise Workspace.Centralize your entire organization under one roof.", icon: Zap, color: "purple" },
+            { title: "Strategic Dashboards", desc: "Strategic Executive Dashboards.Move beyond basic metrics.", icon: Lock, color: "fuchsia" },
+            { title: "Smart Gantt", desc: "Visualize the future of enterprise delivery.Visualize the future of your delivery.", icon: Grid, color: "purple" },
+            { title: "Secure Data", desc: "Scale globally without compromising sensitive data.Scale globally without compromising integrity.", icon: Globe, color: "fuchsia" },
           ].map((feature, idx) => {
             const Icon = feature.icon;
             return (

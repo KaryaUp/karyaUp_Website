@@ -97,6 +97,13 @@ export default function MarketingPage() {
   const [isMobile, setIsMobile] = useState(false);
 
   const [isShieldHovered, setIsShieldHovered] = useState(false);
+  const [activeFeature, setActiveFeature] = useState(null);
+
+  const features = [
+    { title: "Centralized Dashboards", desc: "Real-time visibility into every project. See margins, deadlines, and resource allocation in one unified view." },
+    { title: "Automated Reporting", desc: "Generate client-ready performance reports with a single click. AI summarizes wins and identifies bottlenecks." },
+    { title: "Real-time Collaboration", desc: "Integrated chat and whiteboarding means your team stays in sync without ever leaving the project context." }
+  ];
 
   return (
     <div className="bg-white font-sans overflow-x-hidden">
@@ -180,6 +187,119 @@ export default function MarketingPage() {
           </div>
       </section>
 
+      < section className="py-9 px-6 sm:px-10 lg:py-15 bg-white" >
+        < div className="max-w-4xl mx-auto flex flex-col items-center text-center" >
+
+          <motion.h1
+            initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+            // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+            className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-3"
+          >
+            Supercharge your
+            <span className="block">
+
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] whitespace-nowrap inline-block"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                Daily Workflows.
+              </motion.span>
+            </span>
+          </motion.h1>
+          <p className="mb-2 text-base sm:text-lg lg:text-xl text-slate-500 font-medium leading-relaxed max-w-[320px] sm:max-w-xl lg:max-w-2xl mx-auto">
+            Centralize communication, assign dynamic tasks, and execute flawlessly with enterprise grade AI execution.
+          </p>
+        </div >
+
+        <div className="mb-10 grid lg:grid-cols-2 gap-12 xl:gap-20 items-center">
+
+          {/* Image Card Container */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="relative group"
+          >
+            <div className="relative rounded-[2.5rem] p-2 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 border border-slate-100 shadow-2xl">
+              <img
+                src={dashboardImage}
+                alt="Workspace Preview"
+                className="relative z-10 w-full h-auto rounded-[2rem] border border-white/50 shadow-sm transition-transform duration-500 group-hover:scale-[1.01]"
+              />
+            </div>
+          </motion.div>
+
+          {/* Feature List — numbered steps with connecting lines */}
+          <div className="flex flex-col">
+            {features.map((item, i) => {
+              const isActive = activeFeature === i;
+              const activeColor = i === 1 ? "#d946ef" : "#7c3aed";
+              return (
+              <div key={i} className="flex items-stretch gap-5">
+
+                {/* Left column: number circle + connecting line */}
+                <div className="flex flex-col items-center flex-shrink-0">
+                  <motion.div
+                    animate={
+                      isActive
+                        ? { backgroundColor: activeColor, color: "#ffffff", scale: 1.1 }
+                        : { backgroundColor: "#f3f4f6", color: "#9ca3af", scale: 1 }
+                    }
+                    transition={{ duration: 0.3 }}
+                    className="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold shrink-0 z-10"
+                  >
+                    {i + 1}
+                  </motion.div>
+
+                  {/* Connecting line — hidden after last item */}
+                  {i < features.length - 1 && (
+                    <motion.div
+                      animate={
+                        isActive
+                          ? { backgroundColor: activeColor, opacity: 0.35 }
+                          : { backgroundColor: "#e5e7eb", opacity: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                      className="w-0.5 flex-1 my-1 min-h-8"
+                    />
+                  )}
+                </div>
+
+                {/* Right column: feature card */}
+                <motion.div
+                  onMouseEnter={() => setActiveFeature(i)}
+                  onMouseLeave={() => setActiveFeature(null)}
+                  onTouchStart={() => setActiveFeature(i)}
+                  className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${isActive
+                    ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
+                    : "bg-transparent border-transparent opacity-60 hover:opacity-100"
+                    }`}
+                >
+                  <h3 className="text-xl font-bold text-slate-900 leading-none">
+                    {item.title}
+                  </h3>
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.p
+                        initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                        animate={{ height: "auto", opacity: 1, marginTop: 8 }}
+                        exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                        className="text-slate-500 font-medium text-sm leading-relaxed overflow-hidden"
+                      >
+                        {item.desc}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
+
+              </div>
+            )})}
+          </div>
+        </div>
+      </section >
 
       <MetricStorySlider
         logoSrc={karyaupLogo}

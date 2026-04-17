@@ -47,9 +47,10 @@ const TiltCard = ({ children, className }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      whileHover={{ scale: 1.04 }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: 'spring', stiffness: 320, damping: 28 }}
+      className={`ku-card-flat ${className || ""}`}
     >
       <div style={{ transform: 'translateZ(30px)' }} className="h-full flex flex-col">
         {children}
@@ -267,13 +268,13 @@ export default function Startup() {
                 }}
                 className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-3 drop-shadow-sm"
               >
-                Scale from Startup<br />
+                Scale from <br />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 >
-                  to Unicorn
+                  Startup to Unicorn
                 </motion.span>
               </motion.h1>
             </div>
