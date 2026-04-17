@@ -179,40 +179,44 @@ export default function Attendance() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="relative z-10 flex flex-col items-center text-center lg:items-start lg:text-left"
+                    className="relative z-10 flex flex-col items-center lg:items-start"
                   >
-                    <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
-                      <ScanFace className="h-3.5 w-3.5" />
-                      Face Attendance
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
+                        <ScanFace className="h-3.5 w-3.5" />
+                        Face Attendance
+                      </div>
+
+                      <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black leading-[1.05] tracking-normal text-white">
+                        Scan. Verify.
+                        <span className="mt-1 sm:mt-2 block bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
+                          Punch In Instantly.
+                        </span>
+                      </h2>
+
+                      <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-400">
+                        Fast attendance capture with verified identity and cleaner records for payroll.
+                      </p>
                     </div>
 
-                    <h2 className="mt-4 text-2xl sm:text-3xl lg:text-4xl font-black leading-[1.05] tracking-normal text-white">
-                      Scan. Verify.
-                      <span className="mt-1 sm:mt-2 block bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
-                        Punch In Instantly.
-                      </span>
-                    </h2>
-
-                    <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-400">
-                      Fast attendance capture with verified identity and cleaner records for payroll.
-                    </p>
-
-                    <div className="mt-5 space-y-2.5 w-full max-w-xl mx-auto">
-                      {scanSteps.map((item, index) => (
-                        <motion.div
-                          key={item}
-                          initial={{ opacity: 0, x: -18 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          viewport={{ once: true, amount: 0.35 }}
-                          transition={{ duration: 0.45, delay: index * 0.08 }}
-                          className="flex items-start justify-center gap-3 text-left lg:justify-start"
-                        >
-                          <div className="mt-[3px] flex h-5 w-5 items-center justify-center rounded-full bg-purple-100 border border-purple-200 text-[#7e22ce]">
-                            <Check className="h-2.5 w-2.5 stroke-[4]" />
-                          </div>
-                          <span className="text-sm font-medium text-slate-400">{item}</span>
-                        </motion.div>
-                      ))}
+                    <div className="mt-5 w-full max-w-xl flex flex-col items-start lg:items-start">
+                      <div className="space-y-2.5 w-fit">
+                        {scanSteps.map((item, index) => (
+                          <motion.div
+                            key={item}
+                            initial={{ opacity: 0, x: -18 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true, amount: 0.35 }}
+                            transition={{ duration: 0.45, delay: index * 0.08 }}
+                            className="flex items-start gap-3 text-left"
+                          >
+                            <div className="mt-[3px] flex h-5 w-5 items-center justify-center rounded-full bg-purple-100 border border-purple-200 text-[#7e22ce]">
+                              <Check className="h-2.5 w-2.5 stroke-[4]" />
+                            </div>
+                            <span className="text-sm font-medium text-slate-400">{item}</span>
+                          </motion.div>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="mt-5 sm:mt-6 flex max-w-md items-center gap-3 sm:gap-4 rounded-[1.5rem] border border-purple-900/40 bg-slate-900/70 p-3.5 sm:p-4 text-left shadow-lg shadow-purple-950/20 mx-auto lg:mx-0">
@@ -262,14 +266,15 @@ export default function Attendance() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
                     transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                    className="flex flex-col items-center text-center lg:items-start lg:text-left"
+                    className="flex flex-col items-center lg:items-start"
                   >
-                    <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
-                      <Users className="h-3.5 w-3.5" />
-                      Boss Dashboard
-                    </div>
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-purple-200">
+                        <Users className="h-3.5 w-3.5" />
+                        Boss Dashboard
+                      </div>
 
-                    <div className="mt-4 sm:mt-5 flex flex-col gap-4 sm:gap-3 items-center text-center sm:flex-row sm:items-end sm:justify-between sm:text-left w-full">
+                      <div className="mt-4 sm:mt-5 flex flex-col gap-4 sm:gap-3 items-center text-center sm:flex-row sm:items-end sm:justify-between sm:text-left w-full">
                       <div>
                         <h3 className="text-2xl font-black tracking-tight text-white sm:text-3xl lg:text-4xl">
                            Attendance In One Export-Ready View.
@@ -288,8 +293,9 @@ export default function Attendance() {
                         Download CSV
                       </motion.div>
                     </div>
+                  </div>
 
-                    <div className="mt-5 sm:mt-6 w-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/65 shadow-inner">
+                  <div className="mt-5 sm:mt-6 w-full overflow-hidden rounded-[1.25rem] border border-white/10 bg-slate-950/65 shadow-inner">
                       <div className="flex items-center justify-between border-b border-white/10 bg-slate-900/80 px-4 sm:px-5 py-4 text-left">
                         <div>
                           <div className="text-[10px] sm:text-xs font-black uppercase tracking-[0.18em] text-slate-500">

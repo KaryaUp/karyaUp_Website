@@ -41,11 +41,13 @@ body {
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity 1s ease-in-out;
+    visibility: hidden;
+    transition: opacity 1s ease-in-out, visibility 1s;
 }
 
 .bg-layer.active {
     opacity: 1;
+    visibility: visible;
 }
 
 /* Layer 1: Dark Gradient */

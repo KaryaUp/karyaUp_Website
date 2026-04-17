@@ -213,22 +213,23 @@ export default function Dashboards() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                  className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full mx-auto lg:mx-0"
+                  className="mt-5 sm:mt-6 w-full max-w-lg mx-auto lg:mx-0 flex flex-col items-center lg:items-start"
                 >
-                  {[
-                    "Real-time signals for every decision.",
-                    "Create dashboards focused on real impact"
-
-                  ].map((text, i) => (
-                    <div key={i} className="flex items-start gap-3 text-left">
-                      <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                  <div className="space-y-3 sm:space-y-4 w-fit">
+                    {[
+                      "Real-time signals for every decision.",
+                      "Create dashboards focused on real impact"
+                    ].map((text, i) => (
+                      <div key={i} className="flex items-start gap-3 text-left">
+                        <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                        </div>
+                        <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
+                          {text}
+                        </p>
                       </div>
-                      <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
-                        {text}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </motion.div>
 
                 <FeatureStack items={[
@@ -273,7 +274,7 @@ export default function Dashboards() {
                 <span>Universal Dashboard Control</span>
               </div>
               <h2 className="mt-5 sm:mt-6 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]">
-                Multiple Dashboard For <br />
+                Multiple Dashboard <br />
                 <motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -290,7 +291,7 @@ export default function Dashboards() {
               <div
                 key={i}
                 ref={(el) => (sectionRefs.current[i] = el)}
-                className={`${i === 0 ? "relative" : "absolute inset-0"} w-full bg-white flex flex-col lg:flex-row items-center border-b border-black/5`}
+                className={`${i === 0 ? "relative" : "absolute inset-0"} w-full bg-white flex flex-col lg:flex-row items-center border-b border-black/5 min-h-[740px] sm:min-h-0`}
               >
                 {/* Content Side */}
                 <div className="flex-[0.48] lg:flex-1 flex flex-col justify-end lg:justify-center items-center lg:items-start text-center lg:text-left p-4 pb-2 sm:p-8 lg:p-12 w-full">

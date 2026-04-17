@@ -100,11 +100,11 @@ export default function TeamInfoSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] mb-6 tracking-normal"
+            className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.2] mb-6 tracking-normal"
           >
             Your Team.{" "}Organized.<br className="hidden sm:block" />
             <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] pb-1"
               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
               transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
             >
@@ -141,10 +141,12 @@ export default function TeamInfoSection() {
                 className="h-full"
               >
                 <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 ${getColorClasses(feature.color)}`}>
-                    <Icon size={20} strokeWidth={2.5} />
+                  <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 ${getColorClasses(feature.color)}`}>
+                      <Icon size={20} strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">{feature.title}</h3>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">{feature.title}</h3>
                   <p className="text-slate-600 text-sm font-medium leading-relaxed">{feature.desc}</p>
                 </TiltCard>
               </motion.div>

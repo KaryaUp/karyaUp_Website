@@ -51,20 +51,22 @@ export default function TeamHierarchySection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="relative z-10 lg:pl-4"
+            className="relative z-10 flex flex-col items-center lg:items-start lg:text-left lg:pl-4"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-purple-700 mb-6">
-              <Settings2 className="h-3.5 w-3.5" />
-              Access Panel
-            </div>
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-8">
+              <div className="inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3.5 py-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-purple-700 mb-6 mx-auto lg:mx-0">
+                <Settings2 className="h-3.5 w-3.5" />
+                Access Panel
+              </div>
 
-            <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] mb-8 tracking-normal">
-              Manage Your <br /> Team With
-              <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]">
-                Full Control.
-              </span>
-            </h2>
+              <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.2] tracking-normal max-w-[12ch] sm:max-w-none">
+                Manage Your <br /> Team With
+                <br />
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] pb-1">
+                  Full Control.
+                </span>
+              </h2>
+            </div>
 
             <div className="space-y-6">
               {features.map((item, i) => (

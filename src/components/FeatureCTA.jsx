@@ -21,6 +21,7 @@ export default function FeatureCTA({
   image,
   imageAlt = "KaryaUp Showcase",
   imageClassName = "w-full",
+  imageFrameClassName = "",
   containerClassName = "mt-24 mb-10",
   paddingClassName = "p-1.5 sm:p-3 lg:p-4",
   titleClassName = "text-xl sm:text-2xl lg:text-[1.75rem] font-black text-white leading-[1.1] mb-2 tracking-tight drop-shadow-lg",
@@ -272,16 +273,18 @@ export default function FeatureCTA({
             <div className="absolute top-1/2 left-0 w-full h-full bg-purple-600/50 blur-[150px] rounded-full opacity-70 pointer-events-none" />
             <div className="absolute -top-20 -right-20 w-80 h-80 bg-fuchsia-500/30 blur-[100px] rounded-full opacity-60 pointer-events-none" />
 
-            {/* Image Wrapper (No border line, just smooth shadow/glow) */}
-            <div className={`relative ${imageClassName}`}>
-              <img
-                src={image}
-                alt={imageAlt}
-                width="960"
-                height="600"
-                loading="lazy"
-                className="relative w-full h-auto max-h-[360px] sm:max-h-[420px] lg:max-h-[500px] object-contain rounded-[12px] transition-all duration-500 z-10"
-              />
+            {/* Image frame with optional accent border */}
+            <div className={`relative ${imageFrameClassName}`}>
+              <div className={`relative ${imageClassName}`}>
+                <img
+                  src={image}
+                  alt={imageAlt}
+                  width="960"
+                  height="600"
+                  loading="lazy"
+                  className="relative w-full h-auto max-h-[360px] sm:max-h-[420px] lg:max-h-[500px] object-contain rounded-[12px] transition-all duration-500 z-10"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

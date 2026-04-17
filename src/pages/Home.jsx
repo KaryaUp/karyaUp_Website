@@ -6,6 +6,7 @@ import Loader from "../components/Loader";
 
 import ScatteredWork from "../components/ScatteredWork";
 import AllInOne from "../components/AllInOne";
+import ReviewStrip from "../components/ReviewStrip";
 
 // Lazy-loaded components for below-the-fold optimization
 const TeamSolutions = lazy(() => import("../components/TeamSolutions"));
@@ -51,8 +52,9 @@ export default function Home() {
             </Suspense>
            
             <DataImport />
-        <Management />
+            <Management />
            </div>
+            <ReviewStrip />
             <FinalCTA  />
           
        

@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import logo from "../assets/logo.webp";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
+import { motion, AnimatePresence } from "framer-motion";
 
 const authUrl = "https://app.karyaup.com/auth";
 
@@ -31,48 +32,43 @@ const platformMegaSections = {
   ],
 };
 
-const platformMegaColumns = [
-  platformMegaSections.core,
-  platformMegaSections.manage,
-];
-
 const featuresMegaSections = [
   {
     heading: "PROJECTS",
     items: [
-      { label: "Tasks", to: "/features/tasks", icon: CheckSquare, iconColor: "text-emerald-600" },
-      { label: "Dashboards", to: "/features/dashboards", icon: BarChart2, iconColor: "text-rose-600" },
-      { label: "Gantt", to: "/features/gantt", icon: AlignLeft, iconColor: "text-red-600" },
+      { label: "Tasks", to: "/features/tasks", icon: CheckSquare, iconColor: "text-emerald-600", sublabel: "Tasks and ownership" },
+      { label: "Dashboards", to: "/features/dashboards", icon: BarChart2, iconColor: "text-rose-600", sublabel: "Live performance view" },
+      { label: "Gantt", to: "/features/gantt", icon: AlignLeft, iconColor: "text-red-600", sublabel: "Timeline planning" },
     ],
   },
   {
     heading: "COMMUNICATION",
     items: [
-      { label: "Chat", to: "/features/chat", icon: MessageSquare, iconColor: "text-indigo-600" },
-      { label: "Notifications", to: "/features/notifications", icon: Bell, iconColor: "text-amber-600" }
+      { label: "Chat", to: "/features/chat", icon: MessageSquare, iconColor: "text-indigo-600", sublabel: "Work chat in context" },
+      { label: "Notifications", to: "/features/notifications", icon: Bell, iconColor: "text-amber-600", sublabel: "Instant updates" }
     ],
   },
   {
     heading: "MANAGEMENT",
     items: [
-      { label: "Team", to: "/features/team", icon: Users, iconColor: "text-blue-600" },
-      { label: "Attendance", to: "/features/attendance", icon: UserCheck, iconColor: "text-teal-600" },
-      { label: "Leave", to: "/features/leave", icon: CalendarOff, iconColor: "text-fuchsia-600" },
-      { label: "Salary", to: "/features/salary", icon: Banknote, iconColor: "text-green-600" },
+      { label: "Team", to: "/features/team", icon: Users, iconColor: "text-blue-600", sublabel: "Members and roles" },
+      { label: "Attendance", to: "/features/attendance", icon: UserCheck, iconColor: "text-teal-600", sublabel: "Daily time logs" },
+      { label: "Leave", to: "/features/leave", icon: CalendarOff, iconColor: "text-fuchsia-600", sublabel: "Time-off requests" },
+      { label: "Salary", to: "/features/salary", icon: Banknote, iconColor: "text-green-600", sublabel: "Payroll and payouts" },
     ],
   },
   {
     heading: "TIME",
     items: [
-      { label: "Calendar", to: "/features/calendar", icon: Calendar, iconColor: "text-pink-600" },
-      { label: "Automations", to: "/features/automations", icon: Zap, iconColor: "text-violet-600" },
+      { label: "Calendar", to: "/features/calendar", icon: Calendar, iconColor: "text-pink-600", sublabel: "Schedules and meetings" },
+      { label: "Automations", to: "/features/automations", icon: Zap, iconColor: "text-violet-600", sublabel: "Rule-based workflows" },
     ],
   },
   {
     heading: "MORE",
     items: [
-      { label: "Integrations", to: "/features/integrations", icon: Blocks, iconColor: "text-cyan-600" },
-      { label: "Watch demo", to: "/features/demo", icon: PlayCircle, iconColor: "text-slate-600" },
+      { label: "Integrations", to: "/features/integrations", icon: Blocks, iconColor: "text-cyan-600", sublabel: "Connected tools" },
+      { label: "Watch demo", to: "/features/demo", icon: PlayCircle, iconColor: "text-slate-600", sublabel: "Product walkthrough" },
     ],
   },
 ];
@@ -93,17 +89,17 @@ const solutionsMegaSections = {
     { label: "Agency", sublabel: "Clients & deliverables", to: "/solutions/agency", icon: Briefcase, iconColor: "text-rose-600" },
   ],
   templates: [
-    { label: "Project Management", to: "/solutions/project-management", icon: Kanban, iconColor: "text-blue-600", description: "Roadmaps, backlogs, agile dev." },
-    { label: "Sales / CRM", to: "/solutions/crm", icon: Contact, iconColor: "text-orange-500", description: "Leads, deals, and contacts." },
-    { label: "Marketing", to: "/solutions/marketing", icon: Megaphone, iconColor: "text-indigo-500", description: "Campaigns, assets, wikis." },
+    { label: "Project Management", to: "/solutions/project-management", icon: Kanban, iconColor: "text-blue-600", sublabel: "Roadmaps, backlogs, agile dev." },
+    { label: "Sales / CRM", to: "/solutions/crm", icon: Contact, iconColor: "text-orange-500", sublabel: "Leads, deals, and contacts." },
+    { label: "Marketing", to: "/solutions/marketing", icon: Megaphone, iconColor: "text-indigo-500", sublabel: "Campaigns, assets, wikis." },
   ],
 };
 
 const resourcesMegaSections = [
-  { label: "Blog", to: "/resources/blog", icon: FileText, iconColor: "text-indigo-600", description: "Read the latest news, articles, and tips." },
-  { label: "Documentation", to: "/resources/docs", icon: FileCode, iconColor: "text-blue-600", description: "Detailed guides on how to use every feature." },
-  { label: "Book Demo", to: "/book-demo", icon: Calendar, iconColor: "text-rose-600", description: "Book a live walkthrough tailored to your team." },
-  { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconColor: "text-purple-600", description: "Step-by-step video guides and walkthroughs." },
+  { label: "Blog", to: "/resources/blog", icon: FileText, iconColor: "text-indigo-600", sublabel: "Read the latest news, articles, and tips." },
+  { label: "Documentation", to: "/resources/docs", icon: FileCode, iconColor: "text-blue-600", sublabel: "Detailed guides on how to use every feature." },
+  { label: "Book Demo", to: "/book-demo", icon: Calendar, iconColor: "text-rose-600", sublabel: "Book a live walkthrough tailored to your team." },
+  { label: "Video Tutorials", to: "/resources/tutorials", icon: Video, iconColor: "text-purple-600", sublabel: "Step-by-step video guides and walkthroughs." },
 ];
 
 const mobileMenuSections = {
@@ -116,8 +112,6 @@ const mobileMenuSections = {
   ],
   Resources: resourcesMegaSections,
 };
-
-import { motion, AnimatePresence } from "framer-motion";
 
 const StartWorkspaceButton = ({ href, onClick, size = "sm" }) => {
   const [hovered, setHovered] = useState(false);
@@ -220,7 +214,7 @@ const Navbar = () => {
     setIsFeaturesOpen(false);
     setIsSolutionsOpen(false);
     setIsResourcesOpen(false);
-    setIsOpen(false); // Close mobile menu too
+    setIsOpen(false);
     setMobileOpenSection(null);
     [platformTimerRef, featuresTimerRef, solutionsTimerRef, resourcesTimerRef].forEach(ref => {
       if (ref.current) { clearTimeout(ref.current); ref.current = null; }
@@ -234,38 +228,27 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll);
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      if (platformTimerRef.current) {
-        clearTimeout(platformTimerRef.current);
-      }
-      if (featuresTimerRef.current) {
-        clearTimeout(featuresTimerRef.current);
-      }
-      if (solutionsTimerRef.current) {
-        clearTimeout(solutionsTimerRef.current);
-      }
-      if (resourcesTimerRef.current) {
-        clearTimeout(resourcesTimerRef.current);
-      }
+      if (platformTimerRef.current) clearTimeout(platformTimerRef.current);
+      if (featuresTimerRef.current) clearTimeout(featuresTimerRef.current);
+      if (solutionsTimerRef.current) clearTimeout(solutionsTimerRef.current);
+      if (resourcesTimerRef.current) clearTimeout(resourcesTimerRef.current);
     };
   }, []);
 
   useEffect(() => {
     const shouldLockScroll = isOpen;
-
     if (!shouldLockScroll) {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
       return;
     }
-
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
-
     return () => {
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
     };
-  }, [isOpen, isPlatformOpen, isFeaturesOpen, isSolutionsOpen, isResourcesOpen]);
+  }, [isOpen]);
 
   useEffect(() => {
     const handleMessage = (e) => {
@@ -280,71 +263,42 @@ const Navbar = () => {
     "absolute left-0 top-full w-full bg-white border-b border-slate-200 shadow-xl animate-slide-down origin-top max-h-[calc(100vh-88px)] overflow-y-auto overscroll-contain";
 
   const handlePlatformMouseEnter = () => {
-    if (platformTimerRef.current) {
-      clearTimeout(platformTimerRef.current);
-      platformTimerRef.current = null;
-    }
+    if (platformTimerRef.current) clearTimeout(platformTimerRef.current);
     setIsPlatformOpen(true);
   };
-
   const handlePlatformMouseLeave = () => {
-    platformTimerRef.current = setTimeout(() => {
-      setIsPlatformOpen(false);
-    }, 500); // 500ms delay
+    platformTimerRef.current = setTimeout(() => setIsPlatformOpen(false), 500);
   };
-
   const handleFeaturesMouseEnter = () => {
-    if (featuresTimerRef.current) {
-      clearTimeout(featuresTimerRef.current);
-      featuresTimerRef.current = null;
-    }
+    if (featuresTimerRef.current) clearTimeout(featuresTimerRef.current);
     setIsFeaturesOpen(true);
   };
-
   const handleFeaturesMouseLeave = () => {
-    featuresTimerRef.current = setTimeout(() => {
-      setIsFeaturesOpen(false);
-    }, 500);
+    featuresTimerRef.current = setTimeout(() => setIsFeaturesOpen(false), 500);
   };
-
   const handleSolutionsMouseEnter = () => {
-    if (solutionsTimerRef.current) {
-      clearTimeout(solutionsTimerRef.current);
-      solutionsTimerRef.current = null;
-    }
+    if (solutionsTimerRef.current) clearTimeout(solutionsTimerRef.current);
     setIsSolutionsOpen(true);
   };
-
   const handleSolutionsMouseLeave = () => {
-    solutionsTimerRef.current = setTimeout(() => {
-      setIsSolutionsOpen(false);
-    }, 500); // 500ms delay
+    solutionsTimerRef.current = setTimeout(() => setIsSolutionsOpen(false), 500);
   };
-
   const handleResourcesMouseEnter = () => {
-    if (resourcesTimerRef.current) {
-      clearTimeout(resourcesTimerRef.current);
-      resourcesTimerRef.current = null;
-    }
+    if (resourcesTimerRef.current) clearTimeout(resourcesTimerRef.current);
     setIsResourcesOpen(true);
   };
-
   const handleResourcesMouseLeave = () => {
-    resourcesTimerRef.current = setTimeout(() => {
-      setIsResourcesOpen(false);
-    }, 500);
+    resourcesTimerRef.current = setTimeout(() => setIsResourcesOpen(false), 500);
   };
 
   const isHomePage = location.pathname === "/";
   const isDarkOverlayPage = location.pathname === "/features/ai-agents";
   const isOverlayNav = !isScrolled && !isPlatformOpen && !isFeaturesOpen && !isSolutionsOpen && !isResourcesOpen && !isOpen;
   const isOverlayLightNav = isOverlayNav && (isHomePage || (isDarkOverlayPage && isIframeDark));
-  const linkBase =
-    `text-base font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-[#7e22ce]"}`;
+  const linkBase = `text-base font-semibold tracking-wide transition-all ${isOverlayLightNav ? "text-white hover:text-white/80" : "text-slate-700 hover:text-[#7e22ce]"}`;
   const linkActive = "text-[#7e22ce]";
   const handleLogoClick = (e) => {
     closeAllMenus();
-
     if (location.pathname === "/") {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -368,14 +322,15 @@ const Navbar = () => {
             to="/features/ai-agents"
             className="group flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-none shadow-none outline-none ring-0 px-4"
           >
-            <span className="font-bold">Meet KAI Agent</span>
-            <span className="hidden md:inline">
+            <span className="font-bold transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce]">
+              Meet KAI Agent
+            </span>
+            <span className="hidden md:inline transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce] group-hover:opacity-100">
               {" "}
               -<span className="transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce]">
                 Boost human efficiency with tailored AI assistants
               </span>
             </span>
-            <span className="ml-1 md:ml-1 text-inherit opacity-70 group-hover:opacity-100 inline-flex items-center"></span>
           </Link>
         </div>
 
@@ -455,7 +410,7 @@ const Navbar = () => {
                               <item.icon size={18} strokeWidth={2} className={item.iconColor || "text-purple-600"} />
                               <div>
                                 <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</p>
-                                <p className="text-xs text-slate-400">{item.description || item.sublabel}</p>
+                                <p className="text-xs text-slate-400">{item.sublabel}</p>
                               </div>
                             </Link>
                           ))}
@@ -472,7 +427,7 @@ const Navbar = () => {
                               <item.icon size={18} strokeWidth={2} className={item.iconColor || "text-purple-600"} />
                               <div>
                                 <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</p>
-                                <p className="text-xs text-slate-400">{item.description || item.sublabel}</p>
+                                <p className="text-xs text-slate-400">{item.sublabel}</p>
                               </div>
                             </Link>
                           ))}
@@ -512,8 +467,7 @@ const Navbar = () => {
                                   key={item.to}
                                   to={item.to}
                                   onClick={closeAllMenus}
-                                  className={`group flex items-center gap-3 py-1.5 px-3 rounded-xl transition-all ${"hover:bg-white hover:shadow-md"
-                                    }`}
+                                  className={`group flex items-center gap-3 py-1.5 px-3 rounded-xl transition-all hover:bg-white hover:shadow-md`}
                                 >
                                   <item.icon size={18} strokeWidth={2} className={item.iconColor || "text-slate-600"} />
                                   <div className="flex flex-col">
@@ -521,19 +475,7 @@ const Navbar = () => {
                                       {item.label}
                                     </p>
                                     <p className="text-xs text-slate-400 whitespace-nowrap">
-                                      {item.label === "Tasks" && "Tasks and ownership"}
-                                      {item.label === "Dashboards" && "Live performance view"}
-                                      {item.label === "Gantt" && "Timeline planning"}
-                                      {item.label === "Chat" && "Work chat in context"}
-                                      {item.label === "Notifications" && "Instant updates"}
-                                      {item.label === "Team" && "Members and roles"}
-                                      {item.label === "Attendance" && "Daily time logs"}
-                                      {item.label === "Leave" && "Time-off requests"}
-                                      {item.label === "Salary" && "Payroll and payouts"}
-                                      {item.label === "Calendar" && "Schedules and meetings"}
-                                      {item.label === "Automations" && "Rule-based workflows"}
-                                      {item.label === "Integrations" && "Connected tools"}
-                                      {item.label === "Watch demo" && "Product walkthrough"}
+                                      {item.sublabel}
                                     </p>
                                   </div>
                                 </Link>
@@ -615,7 +557,7 @@ const Navbar = () => {
                                 </div>
                                 <div>
                                   <p className="font-bold text-slate-900 text-[15px] group-hover:text-purple-700 transition-colors">{item.label}</p>
-                                  <p className="text-[13px] text-slate-500">{item.description}</p>
+                                  <p className="text-[13px] text-slate-500">{item.sublabel}</p>
                                 </div>
                                 <ArrowRight size={16} className="ml-auto text-slate-300 group-hover:text-purple-500 group-hover:translate-x-1 transition-all" />
                               </Link>
@@ -663,7 +605,7 @@ const Navbar = () => {
                               <item.icon size={18} strokeWidth={2} className={item.iconColor || "text-indigo-600"} />
                               <div>
                                 <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</p>
-                                <p className="text-xs text-slate-400">{item.description}</p>
+                                <p className="text-xs text-slate-400">{item.sublabel}</p>
                               </div>
                             </Link>
                           ))}
@@ -680,7 +622,7 @@ const Navbar = () => {
                               <item.icon size={18} strokeWidth={2} className={item.iconColor || "text-indigo-600"} />
                               <div>
                                 <p className="text-sm font-semibold text-slate-800 group-hover:text-purple-700 transition-colors">{item.label}</p>
-                                <p className="text-xs text-slate-400">{item.description}</p>
+                                <p className="text-xs text-slate-400">{item.sublabel}</p>
                               </div>
                             </Link>
                           ))}
@@ -726,7 +668,6 @@ const Navbar = () => {
               transition={{ duration: 0.2 }}
               className="md:hidden fixed inset-0 z-[100] bg-white flex flex-col"
             >
-              {/* ClickUp Style Internal Header */}
               <div className="flex items-center justify-between px-4 py-4 border-b border-slate-100 bg-white flex-shrink-0">
                 <Link to="/" onClick={handleLogoClick} className="flex items-center group">
                   <img
@@ -746,7 +687,6 @@ const Navbar = () => {
                 </button>
               </div>
 
-              {/* Scrollable Menu Content */}
               <div
                 data-lenis-prevent="true"
                 className="flex-1 overflow-y-auto overscroll-contain px-4 py-6 bg-white"
@@ -809,9 +749,9 @@ const Navbar = () => {
                                     )}
                                     <div className="flex flex-col text-left justify-center">
                                       <span className="font-bold text-slate-900 leading-tight">{subItem.label}</span>
-                                      {(subItem.sublabel || subItem.description) && (
+                                      {subItem.sublabel && (
                                         <span className="text-[12px] text-slate-500 mt-0.5 line-clamp-1">
-                                          {subItem.sublabel || subItem.description}
+                                          {subItem.sublabel}
                                         </span>
                                       )}
                                     </div>
@@ -826,7 +766,6 @@ const Navbar = () => {
                   ))}
                 </div>
 
-                {/* Bottom Actions */}
                 <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col gap-4 pb-12">
                   <a
                     href={authUrl}
@@ -851,7 +790,5 @@ const Navbar = () => {
     </>
   );
 };
-
-
 
 export default Navbar;

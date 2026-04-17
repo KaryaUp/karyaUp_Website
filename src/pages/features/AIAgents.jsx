@@ -19,14 +19,22 @@ export default function AIAgents() {
         <meta name="description" content="Meet Super Agents -Maximize human productivity with custom AI teammates." />
       </Helmet>
 
-      <div style={{ width: "100%", height: "100vh", overflow: "hidden", margin: 0, padding: 0 }}>
+      <div style={{ 
+        width: "100%", 
+        height: "100vh", 
+        overflow: "hidden", 
+        margin: 0, 
+        padding: 0,
+        background: "white" // Matches main site background while loading
+      }}>
         <iframe
           src="/New folder/New folder/Agent.html"
           title="Demo Page"
           style={{
             width: "100%",
             height: "100%",
-            border: "none"
+            border: "none",
+            background: "white" // Initial background before Agent.html loads its own
           }}
         />
       </div>

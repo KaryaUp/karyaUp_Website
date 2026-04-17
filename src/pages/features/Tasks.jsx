@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useAnimationFrame, useMotionValue } from "framer-motion";
+import { motion as Motion, useAnimationFrame, useMotionValue } from "framer-motion";
 import { Check, Sparkles, Activity, Eye, MessageSquare, Filter, CheckCircle2, Users } from "lucide-react";
 import Task2 from "../../assets/Task.webp";
 import AgentAssign from "../../assets/Agent-Assign.webp";
@@ -9,11 +9,9 @@ import { Helmet } from "react-helmet-async";
 import FeatureStack from "../../components/FeatureStack";
 
 export default function Tasks() {
-  const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
-  const aiAgentRef = useRef(null);
   const listContainerRef = useRef(null);
-
+  
   // Define task list items once to reuse for infinite scroll doubling
   const taskListItems = [
     { title: "Finalize landing page wireframe", owner: "Aisha", due: "Wed", pr: "High" },
@@ -55,7 +53,7 @@ export default function Tasks() {
 
     return (
       <div ref={itemRef} style={{ perspective: "1000px" }}>
-        <motion.div
+        <Motion.div
           className="rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 flex flex-wrap sm:flex-nowrap items-start sm:items-center gap-2 sm:gap-3 bg-white shadow-sm"
           animate={{
             borderColor: t.pr === "High" ? "rgba(248, 113, 113, 0.38)" : "rgba(134, 239, 172, 0.42)",
@@ -93,7 +91,7 @@ export default function Tasks() {
           >
             {t.pr}
           </span>
-        </motion.div>
+        </Motion.div>
       </div>
     );
   };
@@ -155,62 +153,64 @@ export default function Tasks() {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center lg:items-start">
 
               {/* Left */}
-              <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start">
-                <motion.div
+              <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start px-1 sm:px-0">
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
                 >
                   TASKS — SIMPLIFY YOUR TO-DO LISTS
-                </motion.div>
+                </Motion.div>
 
-                <motion.h1
+                <Motion.h1
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] sm:ml-0 max-[390px]:text-[1.55rem] max-[390px]:leading-[1] max-[390px]:tracking-[-0.04em]"
                 >
                   Task Management
-                  <span className="block">
-                    That{" "}
-                    <motion.span
-                      className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                  <span className="block sm:inline max-[390px]:block">
+                   <br/> {" "}
+                    <Motion.span
+                      className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] whitespace-nowrap max-[390px]:whitespace-normal"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                     >
-                      Saves Time
-                    </motion.span>
+                     That Saves Time
+                    </Motion.span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                  className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
+                  className="mt-5 sm:mt-6 w-full max-w-lg flex flex-col items-center lg:items-start"
                 >
-                  {[
-                    { text: "Every piece of work, owned and visible.", icon: Check },
-                    { text: "Turn conversations into tasks with a single click.", icon: Check }
+                  <div className="space-y-3 sm:space-y-4 w-fit">
+                    {[
+                      { text: "Every piece of work, owned and visible.", icon: Check },
+                      { text: "Turn conversations into tasks with a single click.", icon: Check }
 
-                  ].map((item, i) => (
-                    <div key={i} className="flex items-start gap-3 text-left">
-                      <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                        <item.icon className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-start gap-3 text-left">
+                        <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                          <item.icon className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                        </div>
+                        <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
+                          {item.text}
+                        </p>
                       </div>
-                      <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
-                        {item.text}
-                      </p>
-                    </div>
-                  ))}
-                </motion.div>
+                    ))}
+                  </div>
+                </Motion.div>
 
                 <FeatureStack items={["Assignees", "Due dates", "Priorities", "Sub-tasks"]} />
               </div>
 
               {/* Right – Image */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -223,7 +223,7 @@ export default function Tasks() {
                     className="w-full h-[250px] sm:h-[300px] md:h-[280px] lg:h-[380px] xl:h-[350px] object-cover object-left-top bg-white transition-all duration-300"
                   />
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -231,7 +231,7 @@ export default function Tasks() {
         <section className="pt-8 sm:pt-4 lg:pt-6 pb-12 sm:pb-16 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-5xl mx-auto">
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -245,16 +245,16 @@ export default function Tasks() {
                     <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                     AI Agent for Tasks
                   </div>
-                  <h2 className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] tracking-normal">
-                    Prompt It. The Agent{" "}
+                  <h2 className="mt-2 sm:mt-5 text-[1.8rem] leading-[1] sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal sm:leading-[1.05]">
+                   Build Faster.{" "}
                     <br className="hidden sm:block" />
-                    <motion.span
-                      className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                    <Motion.span
+                      className="inline text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] whitespace-nowrap"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                     >
-                      Automates Everything.
-                    </motion.span>
+                       Automate Smarter.
+                    </Motion.span>
                   </h2>
                   <p className="mt-2 text-sm sm:text-base text-slate-600 font-medium max-w-3xl mx-auto lg:mx-0 leading-relaxed">
                     Our integrated AI agent transforms your prompts into structured tasks, assigns owners, and tracks progress automatically—all within your workspace.
@@ -291,7 +291,7 @@ export default function Tasks() {
                             maskImage: 'linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%)',
                             perspective: "1000px"
                           }}>
-                          <motion.div
+                          <Motion.div
                             animate={{ y: ["0%", "-50%"] }}
                             transition={{
                               y: {
@@ -306,7 +306,7 @@ export default function Tasks() {
                             {[...taskListItems, ...taskListItems].map((t, i) => (
                               <BarrelItem key={`${t.title}-${i}`} t={t} containerRef={listContainerRef} />
                             ))}
-                          </motion.div>
+                          </Motion.div>
                         </div>
                         <div className="px-4 py-3 sm:py-4 relative z-10 bg-white/95 backdrop-blur-sm border-t border-slate-100 shadow-[0_-4px_15px_-5px_rgba(0,0,0,0.05)]">
                           <div className="text-[10px] sm:text-xs font-semibold text-slate-500">
@@ -317,7 +317,7 @@ export default function Tasks() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -330,7 +330,7 @@ export default function Tasks() {
             <div className="grid lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-24 items-center">
 
               {/* Left – Animated Graph */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: -50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
@@ -342,10 +342,10 @@ export default function Tasks() {
                 </div>
                 {/* Decorative background glow */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-gradient-to-br from-purple-100/60 to-blue-100/40 rounded-full blur-[140px] -z-10 animate-pulse" />
-              </motion.div>
+              </Motion.div>
 
               {/* Right – Text Content */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -358,13 +358,13 @@ export default function Tasks() {
                 </div>
                 <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.1] tracking-normal">
                   Turn Task Into <br className="hidden lg:block" />
-                  <motion.span
+                  <Motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                   >
                     Actionable Insights.
-                  </motion.span>
+                  </Motion.span>
                 </h2>
 
 
@@ -382,7 +382,7 @@ export default function Tasks() {
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </Motion.div>
 
             </div>
           </div>
@@ -400,3 +400,5 @@ export default function Tasks() {
     </>
   );
 }
+
+

@@ -206,10 +206,10 @@ const AllInOne = () => {
             {isDesktop ? (
                 <div className="w-full relative flex flex-col items-center">
                     <div className="flex flex-col items-center w-full border-y border-gray-100">
-                        <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                        <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                        <MarqueeRow icons={rows[2]} direction="left" speed={22} isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
-                        <MarqueeRow icons={rows[3]} direction="right" speed={22} isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[0]} direction="right" speed={22} isPaused={pausedRowIndex === 0} onRowClick={() => handleRowClick(0)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[1]} direction="left" speed={22} isPaused={pausedRowIndex === 1} onRowClick={() => handleRowClick(1)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[2]} direction="right" speed={22} isPaused={pausedRowIndex === 2} onRowClick={() => handleRowClick(2)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
+                        <MarqueeRow icons={rows[3]} direction="left" speed={22} isPaused={pausedRowIndex === 3} onRowClick={() => handleRowClick(3)} maskHole={maskWidth > 0} maskWidth={maskWidth} />
                     </div>
                     <div className="absolute inset-0 flex items-center justify-center px-0 pointer-events-none">
                         <div className="grid grid-cols-2">
@@ -223,7 +223,7 @@ const AllInOne = () => {
             ) : (
                 <div className="flex w-full flex-col items-center bg-white border-y border-gray-100">
                     <div className="w-full overflow-hidden border-b border-gray-100">
-                        <MarqueeRow icons={rows[0]} direction="left" speed={22} isPaused={false} maskHole={false} />
+                        <MarqueeRow icons={rows[0]} direction="right" speed={22} isPaused={false} maskHole={false} />
                     </div>
                     <div className="grid grid-cols-2 w-full gap-0">
                         <FeatureCard title="Projects" image={featureProjects} />
@@ -232,7 +232,7 @@ const AllInOne = () => {
                         <FeatureCard title="Team" image={teamImage} />
                     </div>
                     <div className="w-full overflow-hidden border-t border-gray-100">
-                        <MarqueeRow icons={rows[1]} direction="right" speed={22} isPaused={false} maskHole={false} />
+                        <MarqueeRow icons={rows[1]} direction="left" speed={22} isPaused={false} maskHole={false} />
                     </div>
                 </div>
             )}

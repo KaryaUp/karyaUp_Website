@@ -100,7 +100,7 @@ export default function Startup() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-               Startup - Founder Intelligence
+                Startup - Founder Intelligence
               </motion.div>
 
               <motion.h1
@@ -323,7 +323,7 @@ export default function Startup() {
           ].map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
+              <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
 
                 {/* HEADER ROW: Icon and Title side-by-side */}
                 <div className="flex items-center gap-4 mb-5 sm:mb-3">

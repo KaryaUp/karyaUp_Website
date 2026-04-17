@@ -34,7 +34,7 @@ export default function Gantt() {
   const ganttSections = [
     {
       header: "Add Tasks",
-      title: "Set Up Your Task Automatically On Gantt",
+      title: "Set Up Your Task On Gantt",
       desc: [
         "Turn entire projects into timelines in one click.",
         "Grasp your project workflow and dependencies."
@@ -203,13 +203,13 @@ export default function Gantt() {
                 >
                   The Ultimate Visibility
                   <span className="block">
-                    With{" "}
+                   {" "}
                     <motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                     >
-                      Gantt
+                      With Gantt
                     </motion.span>
                   </span>
                 </motion.h1>
@@ -218,24 +218,26 @@ export default function Gantt() {
                   initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-                  className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full mx-auto lg:mx-0"
+                  className="mt-5 sm:mt-6 w-full max-w-lg mx-auto lg:mx-0 flex flex-col items-center lg:items-start"
                 >
-                  <div className="flex items-start gap-3 text-left">
-                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                  <div className="space-y-3 sm:space-y-4 w-fit">
+                    <div className="flex items-start gap-3 text-left">
+                      <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                      </div>
+                      <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
+                        Timelines that tell the truth.
+                      </p>
                     </div>
-                    <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
-                      Timelines that tell the truth.
-                    </p>
-                  </div>
 
-                  <div className="flex items-start gap-3 text-left">
-                    <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                      <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                    <div className="flex items-start gap-3 text-left">
+                      <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                        <Check className="w-2 h-2 sm:w-2.5 sm:h-2.5 text-[#7e22ce] stroke-[4]" />
+                      </div>
+                      <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
+                        Map dependencies, adjust milestones in real time
+                      </p>
                     </div>
-                    <p className="text-sm sm:text-lg text-slate-600 font-medium leading-relaxed">
-                      Map dependencies, adjust milestones in real time
-                    </p>
                   </div>
                 </motion.div>
 
@@ -295,7 +297,7 @@ export default function Gantt() {
               <div
                 key={i}
                 ref={(el) => (sectionRefs.current[i] = el)}
-                className={`${i === 0 ? "relative" : "absolute inset-0"} w-full bg-white flex flex-col lg:flex-row items-center border-b border-black/5`}
+                className={`${i === 0 ? "relative" : "absolute inset-0"} w-full bg-white flex flex-col lg:flex-row items-center border-b border-black/5 min-h-[740px] sm:min-h-0`}
               >
                 {/* Content Side */}
                 <div className="flex-[0.48] lg:flex-1 flex flex-col justify-end lg:justify-center items-center lg:items-start text-center lg:text-left p-4 pb-2 sm:p-8 lg:p-12 w-full">

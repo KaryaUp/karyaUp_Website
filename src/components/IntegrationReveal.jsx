@@ -21,7 +21,7 @@ const integrations = [
   { name: "Mail", icon: mailIcon },
 ];
 
-const rightLabels = ["Super Knowledge", "Capabilities", "Engagement"];
+const rightLabels = [" Knowledge", "Capabilities", "Engagement"];
 const leftLabels = ["Siloed Info", "Context Loss", "Manual Sync"];
 
 export default function IntegrationReveal({ className = "" }) {
@@ -126,12 +126,7 @@ export default function IntegrationReveal({ className = "" }) {
                       {item.name}
                     </span>
                   </div>
-                  <div className="flex items-center">
-                    <div
-                      className="h-px bg-gradient-to-r from-purple-500/40 to-transparent hidden md:block"
-                      style={{ width: `40px` }}
-                    />
-                  </div>
+
                 </div>
               ))}
             </div>

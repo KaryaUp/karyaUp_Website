@@ -331,7 +331,7 @@ export default function Education() {
       </section>
 
       {/* ================= GLASS-EFFECT EDUCATION LIFECYCLE ================= */}
-      <section className="w-full py-7 relative overflow-hidden bg-white">
+      <section className="w-full py-5 relative overflow-hidden bg-white">
         {/* Animated Background Glows for Glass Effect */}
         <div className="absolute top-1/4 -left-20 w-80 h-80 bg-white rounded-full blur-[120px] opacity-40 animate-pulse" />
         <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-fuchsia-200 rounded-full blur-[120px] opacity-40 animate-pulse" />
@@ -365,7 +365,7 @@ export default function Education() {
             ].map((feature, idx) => {
               const Icon = feature.icon;
               return (
-                <TiltCard key={idx} className="bg-white border border-slate-200 p-7 sm:p-8 rounded-[2rem] h-full group">
+                <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
 
                   {/* HEADER SECTION: Icon and Title aligned horizontally */}
                   <div className="flex items-center gap-4 mb-5 sm:mb-6">

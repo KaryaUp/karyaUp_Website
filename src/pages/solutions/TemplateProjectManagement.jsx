@@ -1,4 +1,4 @@
-import { useRef, useEffect, useMemo, useState } from "react";
+ import { useRef, useEffect, useMemo, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -223,8 +223,8 @@ const LightShield3D = () => (
 
 const getColorClasses = (color) => {
   const colorMap = {
-    purple: "bg-purple-100 text-purple-600 group-hover:bg-purple-600 group-hover:text-white",
-    fuchsia: "bg-fuchsia-100 text-fuchsia-600 group-hover:bg-fuchsia-600 group-hover:text-white",
+    purple: "bg-purple-100 text-purple-600 lg:hover:border-purple-300 group-hover:bg-purple-600 group-hover:text-white",
+    fuchsia: "bg-fuchsia-100 text-fuchsia-600 lg:hover:border-purple-300 group-hover:bg-fuchsia-600 group-hover:text-white",
     emerald: "bg-emerald-100 text-emerald-600 group-hover:bg-emerald-600 group-hover:text-white",
     orange: "bg-orange-100 text-orange-600 group-hover:bg-orange-600 group-hover:text-white",
     blue: "bg-blue-100 text-blue-600 group-hover:bg-blue-100 group-hover:text-white",
@@ -238,7 +238,7 @@ const aiFeatures = [
     icon: <Sparkles className="w-5 h-5" />,
     title: "Contextual Memory",
     desc: "Our AI learns your project history and team habits, providing suggestions that actually make sense for your specific workflow.",
-    color: "purple"
+    color: "purple",
   },
   {
     icon: <BrainCircuit className="w-5 h-5" />,
@@ -549,10 +549,6 @@ export default function ProjectManagement() {
               >
                 PROJECT MANAGEMENT — PLAN, EXECUTE
               </motion.div>
-              {/* <div className="text-center lg:text-left flex flex-col items-center lg:items-start">
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-4">
-                PROJECT MANAGEMENT — PLAN, EXECUTE
-              </div> */}
 
               <motion.h1
                 initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
@@ -573,29 +569,11 @@ export default function ProjectManagement() {
                   </motion.span>
                 </span>
               </motion.h1>
-              {/* <motion.h1
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-              
-                className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
-              >
-                Unified Project
-                
-                <br className="hidden md:block" />
-
-                <motion.span
-                  className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto] whitespace-nowrap"
-                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  Management Software
-                </motion.span>
-              </motion.h1> */}
 
               <motion.div
                 initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                transition={{ duration: 0.70, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
                 className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
               >
                 {[
@@ -763,190 +741,133 @@ export default function ProjectManagement() {
       </section>
 
       {/* TASK WORKSPACE SECTION */}
-      <section className="mt-6 pb-0 px-4 py-10 sm:py-10 lg:py-6 bg-white relative overflow-hidden">
-        <div className="max-w-7xl mx-auto">
-          {/* HEADING SECTION */}
-          <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-            >
-              {/* Adjusted Pill: Increased padding for a more premium look */}
-              <span className="inline-block px-4 py-1.5 rounded-full bg-slate-50 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.15em] text-slate-600 mb-5 border border-slate-200">
-                Unified Task Workspace
-              </span>
-
-              {/* FIX: Use text-3xl for small phones to avoid cutting off letters.
-          Added pb-2 to protect 'y' and 'g' descenders.
-        */}
-              <h2 className="text-3xl sm:text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] md:leading-[1.1] mb-5 text-balance max-w-[20rem] sm:max-w-3xl mx-auto pb-2">
-                <span className="text-slate-900">{"Supercharge\u00A0Your "}</span>
-                <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto] inline-block"
-                  animate={{
-                    backgroundPosition: ["0% center", "-200% center"],
-                  }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  Daily Workflows.
-                </motion.span>
-              </h2>
-
-              {/* FIX: text-sm on mobile ensures the entire sentence fits without 
-          becoming a massive wall of text.
-        */}
-              <p className="mt-1 mb-2 text-sm sm:text-[1rem] text-slate-600 leading-relaxed font-medium max-w-[22rem] sm:max-w-xl mx-auto">
-                Centralize communication, assign dynamic tasks, and execute
-                flawlessly with enterprise grade AI execution.
-              </p>
-            </motion.div>
-          </div>
-
-          {/* GRID: IMAGE LEFT | NUMBERED FEATURES RIGHT — tighter gap, columns hug center */}
-          <div className="grid lg:grid-cols-2 gap-8 md:gap-10 lg:gap-8 xl:gap-8 items-center">
-            {/* Static Image (Left) */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative order-2 lg:order-1 flex justify-center lg:justify-end"
-            >
-              <div className="w-full max-w-[min(100%,400px)] sm:max-w-[440px] lg:max-w-[460px] overflow-hidden rounded-2xl sm:rounded-[48px]">
-                <img
-                  src={projectImage}
-                  alt="Project Management Dashboard"
-                  className="w-full max-h-[420px] object-contain rounded-xl sm:rounded-[24px]"
-                />
-              </div>
-            </motion.div>
-
-            {/* Numbered Features with Wizard Line (Right) */}
-            <div className="flex flex-col order-1 lg:order-2 w-full max-w-[min(100%,400px)] sm:max-w-[440px] lg:max-w-[460px] mx-auto lg:mx-0 lg:justify-self-start">
-              {features.map((item, i) => {
-                const isActive = activeFeature === i;
-                const isPast = activeFeature > i;
-                const isLineActive = activeFeature > i;
-
-                // Gap from circle edge to row boundary:
-                //   collapsed row ≈ 52px  → center=26, radius=22, gap=4
-                //   expanded  row ≈ 104px → center=52, radius=22, gap=30
-                const COLL = 4;
-                const EXP = 30;
-                const upperGap = activeFeature === i ? EXP : COLL;
-                const lowerGap = activeFeature === i + 1 ? EXP : COLL;
-                // connector height fills: mb-4 gap (16px) + both circle-edge gaps
-                const connHeight = 16 + upperGap + lowerGap;
-
-                return (
-                  <div key={i}>
-                    {/* Row: circle CENTERED with card */}
-                    <div
-                      className="flex items-center gap-5 mb-4 last:mb-0"
-                      onMouseEnter={() => setActiveFeature(i)}
-                    >
-                      {/* Number Circle — no ring so line can touch */}
-                      <motion.div
-                        animate={{
-                          scale: isActive ? 1.1 : 1,
-                          backgroundColor:
-                            isActive || isPast ? "#7E22CE" : "#f1f5f9",
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="w-11 h-11 rounded-full flex items-center justify-center shrink-0 shadow-md z-10"
-                      >
-                        <span
-                          className={`font-black text-base leading-none ${isActive || isPast ? "text-white" : "text-slate-400"}`}
-                        >
-                          {i + 1}
-                        </span>
-                      </motion.div>
-
-                      {/* Card */}
-                      <motion.div
-                        animate={{
-                          borderColor: isActive
-                            ? "rgba(126,34,206,0.25)"
-                            : "rgba(226,232,240,1)",
-                          boxShadow: isActive
-                            ? "0 4px 20px rgba(0,0,0,0.08)"
-                            : "0 1px 4px rgba(0,0,0,0.04)",
-                        }}
-                        transition={{ duration: 0.3 }}
-                        className="flex-1 bg-white border rounded-2xl px-5 py-4 cursor-pointer"
-                      >
-                        <motion.h3
-                          animate={{ color: isActive ? "#0f172a" : "#64748b" }}
-                          className="text-[1.05rem] font-black tracking-tight"
-                        >
-                          {item.title}
-                        </motion.h3>
-
-                        <AnimatePresence>
-                          {isActive && (
-                            <motion.p
-                              key="desc"
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.3, ease: "easeInOut" }}
-                              className="text-slate-500 font-medium text-sm leading-relaxed mt-2 overflow-hidden"
-                            >
-                              {item.desc}
-                            </motion.p>
-                          )}
-                        </AnimatePresence>
-                      </motion.div>
-                    </div>
-
-                    {/* Connector — neg margins pull it flush to both circle edges */}
-                    {i < features.length - 1 && (
-                      <div
-                        className="flex gap-5"
-                        style={{
-                          marginTop: `-${upperGap}px`,
-                          marginBottom: `-${lowerGap}px`,
-                        }}
-                      >
-                        <div className="w-11 flex justify-center">
-                          <motion.div
-                            animate={{
-                              backgroundColor: isLineActive
-                                ? "#7E22CE"
-                                : "#e2e8f0",
-                            }}
-                            transition={{ duration: 0.4 }}
-                            style={{ height: `${connHeight}px` }}
-                            className="w-0.5 rounded-full"
-                          />
-                        </div>
-                        <div className="flex-1" />
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NEW AI WORKSPACE SECTION */}
-      <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden border-t border-slate-200">
+      <section className="py-6 px-6 pb-7 bg-white relative overflow-hidden border-t border-slate-200">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
 
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-purple-700 font-bold text-sm mb-3 shadow-sm border border-purple-100"
+            
+
+            <motion.h1
+              initial={{ opacity: 0, y: 40, x: -10 }}
+              animate={{ opacity: 1, y: 0, x: 0 }}
+              transition={{ type: "spring", damping: 25, stiffness: 100, delay: 0.1 }}
+              className="text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-1 drop-shadow-sm"
             >
-              <Sparkles className="w-4 h-4" /> KaryaUp AI Workspace
+              Supercharge your <br />
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+                Daily Workflows
+              </motion.span>
+            </motion.h1>
+
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
+            >
+              Centralize communication, assign dynamic tasks, and execute flawlessly with enterprise grade AI execution.
+            </motion.p>
+          </div>
+
+          {/* SIDE-BY-SIDE GRID (IMAGE LEFT | FEATURES RIGHT) */}
+          <div className="grid lg:grid-cols-2 gap-12 xl:gap-15 items-center">
+
+            {/* Image Card Container */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="relative group"
+            >
+              <div className="relative rounded-[2.5rem] p-2 bg-gradient-to-br from-purple-500/10 to-fuchsia-500/10 border border-slate-100 shadow-2xl">
+                <img
+                  src={dashboardImage}
+                  alt="Workspace Preview"
+                  className="relative z-10 w-full h-auto rounded-[2rem] border border-white/50 shadow-sm transition-transform duration-500 group-hover:scale-[1.01]"
+                />
+              </div>
             </motion.div>
 
+            {/* Feature List — numbered steps with connecting lines */}
+            <div className="flex flex-col">
+              {features.map((item, i) => (
+                <div key={i} className="flex items-stretch gap-5">
+
+                  {/* Left column: number circle + connecting line */}
+                  <div className="flex flex-col items-center flex-shrink-0">
+                    <motion.div
+                      animate={
+                        activeFeature === i
+                          ? { backgroundColor: "#7c3aed", color: "#ffffff", scale: 1.1 }
+                          : { backgroundColor: "#f3f4f6", color: "#9ca3af", scale: 1 }
+                      }
+                      transition={{ duration: 0.3 }}
+                      className="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold shrink-0 z-10"
+                    >
+                      {i + 1}
+                    </motion.div>
+
+                    {/* Connecting line — hidden after last item */}
+                    {i < features.length - 1 && (
+                      <motion.div
+                        animate={
+                          activeFeature === i
+                            ? { backgroundColor: "#7c3aed", opacity: 0.35 }
+                            : { backgroundColor: "#e5e7eb", opacity: 1 }
+                        }
+                        transition={{ duration: 0.3 }}
+                        className="w-0.5 flex-1 my-1 min-h-8"
+                      />
+                    )}
+                  </div>
+
+                  {/* Right column: feature card */}
+                  <motion.div
+                    onMouseEnter={() => setActiveFeature(i)}
+                    className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${activeFeature === i
+                      ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
+                      : "bg-transparent border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                  >
+                    <h3 className="text-xl font-bold text-slate-900 leading-none">
+                      {item.title}
+                    </h3>
+                    <AnimatePresence>
+                      {activeFeature === i && (
+                        <motion.p
+                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                          animate={{ height: "auto", opacity: 1, marginTop: 8 }}
+                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                          className="text-slate-500 font-medium text-sm leading-relaxed overflow-hidden"
+                        >
+                          {item.desc}
+                        </motion.p>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* NEW AI WORKSPACE SECTION */}
+      <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
+        <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
+
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16 relative z-10">
+      
             <motion.h1
               initial={{ opacity: 0, y: 40, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
@@ -969,17 +890,17 @@ export default function ProjectManagement() {
               viewport={{ once: true }}
               className="text-lg text-slate-600 font-medium max-w-2xl mx-auto leading-relaxed"
             >
-              KaryaUp AI merges project context with autonomous action to free your team for high-impact work.
+              KaryaUp AI merges project context with autonomous action to free your team for high impact work.
             </motion.p>
           </div>
 
           <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-fuchsia-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="mt-3 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
+          <div className="mt-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative z-10">
             {aiFeatures.map((feature, i) => (
               <TiltCard
                 key={i}
-                className="bg-white border border-slate-200 lg:hover:border-purple-300 shadow-xl p-7 sm:p-8 rounded-[2rem] cursor-default group"
-              >
+                className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
+              
                 <div className="flex items-center gap-4 mb-3">
                   <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 ${getColorClasses(feature.color)}`}>
                     {feature.icon}

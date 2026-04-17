@@ -244,7 +244,6 @@ const TeamsSection = () => {
   }, [snapSectionToTop]);
 
   const team = teams[active];
-  const Icon = team.icon;
 
   return (
     <section
@@ -383,9 +382,6 @@ const TeamsSection = () => {
                 transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
                 className={`relative overflow-hidden rounded-3xl border border-slate-100 p-4.5 sm:p-10 lg:p-12 ${team.bg}`}
               >
-                <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl border border-slate-100 bg-white shadow-sm sm:mb-8 sm:h-16 sm:w-16">
-                  <Icon size={20} style={{ color: team.accent }} />
-                </div>
                 <div>
                   <span className={`text-[10px] sm:text-xs font-bold uppercase tracking-widest text-transparent bg-clip-text bg-gradient-to-r ${team.textGrad}`}>
                     {team.label}
@@ -422,19 +418,14 @@ const TeamsSection = () => {
                       {team.bullets.map((item) => (
                         <div
                           key={item}
-                          className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-2.5 text-sm font-bold text-slate-600 shadow-sm backdrop-blur-sm text-left"
+                          className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-2.5 text-[10px] sm:text-sm font-bold text-slate-600 shadow-sm backdrop-blur-sm text-left"
                         >
                           <CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: team.accent }} />
-                          <span>{item}</span>
+                          <span className={item.includes('Clarity:') ? 'whitespace-nowrap' : ''}>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
-                </div>
-
-                {/* Card counter */}
-                <div className="absolute bottom-5 right-6 text-xs font-bold text-slate-300 tracking-widest">
-                  {active + 1} / {teams.length}
                 </div>
               </motion.div>
             </AnimatePresence>

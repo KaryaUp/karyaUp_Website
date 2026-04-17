@@ -251,7 +251,7 @@ const Hero = () => {
                     className="flex flex-col items-center gap-0 pb-3"
                   >
                     {/* Line 1 */}
-                    <div className="flex items-center justify-center flex-wrap gap-x-3 sm:gap-x-4">
+                    <div className="flex items-center justify-center flex-wrap gap-x-1.5 sm:gap-x-4">
                       {MAIN_LINE1.split(" ").map((word, wIdx, arr) => {
                         const wordStartIdx = arr.slice(0, wIdx).join(" ").length + (wIdx > 0 ? 1 : 0);
                         return (
@@ -289,7 +289,7 @@ const Hero = () => {
                         ))}
                       </span>
 
-                      <span className="inline-flex items-center justify-center mx-1 sm:mx-3 relative">
+                      <span className="inline-flex items-center justify-center mx-0 sm:mx-3 relative">
                         <AnimatePresence>
                           {MAIN_LINE2_ROTATING_WORDS[rotatingWordIdx] === "Vision" && (
                             <>
@@ -343,7 +343,7 @@ const Hero = () => {
                             exit={{ opacity: 0, y: -15, filter: "blur(4px)" }}
                             transition={{ duration: 0.35, ease: "easeOut" }}
                             className="inline-block py-1 text-[2.9rem] sm:text-[2.75rem] lg:text-[4.25rem] font-black tracking-normal leading-[1.08] drop-shadow-[0_10px_32px_rgba(15,23,42,0.34)] whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] relative z-10"
-                            style={{ minWidth: "7.5ch", textAlign: "left" }}
+                            style={{ minWidth: "5.5ch", textAlign: "center" }}
                           >
                             {MAIN_LINE2_ROTATING_WORDS[rotatingWordIdx].split("").map((char, cIdx) => {
                               const startOffset = MAIN_LINE1.length + 1 + MAIN_LINE2_PREFIX.length + 1;

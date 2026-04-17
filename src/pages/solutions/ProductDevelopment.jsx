@@ -148,9 +148,9 @@ export default function ProductDevelopment() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[8px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-               Product Development - Product Intelligence
+                Product Development - Product Intelligence
               </motion.div>
 
               <motion.h1
@@ -224,7 +224,7 @@ export default function ProductDevelopment() {
 
         {/* Changed max-w-7xl to max-w-6xl to keep content more focused/reduced width */}
         <div className="max-w-5xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-16 max-w-5xl mx-auto">
+          <div className="text-center mb-10 max-w-5xl mx-auto">
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }} // Changed animate to whileInView so it triggers when user scrolls
@@ -244,7 +244,7 @@ export default function ProductDevelopment() {
             <p className="mb-3 text-[1rem] text-slate-600 font-medium leading-relaxed">
               Eliminate context switching.
               <br />
-              Plan sprints, and visualize roadmaps 
+              Plan sprints, and visualize roadmaps
               <br />
               all in one intelligent platform.
             </p>
@@ -267,7 +267,7 @@ export default function ProductDevelopment() {
                 desc: "Unfinished work automatically and capacity is calculated in real-time.",
                 bgColor: "bg-fuchsia-100 text-fuchsia-600",
                 hoverBg: "group-hover:bg-fuchsia-600",
-                borderColor: "group-hover:border-purple-200"
+                borderColor: "group-hover:bg-purple-200"
               },
               {
                 icon: <Layers size={24} />,
@@ -311,13 +311,27 @@ export default function ProductDevelopment() {
                 className="h-full"
               >
 
-                <TiltCard className="bg-white border border-slate-200 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-white p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
+                <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
 
-                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:text-white ${feature.bgColor} ${feature.hoverBg}`}>
-                    {feature.icon}
+                  <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                    <div className={`
+            w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center 
+            transition-all duration-300 shrink-0
+            group-hover:shadow-md group-hover:scale-110 group-hover:text-white 
+            ${feature.bgColor} ${feature.hoverBg}
+          `}>
+                      {feature.icon}
+                    </div>
+
+                    <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">
+                      {feature.title}
+                    </h3>
                   </div>
-                  <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">{feature.title}</h3>
-                  <p className="text-slate-600 text-sm font-medium leading-relaxed">{feature.desc}</p>
+
+                  {/* DESCRIPTION */}
+                  <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                    {feature.desc}
+                  </p>
                 </TiltCard>
               </motion.div>
             ))}

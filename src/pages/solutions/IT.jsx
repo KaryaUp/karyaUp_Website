@@ -220,8 +220,8 @@ export default function IT() {
               return (
                 <TiltCard
                   key={i}
-                  className="bg-white border border-slate-200 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-8 rounded-[2rem] group h-full cursor-default"
-                >
+                  className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
+                
                   {/* --- Header: Logo and Title side-by-side --- */}
                   <div className="flex items-center gap-4 mb-6">
                     <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shrink-0 ${getColorClasses(feature.color)}`}>

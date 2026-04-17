@@ -13,20 +13,22 @@ export default function GeoFenceSection() {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             viewport={{ once: true }}
-            className="flex-1 min-w-[300px]"
+            className="flex-1 min-w-[300px] flex flex-col items-center lg:items-start lg:text-left"
           >
-            <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce] mb-6">
-              <Target className="h-3.5 w-3.5" />
-              Geo-Fencing Technology
+            <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6">
+              <div className="inline-flex items-center gap-2 rounded-full border border-purple-500/20 bg-purple-500/10 px-3.5 py-1.5 text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce] mb-6">
+                <Target className="h-3.5 w-3.5" />
+                Geo-Fencing Technology
+              </div>
+              
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[1.1] tracking-tight text-slate-900 mb-4">
+                Punch In Only Where
+                <br />
+                <span className="bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
+                  It Matters.
+                </span>
+              </h2>
             </div>
-            
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black leading-[1.1] tracking-tight text-slate-900 mb-4">
-              Punch In Only Where
-              <br />
-              <span className="bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
-                It Matters.
-              </span>
-            </h2>
 
         
 

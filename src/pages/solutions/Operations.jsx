@@ -70,6 +70,7 @@ export default function Operations() {
   const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
   const [isShieldHovered, setIsShieldHovered] = useState(false);
+
   const workflowSteps = [
     { label: "Intake", desc: "AI categorizes incoming requests.", icon: Zap, color: "purple" },
     { label: "Assign", desc: "Logic-based task distribution.", icon: Users, color: "fuchsia" },
@@ -103,7 +104,7 @@ export default function Operations() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-                Operations - Operational Excellence
+                 Operations - Operational Excellence
               </motion.div>
 
               <motion.h1
@@ -168,12 +169,12 @@ export default function Operations() {
       </section>
 
       {/* SELF-DRIVING WORKFLOWS - NO BORDERS */}
-      <section className="py-5 px-6 bg-slate-50/30 border-t border-slate-100">
+      <section className="py-4 px-6 bg-slate-50/30">
         <div className="max-w-8xl mx-auto text-center mb-10">
           <h2 className="text-4xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1">
             Self-Driving 
             <motion.span
-              className="block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
+              className="mb-1 block text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-fuchsia-500 to-purple-700 bg-[length:200%_auto]"
               animate={{ backgroundPosition: ["0% center", "-200% center"] }}
               transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
             >
@@ -185,8 +186,8 @@ export default function Operations() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {workflowSteps.map((step, i) => (
-            /* Removed 'border border-slate-200' and added 'shadow-sm' */
-            <TiltCard key={i} className="bg-white p-8 rounded-[2.5rem] lg:hover:border-purple-300 h-full group shadow-sm hover:shadow-md transition-shadow">
+           
+            <TiltCard key={i} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
               <div className="flex items-center gap-4 mb-6">
                 <div className={`w-14 h-14 lg:hover:border-purple-300 rounded-2xl flex items-center justify-center transition-all ${getColorClasses(step.color)}`}>
                   <step.icon size={24} strokeWidth={2.5} />

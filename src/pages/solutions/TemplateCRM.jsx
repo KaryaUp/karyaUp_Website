@@ -227,7 +227,7 @@ export default function TemplateCRM() {
                 className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-lg w-full"
               >
                 {[
-                  { text: "KaryaUp CRM unifies your contacts, and communication into a single, AI driven interface", icon: Check },
+                  { text: "KaryaUp CRM unifies your contacts into a single, AI driven interface", icon: Check },
                   { text: "Turn every interaction into growth with a smarter, connected CRM.", icon: Check }
 
                 ].map((item, i) => (
@@ -256,45 +256,64 @@ export default function TemplateCRM() {
       </section>
 
       {/* --- AI WORKSPACE --- */}
-      <section className="py-2 bg-white relative overflow-hidden">
-        <div className="max-w-6xl mx-auto px-6 relative z-10">
-          <div className="text-center mb-15">
-            <motion.h1
-              initial={{ opacity: 0, y: 40, x: -10 }}
-              whileInView={{ opacity: 1, y: 0, x: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                type: "spring",
-                damping: 25,
-                stiffness: 100,
-                delay: 0.1
-              }}
-              className="text-center text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
-            >
-              The AI Workspace Built for<br />
-              <motion.span
-                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-              >
-                High-Velocity Sales
-              </motion.span>
-            </motion.h1>
-            <p className="text-[1rem] text-slate-600 max-w-2xl mx-auto font-medium">KaryaUp AI listens, analyzes, and updates your CRM automatically.</p>
+    {/* --- SECTION SPACING UPDATED (py-16 lg:py-24) --- */}
+<section className="py-10 lg:py-20 bg-white relative overflow-hidden">
+  <div className="max-w-6xl mx-auto px-6 relative z-10">
+    <div className="text-center mb-20"> {/* Increased margin-bottom */}
+      <motion.h1
+        initial={{ opacity: 0, y: 40, x: -10 }}
+        whileInView={{ opacity: 1, y: 0, x: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          type: "spring",
+          damping: 25,
+          stiffness: 100,
+          delay: 0.1
+        }}
+        className="text-center text-4xl sm:text-5xl lg:text-[3.25rem] font-black text-slate-900 tracking-tight leading-[1.1] mb-4 drop-shadow-sm"
+      >
+        The AI Workspace Built for<br />
+        <motion.span
+          className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+          animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+        >
+          High-Velocity Sales
+        </motion.span>
+      </motion.h1>
+      <p className="text-[1rem] text-slate-600 max-w-2xl mx-auto font-medium">KaryaUp AI listens, analyzes, and updates your CRM automatically.</p>
+    </div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-9">
+      {aiFeatures.map((feat, i) => (
+        <TiltCard 
+          key={i} 
+          className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
+      
+          {/* --- FLEX CONTAINER: LOGO & TITLE SIDE-BY-SIDE --- */}
+          <div className="flex items-center gap-4 mb-5 sm:mb-6">
+            <div className={`
+              w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center 
+              transition-all duration-300 shrink-0
+              group-hover:shadow-md group-hover:scale-110 
+              ${getColorClasses(feat.color)}
+            `}>
+              <feat.icon size={22} strokeWidth={2.5} />
+            </div>
+
+            <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">
+              {feat.title}
+            </h3>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-9">
-            {aiFeatures.map((feat, i) => (
-              <TiltCard key={i} className="bg-white border border-slate-200 shadow-xl p-7 sm:p-8 rounded-[2rem] cursor-default group">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110 ${getColorClasses(feat.color)}`}>
-                  <feat.icon size={22} strokeWidth={2.5} />
-                </div>
-                <h3 className="text-xl font-black text-slate-900 mb-2.5 leading-tight">{feat.title}</h3>
-                <p className="text-slate-600 text-sm font-medium leading-relaxed">{feat.desc}</p>
-              </TiltCard>
-            ))}
-          </div>
-        </div>
-      </section>
+          {/* DESCRIPTION */}
+          <p className="text-slate-600 text-sm font-medium leading-relaxed">
+            {feat.desc}
+          </p>
+        </TiltCard>
+      ))}
+    </div>
+  </div>
+</section>
 
       {/* --- AI TASK ORCHESTRATION --- */}
       <section className="py-10 bg-white relative overflow-hidden">

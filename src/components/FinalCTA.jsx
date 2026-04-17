@@ -1,22 +1,13 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Zap, ArrowRight, Quote, Sparkles, Star, Globe, ShieldCheck, Heart } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { motion as Motion } from "framer-motion";
+import { Zap, ArrowRight, Quote, Sparkles, Globe, ShieldCheck, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
 import BorderBeam from "./BorderBeam";
 
 const FinalCTA = () => {
-  const [isHoveringCTA, setIsHoveringCTA] = useState(false);
   const [speed, setSpeed] = useState(1);
-  const testimonials = [
-    "Reduced tool usage by 70% -everything is now in one place.",
-    "We improved execution speed within the first week.",
-    "For the first time, we can actually see everything happening.",
-    "The clarity this platform provides is a complete game changer.",
-    "Our team communication has never been more aligned.",
-  ];
-
   // Speed counter effect
   useEffect(() => {
     const interval = setInterval(() => {
@@ -30,7 +21,7 @@ const FinalCTA = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* The Centric Hub (Glass Card) */}
-        <motion.div
+        <Motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -38,7 +29,7 @@ const FinalCTA = () => {
         >
           <div className="absolute inset-0 pointer-events-none opacity-30">
             <svg className="h-full w-full" viewBox="0 0 1200 700" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <motion.path
+              <Motion.path
                 d="M-60 180C160 120 280 90 470 180C690 285 860 360 1260 240"
                 stroke="rgba(216,180,254,0.9)"
                 strokeWidth="3"
@@ -46,7 +37,7 @@ const FinalCTA = () => {
                 animate={{ strokeDashoffset: [-120, 0] }}
                 transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               />
-              <motion.path
+              <Motion.path
                 d="M-40 540C220 450 360 410 600 520C810 610 980 600 1240 500"
                 stroke="rgba(244,114,182,0.65)"
                 strokeWidth="2.5"
@@ -62,48 +53,25 @@ const FinalCTA = () => {
             {/* Trust Badge */}
 
 
-            {/* Testimonial Marquee (Infinite Scroll) - Seamless Loop */}
-            <div className="mb-2 sm:mb-3 overflow-hidden relative w-full h-8 sm:h-12 flex items-center">
-              <motion.div
-                animate={{ x: ["0%", "-50%"] }}
-                transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
-                className="flex items-center gap-8 sm:gap-20 whitespace-nowrap"
-              >
-                {[...testimonials, ...testimonials].map((t, i) => (
-                  <div key={i} className="flex items-center gap-3 sm:gap-4">
-                    <div className="flex gap-0.5">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={8} className="text-amber-400 sm:w-[10px] sm:h-[10px]" fill="currentColor" />
-                      ))}
-                    </div>
-                    <span className="text-slate-400 font-bold text-xs sm:text-sm tracking-normal italic">"{t}"</span>
-                  </div>
-                ))}
-              </motion.div>
-              {/* Fade overlays */}
-              <div className="absolute inset-y-0 left-0 w-8 sm:w-40 bg-gradient-to-r from-white via-white/80 to-transparent z-10" />
-              <div className="absolute inset-y-0 right-0 w-8 sm:w-40 bg-gradient-to-l from-white via-white/80 to-transparent z-10" />
-            </div>
-
             {/* Main Value Prop */}
             <h2 className="mx-auto max-w-[11ch] md:max-w-none text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-2 sm:mb-3 sm:leading-[1.05]">
               <span className="md:hidden block">Run Your Entire</span>
-              <motion.span
-                className="md:hidden block text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
-                animate={{ backgroundPosition: ["0% center", "-400% center"] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              >
-                Workspace
-              </motion.span>
-              <span className="hidden md:inline">Run Your Entire </span>
-              <motion.span
-                className="hidden md:inline text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
-                animate={{ backgroundPosition: ["0% center", "-400% center"] }}
-                transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-              >
-                Workspace
-              </motion.span>
-            </h2>
+            <Motion.span
+              className="md:hidden block text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
+              animate={{ backgroundPosition: ["0% center", "-400% center"] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            >
+              Workspace
+            </Motion.span>
+            <span className="hidden md:inline">Run Your Entire </span>
+            <Motion.span
+              className="hidden md:inline text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:400%_auto]"
+              animate={{ backgroundPosition: ["0% center", "-400% center"] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+            >
+              Workspace
+            </Motion.span>
+          </h2>
 
             <p className="text-base sm:text-xl text-slate-500 font-medium max-w-[20rem] sm:max-w-xl mx-auto mb-4 sm:mb-5 leading-relaxed">
               <span className="block md:inline">Stop switching tools. Start moving move.</span>
@@ -118,8 +86,6 @@ const FinalCTA = () => {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6">
               <Link
                 to="https://app.karyaup.com/auth"
-                onMouseEnter={() => setIsHoveringCTA(true)}
-                onMouseLeave={() => setIsHoveringCTA(false)}
                 className="group relative z-10 flex h-[3.5em] w-[16.5em] shrink-0 items-center justify-center overflow-hidden rounded-[30em] font-bold text-[15px] transition-all duration-300"
                 style={{
                   boxShadow: "6px 6px 12px #c5c5c5, -6px -6px 12px #ffffff"
@@ -133,7 +99,7 @@ const FinalCTA = () => {
                 </span>
               </Link>
 
-              <motion.div
+              <Motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
@@ -143,7 +109,7 @@ const FinalCTA = () => {
                 >
                   Book a Demo
                 </Link>
-              </motion.div>
+              </Motion.div>
             </div>
 
             {/* Bottom Proof - Enhanced Visibility */}
@@ -163,7 +129,7 @@ const FinalCTA = () => {
 
           {/* Shimmer Overlay on card */}
           <div className="absolute inset-0 border-[3px] border-white/40 rounded-[4rem] pointer-events-none" />
-        </motion.div>
+        </Motion.div>
       </div>
     </section>
   );

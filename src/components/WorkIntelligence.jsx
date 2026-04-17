@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform, useVelocity } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform, useVelocity, useScroll } from 'framer-motion';
 import { Network, LineChart, Zap, ArrowRight, Database, BrainCircuit, Rocket } from 'lucide-react';
+
+const Motion = motion;
 
 /* 3D tilt card -corner under cursor dips IN */
 const TiltCard = ({ children, className }) => {
@@ -62,10 +64,17 @@ const cards = [
 
 const WorkIntelligence = () => {
   const [isHovered, setIsHovered] = useState(false);
+  const flowRef = useRef(null);
 
   // Mouse tracking logic for snake trail cursor
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
+
+  const { scrollYProgress } = useScroll({
+    target: flowRef,
+    offset: ['start end', 'end start'],
+  });
+  const mobileSweepX = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   // Chained springs for snake effect
   const trailConfig = [
@@ -98,6 +107,12 @@ const WorkIntelligence = () => {
     useTransform(velocity, [0, 50, 300], [0, 0, 1]),
     { stiffness: 60, damping: 20 },
   );
+
+  const seg1Opacity = useTransform(movementOpacity, () => (isHovered ? 0.8 : 0));
+  const seg2Opacity = useTransform(movementOpacity, (v) => (isHovered ? v * 0.7 : 0));
+  const seg3Opacity = useTransform(movementOpacity, (v) => (isHovered ? v * 0.6 : 0));
+  const seg4Opacity = useTransform(movementOpacity, (v) => (isHovered ? v * 0.5 : 0));
+  const seg5Opacity = useTransform(movementOpacity, (v) => (isHovered ? v * 0.35 : 0));
 
   const segments = [
     { x: s1x, y: s1y, size: 160, opacity: 0.8, blur: 18 },
@@ -137,9 +152,7 @@ const WorkIntelligence = () => {
                 top: seg.y,
                 x: "-50%",
                 y: "-50%",
-                opacity: useTransform([movementOpacity], ([v]) =>
-                  isHovered ? (i === 0 ? seg.opacity : v * seg.opacity) : 0,
-                ),
+                opacity: [seg1Opacity, seg2Opacity, seg3Opacity, seg4Opacity, seg5Opacity][i],
                 scale: isHovered ? 1 : 0,
                 background: `radial-gradient(circle, rgba(168, 85, 247, 0.9) 0%, rgba(168, 85, 247, 0) 70%)`,
                 filter: `blur(${seg.blur}px)`,
@@ -239,7 +252,8 @@ const WorkIntelligence = () => {
           </div>
 
           {/* Flow strip */}
-          <motion.div
+          <Motion.div
+            ref={flowRef}
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -265,11 +279,10 @@ const WorkIntelligence = () => {
               </motion.div>
 
               {/* Gap 1: Arrow 1 */}
-              <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
+              <div className="flex sm:hidden items-center justify-center h-6 relative w-full overflow-hidden">
                 <motion.div
-                  animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
-                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative text-white"
+                  style={{ x: mobileSweepX }}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                 >
                   <ArrowRight size={16} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
@@ -310,11 +323,10 @@ const WorkIntelligence = () => {
               </motion.div>
 
               {/* Gap 2: Arrow 2 */}
-              <div className="flex sm:hidden items-center justify-center h-6 -my-0.5 relative">
+              <div className="flex sm:hidden items-center justify-center h-6 relative w-full overflow-hidden">
                 <motion.div
-                  animate={{ y: [0, 4, 0], opacity: [0.45, 1, 0.45] }}
-                  transition={{ duration: 1.5, delay: 0.35, repeat: Infinity, ease: "easeInOut" }}
-                  className="relative text-white"
+                  style={{ x: mobileSweepX }}
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-white"
                 >
                   <ArrowRight size={16} strokeWidth={3} className="rotate-90 drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]" />
                 </motion.div>
@@ -356,7 +368,7 @@ const WorkIntelligence = () => {
               </motion.div>
 
             </div>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

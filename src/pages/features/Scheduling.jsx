@@ -149,22 +149,24 @@ export default function Scheduling() {
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, delay: 0.2 }}
-                  className="mt-6 space-y-4 w-full"
+                  className="mt-6 w-full flex flex-col items-center lg:items-start"
                 >
-                  {[
-                    "Distribute tasks evenly across your team",
-                    "Respect global time zones and work hours",
-                    "Define sprint cycles and auto-fill capacity"
-                  ].map((item) => (
-                    <div key={item} className="flex items-start gap-3 text-left">
-                      <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
-                        <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
+                  <div className="space-y-4 w-fit">
+                    {[
+                      "Distribute tasks evenly across your team",
+                      "Respect global time zones and work hours",
+                      "Define sprint cycles and auto-fill capacity"
+                    ].map((item) => (
+                      <div key={item} className="flex items-start gap-3 text-left">
+                        <div className="mt-1 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                          <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
+                        </div>
+                        <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
+                          {item}
+                        </p>
                       </div>
-                      <p className="text-base sm:text-lg text-slate-600 font-medium leading-relaxed">
-                        {item}
-                      </p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </motion.div>
 
                 <FeatureStack items={[
@@ -215,10 +217,12 @@ export default function Scheduling() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-6xl mx-auto">
               {scheduleFeatures.map((feature, i) => (
                 <TiltCard key={i} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-8 rounded-[2rem] h-full transition-all duration-300 group">
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-300 group-hover:scale-110 ${getColorClasses(feature.color)}`}>
-                    <feature.icon size={22} strokeWidth={2.5} />
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:scale-110 shrink-0 ${getColorClasses(feature.color)}`}>
+                      <feature.icon size={22} strokeWidth={2.5} />
+                    </div>
+                    <h3 className="text-xl font-black text-slate-900 leading-tight">{feature.title}</h3>
                   </div>
-                  <h3 className="text-xl font-black text-slate-900 mb-3 leading-tight">{feature.title}</h3>
                   <p className="text-slate-600 text-base font-medium leading-relaxed">{feature.desc}</p>
                 </TiltCard>
               ))}

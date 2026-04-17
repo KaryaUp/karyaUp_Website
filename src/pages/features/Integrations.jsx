@@ -478,24 +478,23 @@ export default function Integrations() {
                   className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group"
                 >
                   <div className="flex flex-col h-full">
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md ${getColorClasses(item.color)}`}>
-                      <img
-                        src={item.logo}
-                        alt={item.name}
-                        className={`${item.name === "Microsoft Teams" ? "w-8 h-8 sm:w-10 sm:h-10" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
-                        style={{ filter: item.color === 'white' ? 'none' : '' }}
-                      />
-                    </div>
-
-                    <div className="flex-grow flex flex-col">
-                      <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">
+                    <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                      <div className={`w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl flex items-center justify-center transition-all duration-300 group-hover:shadow-md ${getColorClasses(item.color)}`}>
+                        <img
+                          src={item.logo}
+                          alt={item.name}
+                          className={`${item.name === "Microsoft Teams" ? "w-8 h-8 sm:w-10 sm:h-10" : "w-5 h-5 sm:w-6 sm:h-6"} object-contain`}
+                          style={{ filter: item.color === 'white' ? 'none' : '' }}
+                        />
+                      </div>
+                      <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">
                         {item.name}
                       </h3>
+                    </div>
                       <p className="text-slate-600 text-sm font-medium leading-relaxed">
                         {item.desc}
                       </p>
                     </div>
-                  </div>
                 </TiltCard>
               ))}
             </div>

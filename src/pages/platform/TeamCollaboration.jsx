@@ -526,9 +526,9 @@ export default function TeamCollaboration() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[9px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-              Team Collaboration - One Team, One Goal
+                Team Collaboration - One Team, One Goal
               </motion.div>
 
               <motion.h1

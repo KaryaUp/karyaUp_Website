@@ -190,7 +190,10 @@ for (let i = 1; i <= frameCount; i++) {
 }
 
 // Draw first frame once it loads
-images[0].onload = renderFrame;
+images[0].onload = () => {
+    renderFrame();
+    setBgLayer(0); // Fade in initial Dark Gradient background
+};
 
 function renderFrame() {
     context.clearRect(0, 0, canvas.width, canvas.height);

@@ -624,9 +624,9 @@ export default function BossDashboard() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[09px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-               Boss Dashboard - Global Workspace Status
+                Boss Dashboard - GLOBAL WORKSPACE STATUS
               </motion.div>
 
               <motion.h1
@@ -821,16 +821,7 @@ export default function BossDashboard() {
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
 
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-14 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-purple-700 font-bold text-sm mb-6 shadow-sm border border-purple-100"
-            >
-              <Sparkles className="w-4 h-4" /> KaryaUp AI Workspace
-            </motion.div>
-
+          <div className="text-center mb-10 relative z-10">
             <motion.h1
               initial={{ opacity: 0, y: 40, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
@@ -864,8 +855,8 @@ export default function BossDashboard() {
             {aiFeatures.map((feature, i) => (
               <TiltCard
                 key={i}
-                className="bg-white border border-slate-200 lg:hover:border-purple-300 shadow-xl p-7 sm:p-8 rounded-[2rem] cursor-default group"
-              >
+                className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
+              
                 <div className="flex items-center gap-4 mb-3">
                   <div className={`w-12 h-12 shrink-0 rounded-2xl flex items-center justify-center transition-all duration-500 border border-transparent group-hover:scale-110 ${getColorClasses(feature.color)}`}>
                     {feature.icon}

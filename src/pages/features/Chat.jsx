@@ -320,17 +320,19 @@ export default function Chat() {
               <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
                 <div className="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-full blur-3xl -mr-8 -mt-8 pointer-events-none" />
 
-                <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
-                  <Users className="w-5 h-5 sm:w-6 sm:h-6" />
+                <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                  <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
+                    <Users className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 leading-tight">Group Chat</h3>
                 </div>
-                <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">Group Chat</h3>
                 <p className="relative z-10 text-slate-600 text-sm font-medium leading-relaxed mb-4 min-h-0 sm:min-h-[40px]">"Collaborate with your entire team in real time"</p>
                 <div className="relative z-10 space-y-2.5">
                   {[
                     { text: "Team discussions", icon: Users },
                     { text: "File sharing", icon: FileText },
                     { text: "Mentions & threads", icon: Reply },
-                  
+
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2.5">
                       <div className="w-4 h-4 rounded-full bg-purple-50 text-purple-600 flex items-center justify-center flex-shrink-0">
@@ -346,10 +348,12 @@ export default function Chat() {
               <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
                 <div className="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-full blur-3xl -mr-8 -mt-8 pointer-events-none" />
 
-                <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
-                  <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
+                <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                  <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
+                    <MessageSquare className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 leading-tight">Personal Chat</h3>
                 </div>
-                <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">Personal Chat</h3>
                 <p className="relative z-10 text-slate-600 text-sm font-medium leading-relaxed mb-4 min-h-0 sm:min-h-[40px]">"Quick 1:1 conversations without noise"</p>
                 <div className="relative z-10 space-y-2.5">
                   {[
@@ -371,10 +375,12 @@ export default function Chat() {
               <TiltCard className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
                 <div className="absolute top-0 right-0 w-28 h-28 bg-purple-500/10 rounded-full blur-3xl -mr-8 -mt-8 pointer-events-none" />
 
-                <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
-                  <Kanban className="w-5 h-5 sm:w-6 sm:h-6" />
+                <div className="flex items-center gap-4 mb-5 sm:mb-6">
+                  <div className="relative z-10 w-10 h-10 sm:w-12 sm:h-12 shrink-0 rounded-xl bg-purple-100 border border-purple-200 flex items-center justify-center transition-all duration-300 group-hover:shadow-md group-hover:scale-110 group-hover:bg-[#7e22ce] group-hover:text-white text-purple-600">
+                    <Kanban className="w-5 h-5 sm:w-6 sm:h-6" />
+                  </div>
+                  <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 leading-tight">Project-Based Chat</h3>
                 </div>
-                <h3 className="relative z-10 text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">Project-Based Chat</h3>
                 <p className="relative z-10 text-slate-600 text-sm font-medium leading-relaxed mb-4 min-h-0 sm:min-h-[40px]">"Every project gets its own conversation space"</p>
                 <div className="relative z-10 space-y-2.5">
                   {[
@@ -505,8 +511,10 @@ export default function Chat() {
           description="Communicate seamlessly within your tasks, documents, and workflows so you never lose context."
           image={chatImg}
           imageAlt="KaryaUp Chat Interface"
+          imageClassName="w-full rounded-[calc(1.5rem-1.5px)] bg-slate-950 overflow-hidden"
           containerClassName="mt-12 sm:mt-16 lg:mt-20"
           paddingClassName="p-3 pt-6 sm:p-4 lg:p-4 lg:py-6"
+          imageFrameClassName="p-[1.5px] rounded-3xl bg-[conic-gradient(from_var(--border-angle),#7e22ce,#ec4899,#00ccff,#7e22ce)] shadow-[0_0_40px_rgba(126,34,206,0.25)]"
         />
       </div>
     </>

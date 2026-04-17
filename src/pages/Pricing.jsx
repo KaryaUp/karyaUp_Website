@@ -8,7 +8,6 @@ import {
   ArrowRight,
   Zap,
   Shield,
-  Star,
   Rocket,
   Globe,
   Minus,
@@ -21,7 +20,11 @@ import {
   Briefcase,
 } from "lucide-react";
 import NumberFlow from "@number-flow/react";
-import microsoftTeamsLogo from "../assets/Teams-logo.webp";
+import hubspotLogo from "../assets/hubspot.webp";
+import hubstaffLogo from "../assets/hubstaff.webp";
+import pagarbookLogo from "../assets/pagarbook.webp";
+import zoominfoLogo from "../assets/zoominfo.webp";
+import zapierLogo from "../assets/zapier.webp";
 import { Helmet } from "react-helmet-async";
 
 const authUrl = "https://app.karyaup.com/auth";
@@ -388,11 +391,11 @@ export default function Pricing() {
   const [isDesktop, setIsDesktop] = useState(false);
   const [selectedApps, setSelectedApps] = useState([
     "slack",
-    "drive",
-    "gmail",
-    "meet",
-    "calendar",
-    "teams",
+    "hubspot",
+    "hubstaff",
+    "pagarbook",
+    "zoominfo",
+    "zapier",
   ]);
   const [userCount, setUserCount] = useState(250);
   const [stickyHeaderVisible, setStickyHeaderVisible] = useState(false);
@@ -477,30 +480,30 @@ export default function Pricing() {
       logo: "https://upload.wikimedia.org/wikipedia/commons/d/d5/Slack_icon_2019.svg",
     },
     {
-      id: "drive",
-      name: "Google Drive",
+      id: "hubspot",
+      name: "HubSpot",
       price: 13,
-      logo: "https://upload.wikimedia.org/wikipedia/commons/1/12/Google_Drive_icon_%282020%29.svg",
+      logo: hubspotLogo,
     },
     {
-      id: "gmail",
-      name: "Gmail",
+      id: "hubstaff",
+      name: "Hubstaff",
       price: 6,
-      logo: "https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg",
+      logo: hubstaffLogo,
     },
     {
-      id: "meet",
-      name: "Google Meet",
+      id: "pagarbook",
+      name: "PagarBook",
       price: 8,
-      logo: "https://upload.wikimedia.org/wikipedia/commons/9/9b/Google_Meet_icon_%282020%29.svg",
+      logo: pagarbookLogo,
     },
     {
-      id: "calendar",
-      name: "Google Calendar",
+      id: "zoominfo",
+      name: "ZoomInfo",
       price: 5,
-      logo: "https://upload.wikimedia.org/wikipedia/commons/a/a5/Google_Calendar_icon_%282020%29.svg",
+      logo: zoominfoLogo,
     },
-    { id: "teams", name: "MS Teams", price: 12, logo: microsoftTeamsLogo },
+    { id: "zapier", name: "Zapier", price: 12, logo: zapierLogo },
   ];
 
   const toggleApp = (id) => {
@@ -655,15 +658,6 @@ export default function Pricing() {
                         : "border-transparent"
                         }`}
                     />
-                    {plan.popular && (
-                      <div className="absolute top-6 sm:top-8 lg:top-10 right-[-1px] z-20">
-                        <div className="text-[9px] font-black uppercase text-[#7e22ce] px-3 sm:px-4 py-2 rounded-l-full flex items-center gap-1 sm:gap-2 border-y border-l border-white/20 bg-white shadow-lg shadow-purple-900/20">
-                          <Star size={10} className="fill-[#7e22ce]" />
-                          Most Popular
-                        </div>
-                      </div>
-                    )}
-
                     <div className="relative z-10 flex flex-col flex-grow">
                       <div className="mb-6 sm:mb-8 lg:mb-10">
                         <h3
@@ -1048,25 +1042,22 @@ export default function Pricing() {
                         onClick={() => toggleApp(app.id)}
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className={`relative aspect-square rounded-2xl sm:rounded-3xl flex items-center justify-center transition-all p-1 sm:p-1.5 ${selectedApps.includes(app.id)
+                        className={`relative aspect-square rounded-2xl sm:rounded-3xl flex items-center justify-center transition-all p-1 sm:p-1.5 overflow-hidden ${selectedApps.includes(app.id)
                           ? "bg-[#7e22ce]/10"
                           : "bg-transparent hover:bg-slate-50"
                           }`}
                       >
-                        <img
-                          src={app.logo}
-                          alt={app.name}
-                          className={`${app.id === "teams" ? "w-11 h-11 sm:w-14 sm:h-14 scale-125" : "w-8 h-8 sm:w-10 sm:h-10"} object-contain`}
-                        />
-                        {selectedApps.includes(app.id) && (
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            className="absolute -top-1 -right-1 w-4 h-4 sm:w-5 sm:h-5 bg-[#7e22ce] rounded-full flex items-center justify-center text-white"
-                          >
-                            <Check size={10} strokeWidth={4} />
-                          </motion.div>
-                        )}
+                        {/* Blend wrapper – isolate from motion transform stacking context */}
+                        <span
+                          className="flex items-center justify-center w-full h-full"
+                          style={{ mixBlendMode: "multiply" }}
+                        >
+                          <img
+                            src={app.logo}
+                            alt={app.name}
+                            className="w-12 h-12 sm:w-16 sm:h-16 object-contain"
+                          />
+                        </span>
                       </motion.button>
                     ))}
                   </div>
@@ -1193,10 +1184,10 @@ export default function Pricing() {
                 viewport={{ once: true }}
                 className="text-center mb-10 sm:mb-12 lg:mb-16"
               >
-                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 sm:mb-6 font-display tracking-tight">
+                <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 mb-4 sm:mb-6 font-display tracking-tight leading-[1.2]">
                   Got{" "}
                   <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto] italic"
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-[#ec4899] to-[#7e22ce] bg-[length:200%_auto] italic pb-1"
                     animate={{
                       backgroundPosition: ["0% center", "-200% center"],
                     }}

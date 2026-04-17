@@ -1,4 +1,4 @@
-import { Helmet } from "react-helmet-async";
+ import { Helmet } from "react-helmet-async";
 import React, { useRef, useState, useEffect, useMemo, isStackOpen } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
@@ -106,9 +106,9 @@ export default function Enterprise() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
+                className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm mb-2 sm:mb-4"
               >
-               Enterprise - Employee Experience
+                Enterprise - Employee Experience
               </motion.div>
 
               <motion.h1
@@ -190,7 +190,7 @@ export default function Enterprise() {
             </motion.span>
           </motion.h2>
           <p className="text-sm text-gray-600 max-w-2xl mx-auto">
-            KaryaUp is trusted by global enterprises to deliver secure, 
+            KaryaUp is trusted by global enterprises to deliver secure,
 
             and integrated solutions that empower teams.
           </p>
@@ -201,22 +201,38 @@ export default function Enterprise() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 px-4"
         >
           {[
             { title: "Enterprise Workspace", desc: "High-Velocity Enterprise Workspace.", icon: Zap, color: "purple" },
             { title: "Strategic Dashboards", desc: "Strategic Executive Dashboards.", icon: Lock, color: "fuchsia" },
-            { title: "Adaptive Roadmaps (Gantt)", desc: "Visualize the future of enterprise delivery with high-fidelity visual scheduling.", icon: Grid, color: "purple" },
-            { title: "Secure Data", desc: "Scale globally without compromising sensitive data. KaryaUp is trusted by global enterprises", icon: Globe, color: "fuchsia" },
+            { title: "Smart Gantt", desc: "Visualize the future of enterprise delivery.", icon: Grid, color: "purple" },
+            { title: "Secure Data", desc: "Scale globally without compromising sensitive data.", icon: Globe, color: "fuchsia" },
           ].map((feature, idx) => {
             const Icon = feature.icon;
             return (
-              <TiltCard key={idx} className="bg-white border border-slate-200 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-full transition-colors transition-shadow duration-300 group">
-                <div className={`w-10 h-10 sm:w-12 sm:h-10 rounded-xl flex items-center justify-center mb-5 sm:mb-6 transition-all duration-300 group-hover:shadow-md group-hover:scale-110 ${getColorClasses(feature.color)}`}>
-                  <Icon size={20} strokeWidth={2.5} />
+              <TiltCard key={idx} className="bg-white border border-slate-200 hover:border-purple-300 shadow-xl shadow-slate-200/40 hover:shadow-2xl hover:shadow-purple-900/15 p-7 sm:p-8 rounded-[2rem] cursor-default h-fulltransition-colors transition-shadow duration-300 group">
+
+                {/* LOGO AND HEADING SIDE-BY-SIDE */}
+                <div className="flex items-center gap-2 mb-3 sm:mb-4">
+                  <div className={`
+            w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center 
+            transition-all duration-300 shrink-0
+            group-hover:shadow-md group-hover:scale-110 
+            ${getColorClasses(feature.color)}
+          `}>
+                    <Icon size={20} strokeWidth={2.5} />
+                  </div>
+
+                  <h3 className="text-lg sm:text-xl font-black text-slate-900 leading-tight">
+                    {feature.title}
+                  </h3>
                 </div>
-                <h3 className="text-lg sm:text-xl font-black text-slate-900 mb-2.5 leading-tight">{feature.title}</h3>
-                <p className="text-slate-600 text-sm font-medium leading-relaxed">{feature.desc}</p>
+
+                {/* DESCRIPTION */}
+                <p className="text-slate-600 text-sm font-medium leading-relaxed">
+                  {feature.desc}
+                </p>
               </TiltCard>
             );
           })}
@@ -225,20 +241,13 @@ export default function Enterprise() {
 
       {/* ================= AI WORKSPACE SECTION ================= */}
 
-      <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden border-t border-slate-200">
+      <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />
 
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white text-purple-700 font-bold text-sm mb-3 shadow-sm border border-purple-100"
-            >
-              <Sparkles className="w-4 h-4" /> Unified Task Workspace
-            </motion.div>
+
 
             <motion.h1
               initial={{ opacity: 0, y: 40, x: -10 }}
@@ -354,7 +363,7 @@ export default function Enterprise() {
 
       {/* ================= CTA ================= */}
       <FeatureCTA
-       title={<>Tasks That Connect To <br /> Everything You Do</>}
+        title={<>Tasks That Connect To <br /> Everything You Do</>}
         description="Work Smater with tasks that can live in your whiteboaards,chat,calendar - anywhere you work"
         image={dashboardImage}
         imageAlt="KaryaUp dashboard"
