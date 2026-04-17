@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react";
-import {
-  motion,
+import { motion as Motion,
   useMotionValue,
   useSpring,
   useVelocity,
   useTransform,
 } from "framer-motion";
 import NumberFlow from "@number-flow/react";
+import FeatureCTA from "../../components/FeatureCTA";
+import FeatureStack from "../../components/FeatureStack";
+import featureSalary from "../../assets/Salary.webp";
+import { Helmet } from "react-helmet-async";
 import {
   BriefcaseBusiness,
   Check,
@@ -58,7 +61,7 @@ const TiltCard = ({ children, className }) => {
   };
 
   return (
-    <motion.div
+    <Motion.div
       ref={ref}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -69,8 +72,10 @@ const TiltCard = ({ children, className }) => {
         transformPerspective: 1000,
       }}
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      className={className}
+      tabIndex={0}
+      className={`${className} active:border-purple-300 active:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/30`}
     >
       <div
         style={{ transform: "translateZ(30px)" }}
@@ -78,47 +83,9 @@ const TiltCard = ({ children, className }) => {
       >
         {children}
       </div>
-    </motion.div>
+    </Motion.div>
   );
 };
-import FeatureCTA from "../../components/FeatureCTA";
-import FeatureStack from "../../components/FeatureStack";
-import featureSalary from "../../assets/Salary.webp";
-import { Helmet } from "react-helmet-async";
-
-const salaryTags = [
-  "Auto calculations",
-  "Deduction breakdowns",
-  "Payslip generation",
-  "Full salary history",
-];
-
-const payrollRows = [
-  { label: "Base salary", value: "₹58,000", tone: "text-slate-900" },
-  { label: "Allowances", value: "+ ₹7,500", tone: "text-emerald-600" },
-  { label: "Deductions", value: "- ₹4,860", tone: "text-rose-600" },
-  { label: "Net payout", value: "₹60,640", tone: "text-[#7e22ce]" },
-];
-
-const profitFilters = [
-  { label: "Project", value: "KaryaUp" },
-  { label: "Time range", value: "Last month" },
-  { label: "Filter by member", value: "All members" },
-];
-
-const profitSummary = [
-  { label: "Total salary cost", amount: 142000 },
-  { label: "Other actual cost", amount: 220000 },
-  { label: "Total cost", amount: 362000 },
-  { label: "Profit", amount: 78000, tone: "text-emerald-600" },
-];
-
-const memberCostRows = [
-  { name: "Design", owner: "Aarav", cost: "₹42,000", share: "18%" },
-  { name: "Frontend", owner: "Priya", cost: "₹58,000", share: "24%" },
-  { name: "Backend", owner: "Rohan", cost: "₹64,000", share: "27%" },
-];
-
 const profitInsights = [
   {
     title: "See margin before payout",
@@ -304,15 +271,15 @@ export default function Salary() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
                 >
                   PAYROLL -AUTOMATE YOUR SALARY
-                </motion.div>
-                <motion.h1
+                </Motion.div>
+                <Motion.h1
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -325,7 +292,7 @@ export default function Salary() {
                   Salary That Removes
                   <span className="block">
                     {" "}
-                    <motion.span
+                    <Motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                       animate={{
                         backgroundPosition: ["0% center", "-200% center"],
@@ -337,11 +304,11 @@ export default function Salary() {
                       }}
                     >
                       Ambiguity
-                    </motion.span>
+                    </Motion.span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -357,7 +324,7 @@ export default function Salary() {
                       "Instant payslips & full history tracking",
                     ].map((text, i) => (
                       <div key={i} className="flex items-start gap-4 text-left">
-                        <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                        <div className="mt-0.5 sm:mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                           <Check
                             size={10}
                             className="text-[#7e22ce] stroke-[4]"
@@ -369,7 +336,7 @@ export default function Salary() {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </Motion.div>
 
                 <FeatureStack
                   items={[
@@ -381,7 +348,7 @@ export default function Salary() {
                 />
               </div>
 
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -505,14 +472,14 @@ export default function Salary() {
                   {/* Glassy Overlay for "Unclickable" feel visually */}
                   <div className="absolute inset-0 bg-white/5 pointer-events-none" />
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
 
         <section className="pt-4 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: 24 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
@@ -527,7 +494,7 @@ export default function Salary() {
                 Boss Dashboard
                 <span className="block">
                   {" "}
-                  <motion.span
+                  <Motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{
                       backgroundPosition: ["0% center", "-200% center"],
@@ -539,7 +506,7 @@ export default function Salary() {
                     }}
                   >
                     For Project Profit
-                  </motion.span>
+                  </Motion.span>
                 </span>
               </h2>
               <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-slate-600">
@@ -547,7 +514,7 @@ export default function Salary() {
                 team salary impact so they can track margins before payroll
                 closes.
               </p>
-            </motion.div>
+            </Motion.div>
 
             <div
               onMouseMove={handleMouseMove}
@@ -558,7 +525,7 @@ export default function Salary() {
               {/* Snake Trail Effect */}
               {!isMobile &&
                 segments.map((seg, i) => (
-                  <motion.div
+                  <Motion.div
                     key={i}
                     className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
                     style={{
@@ -582,7 +549,7 @@ export default function Salary() {
 
               {/* Lead Cursor Glow */}
               {!isMobile && (
-                <motion.div
+                <Motion.div
                   className="absolute w-80 h-80 pointer-events-none z-[90] rounded-full mix-blend-screen"
                   style={{
                     left: s1x,
@@ -603,7 +570,7 @@ export default function Salary() {
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_0%_100%,rgba(236,72,153,0.12),transparent_40%)] pointer-events-none" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(126,34,206,0.14),transparent_35%)] pointer-events-none" />
 
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -614,23 +581,23 @@ export default function Salary() {
                 }}
                 className="grid gap-6 sm:gap-8 xl:grid-cols-[0.84fr_1.16fr] relative z-10"
               >
-                <div className="relative flex flex-col justify-center">
-                  <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] sm:tracking-[0.18em] text-emerald-300 w-fit">
+                <div className="relative flex flex-col items-center text-center justify-center lg:items-start lg:text-left">
+                  <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.16em] sm:tracking-[0.18em] text-emerald-300 w-fit mx-auto lg:mx-0">
                     <TrendingUp className="h-3.5 w-3.5" />
                     Leadership view
                   </div>
-                  <h3 className="mt-4 text-[1.75rem] sm:text-3xl font-black tracking-tight leading-[1.08] text-white">
+                  <h3 className="mt-4 text-[1.75rem] sm:text-3xl font-black tracking-tight leading-[1.12] sm:leading-[1.08] text-white">
                     Understand Which Projects
-                    <span className="mt-1 sm:mt-2 block bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
+                    <span className="mt-1 sm:mt-2 block pb-1 bg-gradient-to-r from-[#7e22ce] via-fuchsia-400 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent">
                       Actually Make Money
                     </span>
                   </h3>
-                  <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-400">
+                  <p className="mt-3 max-w-md text-sm font-medium leading-relaxed text-slate-400 mx-auto lg:mx-0">
                     Bring billing, real spend, and salary allocation into one
                     dashboard.
                   </p>
 
-                  <div className="mt-5 grid gap-3">
+                  <div className="mt-5 grid gap-3 w-full max-w-md mx-auto lg:mx-0">
                     {profitInsights.map((item) => (
                       <div
                         key={item.title}
@@ -753,7 +720,7 @@ export default function Salary() {
                   {/* Polish Overlay */}
                   <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-white/20 to-transparent pointer-events-none" />
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -782,7 +749,7 @@ export default function Salary() {
             {salaryFeatures.map((feature, i) => {
               const Icon = feature.icon;
               return (
-                <motion.div
+                <Motion.div
                   key={i}
                   initial={{ opacity: 0, y: 24 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -805,7 +772,7 @@ export default function Salary() {
                       {feature.desc}
                     </p>
                   </TiltCard>
-                </motion.div>
+                </Motion.div>
               );
             })}
           </div>
@@ -822,7 +789,7 @@ export default function Salary() {
             "Automated payroll generation in one click",
             "Visual profit analysis per project",
           ]}
-          buttonText="Streamline Payroll Now"
+          buttonText="Get Started It's Free"
           image={featureSalary}
           imageAlt="KaryaUp salary dashboard"
           containerClassName="mt-0"
@@ -833,3 +800,5 @@ export default function Salary() {
     </>
   );
 }
+
+

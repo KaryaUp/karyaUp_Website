@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion, useMotionValue, useSpring, useVelocity, useTransform } from "framer-motion";
+import { motion as Motion, useMotionValue, useSpring, useVelocity, useTransform } from "framer-motion";
 import {
   Camera,
   Check,
@@ -26,6 +26,30 @@ const attendanceRows = [
   { name: "Arjun Jetti", team: "Design", punchIn: "09:02 AM", status: "On Time" },
   { name: "Sara Khan", team: "QA", punchIn: "--", status: "Late" },
 ];
+
+const SnakeParticle = ({ seg, index, isHovered, movementOpacity }) => {
+  const particleOpacity = useTransform(movementOpacity, (value) =>
+    isHovered ? (index === 0 ? seg.opacity : value * seg.opacity) : 0,
+  );
+
+  return (
+    <Motion.div
+      className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
+      style={{
+        width: seg.size,
+        height: seg.size,
+        left: seg.x,
+        top: seg.y,
+        x: "-50%",
+        y: "-50%",
+        opacity: particleOpacity,
+        scale: isHovered ? 1 : 0,
+        background: "radial-gradient(circle, rgba(192, 38, 211, 0.9) 0%, rgba(168, 85, 247, 0) 70%)",
+        filter: `blur(${seg.blur}px)`,
+      }}
+    />
+  );
+};
 
 export default function Attendance() {
   const [isHovered, setIsHovered] = useState(false);
@@ -121,7 +145,7 @@ export default function Attendance() {
         <AttendanceHero />
 
         <section className="relative overflow-hidden pt-4 lg:pt-8 pb-12 sm:pb-16 lg:pb-20">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+              <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div
               onMouseMove={handleMouseMove}
               onMouseEnter={() => setIsHovered(true)}
@@ -130,28 +154,17 @@ export default function Attendance() {
             >
               {/* Snake Trail Effect */}
               {segments.map((seg, i) => (
-                <motion.div
+                <SnakeParticle
                   key={i}
-                  className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
-                  style={{
-                    width: seg.size,
-                    height: seg.size,
-                    left: seg.x,
-                    top: seg.y,
-                    x: "-50%",
-                    y: "-50%",
-                    opacity: useTransform([movementOpacity], ([v]) =>
-                      isHovered ? (i === 0 ? seg.opacity : v * seg.opacity) : 0,
-                    ),
-                    scale: isHovered ? 1 : 0,
-                    background: `radial-gradient(circle, rgba(192, 38, 211, 0.9) 0%, rgba(168, 85, 247, 0) 70%)`,
-                    filter: `blur(${seg.blur}px)`,
-                  }}
+                  seg={seg}
+                  index={i}
+                  isHovered={isHovered}
+                  movementOpacity={movementOpacity}
                 />
               ))}
 
               {/* Lead Cursor Glow */}
-              <motion.div
+              <Motion.div
                 className="absolute w-80 h-80 pointer-events-none z-[90] rounded-full mix-blend-screen"
                 style={{
                   left: s1x,
@@ -174,7 +187,7 @@ export default function Attendance() {
                   <div className="pointer-events-none absolute top-0 right-0 h-64 w-64 rounded-full bg-purple-600/20 blur-[70px]" />
                   <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 rounded-full bg-fuchsia-600/20 blur-[70px]" />
 
-                  <motion.div
+                  <Motion.div
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
@@ -202,7 +215,7 @@ export default function Attendance() {
                     <div className="mt-5 w-full max-w-xl flex flex-col items-start lg:items-start">
                       <div className="space-y-2.5 w-fit">
                         {scanSteps.map((item, index) => (
-                          <motion.div
+                          <Motion.div
                             key={item}
                             initial={{ opacity: 0, x: -18 }}
                             whileInView={{ opacity: 1, x: 0 }}
@@ -214,19 +227,19 @@ export default function Attendance() {
                               <Check className="h-2.5 w-2.5 stroke-[4]" />
                             </div>
                             <span className="text-sm font-medium text-slate-400">{item}</span>
-                          </motion.div>
+                          </Motion.div>
                         ))}
                       </div>
                     </div>
 
                     <div className="mt-5 sm:mt-6 flex max-w-md items-center gap-3 sm:gap-4 rounded-[1.5rem] border border-purple-900/40 bg-slate-900/70 p-3.5 sm:p-4 text-left shadow-lg shadow-purple-950/20 mx-auto lg:mx-0">
                       <div className="relative flex h-24 w-20 sm:h-28 sm:w-24 shrink-0 items-center justify-center rounded-[1.25rem] sm:rounded-[1.5rem] border border-purple-500/25 bg-black/50">
-                        <motion.div
+                        <Motion.div
                           animate={{ scale: [0.96, 1.04, 0.96], opacity: [0.35, 0.75, 0.35] }}
                           transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
                           className="absolute inset-2 sm:inset-3 rounded-[0.85rem] sm:rounded-[1rem] border border-fuchsia-400/40"
                         />
-                        <motion.div
+                        <Motion.div
                           animate={{ y: [-20, 20, -20] }}
                           transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
                           className="absolute left-2 right-2 h-6 sm:h-8 rounded-full bg-gradient-to-r from-transparent via-fuchsia-400/45 to-transparent blur-md"
@@ -257,11 +270,11 @@ export default function Attendance() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </Motion.div>
                 </div>
 
                 <div className="relative bg-transparent px-6 py-6 sm:px-8 sm:py-8">
-                  <motion.div
+                  <Motion.div
                     initial={{ opacity: 0, y: 18 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, amount: 0.25 }}
@@ -284,14 +297,14 @@ export default function Attendance() {
                         </p>
                       </div>
 
-                      <motion.div
+                      <Motion.div
                         whileHover={{ y: -2 }}
                         whileTap={{ scale: 0.98 }}
                         className="inline-flex items-center gap-2 self-center sm:self-start rounded-2xl border border-white/10 bg-white px-4 py-3 text-sm font-black text-black shadow-lg shadow-white/10"
                       >
                         <FileSpreadsheet className="h-4 w-4" />
                         Download CSV
-                      </motion.div>
+                      </Motion.div>
                     </div>
                   </div>
 
@@ -321,7 +334,7 @@ export default function Attendance() {
                                 : "border-rose-200 bg-rose-50 text-rose-700";
 
                           return (
-                            <motion.div
+                            <Motion.div
                               key={row.name}
                               initial={{ opacity: 0, x: 24 }}
                               whileInView={{ opacity: 1, x: 0 }}
@@ -361,7 +374,7 @@ export default function Attendance() {
                               <div className={`hidden sm:inline-flex items-center justify-center rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-[0.18em] ${statusStyles}`}>
                                 {row.status}
                               </div>
-                            </motion.div>
+                            </Motion.div>
                           );
                         })}
                       </div>
@@ -374,7 +387,7 @@ export default function Attendance() {
                         </div>
                       </div>
                     </div>
-                  </motion.div>
+                  </Motion.div>
                 </div>
               </div>
             </div>
@@ -396,7 +409,7 @@ export default function Attendance() {
           imageAlt="KaryaUp attendance dashboard"
           containerClassName="mt-0"
           paddingClassName="p-3 lg:p-4 lg:py-6"
-          imageClassName="w-full max-w-[940px]"
+          imageClassName="w-full max-w-[940px] overflow-hidden rounded-[24px] sm:rounded-[18px]"
           imageOuterClassName="relative w-[92%] lg:w-full mx-auto lg:mx-0 translate-x-0 lg:translate-x-8"
         />
       </div>

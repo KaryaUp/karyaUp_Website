@@ -1,12 +1,19 @@
 import React, { lazy, Suspense, useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import { ArrowRight, Check, CalendarDays, Clock, Globe, Layout } from "lucide-react";
+import { motion as Motion } from "framer-motion";
+import {
+  ArrowRight,
+  Check,
+  CalendarDays,
+  Clock,
+  Globe,
+  Layout,
+} from "lucide-react";
 import FeatureStack from "../../components/FeatureStack";
 import FeatureCTA from "../../components/FeatureCTA";
 import calenderImg from "../../assets/calender.webp";
 import { Helmet } from "react-helmet-async";
 const CalendarStickySection = lazy(
-  () => import("../../components/CalendarStickySection")
+  () => import("../../components/CalendarStickySection"),
 );
 
 export default function CalendarPage() {
@@ -51,10 +58,7 @@ export default function CalendarPage() {
         />
         <meta property="og:site_name" content="Karyaup" />
 
-        <link
-          rel="canonical"
-          href="https://karyaup.com/features/calendar"
-        />
+        <link rel="canonical" href="https://karyaup.com/features/calendar" />
       </Helmet>
       <div className="min-h-screen bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900">
         {/* Hero Section */}
@@ -67,42 +71,53 @@ export default function CalendarPage() {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
               {/* Left Content */}
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
                 >
                   CALENDAR — ORGANIZE YOUR SCHEDULE
-                </motion.div>
-                <motion.h1
+                </Motion.div>
+                <Motion.h1
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black tracking-normal leading-[1.05] text-slate-900"
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.08,
+                  }}
+                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black tracking-normal leading-[1.12] sm:leading-[1.05] text-slate-900"
                 >
                   Master Your Time With
                   <span className="block">
                     {" "}
-                    <span className="text-gradient inline-block">
+                    <span
+                      className="text-gradient inline-block pb-1 tracking-[0.02em] sm:tracking-normal"
+                      style={{ letterSpacing: "0.03em" }}
+                    >
                       Unified Calendar
                     </span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                  transition={{
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.18,
+                  }}
                   className="mt-4 sm:mt-6 w-full max-w-[28rem] mx-auto lg:max-w-none lg:mx-0 flex flex-col items-center lg:items-start"
                 >
                   <div className="space-y-3 w-fit">
                     {[
                       "Unified view for tasks, meetings & deadlines",
-                      "Visual timelines & seamless team coordination"
+                      "Visual timelines & seamless team coordination",
                     ].map((text, i) => (
                       <div key={i} className="flex items-start gap-4 text-left">
-                        <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                        <div className="mt-0.5 sm:mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                           <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
                         </div>
                         <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
@@ -111,21 +126,27 @@ export default function CalendarPage() {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </Motion.div>
 
-                <FeatureStack items={[
-                  { label: "Task scheduling", icon: CalendarDays },
-                  { label: "Meeting invites", icon: Clock },
-                  { label: "Global tracking", icon: Globe },
-                  { label: "Timeline view", icon: Layout }
-                ]} />
+                <FeatureStack
+                  items={[
+                    { label: "Task scheduling", icon: CalendarDays },
+                    { label: "Meeting invites", icon: Clock },
+                    { label: "Global tracking", icon: Globe },
+                    { label: "Timeline view", icon: Layout },
+                  ]}
+                />
               </div>
 
               {/* Right Hero Image - Without SVGs */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: 0.18,
+                }}
                 className="relative w-full max-w-[420px] sm:max-w-[480px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-8 xl:-mr-16 mt-4 sm:mt-8 lg:mt-0"
               >
                 <div className="relative">
@@ -137,7 +158,7 @@ export default function CalendarPage() {
                     />
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -148,7 +169,11 @@ export default function CalendarPage() {
 
         {/* Calendar Feature CTA */}
         <FeatureCTA
-          title={<>Stay Synced With Your <br /> Schedule.</>}
+          title={
+            <>
+              Stay Synced With Your <br /> Schedule.
+            </>
+          }
           description="Connect your favorite tools and never miss a deadline. Automatically sync your scheduled tasks, meetings, and content publishing."
           buttonText="Start Scheduling"
           image={calenderImg}
@@ -158,7 +183,6 @@ export default function CalendarPage() {
           imageClassName="w-full max-w-[760px] mx-auto"
           imageOuterClassName="relative flex w-full max-w-[300px] items-center justify-center mx-auto -translate-x-2 sm:w-[102%] sm:max-w-none sm:translate-x-0 lg:w-[88%] lg:translate-x-3"
         />
-
       </div>
     </>
   );

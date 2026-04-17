@@ -32,12 +32,8 @@ export default function TeamHierarchySection() {
       icon: RefreshCcw,
       title: "Instant Task Reassignment",
       desc: "Easily shift tasks between employees as priorities change.",
-    },
-    {
-      icon: Eye,
-      title: "Complete Visibility",
-      desc: "Monitor team structure, access, and task flow in one place.",
-    },
+    }
+  
   ];
 
   return (

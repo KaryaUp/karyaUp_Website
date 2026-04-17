@@ -277,6 +277,19 @@ body::-webkit-scrollbar {
   .badge-glass-multicolor>div {
     @apply px-3.5 py-1.5 rounded-[7px] bg-[#0a0514] backdrop-blur-md flex items-center gap-1.5 text-white/100 text-[11px] font-black uppercase tracking-widest ring-1 ring-white/10;
   }
+
+  .badge-glass-multicolor-text {
+    @apply transition-all duration-300;
+  }
+
+  .group:hover .badge-glass-multicolor-text {
+    color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    background-image: linear-gradient(to right, #7e22ce, #ec4899, #00ccff, #7e22ce);
+    background-size: 200% auto;
+    animation: gradient-move 4s linear infinite;
+  }
 }
 
 .karyaup-gradient {

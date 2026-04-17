@@ -91,8 +91,8 @@ export default function IntegrationReveal({ className = "" }) {
         style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
       >
         <div className="absolute inset-0 flex items-center justify-center">
-            {/* Left Labels */}
-            <div className="absolute left-2 sm:left-6 lg:left-20 top-1/2 -translate-y-1/2 z-10">
+            {/* Left Labels — hidden on mobile */}
+            <div className="absolute left-2 sm:left-6 lg:left-20 top-1/2 -translate-y-1/2 z-10 hidden md:block">
               <div className="flex flex-col items-end gap-5 md:gap-8 relative pr-2 md:pr-0">
                 {leftLabels.map((label, i) => (
                   <div key={label} className="flex items-center gap-3">
@@ -109,20 +109,20 @@ export default function IntegrationReveal({ className = "" }) {
               </div>
             </div>
 
-            <div className={`flex flex-col items-center gap-2 md:gap-3 pr-4 sm:pr-32 relative z-0 transition-transform duration-300 ${isMobile ? "scale-[0.85] origin-right" : ""}`}>
+            <div className={`flex flex-col items-center gap-2 md:gap-3 pr-4 sm:pr-32 relative z-0 transition-transform duration-300`}>
               {integrations.map((item, i) => (
                 <div
                   key={item.name}
                   className="flex items-center gap-3"
                   style={{ animation: `integSlideInLeft 0.6s ease-out ${i * 0.08}s both` }}
                 >
-                  <div className="flex items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-2 py-1.5 md:px-4 md:py-2 hover:bg-white/10 transition-all duration-300 min-w-[110px] md:min-w-[140px]">
+                  <div className="flex items-center gap-2 md:gap-3 bg-white/5 backdrop-blur-sm border border-white/10 rounded-lg px-3 py-2 md:px-4 md:py-2 hover:bg-white/10 transition-all duration-300 min-w-[130px] md:min-w-[140px]">
                     <img 
                       src={item.icon} 
                       alt={item.name} 
-                      className={`w-5 h-5 md:w-6 md:h-6 object-contain ${item.name === 'Teams' ? '[mix-blend-mode:plus-lighter] filter contrast-125' : ''}`} 
+                      className={`w-6 h-6 md:w-6 md:h-6 object-contain ${item.name === 'Teams' ? '[mix-blend-mode:plus-lighter] filter contrast-125' : ''}`} 
                     />
-                    <span className="text-white/80 font-bold text-[10px] md:text-xs tracking-wider uppercase">
+                    <span className="text-white/80 font-bold text-[11px] md:text-xs tracking-wider uppercase">
                       {item.name}
                     </span>
                   </div>
@@ -143,15 +143,15 @@ export default function IntegrationReveal({ className = "" }) {
                 <img
                   src={logo}
                   alt="KaryaUp"
-                  className="w-32 md:w-64 drop-shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
+                  className="w-48 md:w-64 drop-shadow-[0_0_40px_rgba(139,92,246,0.5)] transition-all duration-300"
                   style={{ 
                     animation: "integPulseGlow 3s ease-in-out infinite",
-                    transform: isMobile ? "scale(0.8)" : "none"
                   }}
                 />
               </div>
 
-              <div className="absolute right-2 sm:right-6 lg:right-20 top-1/2 -translate-y-1/2">
+              {/* Right Labels — hidden on mobile */}
+              <div className="absolute right-2 sm:right-6 lg:right-20 top-1/2 -translate-y-1/2 hidden md:block">
                 <div className="flex flex-col gap-5 md:gap-8 relative pl-2 md:pl-0">
                   {rightLabels.map((label, i) => (
                     <div key={label} className="flex items-center gap-3">

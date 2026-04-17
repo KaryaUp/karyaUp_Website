@@ -167,11 +167,10 @@ export default function Tasks() {
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] sm:ml-0 max-[390px]:text-[1.55rem] max-[390px]:leading-[1] max-[390px]:tracking-[-0.04em]"
+                  className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] sm:ml-0 max-[390px]:text-[1.55rem] max-[390px]:leading-[0.95] max-[390px]:tracking-[-0.04em]"
                 >
                   Task Management
-                  <span className="block sm:inline max-[390px]:block">
-                   <br/> {" "}
+                  <span className="block sm:inline max-[390px]:block max-[390px]:-mt-2">
                     <Motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] whitespace-nowrap max-[390px]:whitespace-normal"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
@@ -265,13 +264,13 @@ export default function Tasks() {
 
                     {/* Prompt panel / image */}
                     <div className="lg:col-span-5 flex items-center justify-center w-full">
-                      <div className="relative h-[220px] sm:h-[300px] lg:h-[360px] w-fit max-w-full p-[2.5px] rounded-[1.25rem] sm:rounded-3xl overflow-hidden group mx-auto">
+                      <div className="relative h-[250px] sm:h-[300px] lg:h-[360px] w-fit max-w-full p-[2.5px] rounded-[1.25rem] sm:rounded-3xl overflow-hidden group mx-auto">
                         <div className="absolute inset-[-100%] bg-[conic-gradient(from_var(--border-angle),#7e22ce,#ec4899,#00ccff,#7e22ce)] animate-[spin-border_4s_linear_infinite]" />
                         <div className="relative h-full w-full rounded-[calc(1.25rem-2.5px)] sm:rounded-[calc(1.5rem-2.5px)] flex items-center justify-center p-0 z-10 overflow-hidden bg-white">
                           <img
                             src={AgentAssign}
                             alt="AI Agent Workflow"
-                            className="w-full h-full object-cover mx-auto transform group-hover:scale-[1.03] transition-transform duration-500"
+                            className="w-full h-full object-contain sm:object-cover mx-auto transform group-hover:scale-[1.03] transition-transform duration-500"
                           />
                         </div>
                       </div>

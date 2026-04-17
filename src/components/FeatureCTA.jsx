@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import {
-  motion,
+  motion as Motion,
   useMotionValue,
   useSpring,
   useVelocity,
@@ -10,6 +10,30 @@ import { ArrowRight, Check } from "lucide-react";
 import logo from "../assets/logo.webp";
 
 const authUrl = "https://app.karyaup.com/auth";
+
+const TrailSegment = ({ seg, index, isHovered, movementOpacity }) => {
+  const opacity = useTransform(movementOpacity, (v) =>
+    isHovered ? (index === 0 ? seg.opacity : v * seg.opacity) : 0,
+  );
+
+  return (
+    <Motion.div
+      className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
+      style={{
+        width: seg.size,
+        height: seg.size,
+        left: seg.x,
+        top: seg.y,
+        x: "-50%",
+        y: "-50%",
+        opacity,
+        scale: isHovered ? 1 : 0,
+        background: `radial-gradient(circle, rgba(192, 38, 211, 0.9) 0%, rgba(168, 85, 247, 0) 70%)`,
+        filter: `blur(${seg.blur}px)`,
+      }}
+    />
+  );
+};
 
 export default function FeatureCTA({
   title,
@@ -24,6 +48,7 @@ export default function FeatureCTA({
   imageFrameClassName = "",
   containerClassName = "mt-24 mb-10",
   paddingClassName = "p-1.5 sm:p-3 lg:p-4",
+  shellClassName = "",
   titleClassName = "text-xl sm:text-2xl lg:text-[1.75rem] font-black text-white leading-[1.1] mb-2 tracking-tight drop-shadow-lg",
   imageOuterClassName = "relative w-full max-w-[300px] sm:max-w-[460px] lg:max-w-none lg:w-full lg:max-w-[560px] mx-auto lg:mx-0 translate-x-0 lg:translate-x-6",
   imageSectionClassName = "flex-[1.5] xl:flex-[1.4] relative mt-2 lg:mt-0 flex items-center justify-center lg:justify-end p-2 lg:p-4 lg:pr-8",
@@ -100,32 +125,21 @@ export default function FeatureCTA({
         onMouseMove={handleMouseMove}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className={`relative rounded-[2.5rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch ${paddingClassName} ${isHovered ? "cursor-none" : ""}`}
+        className={`relative rounded-[2.5rem] overflow-hidden bg-black flex flex-col lg:flex-row items-stretch ${paddingClassName} ${shellClassName} ${isHovered ? "cursor-none" : ""}`}
       >
         {/* Snake Trail Effect */}
         {segments.map((seg, i) => (
-          <motion.div
+          <TrailSegment
             key={i}
-            className="absolute pointer-events-none z-[100] rounded-full mix-blend-screen"
-            style={{
-              width: seg.size,
-              height: seg.size,
-              left: seg.x,
-              top: seg.y,
-              x: "-50%",
-              y: "-50%",
-              opacity: useTransform([movementOpacity], ([v]) =>
-                isHovered ? (i === 0 ? seg.opacity : v * seg.opacity) : 0,
-              ),
-              scale: isHovered ? 1 : 0,
-              background: `radial-gradient(circle, rgba(192, 38, 211, 0.9) 0%, rgba(168, 85, 247, 0) 70%)`,
-              filter: `blur(${seg.blur}px)`,
-            }}
+            seg={seg}
+            index={i}
+            isHovered={isHovered}
+            movementOpacity={movementOpacity}
           />
         ))}
 
         {/* Lead Cursor Glow (Extra diffuse, always shows when hovered) */}
-        <motion.div
+        <Motion.div
           className="absolute w-80 h-80 pointer-events-none z-[90] rounded-full mix-blend-screen"
           style={{
             left: s1x,
@@ -147,7 +161,7 @@ export default function FeatureCTA({
 
         {/* Left Content Area */}
         <div className="flex-[0.5] xl:flex-[0.6] z-20 text-center lg:text-left flex flex-col items-center lg:items-start justify-center pt-3 lg:pt-5 pb-0 lg:pb-3 px-4 lg:pl-10 lg:pr-0">
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
@@ -179,9 +193,9 @@ export default function FeatureCTA({
                 />
               </div>
             </div>
-          </motion.div>
+          </Motion.div>
           {eyebrow ? (
-            <motion.span
+            <Motion.span
               initial={{ opacity: 0, y: 12 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -189,9 +203,9 @@ export default function FeatureCTA({
               className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/15 bg-white/5 text-[10px] font-black uppercase tracking-[0.18em] text-purple-200/95 mb-3 self-center lg:self-start"
             >
               {eyebrow}
-            </motion.span>
+            </Motion.span>
           ) : null}
-          <motion.h2
+          <Motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -199,8 +213,8 @@ export default function FeatureCTA({
             className={titleClassName}
           >
             {title}
-          </motion.h2>
-          <motion.p
+          </Motion.h2>
+          <Motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -208,9 +222,9 @@ export default function FeatureCTA({
             className="text-slate-400 text-[13px] sm:text-sm font-medium mb-4 max-w-xs mx-auto lg:mx-0 leading-relaxed"
           >
             {description}
-          </motion.p>
+          </Motion.p>
           {Array.isArray(highlights) && highlights.length > 0 ? (
-            <motion.ul
+            <Motion.ul
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -228,9 +242,9 @@ export default function FeatureCTA({
                   <span>{line}</span>
                 </li>
               ))}
-            </motion.ul>
+            </Motion.ul>
           ) : null}
-          <motion.button
+          <Motion.button
             type="button"
             onClick={handleAuthRedirect}
             whileHover={{ scale: 1.03 }}
@@ -249,7 +263,7 @@ export default function FeatureCTA({
                 className="transition-transform group-hover:translate-x-1.5"
               />
             </span>
-          </motion.button>
+          </Motion.button>
           {extra && (
             <div className="mt-6 w-full opacity-90">
               {extra}
@@ -259,7 +273,7 @@ export default function FeatureCTA({
 
         {/* Right Content Area: Interface Showcase with Glows */}
         <div className={imageSectionClassName}>
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : 80, scale: 0.95 }}
             whileInView={{ opacity: 1, x: 0, scale: 1 }}
             viewport={{ once: true }}
@@ -286,7 +300,7 @@ export default function FeatureCTA({
                 />
               </div>
             </div>
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

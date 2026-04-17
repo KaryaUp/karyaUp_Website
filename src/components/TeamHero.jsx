@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { Check, Mail, MoreVertical, ChevronDown, Search, UserPlus } from 'lucide-react';
 import FeatureStack from "./FeatureStack";
 
@@ -40,7 +40,7 @@ const DarkRoleManagementPreview = () => {
         <div className="space-y-3.5 relative z-20">
 
           {/* Card 1: Administrator */}
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -72,10 +72,10 @@ const DarkRoleManagementPreview = () => {
               </div>
               <span className="text-[9px] sm:text-[10px] sm:text-xs font-semibold text-slate-500 tracking-wide uppercase">Joined Feb 23, 2026</span>
             </div>
-          </motion.div>
+          </Motion.div>
 
           {/* Card 2: Team Member */}
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
@@ -107,7 +107,7 @@ const DarkRoleManagementPreview = () => {
               </div>
               <span className="text-[9px] sm:text-[10px] sm:text-xs font-semibold text-slate-500 tracking-wide uppercase">Joined Feb 23, 2026</span>
             </div>
-          </motion.div>
+          </Motion.div>
 
         </div>
       </div>
@@ -132,15 +132,15 @@ export default function TeamHero() {
 
           {/* Left Content */}
           <div className="w-full text-center lg:text-left max-w-xl mx-auto lg:mx-0 flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
             >
               TEAM — MANAGE YOUR PEOPLE
-            </motion.div>
-            <motion.h1
+            </Motion.div>
+            <Motion.h1
               initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
@@ -149,17 +149,17 @@ export default function TeamHero() {
               One Place For Your  {" "}
               <span className="block">
                 {" "}
-                <motion.span
+                <Motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 >
                   Entire Team
-                </motion.span>
+                </Motion.span>
               </span>
-            </motion.h1>
+            </Motion.h1>
 
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -171,7 +171,7 @@ export default function TeamHero() {
                   "Full visibility into team capacity"
                 ].map((text, i) => (
                   <div key={i} className="flex items-start gap-4 text-left">
-                    <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                    <div className="mt-0.5 sm:mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                       <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
                     </div>
                     <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
@@ -180,20 +180,20 @@ export default function TeamHero() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </Motion.div>
 
             <FeatureStack items={["Roles & permissions", "Workload visibility", "Department hierarchy", "Member profiles"]} />
           </div>
 
           {/* Right Side Preview */}
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, scale: 0.9, x: isMobile ? 0 : 20 }}
             animate={{ opacity: 1, scale: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative w-full flex justify-center"
           >
             <DarkRoleManagementPreview />
-          </motion.div>
+          </Motion.div>
 
         </div>
       </div>

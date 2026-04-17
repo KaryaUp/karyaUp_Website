@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import { Rocket, Users, Cpu, Handshake, UserCircle2, CheckCircle2 } from 'lucide-react';
 
 const teams = [
@@ -259,13 +259,13 @@ const TeamsSection = () => {
           </span>
           <h2 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 leading-[1.05] tracking-normal max-w-3xl mx-auto">
             Built For Teams That{' '}<br />
-            <motion.span
+            <Motion.span
               className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
               animate={{ backgroundPosition: ['0% center', '-200% center'] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
             >
               Move Fast
-            </motion.span>
+            </Motion.span>
           </h2>
         </div>
 
@@ -303,7 +303,7 @@ const TeamsSection = () => {
             <div className="absolute left-[36px] top-[40px] bottom-[40px] w-0.5 bg-slate-100 rounded-full z-0" />
 
             {/* The Animated Progress Line */}
-            <motion.div
+            <Motion.div
               animate={{
                 height: `${(active / (teams.length - 1)) * 100}%`,
                 background: `linear-gradient(to bottom, ${teams[Math.max(0, active - 1)].accent}, ${teams[active].accent})`
@@ -319,7 +319,7 @@ const TeamsSection = () => {
               const isPast = active > i;
 
               return (
-                <motion.button
+                <Motion.button
                   key={t.label}
                   onClick={() => { activeRef.current = i; setActive(i); }}
                   whileHover={{ x: 4 }}
@@ -327,7 +327,7 @@ const TeamsSection = () => {
                   className="flex items-center gap-6 py-6 text-left group w-full relative z-10"
                 >
                   {/* Step dot / Icon Container */}
-                  <motion.div
+                  <Motion.div
                     animate={{
                       scale: isActive ? 1.15 : 1,
                     }}
@@ -340,10 +340,10 @@ const TeamsSection = () => {
                     }}
                   >
                     <TIcon size={18} className="text-white" />
-                  </motion.div>
+                  </Motion.div>
 
                   <div className="flex-1">
-                    <motion.p
+                    <Motion.p
                       animate={{
                         color: isActive ? '#0f172a' : isPast ? '#64748b' : '#94a3b8',
                         scale: isActive ? 1.05 : 1
@@ -351,10 +351,10 @@ const TeamsSection = () => {
                       className={`text-[15px] font-black tracking-tight leading-none`}
                     >
                       {t.label}
-                    </motion.p>
+                    </Motion.p>
                     <AnimatePresence>
                       {isActive && (
-                        <motion.p
+                        <Motion.p
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
@@ -362,11 +362,11 @@ const TeamsSection = () => {
                           className="text-xs text-slate-400 font-medium mt-1.5 overflow-hidden pr-4"
                         >
                           {t.result}
-                        </motion.p>
+                        </Motion.p>
                       )}
                     </AnimatePresence>
                   </div>
-                </motion.button>
+                </Motion.button>
               );
             })}
           </div>
@@ -374,7 +374,7 @@ const TeamsSection = () => {
           {/* RIGHT: detail panel */}
           <div className="lg:col-span-8" ref={rightPanelRef}>
             <AnimatePresence mode="wait">
-              <motion.div
+              <Motion.div
                 key={active}
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -420,14 +420,14 @@ const TeamsSection = () => {
                           key={item}
                           className="flex items-start gap-3 rounded-2xl border border-white/70 bg-white/75 px-4 py-2.5 text-[10px] sm:text-sm font-bold text-slate-600 shadow-sm backdrop-blur-sm text-left"
                         >
-                          <CheckCircle2 size={16} className="mt-0.5 shrink-0" style={{ color: team.accent }} />
+                          <CheckCircle2 size={16} className="-mt-0.5 shrink-0 sm:mt-0.5" style={{ color: team.accent }} />
                           <span className={item.includes('Clarity:') ? 'whitespace-nowrap' : ''}>{item}</span>
                         </div>
                       ))}
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
             </AnimatePresence>
           </div>
         </div>

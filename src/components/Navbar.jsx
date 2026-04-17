@@ -11,6 +11,7 @@ import logo from "../assets/logo.webp";
 import KaryaUpBtn from "../assets/KaryaupBtn.png";
 import { motion, AnimatePresence } from "framer-motion";
 
+const MotionDiv = motion.div;
 const authUrl = "https://app.karyaup.com/auth";
 
 const navItems = [
@@ -322,14 +323,11 @@ const Navbar = () => {
             to="/features/ai-agents"
             className="group flex w-full items-center justify-center py-2 text-[13px] font-semibold tracking-wide transition-colors bg-white text-slate-900 hover:bg-slate-50 border-none shadow-none outline-none ring-0 px-4"
           >
-            <span className="font-bold transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce]">
+            <span className="badge-glass-multicolor-text font-bold md:hidden">
               Meet KAI Agent
             </span>
-            <span className="hidden md:inline transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce] group-hover:opacity-100">
-              {" "}
-              -<span className="transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-[#7e22ce] group-hover:via-fuchsia-500 group-hover:to-[#7e22ce]">
-                Boost human efficiency with tailored AI assistants
-              </span>
+            <span className="badge-glass-multicolor-text font-bold hidden md:inline">
+              Meet KAI Agent - Boost human efficiency with tailored AI assistants
             </span>
           </Link>
         </div>
@@ -359,7 +357,7 @@ const Navbar = () => {
 
                 <AnimatePresence>
                   {isLogoHovered && (
-                    <motion.div
+                    <MotionDiv
                       initial={{ opacity: 0, y: 10, scale: 0.95 }}
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -373,7 +371,7 @@ const Navbar = () => {
                           From Sanskrit word<br /> <span className="italic opacity-90">“कार्य   ”</span> meaning action <br /> or work.
                         </p>
                       </div>
-                    </motion.div>
+                    </MotionDiv>
                   )}
                 </AnimatePresence>
               </div>
@@ -661,7 +659,7 @@ const Navbar = () => {
 
         <AnimatePresence>
           {isOpen && (
-            <motion.div
+            <MotionDiv
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -724,7 +722,7 @@ const Navbar = () => {
                         </button>
                         <AnimatePresence>
                           {mobileOpenSection === item.label && (
-                            <motion.div
+                            <MotionDiv
                               initial={{ height: 0, opacity: 0 }}
                               animate={{ height: "auto", opacity: 1 }}
                               exit={{ height: 0, opacity: 0 }}
@@ -758,7 +756,7 @@ const Navbar = () => {
                                   </Link>
                                 ))}
                               </div>
-                            </motion.div>
+                            </MotionDiv>
                           )}
                         </AnimatePresence>
                       </div>
@@ -783,7 +781,7 @@ const Navbar = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </MotionDiv>
           )}
         </AnimatePresence>
       </nav>

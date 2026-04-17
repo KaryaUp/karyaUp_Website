@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
+import { motion as Motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Check, MessageSquare, FileText, Reply, Users, Bot, Sparkles, Send, Kanban, Zap, Shield, Link as LinkIcon, Briefcase } from "lucide-react";
 import { FeatureCard, CTABanner } from "../../components/SubPageLayout";
 
@@ -43,7 +43,7 @@ export default function Chat() {
     };
 
     return (
-      <motion.div
+      <Motion.div
         ref={ref}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
@@ -55,7 +55,7 @@ export default function Chat() {
         <div style={isMobile ? {} : { transform: 'translateZ(20px)' }} className="h-full flex flex-col">
           {children}
         </div>
-      </motion.div>
+      </Motion.div>
     );
   };
 
@@ -112,16 +112,16 @@ export default function Chat() {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
               {/* Left Content */}
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
                 >
                   CHAT — COLLABORATE IN REAL-TIME
-                </motion.div>
+                </Motion.div>
 
-                <motion.h1
+                <Motion.h1
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
@@ -130,17 +130,17 @@ export default function Chat() {
                   Where Conversations
                   <span className="block mt-2">
                     Turn Into{" "}
-                    <motion.span
+                    <Motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                     >
                       Action
-                    </motion.span>
+                    </Motion.span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -166,7 +166,7 @@ export default function Chat() {
 
 
 
-                </motion.div>
+                </Motion.div>
 
                 <FeatureStack
                   items={[
@@ -179,7 +179,7 @@ export default function Chat() {
               </div>
 
               {/* Right Hero Preview */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -210,7 +210,7 @@ export default function Chat() {
                   {/* Messages Base */}
                   <div className="flex-1 p-5 overflow-y-auto space-y-6 flex flex-col justify-end pb-8 custom-scrollbar">
                     {/* Message 1 */}
-                    <motion.div
+                    <Motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.5 }}
@@ -225,10 +225,10 @@ export default function Chat() {
                       <div className="w-9 h-9 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs font-black shadow-[0_0_15px_rgba(168,85,247,0.4)] ring-2 ring-slate-900 mb-1 shrink-0">
                         P
                       </div>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Message 2 */}
-                    <motion.div
+                    <Motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 1.2 }}
@@ -243,10 +243,10 @@ export default function Chat() {
                           On it -will check before EOD
                         </div>
                       </div>
-                    </motion.div>
+                    </Motion.div>
 
                     {/* Message 3 */}
-                    <motion.div
+                    <Motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 1.9 }}
@@ -261,7 +261,7 @@ export default function Chat() {
                           QA flagged one issue, created a task already
                         </div>
                       </div>
-                    </motion.div>
+                    </Motion.div>
                   </div>
 
                   {/* Input Area (Static representation) */}
@@ -272,7 +272,7 @@ export default function Chat() {
                   </div>
 
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -286,22 +286,22 @@ export default function Chat() {
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10 lg:mb-12">
-              <motion.h2
+              <Motion.h2
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05] mb-3"
               >
                 Chat Designed For <br className="hidden sm:block" />
-                <motion.span
+                <Motion.span
                   className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
                 >
                   Every Scenario
-                </motion.span>
-              </motion.h2>
-              <motion.p
+                </Motion.span>
+              </Motion.h2>
+              <Motion.p
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -309,7 +309,7 @@ export default function Chat() {
                 className="text-base sm:text-lg text-slate-600 font-medium"
               >
                 Whether you're blasting an update to the company or hashing out a quick design detail privately, we have a space for it.
-              </motion.p>
+              </Motion.p>
             </div>
 
             <div
@@ -422,7 +422,7 @@ export default function Chat() {
 
                 {/* AI Text Left */}
                 <div className="flex flex-col justify-center items-center lg:items-start text-center lg:text-left">
-                  <motion.div
+                  <Motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -431,21 +431,21 @@ export default function Chat() {
                     <div>
                       KaryaUp AI
                     </div>
-                  </motion.div>
+                  </Motion.div>
 
-                  <motion.h2
+                  <Motion.h2
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white leading-[1.05] mb-4 tracking-normal"
+                    className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white leading-[1.12] sm:leading-[1.05] mb-4 tracking-normal"
                   >
                     Your Personal <br className="hidden sm:block" />
-                    <span className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]">
+                    <span className="inline-block pb-1 text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]">
                       Agent In Every Chat
                     </span>
-                  </motion.h2>
+                  </Motion.h2>
 
-                  <motion.p
+                  <Motion.p
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -453,34 +453,34 @@ export default function Chat() {
                     className="text-base sm:text-lg text-slate-400 font-medium mb-6 leading-relaxed max-w-xl"
                   >
                     Don't just chat—execute. Ask the AI agent to summarize unread threads, extract action items.
-                  </motion.p>
+                  </Motion.p>
 
                   {/* Feature bullets */}
-                  <motion.div
+                  <Motion.div
                     initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: 0.2 }}
-                    className="space-y-3 w-full sm:w-auto text-left"
+                    className="space-y-3 w-full sm:w-auto text-left ml-2 sm:ml-0"
                   >
                     {[
                       "Summarize 100+ message threads instantly",
                       "Auto-create tasks from action items",
                       "Draft context-aware replies",
                     ].map((item, i) => (
-                      <div key={i} className="flex items-start sm:items-center gap-3">
+                      <div key={i} className="flex items-start sm:items-center gap-3 text-left">
                         <div className="w-6 h-6 rounded-full bg-slate-900 border border-slate-700 flex items-center justify-center shrink-0 mt-0.5 sm:mt-0">
                           <Check className="w-3.5 h-3.5 text-fuchsia-400" />
                         </div>
                         <span className="text-slate-300 font-medium leading-snug">{item}</span>
                       </div>
                     ))}
-                  </motion.div>
+                  </Motion.div>
                 </div>
 
                 {/* Right Side - Agent Assign Graphic with Rainbow Border */}
                 <div className="relative flex justify-center w-full">
-                  <motion.div
+                  <Motion.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
@@ -498,7 +498,7 @@ export default function Chat() {
                         className="h-full w-auto object-contain rounded-[calc(1.5rem-1.5px)] bg-slate-950"
                       />
                     </div>
-                  </motion.div>
+                  </Motion.div>
                 </div>
               </div>
             </div>
@@ -520,3 +520,4 @@ export default function Chat() {
     </>
   );
 }
+

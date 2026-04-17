@@ -115,8 +115,81 @@ const Footer = () => {
 
   return (
     <footer className="relative flex flex-col overflow-hidden border-t border-gray-100 bg-white pt-10 pb-8 text-gray-900">
-
-
+      {/* Watermark — Match Agent page style with perspective and translation */}
+      <div
+        className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] flex min-h-[13rem] items-end justify-center overflow-hidden select-none sm:min-h-[18rem] md:min-h-[26rem] lg:min-h-[30rem]"
+        aria-hidden="true"
+      >
+        <div className="flex w-full max-w-[100vw] justify-center px-0 [perspective:min(100vw,600px)] sm:[perspective:min(120vw,1400px)] lg:[perspective:min(140vw,2400px)]">
+          <div className="origin-bottom max-sm:origin-[50%_100%] -translate-y-2 translate-x-0 max-sm:scale-[0.62] sm:origin-[78%_100%] sm:-translate-y-5 sm:translate-x-16 sm:scale-100 md:-translate-y-6 md:translate-x-[4.5rem] lg:-translate-y-8 lg:translate-x-24">
+            <div className="flex max-w-full origin-bottom max-sm:origin-[50%_100%] items-end justify-center gap-0 [transform:translate(0,4%)_scale(0.9)_rotateY(4deg)_skewY(-0.5deg)] [transform-style:preserve-3d] sm:origin-bottom sm:gap-px sm:[transform:translate(0,24%)_scale(1)_rotateY(12deg)_skewY(-2deg)] md:[transform:translate(0,28%)_scale(1.04)_rotateY(12deg)_skewY(-2deg)] lg:[transform:translate(0,32%)_scale(1.08)_rotateY(12deg)_skewY(-2deg)]">
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(8.8rem, 19.4vw, 11.6rem)",
+                  transform: "translateZ(0px)",
+                }}
+              >
+                K
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(9.8rem, 21.56vw, 12.83rem)",
+                  transform: "translateZ(48px)",
+                }}
+              >
+                A
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(10.8rem, 23.73vw, 14.06rem)",
+                  transform: "translateZ(96px)",
+                }}
+              >
+                R
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(11.8rem, 25.9vw, 15.3rem)",
+                  transform: "translateZ(144px)",
+                }}
+              >
+                Y
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(12.8rem, 28.06vw, 16.53rem)",
+                  transform: "translateZ(192px)",
+                }}
+              >
+                A
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(13.8rem, 30.23vw, 17.76rem)",
+                  transform: "translateZ(240px)",
+                }}
+              >
+                U
+              </span>
+              <span
+                className="inline-block font-medium !font-['Anton',Impact,sans-serif] uppercase leading-none tracking-[-0.05em] antialiased text-slate-900/[0.04]"
+                style={{
+                  fontSize: "clamp(14.8rem, 32.4vw, 19rem)",
+                  transform: "translateZ(288px)",
+                }}
+              >
+                P
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
 
       <div className="relative z-[2] mx-auto flex w-full max-w-7xl flex-1 flex-col px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col gap-12 lg:flex-row lg:items-end lg:justify-between">
@@ -134,8 +207,8 @@ const Footer = () => {
                 />
               </a>
               <p className="max-w-xs text-[13px] font-medium leading-relaxed text-slate-500">
-                From Sanskrit <span className="italic opacity-90">“Karya”</span> meaning action or work. Empowering
-                teams to ship faster.
+                From Sanskrit <span className="italic opacity-90">“Karya”</span>{" "}
+                meaning action or work. Empowering teams to ship faster.
               </p>
             </div>
 
@@ -228,30 +301,30 @@ const Footer = () => {
         </div>
 
         <div className="relative mt-auto flex flex-col items-center gap-4 border-t border-slate-100 pt-8 text-center sm:flex-row sm:justify-between sm:text-left">
-          {/* Watermark — Anchored exactly above the border line */}
-          <img
-            src={watermark}
-            alt=""
-            aria-hidden="true"
-            className="pointer-events-none absolute bottom-[1/2] left-1/2 z-0 h-auto w-[min(180vw,1400px)] -translate-x-1/2 translate-y-[28%] select-none opacity-25 grayscale contrast-[0.9] brightness-[0.7] sm:w-[min(160vw,1600px)] md:w-[min(140vw,1800px)] lg:w-[min(120vw,2000px)]"
-          />
-
           <p className="relatve z-10 text-xs font-medium text-slate-600 max-sm:[text-shadow:0_1px_0_rgba(255,255,255,0.92),0_0_12px_rgba(255,255,255,0.75)]">
             &copy; 2026 KaryaUp. All rights reserved.
           </p>
           <div className="relative z-10 flex flex-wrap justify-center gap-5 text-xs font-semibold text-slate-600 max-sm:[text-shadow:0_1px_0_rgba(255,255,255,0.92),0_0_12px_rgba(255,255,255,0.75)]">
-            <Link to="/disclaimer" className="transition-colors hover:text-purple-600">
+            <Link
+              to="/disclaimer"
+              className="transition-colors hover:text-purple-600"
+            >
               Disclaimer
             </Link>
-            <Link to="/privacy-policy" className="transition-colors hover:text-purple-600">
+            <Link
+              to="/privacy-policy"
+              className="transition-colors hover:text-purple-600"
+            >
               Privacy Policy
             </Link>
-            <Link to="/terms-of-service" className="transition-colors hover:text-purple-600">
+            <Link
+              to="/terms-of-service"
+              className="transition-colors hover:text-purple-600"
+            >
               Terms of Service
             </Link>
           </div>
         </div>
-
       </div>
     </footer>
   );

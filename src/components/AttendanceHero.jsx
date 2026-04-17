@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Check, Clock, Activity, FileText, Download } from "lucide-react";
 import FeatureStack from "./FeatureStack";
 
@@ -21,35 +21,35 @@ export default function AttendanceHero() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
           <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
             >
               ATTENDANCE — TRACK TIME PRECISELY
-            </motion.div>
+            </Motion.div>
 
-            <motion.h1
+            <Motion.h1
               initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
-              className="mt-4 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+              className="mt-4 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.12] sm:leading-[1.05]"
             >
               Attendance Tracked
               <span className="block">
-                &{" "}
-                <motion.span
-                  className="bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent"
+                {" "}
+                <Motion.span
+                  className="inline-block pb-1 bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent"
                   animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                   transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                 >
-                  Records Kept.
-                </motion.span>
+                  & Records Kept.
+                </Motion.span>
               </span>
-            </motion.h1>
+            </Motion.h1>
 
-            <motion.div
+            <Motion.div
               initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -61,7 +61,7 @@ export default function AttendanceHero() {
                   "Audit-ready logs for payroll"
                 ].map((text, i) => (
                   <div key={i} className="flex items-start gap-4 text-left">
-                    <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                    <div className="mt-0.5 sm:mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                       <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
                     </div>
                     <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
@@ -70,12 +70,12 @@ export default function AttendanceHero() {
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </Motion.div>
 
             <FeatureStack items={["Auto check-in", "Real-time logs", "Timesheets", "Audit-ready exports"]} />
           </div>
 
-          <motion.div
+          <Motion.div
             initial={{ opacity: 0, x: isMobile ? 0 : 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
@@ -153,7 +153,7 @@ export default function AttendanceHero() {
 
             <div className="absolute -right-10 -bottom-10 -z-10 h-64 w-64 rounded-full bg-purple-600/20 blur-[80px]" />
             <div className="absolute -top-10 -left-10 -z-10 h-48 w-48 rounded-full bg-fuchsia-600/10 blur-[70px]" />
-          </motion.div>
+          </Motion.div>
         </div>
       </div>
     </section>

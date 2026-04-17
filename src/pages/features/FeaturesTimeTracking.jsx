@@ -37,8 +37,10 @@ const TiltCard = ({ children, className }) => {
       onMouseLeave={handleMouseLeave}
       style={{ rotateX, rotateY, transformStyle: 'preserve-3d', transformPerspective: 1000 }}
       whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-      className={className}
+      tabIndex={0}
+      className={`${className} active:border-purple-300 active:shadow-2xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400/30`}
     >
       <div style={{ transform: 'translateZ(20px)' }} className="h-full flex flex-col">
         {children}

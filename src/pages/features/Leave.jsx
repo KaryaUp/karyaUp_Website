@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import {
   BadgeCheck,
   CalendarDays,
@@ -20,13 +20,6 @@ import FeatureCTA from "../../components/FeatureCTA";
 import FeatureStack from "../../components/FeatureStack";
 import leaveImg from "../../assets/Leave.webp";
 import { Helmet } from "react-helmet-async";
-
-const leaveTags = [
-  "Custom leave types",
-  "Smart approval flows",
-  "Live balance tracker",
-  "Team overlap alerts",
-];
 
 const leaveRequests = [
   {
@@ -101,15 +94,15 @@ export default function Leave() {
           <div className="mx-auto flex max-w-7xl items-start px-4 sm:px-6 lg:px-8 lg:pt-2">
             <div className="grid w-full items-start gap-10 lg:grid-cols-2 lg:gap-14">
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-xs font-black uppercase tracking-widest shadow-sm"
                 >
                   LEAVE MANAGEMENT — SIMPLIFY TIME OFF
-                </motion.div>
-                <motion.h1
+                </Motion.div>
+                <Motion.h1
                   initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -122,7 +115,7 @@ export default function Leave() {
                   Leave That
                   <span className="mt-2 block">
                     {" "}
-                    <motion.span
+                    <Motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                       animate={{
                         backgroundPosition: ["0% center", "-200% center"],
@@ -134,11 +127,11 @@ export default function Leave() {
                       }}
                     >
                       Runs Itself
-                    </motion.span>
+                    </Motion.span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: isMobile ? 0 : 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{
@@ -154,7 +147,7 @@ export default function Leave() {
                       "Live balance tracking & overlap alerts",
                     ].map((text, i) => (
                       <div key={i} className="flex items-start gap-4 text-left">
-                        <div className="mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
+                        <div className="mt-0.5 sm:mt-1.5 w-5 h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
                           <Check className="w-2.5 h-2.5 text-[#7e22ce] stroke-[4]" />
                         </div>
                         <p className="text-sm sm:text-base lg:text-lg text-slate-600 font-medium leading-relaxed">
@@ -163,7 +156,7 @@ export default function Leave() {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </Motion.div>
 
                 <FeatureStack
                   items={[
@@ -175,7 +168,7 @@ export default function Leave() {
                 />
               </div>
 
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
@@ -242,14 +235,14 @@ export default function Leave() {
                     </div>
 
                     <div className="mt-4 flex flex-col items-center gap-3 sm:flex-row sm:items-center sm:justify-between">
-                      <motion.button
+                      <Motion.button
                         whileHover={{ y: -2 }}
                         whileTap={{ scale: 0.98 }}
                         className="btn-primary self-center px-4 py-2.5 text-[13px] font-black sm:self-start"
                       >
                         <Send className="h-4 w-4" />
                         Submit Request
-                      </motion.button>
+                      </Motion.button>
 
                       <div className="hidden sm:inline-flex items-center gap-2 rounded-full border border-purple-200 bg-purple-50 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.18em] text-purple-700">
                         <ClipboardCheck className="h-3.5 w-3.5" />
@@ -258,7 +251,7 @@ export default function Leave() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -268,7 +261,7 @@ export default function Leave() {
 
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 36 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -298,7 +291,7 @@ export default function Leave() {
                       const warning = request.status === "Coverage warning";
 
                       return (
-                        <motion.div
+                        <Motion.div
                           key={request.name}
                           initial={{ opacity: 0, y: 18 }}
                           whileInView={{ opacity: 1, y: 0 }}
@@ -373,14 +366,14 @@ export default function Leave() {
                               </div>
                             </div>
                           </div>
-                        </motion.div>
+                        </Motion.div>
                       );
                     })}
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
 
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : -32 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.25 }}
@@ -394,7 +387,7 @@ export default function Leave() {
 
                 <h2 className="mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black tracking-normal text-slate-900 leading-[1.05]">
                   Review Leave Request From{" "}
-                  <motion.span
+                  <Motion.span
                     className="sm:mt-2 sm:block bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] bg-clip-text text-transparent inline sm:inline-block"
                     animate={{
                       backgroundPosition: ["0% center", "-200% center"],
@@ -406,7 +399,7 @@ export default function Leave() {
                     }}
                   >
                     One Place
-                  </motion.span>
+                  </Motion.span>
                 </h2>
 
                 <p className="mt-6 max-w-2xl text-base font-medium leading-relaxed text-slate-600 sm:text-lg">
@@ -424,14 +417,14 @@ export default function Leave() {
                       key={item}
                       className="flex items-start justify-center gap-3 text-left lg:justify-start"
                     >
-                      <div className="mt-0.5 flex h-6 w-6 items-center justify-center rounded-full bg-purple-100 border border-purple-200 text-[#7e22ce]">
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 aspect-square items-center justify-center rounded-full bg-purple-100 border border-purple-200 text-[#7e22ce]">
                         <Check className="h-3.5 w-3.5 stroke-[4]" />
                       </div>
                       <span className="font-medium text-slate-700">{item}</span>
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
@@ -456,3 +449,4 @@ export default function Leave() {
     </>
   );
 }
+

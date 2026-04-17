@@ -292,24 +292,24 @@ const TeamSolutions = () => {
 
         {/* Sticky scrolling sections container */}
         {/* Sticky scrolling sections container */}
-        <div className="teamsolutions-sticky-container relative h-[68vh] sm:h-[75vh] lg:h-[75vh] w-full mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-100 shadow-sm bg-gradient-to-br from-[#ffffff] via-[#faf8ff] to-[#f3e8ff]">
+        <div className="teamsolutions-sticky-container relative h-[760px] sm:h-[640px] lg:h-[500px] w-full mx-auto rounded-2xl sm:rounded-3xl overflow-hidden border border-gray-100 shadow-sm bg-gradient-to-br from-[#ffffff] via-[#faf8ff] to-[#f3e8ff]">
           {teams.map((active, i) => (
             <div
               key={active.id}
               ref={(el) => (sectionRefs.current[i] = el)}
-              className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-[#faf8ff] to-[#f3e8ff] flex flex-col items-center justify-start lg:justify-center pt-2 lg:pt-0"
+              className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-[#faf8ff] to-[#f3e8ff] flex flex-col items-center justify-start lg:justify-center pt-0 lg:pt-0"
             >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-1 sm:gap-12 items-start lg:items-center p-3 sm:p-10 w-full h-full max-h-full">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-12 items-start lg:items-center px-4 pt-2 pb-4 sm:p-6 lg:p-8 w-full h-auto max-h-full">
                 {/* Left side */}
                 <div className="relative lg:pr-10 flex flex-col items-center lg:items-start text-center lg:text-left h-auto lg:h-full justify-start lg:justify-center mb-0">
                   <div className="relative z-10 w-full flex flex-col items-center lg:items-start pt-0 lg:pt-0">
-                    <h3 className="flex flex-col lg:flex-row items-center lg:items-center justify-center lg:justify-start gap-x-2 gap-y-0 px-1 sm:px-0 pb-2 sm:pb-3 text-lg sm:text-2xl md:text-[2.25rem] font-black text-gray-900 leading-[1.4] sm:leading-[1.2] mb-1.5 sm:mb-4 whitespace-normal lg:whitespace-nowrap max-w-full overflow-visible tracking-normal">
+                    <h3 className="flex flex-row flex-nowrap items-center justify-center lg:justify-start gap-x-2 gap-y-0 px-1 sm:px-0 pb-2 sm:pb-3 text-[1.35rem] sm:text-2xl md:text-[2.25rem] font-black text-gray-900 leading-none sm:leading-[1.2] mb-1 sm:mb-4 whitespace-nowrap max-w-full overflow-visible tracking-normal">
                       <span
-                        className={`block sm:inline ${active.title === "Workflow" ? "tracking-wider" : ""}`}
+                        className={`${active.title === "Workflow" ? "tracking-wider" : ""}`}
                       >
                         {active.title}
                       </span>
-                      <span className="block sm:inline text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] italic pb-1">
+                      <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto] italic pb-1">
                         {active.titleHighlight}
                       </span>
                     </h3>

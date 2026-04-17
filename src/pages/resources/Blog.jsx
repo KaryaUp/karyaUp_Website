@@ -1,7 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ArrowRight, Clock, Sparkles, TrendingUp, BookOpen, Users, Send, ChevronLeft, Calendar, Share2, Twitter, Linkedin, Copy, Check, CheckCircle2 } from "lucide-react";
-import { FocusIllust, TeamIllust, OpsIllust, LeadIllust, MeetingIllust } from "./BlogIllustrations";
+import {
+  Search,
+  ArrowRight,
+  Clock,
+  Sparkles,
+  TrendingUp,
+  BookOpen,
+  Users,
+  Send,
+  ChevronLeft,
+  Calendar,
+  Share2,
+  Twitter,
+  Linkedin,
+  Copy,
+  Check,
+  CheckCircle2,
+} from "lucide-react";
+import {
+  FocusIllust,
+  TeamIllust,
+  OpsIllust,
+  LeadIllust,
+  MeetingIllust,
+} from "./BlogIllustrations";
 import article1 from "../../assets/work_analysis.webp";
 
 import Blog2 from "../../assets/Blog2.webp";
@@ -11,6 +34,7 @@ import Blog5 from "../../assets/Blog5.webp";
 import Blog6 from "../../assets/Blog6.webp";
 
 import BlogHero from "../../assets/Blog_Hero.webp";
+import logo from "../../assets/logo.webp";
 import { Helmet } from "react-helmet-async";
 import MovingPurpleRing from "../../components/MovingPurpleRing";
 
@@ -20,7 +44,8 @@ const articles = [
   {
     id: "featured",
     title: "Why Your Team Is Busy But Nothing Is Getting Done",
-    excerpt: "Busyness is not progress. Most teams confuse activity with output -and managers let it slide because the calendar looks full. Here's how to tell the difference, and what to actually fix.",
+    excerpt:
+      "Busyness is not progress. Most teams confuse activity with output -and managers let it slide because the calendar looks full. Here's how to tell the difference, and what to actually fix.",
     category: "Team Management",
     author: "Alex Rivers",
     role: "Head of Operations",
@@ -29,7 +54,8 @@ const articles = [
     image: Blog2,
     illustration: null,
     hookStat: "73% of tasks on average to-do lists never get done.",
-    pullQuote: "A full calendar and an empty sprint are not the same problem -but they have the same root cause.",
+    pullQuote:
+      "A full calendar and an empty sprint are not the same problem -but they have the same root cause.",
     content: `
       <p>Busyness is the ultimate hiding place. It feels like commitment, it looks like hard work, and it sounds like progress. But for most teams, it's just noise.</p>
       <h2>The Paradox of Activity</h2>
@@ -39,12 +65,13 @@ const articles = [
       <p>Motion is doing things; progress is getting things done. A team can spend forty hours a week in meetings discussing a feature, but if not a single line of code is written, that's motion without progress. Managers often let this slide because intervention feels like micro-management, or worse, because they are caught in the same cycle themselves.</p>
       <h2>What to Actually Fix</h2>
       <p>To break this cycle, leadership must prioritize outcome over output. This means setting clear, singular goals for the week and fiercely protecting the team's time. Stop asking "What did you do today?" and start asking "What did we ship today?"</p>
-    `
+    `,
   },
   {
     id: 1,
     title: "The 3-Task Rule -Why Top Performers Never Write Long To-Do Lists",
-    excerpt: "Long task lists feel productive to write and useless to execute. The best performers work differently -and it starts with a number most people think is too small.",
+    excerpt:
+      "Long task lists feel productive to write and useless to execute. The best performers work differently -and it starts with a number most people think is too small.",
     category: "Productivity",
     author: "Sarah Chen",
     role: "Senior Product Designer",
@@ -62,12 +89,13 @@ const articles = [
       <p>The 3-task rule is simple: before you start your day, identify the three things that, if completed, would make the day a success. Everything else is secondary. This constraint forces you to evaluate the weight of each task. If you have ten things to do, you have to ask: which of these actually move the needle?</p>
       <h2>Executing with Intent</h2>
       <p>Once you have your three, you tackle them in order of importance. This prevents the "productive procrastination" of clearing your inbox before starting a difficult design project. By narrowing your focus, you increase the intensity of your work.</p>
-    `
+    `,
   },
   {
     id: 2,
     title: "Hiring for Culture Fit Is Killing Your Team's Potential",
-    excerpt: "Culture fit sounds smart until you realise you've built a room full of the same person. The teams that outperform aren't the ones that agree -they're the ones that argue well.",
+    excerpt:
+      "Culture fit sounds smart until you realise you've built a room full of the same person. The teams that outperform aren't the ones that agree -they're the ones that argue well.",
     category: "Team Management",
     author: "Marcus Volt",
     role: "Full Stack Lead",
@@ -75,7 +103,8 @@ const articles = [
     readTime: "5 min read",
     image: Blog3,
     illustration: null,
-    hookStat: "Teams with diverse thinking styles are 35% more likely to hit targets.",
+    hookStat:
+      "Teams with diverse thinking styles are 35% more likely to hit targets.",
     content: `
       <p>Stop looking for people who fit in. Start looking for people who add something new. Culture add over culture fit.</p>
       <h2>The Echo Chamber Effect</h2>
@@ -85,12 +114,13 @@ const articles = [
       <p>The most innovative teams are those where ideas are challenged. This requires "culture add"—hiring people who bring a different perspective, a different set of experiences, or a different problem-solving style. This creates friction, which is uncomfortable but necessary for growth.</p>
       <h2>How to Change Your Process</h2>
       <p>Redefine your culture not as a set of personality traits, but as a set of values. Instead of asking "Would I grab a beer with this person?", ask "What part of our culture is currently missing that this person can provide?"</p>
-    `
+    `,
   },
   {
     id: 3,
     title: "The Hidden Cost of a Bad Leave Policy -And How to Fix It in a Day",
-    excerpt: "Most companies don't have a leave problem. They have a leave policy problem. Here's what a broken system actually costs you -in time, trust, and talent.",
+    excerpt:
+      "Most companies don't have a leave problem. They have a leave policy problem. Here's what a broken system actually costs you -in time, trust, and talent.",
     category: "HR & Ops",
     author: "Priya Sharma",
     role: "HR Strategist",
@@ -98,7 +128,8 @@ const articles = [
     readTime: "5 min read",
     image: Blog4,
     illustration: null,
-    hookStat: "1 in 3 employees cite poor leave management as a reason to quit.",
+    hookStat:
+      "1 in 3 employees cite poor leave management as a reason to quit.",
     content: `
       <p>A broken leave policy is a silent killer of morale. If your team is afraid to take time off, you've already lost them.</p>
       <h2>The Fear of Stepping Away</h2>
@@ -108,12 +139,13 @@ const articles = [
       <p>High turnover is expensive. Replacing a senior employee can cost up to twice their annual salary in recruitment, onboarding, and lost productivity. A bad leave policy is effectively a hidden tax on your business operations.</p>
       <h2>The 24-Hour Fix</h2>
       <p>You can fix this today by implementing a "Minimum Leave Requirement." Tell your team they are required to take at least 15 days off per year. When people see that leadership values rest, they will feel safe enough to take it themselves.</p>
-    `
+    `,
   },
   {
     id: 4,
     title: "Stop Motivating Your Team. Start Removing What Demotivates Them.",
-    excerpt: "Motivation is not a manager's job. Removing friction is. The best leaders don't inspire -they clear the path and get out of the way.",
+    excerpt:
+      "Motivation is not a manager's job. Removing friction is. The best leaders don't inspire -they clear the path and get out of the way.",
     category: "Leadership",
     author: "Jordan Lee",
     role: "Experience Lead",
@@ -121,7 +153,8 @@ const articles = [
     readTime: "4 min read",
     image: Blog5,
     illustration: null,
-    hookStat: "Friction, not lack of motivation, causes 68% of disengagement at work.",
+    hookStat:
+      "Friction, not lack of motivation, causes 68% of disengagement at work.",
     content: `
       <p>Management is about removing obstacles, not cheerleading from the sidelines.</p>
       <h2>The Illusion of Inspiration</h2>
@@ -131,12 +164,13 @@ const articles = [
       <p>Instead of hiring an inspirational speaker, spend an hour a week asking each team member: "What is the most annoying thing about your job right now?" Is it a slow CI/CD pipeline? Is it a difficult stakeholder? Is it a lack of clarity on a project? That is where your work as a leader begins.</p>
       <h2>Becoming a Path-Clearer</h2>
       <p>Your success as a manager is measured by how invisible you are. If the path is clear, the team will run. Your job is to stay ahead of them, spotting the hurdles and removing them before the team even knows they exist.</p>
-    `
+    `,
   },
   {
     id: 5,
     title: "Meetings Are Not the Problem. Purposeless Meetings Are.",
-    excerpt: "The meeting-hating culture has gone too far. Some meetings are irreplaceable -but only when they have a clear owner, a defined outcome, and a hard stop time.",
+    excerpt:
+      "The meeting-hating culture has gone too far. Some meetings are irreplaceable -but only when they have a clear owner, a defined outcome, and a hard stop time.",
     category: "Productivity",
     author: "Nina Patel",
     role: "Growth Advisor",
@@ -144,7 +178,8 @@ const articles = [
     readTime: "3 min read",
     image: Blog6,
     illustration: null,
-    hookStat: "Employees spend 31 hours per month in unproductive meetings on average.",
+    hookStat:
+      "Employees spend 31 hours per month in unproductive meetings on average.",
     content: `
       <p>Don't ban meetings. Ban bad ones. Every meeting should have a cost-benefit analysis before the invite is sent.</p>
       <h2>The Default State of Collaboration</h2>
@@ -154,8 +189,8 @@ const articles = [
       <p>Every meeting must have: 1. A clear owner (who is in charge?), 2. A defined outcome (what do we need to decide?), and 3. A hard stop time. If you can't state the outcome in one sentence, you aren't ready to meet.</p>
       <h2>Reclaiming Deep Work</h2>
       <p>By drastically reducing meeting frequency, you give your team back the most valuable asset they have: their attention. Encourage "meeting-free Wednesdays" or dedicated blocks for deep work. You'll find that most things can be solved more efficiently over a well-written document than an hour-long call.</p>
-    `
-  }
+    `,
+  },
 ];
 
 const PostRow = ({ article, onClick, index = 0 }) => {
@@ -174,10 +209,11 @@ const PostRow = ({ article, onClick, index = 0 }) => {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: 16 }}
         transition={{ type: "spring", stiffness: 380, damping: 32 }}
-        className={`relative overflow-hidden border border-slate-100/90 bg-white p-6 shadow-[0_4px_12px_rgba(15,23,42,0.06),0_16px_40px_-16px_rgba(15,23,42,0.12)] transition-all duration-500 ease-out hover:-translate-y-0.5 md:p-8 lg:p-9 ${altLayout
+        className={`relative overflow-hidden border border-slate-100/90 bg-white p-6 shadow-[0_4px_12px_rgba(15,23,42,0.06),0_16px_40px_-16px_rgba(15,23,42,0.12)] transition-all duration-500 ease-out hover:-translate-y-0.5 md:p-8 lg:p-9 ${
+          altLayout
             ? "hover:border-violet-300/50 hover:shadow-[0_0_0_1px_rgba(139,92,246,0.12),0_24px_56px_-16px_rgba(124,58,237,0.22),0_12px_32px_-12px_rgba(15,23,42,0.06)]"
             : "hover:border-violet-200/60 hover:shadow-[0_0_0_1px_rgba(167,139,250,0.2),0_28px_64px_-18px_rgba(109,40,217,0.18),0_12px_32px_-12px_rgba(15,23,42,0.06)]"
-          }`}
+        }`}
       >
         {/* Purple hover washes */}
         <div
@@ -287,11 +323,10 @@ const PostRow = ({ article, onClick, index = 0 }) => {
   );
 };
 
-
 const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
-  const otherArticles = articles.filter(a => a.id !== article.id);
+  const otherArticles = articles.filter((a) => a.id !== article.id);
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: "instant" });
   }, [article]);
 
   return (
@@ -334,8 +369,12 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
             {article.author.charAt(0)}
           </div>
           <div>
-            <div className="text-[#0A2540] font-black text-lg tracking-tight leading-none mb-1.5">{article.author}</div>
-            <div className="text-[#425466] text-[10px] uppercase font-bold tracking-[0.2em]">{article.role}</div>
+            <div className="text-[#0A2540] font-black text-lg tracking-tight leading-none mb-1.5">
+              {article.author}
+            </div>
+            <div className="text-[#425466] text-[10px] uppercase font-bold tracking-[0.2em]">
+              {article.role}
+            </div>
           </div>
         </div>
 
@@ -343,7 +382,11 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
           {article.illustration ? (
             article.illustration
           ) : (
-            <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-full object-cover"
+            />
           )}
         </div>
 
@@ -366,7 +409,10 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
             </h3>
           </div>
 
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 hide-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          <div
+            className="flex overflow-x-auto snap-x snap-mandatory gap-5 pb-8 hide-scrollbar -mx-6 px-6 sm:mx-0 sm:px-0"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+          >
             {otherArticles.map((nextArt) => (
               <div
                 key={nextArt.id}
@@ -377,7 +423,11 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
                   {nextArt.illustration ? (
                     nextArt.illustration
                   ) : (
-                    <img src={nextArt.image} alt={nextArt.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <img
+                      src={nextArt.image}
+                      alt={nextArt.title}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    />
                   )}
                 </div>
 
@@ -390,15 +440,18 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
                   </h4>
 
                   <div className="mt-auto inline-flex items-center gap-2 text-[#7e22ce] font-black text-[12px] uppercase tracking-widest transition-all">
-                    Read Article <ArrowRight size={16} strokeWidth={3} className="group-hover:translate-x-1.5 transition-transform" />
+                    Read Article{" "}
+                    <ArrowRight
+                      size={16}
+                      strokeWidth={3}
+                      className="group-hover:translate-x-1.5 transition-transform"
+                    />
                   </div>
                 </div>
               </div>
             ))}
           </div>
         </div>
-
-
 
         {/* --- Back to Blog Footer --- */}
         <div className="mt-12 mb-16 flex justify-center">
@@ -410,12 +463,10 @@ const ArticleDetail = ({ article, onBack, onOpenArticle }) => {
             Back to Blog
           </button>
         </div>
-
       </div>
     </motion.div>
   );
 };
-
 
 export default function Blog() {
   const [isMobile, setIsMobile] = useState(false);
@@ -450,18 +501,18 @@ export default function Blog() {
         const y = savedScrollY.current;
         requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            window.scrollTo({ top: y, behavior: 'instant' });
+            window.scrollTo({ top: y, behavior: "instant" });
           });
         });
       }
     };
-    window.addEventListener('popstate', handlePopState);
-    return () => window.removeEventListener('popstate', handlePopState);
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
   }, []); // runs once, uses ref so never stale
 
   const openArticle = (article) => {
     savedScrollY.current = window.scrollY; // save position before opening
-    window.history.pushState({ article: article.id }, '', '#article');
+    window.history.pushState({ article: article.id }, "", "#article");
     setSelectedArticle(article);
   };
 
@@ -470,18 +521,29 @@ export default function Blog() {
     // Set state to null first (ref also updates synchronously via render)
     setSelectedArticle(null);
     // Clean up the hash from the URL without triggering popstate double-close
-    if (window.location.hash === '#article') {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    if (window.location.hash === "#article") {
+      window.history.replaceState(
+        null,
+        "",
+        window.location.pathname + window.location.search,
+      );
     }
     // Restore scroll position after DOM updates
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        window.scrollTo({ top: y, behavior: 'instant' });
+        window.scrollTo({ top: y, behavior: "instant" });
       });
     });
   };
 
-  const categories = ["All", "Team Management", "Productivity", "Product Updates", "HR & Ops", "Leadership"];
+  const categories = [
+    "All",
+    "Team Management",
+    "Productivity",
+    "Product Updates",
+    "HR & Ops",
+    "Leadership",
+  ];
 
   const handleSearch = () => {
     setAppliedSearch(searchQuery);
@@ -512,13 +574,18 @@ export default function Blog() {
         appliedSearch === "" ||
         a.title.toLowerCase().includes(appliedSearch.toLowerCase()) ||
         a.excerpt.toLowerCase().includes(appliedSearch.toLowerCase());
-      const matchesCategory = activeCategory === "All" || a.category === activeCategory;
+      const matchesCategory =
+        activeCategory === "All" || a.category === activeCategory;
       return matchesSearch && matchesCategory;
     })
     .sort((a, b) => {
       if (appliedSearch === "") return 0;
-      const aTitleMatch = a.title.toLowerCase().includes(appliedSearch.toLowerCase());
-      const bTitleMatch = b.title.toLowerCase().includes(appliedSearch.toLowerCase());
+      const aTitleMatch = a.title
+        .toLowerCase()
+        .includes(appliedSearch.toLowerCase());
+      const bTitleMatch = b.title
+        .toLowerCase()
+        .includes(appliedSearch.toLowerCase());
       if (aTitleMatch && !bTitleMatch) return -1;
       if (!aTitleMatch && bTitleMatch) return 1;
       return 0;
@@ -527,7 +594,11 @@ export default function Blog() {
   if (selectedArticle) {
     return (
       <AnimatePresence mode="wait">
-        <ArticleDetail article={selectedArticle} onBack={closeArticle} onOpenArticle={openArticle} />
+        <ArticleDetail
+          article={selectedArticle}
+          onBack={closeArticle}
+          onOpenArticle={openArticle}
+        />
       </AnimatePresence>
     );
   }
@@ -564,16 +635,10 @@ export default function Blog() {
           content="Read articles on productivity, team management, and smarter workflows."
         />
         <meta property="og:type" content="website" />
-        <meta
-          property="og:url"
-          content="https://karyaup.com/resources/blog"
-        />
+        <meta property="og:url" content="https://karyaup.com/resources/blog" />
         <meta property="og:site_name" content="Karyaup" />
 
-        <link
-          rel="canonical"
-          href="https://karyaup.com/resources/blog"
-        />
+        <link rel="canonical" href="https://karyaup.com/resources/blog" />
       </Helmet>
       <div className="min-h-screen max-w-full overflow-x-hidden bg-white pt-24 sm:pt-24 pb-12 sm:pb-16 lg:pb-20 text-slate-900 font-sans selection:bg-[#7e22ce] selection:text-white">
         <section className="relative pt-4 sm:pt-6 lg:pt-8 pb-8 sm:pb-10 lg:pb-12">
@@ -595,14 +660,24 @@ export default function Blog() {
                 <motion.h1
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+                  transition={{
+                    duration: 0.7,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.08,
+                  }}
                   className="mt-4 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
                 >
                   Not Another Productivity <br />
                   <motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                    animate={{
+                      backgroundPosition: ["0% center", "-200% center"],
+                    }}
+                    transition={{
+                      duration: 4,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
                   >
                     Blog.
                   </motion.span>
@@ -611,12 +686,16 @@ export default function Blog() {
                 <motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                  transition={{
+                    duration: 0.65,
+                    ease: [0.22, 1, 0.36, 1],
+                    delay: 0.18,
+                  }}
                   className="mt-5 sm:mt-6 space-y-3 sm:space-y-4 max-w-2xl mx-auto lg:mx-0"
                 >
                   {[
                     "Real talk on how modern teams work, lead, and grow.",
-                    "Written by people who've actually felt the pressure of a missed deadline."
+                    "Written by people who've actually felt the pressure of a missed deadline.",
                   ].map((text, i) => (
                     <div key={i} className="flex items-start gap-3 text-left">
                       <div className="mt-1 w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-purple-100 border border-purple-200 flex items-center justify-center flex-shrink-0">
@@ -628,13 +707,16 @@ export default function Blog() {
                     </div>
                   ))}
                 </motion.div>
-
               </div>
 
               <motion.div
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+                transition={{
+                  duration: 0.75,
+                  ease: [0.22, 1, 0.36, 1],
+                  delay: 0.18,
+                }}
                 className="relative mt-8 lg:-mt-6 w-full max-w-[380px] sm:max-w-[440px] lg:max-w-[480px] mx-auto lg:mx-0 lg:ml-auto"
               >
                 <img
@@ -652,7 +734,12 @@ export default function Blog() {
             <div className="relative isolate flex flex-col gap-5 pb-16 pt-2 sm:gap-6 md:gap-7 md:pb-20">
               <AnimatePresence mode="popLayout" initial={false}>
                 {filteredArticles
-                  .filter((a) => activeCategory !== "All" || appliedSearch || a.id !== "featured")
+                  .filter(
+                    (a) =>
+                      activeCategory !== "All" ||
+                      appliedSearch ||
+                      a.id !== "featured",
+                  )
                   .map((article, index) => (
                     <PostRow
                       key={article.id}
@@ -673,10 +760,18 @@ export default function Blog() {
                 <div className="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Search size={32} className="text-slate-300" />
                 </div>
-                <h3 className="text-2xl font-black text-[#0A2540] mb-2">No matches found</h3>
-                <p className="text-slate-400 font-medium">Try adjusting your search or category filters.</p>
+                <h3 className="text-2xl font-black text-[#0A2540] mb-2">
+                  No matches found
+                </h3>
+                <p className="text-slate-400 font-medium">
+                  Try adjusting your search or category filters.
+                </p>
                 <button
-                  onClick={() => { setSearchQuery(""); setAppliedSearch(""); setActiveCategory("All"); }}
+                  onClick={() => {
+                    setSearchQuery("");
+                    setAppliedSearch("");
+                    setActiveCategory("All");
+                  }}
                   className="mt-8 text-[#7e22ce] font-black uppercase tracking-widest text-sm hover:underline"
                 >
                   Clear all filters
@@ -695,46 +790,41 @@ export default function Blog() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(168,85,247,0.1),transparent_40%)] pointer-events-none" />
 
             <div className="relative z-10 flex flex-col lg:flex-row items-center justify-center lg:justify-between gap-8 sm:gap-10 lg:gap-24 w-full">
-              {/* Left Content */}
-              <div className="max-w-2xl text-center lg:text-left flex-[1.2] mx-auto lg:mx-0">
-                <motion.div
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="text-[#635BFF] text-[11px] sm:text-[13px] font-black uppercase tracking-[0.24em] sm:tracking-[0.3em] mb-4 sm:mb-6 flex items-center justify-center lg:justify-start gap-2"
-                >
-                  <div className="w-8 h-[1px] bg-[#635BFF]/30" />
-                  Weekly Drop
-                </motion.div>
-
-                <motion.h2
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.1 }}
-                  className="text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-white mb-4 sm:mb-6 leading-[1.05] tracking-normal drop-shadow-2xl"
-                >
-                  One Idea. Every Tuesday. <br />
-                  <motion.span
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                    animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                    transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                  >
-                    Straight To your Inbox.
-                  </motion.span>
-                </motion.h2>
-
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.2 }}
-                  className="text-slate-400 text-base sm:text-lg md:text-xl font-medium leading-relaxed max-w-xl mx-auto lg:mx-0 mb-0"
-                >
-                  No roundups. No recycled tips. Just one sharp, useful idea your team can act on before the week is out. Joined by 8,000+ managers already.
-                </motion.p>
+              {/* Left Content with Logo */}
+              <div className="flex-1 flex flex-col justify-center z-10">
+                <div className="mb-2 flex items-center gap-3">
+                  {/* KaryaUp Logo (same as FeatureCTA) */}
+                  <div className="relative h-11 flex items-center">
+                    <img
+                      src={logo}
+                      alt="KaryaUp"
+                      width="160"
+                      height="44"
+                      loading="lazy"
+                      className="h-full w-auto"
+                    />
+                    <div
+                      className="absolute inset-0 pointer-events-none"
+                      style={{ clipPath: 'inset(0 75% 0 0)' }}
+                    >
+                      <img
+                        src={logo}
+                        alt=""
+                        width="160"
+                        height="44"
+                        loading="lazy"
+                        className="h-full w-auto"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <h2 className="text-xl sm:text-2xl lg:text-[1.75rem] font-black text-white leading-[1.1] mb-2 tracking-tight drop-shadow-lg">
+                  Get the Tuesday Drop
+                </h2>
+                <p className="mt-4 text-[13px] sm:text-sm font-medium text-slate-400 max-w-xs">
+                  Get one sharp, useful idea your team can act on before the week is out. No spam, always free.
+                </p>
               </div>
-
               {/* Right Form */}
               <div className="w-full max-w-md lg:max-w-none lg:w-[460px] flex-1 mx-auto">
                 <motion.form
@@ -757,12 +847,16 @@ export default function Blog() {
                   </div>
 
                   <motion.button
-                    whileHover={{ scale: 1.02, boxShadow: "0 0 30px rgba(99,91,255,0.3)" }}
+                    whileHover={{
+                      scale: 1.02,
+                      boxShadow: "0 0 30px rgba(99,91,255,0.3)",
+                    }}
                     whileTap={{ scale: 0.98 }}
                     className="w-full bg-white text-black py-3.5 sm:py-5 rounded-[1.15rem] sm:rounded-[1.5rem] font-black text-[13px] sm:text-base uppercase tracking-[0.12em] sm:tracking-widest hover:bg-slate-50 transition-all shadow-2xl relative overflow-hidden"
                   >
                     <span className="relative z-10 flex items-center justify-center gap-2">
-                      Get the Tuesday Drop <ArrowRight size={18} strokeWidth={3} />
+                      Get the Tuesday Drop{" "}
+                      <ArrowRight size={18} strokeWidth={3} />
                     </span>
                   </motion.button>
 
@@ -777,8 +871,11 @@ export default function Blog() {
                           initial={{ opacity: 0, y: 10 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
-                          className={`text-[12px] font-black uppercase tracking-widest ${subscribeStatus === "success" ? "text-emerald-400" : "text-red-400"
-                            }`}
+                          className={`text-[12px] font-black uppercase tracking-widest ${
+                            subscribeStatus === "success"
+                              ? "text-emerald-400"
+                              : "text-red-400"
+                          }`}
                         >
                           {message}
                         </motion.div>
@@ -790,8 +887,6 @@ export default function Blog() {
             </div>
           </div>
         </section>
-
-
       </div>
     </>
   );

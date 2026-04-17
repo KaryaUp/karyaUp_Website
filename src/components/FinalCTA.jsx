@@ -17,7 +17,7 @@ const FinalCTA = () => {
   }, []);
 
   return (
-    <section className="py-1.5 sm:py-0 bg-white relative overflow-hidden font-sans">
+    <section className="py-1.5 sm:py-0 mb-8 sm:mb-10 lg:mb-12 bg-white relative overflow-hidden font-sans">
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* The Centric Hub (Glass Card) */}

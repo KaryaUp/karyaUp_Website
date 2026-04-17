@@ -1,17 +1,14 @@
 import React, { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
+import { motion as Motion } from "framer-motion";
 import { Check, Sparkles, Activity, Zap, BarChart3, PieChart, TrendingUp, LayoutDashboard, Share2, MousePointer2, Crown, Rocket, Target, BarChart4 } from "lucide-react";
 import { Helmet } from "react-helmet-async";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { ReactLenis } from "lenis/react";
-import { cn } from "../../lib/utils";
 import FeatureStack from "../../components/FeatureStack";
 
 // Assets
-import logo from "../../assets/logo.webp";
-import dashboardImg1 from "../../assets/dashboard2.webp";
 import dashboardImg2 from "../../assets/dashboard2.webp";
 import featureProjects from '../../assets/projects.webp';
 import featureWork from '../../assets/work_analysis.webp';
@@ -181,16 +178,16 @@ export default function Dashboards() {
             <div className="grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-center">
               {/* Left Content */}
               <div className="text-center lg:text-left flex flex-col items-center lg:items-start lg:self-start lg:pt-2">
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
-                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em] shadow-sm mb-2"
+                  className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50/80 backdrop-blur-sm border border-purple-100 text-purple-600 text-[10px] sm:text-[11px] font-black uppercase tracking-[0.2em]  mb-2"
                 >
                   DASHBOARDS — VISUALIZE YOUR DATA
-                </motion.div>
+                </Motion.div>
 
-                <motion.h1
+                <Motion.h1
                   initial={{ opacity: 0, y: 22 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
@@ -199,17 +196,17 @@ export default function Dashboards() {
                   Custom Metrics
                   <span className="block">
                     For Every{" "}
-                    <motion.span
+                    <Motion.span
                       className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                       animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                     >
                       Decision
-                    </motion.span>
+                    </Motion.span>
                   </span>
-                </motion.h1>
+                </Motion.h1>
 
-                <motion.div
+                <Motion.div
                   initial={{ opacity: 0, y: 18 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
@@ -230,7 +227,7 @@ export default function Dashboards() {
                       </div>
                     ))}
                   </div>
-                </motion.div>
+                </Motion.div>
 
                 <FeatureStack items={[
                   { label: "Custom widgets", icon: LayoutDashboard },
@@ -240,53 +237,27 @@ export default function Dashboards() {
               </div>
 
               {/* Right Hero Image */}
-              <motion.div
+              <Motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 60 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
                 className="relative w-full max-w-[480px] sm:max-w-[540px] mx-auto lg:max-w-none lg:mx-0 lg:-mr-12 xl:-mr-24"
               >
-                <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl shadow-slate-900/10 bg-white">
+                <div className="relative overflow-hidden border border-slate-200/80 rounded-2xl sm:rounded-3xl  bg-white">
                   <img
                     src={dashboardImg2}
                     alt="KaryaUp Dashboard"
                     className="w-full h-[220px] sm:h-[300px] md:h-[380px] lg:h-[460px] xl:h-[500px] object-cover object-left"
                   />
                 </div>
-              </motion.div>
+              </Motion.div>
             </div>
           </div>
         </section>
 
         {/* Role-Based Dashboards Section */}
         <section ref={container} className="bg-white pt-2 lg:pt-4 pb-4 sm:pb-12 lg:pb-5 overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-8 sm:mb-12 text-center">
-            <motion.div
-              initial={{ opacity: 0, x: isMobile ? 0 : -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-              className="flex flex-col items-center"
-            >
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-100 border border-purple-200 text-purple-700 text-[10px] font-black uppercase tracking-widest shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-[#7e22ce]" />
-                <span className="opacity-60">/</span>
-                <span>Universal Dashboard Control</span>
-              </div>
-              <h2 className="mt-5 sm:mt-6 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]">
-                Multiple Dashboard <br />
-                <motion.span
-                  className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-                  animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-                >
-                  Based On Roles
-                </motion.span>
-              </h2>
-            </motion.div>
-          </div>
-
-          <div className="sticky-sections-container relative h-auto max-w-6xl mx-auto rounded-xl sm:rounded-3xl overflow-hidden border border-slate-200/60 shadow-2xl mb-4 sm:mb-24">
+          <div className="sticky-sections-container relative h-auto max-w-6xl mx-auto rounded-xl sm:rounded-3xl overflow-hidden border border-slate-200/60 mb-4 sm:mb-24">
             {dashboardSections.map((item, i) => (
               <div
                 key={i}
@@ -295,6 +266,25 @@ export default function Dashboards() {
               >
                 {/* Content Side */}
                 <div className="flex-[0.48] lg:flex-1 flex flex-col justify-end lg:justify-center items-center lg:items-start text-center lg:text-left p-4 pb-2 sm:p-8 lg:p-12 w-full">
+                  <Motion.div
+                    initial={{ opacity: 0, y: isMobile ? 0 : -10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.7, ease: "easeOut" }}
+                    className="flex flex-col items-center lg:items-start mb-5 sm:mb-7 lg:mb-8"
+                  >
+                    
+                    <h2 className="mt-4 sm:mt-5 text-2xl sm:text-[2.5rem] lg:text-[3rem] font-black text-slate-900 tracking-normal leading-[1.05]">
+                      Multiple Dashboard <br />
+                      <Motion.span
+                        className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                        animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                        transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                      >
+                        Based On Roles
+                      </Motion.span>
+                    </h2>
+                  </Motion.div>
                   <div className="flex items-center justify-center lg:justify-start gap-3 mb-2 sm:mb-4">
                     <div className="w-1.5 h-4 sm:h-6 bg-[#7e22ce] rounded-full" />
                     <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#7e22ce]">
@@ -328,14 +318,14 @@ export default function Dashboards() {
                     <div className="absolute inset-0 bg-gradient-to-tr from-purple-100/50 to-transparent blur-3xl rounded-full" />
 
                     {item.header === "Sales Dashboard" ? (
-                      <div className="relative w-full h-full bg-white rounded-2xl shadow-2xl flex items-center justify-center p-6 sm:p-10 lg:p-16">
+                      <div className="relative w-full h-full bg-white rounded-2xl  flex items-center justify-center p-6 sm:p-10 lg:p-16">
                         <GrowthGraph className="w-full" />
                       </div>
                     ) : (
                       <img
                         src={item.image}
                         alt={item.title}
-                        className="relative max-h-full w-full object-contain rounded-2xl shadow-2xl shadow-slate-900/30 ring-1 ring-black/5"
+                        className="relative max-h-full w-full object-contain rounded-2xl ring-1 ring-black/5"
                       />
                     )}
                   </div>
@@ -352,6 +342,7 @@ export default function Dashboards() {
           image={dashboardImg2}
           imageAlt="KaryaUp Dashboard Interface"
           containerClassName="mt-0"
+          shellClassName="shadow-none"
         />
       </div>
     </ReactLenis>
