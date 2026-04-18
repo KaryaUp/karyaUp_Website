@@ -7,11 +7,8 @@ import glbUrl from '../assets/Karyaup-logo.glb';
 function Model({ isHovered }) {
   const { scene } = useGLTF(glbUrl);
   const groupRef = useRef();
-
-  // Clone the scene to ensure we have a fresh instance with independent transforms
   const clonedScene = useMemo(() => scene.clone(), [scene]);
 
-  // Rotate smoothly over time on the parent group which is now perfectly centered at the bottom
   useFrame((state, delta) => {
     if (groupRef.current) {
       groupRef.current.rotation.y += delta * (isHovered ? 2.0 : 0.8);

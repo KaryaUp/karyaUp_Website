@@ -12,37 +12,10 @@ import slackLogo from "../../assets/slack.svg";
 import gmailLogo from "../../assets/gmail.svg";
 import googleDriveLogo from "../../assets/google-drive.svg";
 import googleCalendarLogo from "../../assets/google-calendar.svg";
-// microsoftteamLogo PNG removed — replaced with inline SVG (no white background)
+import microsoftTeamsLogo from "../../assets/microsoft-teams.svg";
 import karyaupLogo from "../../assets/logo-svg.svg";
 
 const SpinningLogo3D = lazy(() => import("../../components/SpinningLogo3D"));
-
-const MsTeamsLogoSVG = ({ size = 40 }) => (
-  <svg
-    xmlns="https://www.liblogo.com/img-logo/mi462me99-microsoft-teams-logo-microsoft-teams.png"
-    viewBox="0 0 48 48" // Keep viewBoxconsistent
-    width={size}
-    height={size}
-    className="translate-y-[1px]" // Micro-nudge down for perfect visual center
-  >
-    {/* Back person — Moved Up */}
-    <circle cx="32" cy="11" r="5" fill="#5059C9" />
-    <path
-      d="M40 21H24.5A2.5 2.5 0 0 0 22 23.5V35a9 9 0 0 0 18 0V23.5A2.5 2.5 0 0 0 40 21z"
-      fill="#5059C9"
-    />
-    {/* Front person — Moved Up */}
-    <circle cx="21" cy="9.5" r="5.5" fill="#7B83EB" />
-    <path
-      d="M27.5 19h-17A2.5 2.5 0 0 0 8 21.5V33a8 8 0 0 0 16 0V21.5A2.5 2.5 0 0 0 27.5 19z"
-      fill="#7B83EB"
-    />
-    {/* White lines inside chat icon */}
-    <rect x="14" y="29" width="10" height="1.4" rx="0.7" fill="white" opacity="0.9" />
-    <rect x="14" y="32.5" width="9" height="1.4" rx="0.7" fill="white" opacity="0.9" />
-    <rect x="14" y="36" width="10" height="1.4" rx="0.7" fill="white" opacity="0.9" />
-  </svg>
-);
 
 /* ═══════════════════════════════════════════════
    OTHER SVG LOGOS (unchanged)
@@ -117,8 +90,8 @@ const BarrelItem = ({ data, type, containerRef }) => {
 };
 /* ═══════════════════════════════════════════════
    TILT CARD
-   logoSrc  — for img-based logos (Slack, Gmail, Drive, Calendar)
-   logoNode — for inline SVG/JSX (MS Teams)
+  logoSrc  — for integration logos
+  logoNode — optional inline SVG/JSX override
 ═══════════════════════════════════════════════ */
 function TiltCard({ logoSrc, logoNode, name, glowColor, delay = 0 }) {
   const cardRef = useRef(null);
@@ -204,7 +177,7 @@ function TiltCard({ logoSrc, logoNode, name, glowColor, delay = 0 }) {
 
 /* ═══════════════════════════════════════════════
    INTEGRATIONS LIST
-   MS Teams uses logoNode instead of logoSrc
+   Integrations logo list
 ═══════════════════════════════════════════════ */
 const integrations = [
   { logoSrc: slackLogo, name: "Slack", glowColor: "rgba(234, 118, 236, 0.15)" },
@@ -212,7 +185,7 @@ const integrations = [
   { logoSrc: googleDriveLogo, name: "Drive", glowColor: "rgba(234, 118, 236, 0.15)" },
   { logoSrc: googleCalendarLogo, name: "Calendar", glowColor: "rgba(234, 118, 236, 0.15)" },
   {
-    logoNode: <MsTeamsLogoSVG size={59} />,  // ← inline SVG, no white bg, size=72
+    logoSrc: microsoftTeamsLogo,
     name: "MS Teams",
     glowColor: "rgba(225, 105, 213, 0.2)",
   },

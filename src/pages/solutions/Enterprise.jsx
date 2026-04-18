@@ -1,4 +1,4 @@
- import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet-async";
 import React, { useRef, useState, useEffect, useMemo, isStackOpen } from "react";
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "framer-motion";
 import { Sparkles } from "lucide-react";
@@ -128,7 +128,7 @@ export default function Enterprise() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
                 // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
-                className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
+                className="text-[3.25rem] md:text-[3.20rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
               >
                 The World's most Powerful
                 <span className="block">
@@ -185,25 +185,27 @@ export default function Enterprise() {
       {/* ================= ENTERPRISE ADVANTAGES SECTION ================= */}
       <section className="w-full py-1 px-2 lg:px-5 pb-10 bg-white">
         <div className="max-w-10xl mx-auto text-center mb-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-            className="text-4xl sm:text-5xl lg:text-[3.25rem] font-bold text-slate-900 mb-3"
+          <motion.h1
+            initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
+            // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
+            className="text-[3.25rem] md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
           >
-            Enterprise-Ready <br />
-            <motion.span
-              className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
-              animate={{ backgroundPosition: ["0% center", "-200% center"] }}
-              transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-            >
-              Reliability & Scale
-            </motion.span>
-          </motion.h2>
+            Enterprise-Ready
+            <span className="block">
+
+              <motion.span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
+                animate={{ backgroundPosition: ["0% center", "-200% center"] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+              >
+               Reliability & Scale
+              </motion.span>
+            </span>
+          </motion.h1>   
           <p className="text-sm text-gray-600 max-w-2xl mx-auto">
             KaryaUp is trusted by global enterprises to deliver secure,
-
             and integrated solutions that empower teams.
           </p>
         </div>
@@ -312,65 +314,66 @@ export default function Enterprise() {
                 const isActive = activeFeature === i;
                 const activeColor = i === 1 ? "#d946ef" : "#7c3aed";
                 return (
-                <div key={i} className="flex items-stretch gap-5">
+                  <div key={i} className="flex items-stretch gap-5">
 
-                  {/* Left column: number circle + connecting line */}
-                  <div className="flex flex-col items-center flex-shrink-0">
-                    <motion.div
-                      animate={
-                        isActive
-                          ? { backgroundColor: activeColor, color: "#ffffff", scale: 1.1 }
-                          : { backgroundColor: "#f3f4f6", color: "#9ca3af", scale: 1 }
-                      }
-                      transition={{ duration: 0.3 }}
-                      className="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold shrink-0 z-10"
-                    >
-                      {i + 1}
-                    </motion.div>
-
-                    {/* Connecting line — hidden after last item */}
-                    {i < features.length - 1 && (
+                    {/* Left column: number circle + connecting line */}
+                    <div className="flex flex-col items-center flex-shrink-0">
                       <motion.div
                         animate={
                           isActive
-                            ? { backgroundColor: activeColor, opacity: 0.35 }
-                            : { backgroundColor: "#e5e7eb", opacity: 1 }
+                            ? { backgroundColor: activeColor, color: "#ffffff", scale: 1.1 }
+                            : { backgroundColor: "#f3f4f6", color: "#9ca3af", scale: 1 }
                         }
                         transition={{ duration: 0.3 }}
-                        className="w-0.5 flex-1 my-1 min-h-8"
-                      />
-                    )}
-                  </div>
+                        className="w-11 h-11 rounded-full flex items-center justify-center text-base font-bold shrink-0 z-10"
+                      >
+                        {i + 1}
+                      </motion.div>
 
-                  {/* Right column: feature card */}
-                  <motion.div
-                    onMouseEnter={() => setActiveFeature(i)}
-                    onMouseLeave={() => setActiveFeature(null)}
-                    onTouchStart={() => setActiveFeature(i)}
-                    className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${isActive
-                      ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
-                      : "bg-transparent border-transparent opacity-60 hover:opacity-100"
-                      }`}
-                  >
-                    <h3 className="text-xl font-bold text-slate-900 leading-none">
-                      {item.title}
-                    </h3>
-                    <AnimatePresence>
-                      {isActive && (
-                        <motion.p
-                          initial={{ height: 0, opacity: 0, marginTop: 0 }}
-                          animate={{ height: "auto", opacity: 1, marginTop: 8 }}
-                          exit={{ height: 0, opacity: 0, marginTop: 0 }}
-                          className="text-slate-500 font-medium text-sm leading-relaxed overflow-hidden"
-                        >
-                          {item.desc}
-                        </motion.p>
+                      {/* Connecting line — hidden after last item */}
+                      {i < features.length - 1 && (
+                        <motion.div
+                          animate={
+                            isActive
+                              ? { backgroundColor: activeColor, opacity: 0.35 }
+                              : { backgroundColor: "#e5e7eb", opacity: 1 }
+                          }
+                          transition={{ duration: 0.3 }}
+                          className="w-0.5 flex-1 my-1 min-h-8"
+                        />
                       )}
-                    </AnimatePresence>
-                  </motion.div>
+                    </div>
 
-                </div>
-              )})}
+                    {/* Right column: feature card */}
+                    <motion.div
+                      onMouseEnter={() => setActiveFeature(i)}
+                      onMouseLeave={() => setActiveFeature(null)}
+                      onTouchStart={() => setActiveFeature(i)}
+                      className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${isActive
+                        ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
+                        : "bg-transparent border-transparent opacity-60 hover:opacity-100"
+                        }`}
+                    >
+                      <h3 className="text-xl font-bold text-slate-900 leading-none">
+                        {item.title}
+                      </h3>
+                      <AnimatePresence>
+                        {isActive && (
+                          <motion.p
+                            initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                            animate={{ height: "auto", opacity: 1, marginTop: 8 }}
+                            exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                            className="text-slate-500 font-medium text-sm leading-relaxed overflow-hidden"
+                          >
+                            {item.desc}
+                          </motion.p>
+                        )}
+                      </AnimatePresence>
+                    </motion.div>
+
+                  </div>
+                )
+              })}
             </div>
 
           </div>

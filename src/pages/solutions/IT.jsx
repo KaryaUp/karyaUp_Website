@@ -84,7 +84,7 @@ export default function IT() {
 
   const sectionSpacing = "py-12 sm:py-16 lg:py-20";
   const [isMobile, setIsMobile] = useState(false);
-  const [timelineActiveFeature, setTimelineActiveFeature] = useState(1);
+  const [timelineActiveFeature, setTimelineActiveFeature] = useState(null);
 
   const timelineFeatures = [
     {
@@ -341,7 +341,7 @@ export default function IT() {
 
                     <motion.div
                       onMouseEnter={() => setTimelineActiveFeature(i)}
-                      onTouchStart={() => setTimelineActiveFeature(i)}
+                      onMouseLeave={() => setTimelineActiveFeature(null)}
                       className={`relative p-6 rounded-[2rem] cursor-pointer transition-all duration-500 border flex-1 mb-4 ${isActive
                         ? "bg-white border-slate-200 shadow-xl shadow-purple-500/5 translate-x-2"
                         : "bg-transparent border-transparent opacity-60 hover:opacity-100"

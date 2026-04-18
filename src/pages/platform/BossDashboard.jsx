@@ -644,19 +644,17 @@ export default function BossDashboard() {
                 initial={{ opacity: 0, y: isMobile ? 0 : 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.08 }}
-                // className="mt-2 sm:mt-5 text-3xl sm:text-[2.75rem] lg:text-[3.25rem] font-black text-slate-900 tracking-normal leading-[1.05]"
                 className="text-3xl md:text-[3.25rem] font-black text-slate-900 tracking-tight leading-tight mb-1"
               >
                 Control your Business
                 <span className="block">
-
                   <motion.span
                     className="text-transparent bg-clip-text bg-gradient-to-r from-[#7e22ce] via-fuchsia-500 to-[#7e22ce] bg-[length:200%_auto]"
                     animate={{ backgroundPosition: ["0% center", "-200% center"] }}
                     transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
                   >
                     in One Powerful View.
-                  </motion.span>
+                  </motion.span>  
                 </span>
               </motion.h1>
               <motion.div

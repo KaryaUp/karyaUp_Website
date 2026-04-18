@@ -755,8 +755,6 @@ export default function ProjectManagement() {
 
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16 relative z-10">
-            
-
             <motion.h1
               initial={{ opacity: 0, y: 40, x: -10 }}
               animate={{ opacity: 1, y: 0, x: 0 }}
@@ -772,7 +770,6 @@ export default function ProjectManagement() {
                 Daily Workflows
               </motion.span>
             </motion.h1>
-
             <motion.p
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -783,10 +780,7 @@ export default function ProjectManagement() {
             </motion.p>
           </div>
 
-          {/* SIDE-BY-SIDE GRID (IMAGE LEFT | FEATURES RIGHT) */}
           <div className="grid lg:grid-cols-2 gap-12 xl:gap-15 items-center">
-
-            {/* Image Card Container */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -802,7 +796,6 @@ export default function ProjectManagement() {
               </div>
             </motion.div>
 
-            {/* Feature List — numbered steps with connecting lines */}
             <div className="flex flex-col">
               {features.map((item, i) => {
                 const isActive = activeFeature === i;
@@ -810,7 +803,6 @@ export default function ProjectManagement() {
                 return (
                 <div key={i} className="flex items-stretch gap-5">
 
-                  {/* Left column: number circle + connecting line */}
                   <div className="flex flex-col items-center flex-shrink-0">
                     <motion.div
                       animate={
@@ -824,7 +816,6 @@ export default function ProjectManagement() {
                       {i + 1}
                     </motion.div>
 
-                    {/* Connecting line — hidden after last item */}
                     {i < features.length - 1 && (
                       <motion.div
                         animate={
@@ -838,7 +829,6 @@ export default function ProjectManagement() {
                     )}
                   </div>
 
-                  {/* Right column: feature card */}
                   <motion.div
                     onMouseEnter={() => setActiveFeature(i)}
                     onMouseLeave={() => setActiveFeature(null)}
@@ -864,16 +854,13 @@ export default function ProjectManagement() {
                       )}
                     </AnimatePresence>
                   </motion.div>
-
                 </div>
               )})}
             </div>
-
           </div>
         </div>
       </section>
 
-      {/* NEW AI WORKSPACE SECTION */}
       <section className="py-6 px-6 pb-7 bg-white-50 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/3 h-full bg-white" />
         <div className="absolute bottom-0 left-0 w-1/3 h-full bg-white" />

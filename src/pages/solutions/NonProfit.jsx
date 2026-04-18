@@ -396,7 +396,7 @@ export default function NonProfit() {
       </section>
 
       <section className="w-full py-7 pb-15 relative overflow-hidden bg-white">
-        {/* Animated Background Glows for Glass Effect */}
+        
         <div className="absolute top-1/4 -left-20 w-80 h-80 bg-white rounded-full blur-[120px] opacity-40 animate-pulse" />
         <div className="absolute bottom-1/4 -right-20 w-80 h-80 opacity-40 animate-pulse" />
 

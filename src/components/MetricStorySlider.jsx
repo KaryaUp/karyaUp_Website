@@ -124,7 +124,6 @@ export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
                         className="w-full h-full object-cover object-top"
                       />
 
-                      {/* Bottom overlay subtitle */}
                       <div className="absolute inset-x-0 bottom-0 z-20 bg-gradient-to-t from-black/70 via-black/30 to-transparent p-4 md:p-6">
                         <h3 className="text-white text-lg md:text-2xl font-bold max-w-2xl leading-snug drop-shadow-sm">
                           {slide.storyTitle}
@@ -148,7 +147,6 @@ export default function KaryaUpSyncSlider({ slides = [], className = "" }) {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
